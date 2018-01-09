@@ -1,0 +1,14 @@
+<?php
+
+use App\invoice_category as invoice;
+use Illuminate\Database\Seeder;
+
+class InvoiceCategorySeeder extends Seeder{
+	public function run(){
+		invoice::truncate();
+		invoice::create(["title" => "Convention Transfer","updated_at"=>null]);
+        invoice::create(["title"=>"Airport Transfer","updated_at"=>null]);
+        invoice::create(["title"=>"Daytrip","updated_at"=>null]);
+	}
+}
+?>

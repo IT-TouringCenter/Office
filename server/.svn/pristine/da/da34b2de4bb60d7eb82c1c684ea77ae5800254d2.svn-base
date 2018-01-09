@@ -1,0 +1,16 @@
+<?php
+namespace App\Facades\Tours;
+
+use App\Repositories\TransportRepository as TransportRepository;
+
+class TransportClass extends BaseClass{
+  public function __construct(TransportRepository $repo){
+    $this->TransportRepository= $repo;
+  }
+
+  public function GetTransportById($transport_id){
+    return $this->TransportRepository->findBy('id',$transport_id,['id','transportation']);
+  }
+}
+
+?>

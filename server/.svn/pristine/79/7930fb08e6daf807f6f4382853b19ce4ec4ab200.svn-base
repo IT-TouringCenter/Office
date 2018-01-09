@@ -1,0 +1,16 @@
+<?php
+
+use App\configuration_transfer as configuration_transfer;
+use Illuminate\Database\Seeder;
+
+class ConfigurationTransferSeeder extends Seeder{
+	public function run(){
+		configuration_transfer::truncate();
+		configuration_transfer::create(["activity_id" => "1", "transfer_id" =>"1", "configuration_transportation_id" => "2", "transfer_mode_id" => "2", "transfer_reserve_type_id" => "4", "price" => "2000", "validity_start" => "2017-01-15 00:00:00", "validity_end" => "2017-06-14 23:59:59"]);
+		configuration_transfer::create(["activity_id" => "1", "transfer_id" =>"1", "configuration_transportation_id" => "2", "transfer_mode_id" => "2", "transfer_reserve_type_id" => "4", "price" => "2200", "validity_start" => "2017-06-15 00:00:00", "validity_end" => "2017-07-14 23:59:59"]);
+		configuration_transfer::create(["activity_id" => "1", "transfer_id" =>"2", "configuration_transportation_id" => "1", "transfer_mode_id" => "1", "transfer_reserve_type_id" => "1", "price" => "150", "validity_start" => "2017-01-15 00:00:00", "validity_end" => "2017-07-14 23:59:59"]);
+		configuration_transfer::create(["activity_id" => "1", "transfer_id" =>"2", "configuration_transportation_id" => "1", "transfer_mode_id" => "1", "transfer_reserve_type_id" => "2", "price" => "150", "validity_start" => "2017-01-15 00:00:00", "validity_end" => "2017-07-14 23:59:59"]);
+		configuration_transfer::create(["activity_id" => "1", "transfer_id" =>"2", "configuration_transportation_id" => "1", "transfer_mode_id" => "2", "transfer_reserve_type_id" => "3", "price" => "300", "validity_start" => "2017-01-15 00:00:00", "validity_end" => "2017-07-14 23:59:59"]);
+	}
+}
+?>

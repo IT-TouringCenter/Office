@@ -1,0 +1,9 @@
+<?php namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class airline_information extends baseModel {
+
+	protected $table = 'airline_informations';
+
+}

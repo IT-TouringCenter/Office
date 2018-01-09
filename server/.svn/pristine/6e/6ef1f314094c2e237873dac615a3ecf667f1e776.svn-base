@@ -1,0 +1,12 @@
+<?php
+namespace App\Facades\ActivityFacades;
+
+use Illuminate\Support\Facades\Facade;
+
+class IcasGetHotelFacade extends Facade{
+  protected static function getFacadeAccessor(){
+    return "App\Facades\ActivityFacades\ICAS\IcasGetHotelClass";
+  }
+}
+
+?>

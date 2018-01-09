@@ -1,0 +1,12 @@
+<?php namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class activity extends baseModel {
+
+	protected $table = 'activities';
+
+	public function hotels(){
+		return $this->hasOne('App/hotel', 'activity_id');
+	}
+}

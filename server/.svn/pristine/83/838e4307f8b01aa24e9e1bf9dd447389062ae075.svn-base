@@ -1,0 +1,9 @@
+<?php 
+namespace App\Repositories;
+
+use App\Repositories\Src\Contracts\IRepository;
+use App\Repositories\Src\Eloquent\Repository;
+
+class JobQualificationRepository extends Repository{
+  function model(){return "App\job_qualification";}
+}

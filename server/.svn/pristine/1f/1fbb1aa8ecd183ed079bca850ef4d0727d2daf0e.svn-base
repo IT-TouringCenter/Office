@@ -1,0 +1,18 @@
+<?php
+
+use App\job_vacancy as job_vacancy;
+use Illuminate\Database\Seeder;
+
+class JobVacancySeeder extends Seeder{
+	public function run(){
+		job_vacancy::truncate();
+		job_vacancy::create(["job_department_id"=>"1","job_type_id"=>"1","position"=>"2","note"=>"","notify"=>"Interested applicants, please send resume with resent photo to info@touringcnx.com","validity_start"=>"","validity_stop"=>""]); // sale staff
+		job_vacancy::create(["job_department_id"=>"1","job_type_id"=>"4","position"=>"3","note"=>"","notify"=>"ผู้สนใจส่ง E-mail ใบสมัคร + รูปถ่ายปัจจุบันและประวัติส่วนตัว + ผลการเรียนมาที่ info@touringcnx.com","validity_start"=>"","validity_stop"=>""]);
+		job_vacancy::create(["job_department_id"=>"2","job_type_id"=>"1","position"=>"2","note"=>"","notify"=>"Interested applicants, please send resume with resent photo to info@touringcnx.com","validity_start"=>"","validity_stop"=>""]);
+		job_vacancy::create(["job_department_id"=>"2","job_type_id"=>"4","position"=>"4","note"=>"","notify"=>"ผู้สนใจส่ง E-mail ใบสมัคร + รูปถ่ายปัจจุบันและประวัติส่วนตัว + ผลการเรียนมาที่ info@touringcnx.com","validity_start"=>"","validity_stop"=>""]);
+		job_vacancy::create(["job_department_id"=>"3","job_type_id"=>"2","position"=>"5","note"=>"Optional or Side Trip is not allowed for all Touring Center's Day Trip","notify"=>"Interested applicants, please feel free to walk in and apply at the office as below details","validity_start"=>"","validity_stop"=>""]);
+		job_vacancy::create(["job_department_id"=>"7","job_type_id"=>"4","position"=>"4","note"=>"","notify"=>"ผู้สนใจส่ง E-mail ใบสมัคร + รูปถ่ายปัจจุบันและประวัติส่วนตัว + ผลการเรียนมาที่ info@touringcnx.com","validity_start"=>"","validity_stop"=>""]);
+		job_vacancy::create(["job_department_id"=>"8","job_type_id"=>"4","position"=>"3","note"=>"","notify"=>"ผู้สนใจส่ง E-mail ใบสมัคร + รูปถ่ายปัจจุบันและประวัติส่วนตัว + ผลการเรียนมาที่ info@touringcnx.com","validity_start"=>"","validity_stop"=>""]);
+	}
+}
+?>

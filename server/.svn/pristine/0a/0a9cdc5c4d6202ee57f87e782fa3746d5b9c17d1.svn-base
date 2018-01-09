@@ -1,0 +1,9 @@
+<?php 
+namespace App\Repositories;
+
+use App\Repositories\Src\Contracts\IRepository;
+use App\Repositories\Src\Eloquent\Repository;
+
+class CountryRepository extends Repository{
+  function model(){return "App\country";}
+}

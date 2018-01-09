@@ -1,0 +1,16 @@
+<?php
+
+use App\transportation as transportation;
+use Illuminate\Database\Seeder;
+
+class TransportationSeeder extends Seeder{
+	public function run(){
+		transportation::truncate();
+		transportation::create(['transportation' => 'Van']);
+		transportation::create(['transportation' => 'Mercedes Benz E250']);
+		transportation::create(['transportation' => 'Toyota Camry']);
+		transportation::create(['transportation' => 'VIP - Van']);
+		transportation::create(['transportation' => 'Bus']);
+	}
+}
+?>

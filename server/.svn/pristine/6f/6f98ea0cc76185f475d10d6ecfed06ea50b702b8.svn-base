@@ -1,0 +1,10 @@
+<?php 
+namespace App\Repositories;
+
+use App\Repositories\Src\Contracts\IRepository;
+use App\Repositories\Src\Eloquent\Repository;
+
+class PaxRepository extends Repository{
+  function model(){return "App\pax";}
+}
+?>

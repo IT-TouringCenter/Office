@@ -1,0 +1,9 @@
+<?php namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class reserve_identify extends Model {
+
+	protected $table ='reserve_identifies';
+
+}

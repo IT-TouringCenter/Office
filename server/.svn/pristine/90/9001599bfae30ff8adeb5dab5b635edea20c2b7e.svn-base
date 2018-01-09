@@ -1,0 +1,41 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateTourProgramsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('tour_programs', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('code',20);
+            $table->string('title',100);
+            $table->string('image',150)->nullable();
+            $table->string('link',150)->nullable();
+            $table->dateTime('validity_start');
+            $table->dateTime('validity_end');
+            $table->tinyInteger('is_recommend')->default(0);
+            $table->tinyInteger('is_active')->default(1);
+            $table->string('created_by',50)->default('System');
+            $table->string('updated_by',50)->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('tour_programs');
+    }
+}

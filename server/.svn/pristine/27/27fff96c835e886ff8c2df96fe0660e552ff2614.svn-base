@@ -1,0 +1,50 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateAccountsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('accounts', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('account_type_id');
+            $table->integer('hotel_id');
+            $table->string('email',50);
+            $table->string('password',50);
+            $table->string('license_number',50)->nullable;
+            $table->string('firstname',50);
+            $table->string('lastname',50);
+            $table->string('phone',20);
+            $table->string('gender',20);
+            $table->string('address',100)->nullable();
+            $table->string('city',50)->nullable();
+            $table->string('province',50)->nullable();
+            $table->string('postcode',20)->nullable();
+            $table->string('country',50);
+            $table->string('picture',150)->nullable();
+            $table->tinyInteger('is_active_register')->default(0);
+            $table->tinyInteger('is_active')->default(1);
+            $table->string('created_by',50)->default('System');
+            $table->string('updated_by',50)->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('accounts');
+    }
+}

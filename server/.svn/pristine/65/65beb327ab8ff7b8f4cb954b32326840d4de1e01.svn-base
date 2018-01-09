@@ -1,0 +1,26 @@
+<?php
+namespace App\Http\Controllers;
+
+use Request;
+use App\Http\Requests;
+// use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\account as account;
+
+use Carbon\Carbon;
+
+class AuthenticateController extends Controller {
+
+	public function Login(){
+		$input = request::input('user');
+		// pass
+		$account = account::where('is_active',1)->where('email',$input)->get()->count();
+
+		if($account==='' || $account===null || !isset($account) || is_null($account) || $account<1){
+			return ['False'=>'fffff'];
+		}else{
+			return 'Success';
+		}
+
+	}
+}
