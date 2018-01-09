@@ -1,9 +1,0 @@
-<?php namespace App;
-
-use Illuminate\Database\Eloquent\Model;
-
-class transfer_mode extends baseModel {
-
-	protected $table = 'transfer_modes';
-
-}

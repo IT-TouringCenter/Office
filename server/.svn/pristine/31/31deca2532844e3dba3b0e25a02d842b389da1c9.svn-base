@@ -1,8 +1,0 @@
-<?php namespace App;
-
-use Illuminate\Database\Eloquent\Model;
-
-class transaction_transfer_history extends baseModel {
-
-	protected $table = 'transaction_transfer_histories';
-}
