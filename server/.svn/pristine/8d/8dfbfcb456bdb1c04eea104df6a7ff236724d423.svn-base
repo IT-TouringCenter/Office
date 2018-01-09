@@ -1,0 +1,15 @@
+<?php
+
+use App\notify_status_cronjob as notify_status_cronjob;
+use Illuminate\Database\Seeder;
+
+class NotifyStatusCronjobSeeder extends Seeder{
+	public function run(){
+		notify_status_cronjob::truncate();
+		notify_status_cronjob::create(["status" => "Pending"]);
+		notify_status_cronjob::create(["status" => "Success"]);
+		notify_status_cronjob::create(["status" => "Error"]);
+		notify_status_cronjob::create(["status" => "Retry"]);
+	}
+}
+?>

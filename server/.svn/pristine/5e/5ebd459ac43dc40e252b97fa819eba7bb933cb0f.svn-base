@@ -1,0 +1,25 @@
+<?php
+namespace App\Facades\Tours;
+
+use App\Repositories\CountryRepository as CountryRepository;
+use App\country as country;
+
+class CountryClass extends BaseClass{  
+  public function __construct(CountryRepository $repo){
+    $this->CountryRepository = $repo;
+  }
+
+  public function GetCountry(){
+  	$country_arr = [];
+  	$country_repo = $this->CountryRepository->all();
+  	foreach($country_repo as $value){
+  		$this->country = new country;
+  		$this->country->countryId = $value->id;
+  		$this->country->countryName = $value->country;
+  		array_push($country_arr,$this->country);
+  	}
+    return $country_arr;
+  }
+}
+
+?>

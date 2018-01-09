@@ -1,0 +1,44 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateTransactionTransfersTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('transaction_transfers', function(Blueprint $table)
+		{			
+			$table->increments('id');
+			$table->integer('discount_code_id');
+			$table->integer('transaction_id');
+			$table->integer('passenger_id');
+			$table->integer('hotel_id');
+			$table->string('hotel_other')->nullable();
+			$table->string('room_number')->nullable();
+			$table->datetime('expired_date_ticket')->nullable();
+			$table->tinyInteger('is_used_ticket')->default(0);
+			$table->tinyInteger('is_expired_ticket')->default(0);
+			$table->tinyInteger('is_active')->default(1);
+			$table->string('created_by',50)->default('System');
+			$table->string('updated_by',50)->nullable();
+			$table->timestamps();
+		});
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('transaction_transfers');
+	}
+
+}

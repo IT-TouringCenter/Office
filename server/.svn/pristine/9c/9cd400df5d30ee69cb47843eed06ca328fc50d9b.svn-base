@@ -1,0 +1,16 @@
+<?php
+
+use App\payment_transaction_status as payment_transaction_status;
+use Illuminate\Database\Seeder;
+
+class PaymentTransactionStatusSeeder extends Seeder{
+	public function run(){
+		payment_transaction_status::truncate();
+		payment_transaction_status::create(['status' => 'Pending']);
+		payment_transaction_status::create(['status' => 'Approved']);
+		payment_transaction_status::create(['status' => 'Expire']);
+		payment_transaction_status::create(['status' => 'Cancel']);
+		payment_transaction_status::create(['status' => 'Error']);
+	}
+}
+?>

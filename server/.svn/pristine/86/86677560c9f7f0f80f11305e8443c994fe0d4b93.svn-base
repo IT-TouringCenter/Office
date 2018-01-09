@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateNotifyPromotionCodeCronjobsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('notify_promotion_code_cronjobs', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('notify_status_cronjob_id');
+            $table->integer('promotion_id');
+            $table->string('email',50);
+            $table->tinyInteger('interval_time');
+            $table->tinyInteger('interval_limit');
+            $table->tinyInteger('interval_count');
+            $table->tinyInteger('is_active')->default(1);
+            $table->string('created_by',50)->default('System');
+            $table->string('updated_by',50)->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('notify_promotion_code_cronjobs');
+    }
+}

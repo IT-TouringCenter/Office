@@ -1,0 +1,18 @@
+<?php
+namespace App\Facades\ActivityFacades\ICAS;
+
+use App\Repositories\IcasRepo\TransferReserveTypeRepository as TransferReserveTypeRepository;
+
+class IcasTransferReserveTypeClass extends BaseClass{
+  public function __construct(TransferReserveTypeRepository $repo){
+    $this->TransferReserveTypeRepository = $repo;
+  }
+
+  public function GetTransferReserveTypeById($transfer_reserve_type_id){
+    // $transfer_reserve_type = $this->TransferReserveTypeRepository->all();
+    $transfer_reserve_type = $this->TransferReserveTypeRepository->GetTransferReserveTypeById($transfer_reserve_type_id);
+    return $transfer_reserve_type;
+  }
+}
+
+?>

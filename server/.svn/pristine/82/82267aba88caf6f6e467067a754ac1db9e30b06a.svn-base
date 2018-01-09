@@ -1,0 +1,48 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateEmailNotifyTransactionsTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('email_notify_transactions', function(Blueprint $table)
+		{
+			$table->increments('id');
+			$table->integer('transaction_source_id');
+			$table->integer('transaction_id');
+			$table->integer('email_notify_status_id');
+			$table->string('fullname',100);
+			$table->string('to',512);
+			$table->string('cc',512)->nullable();
+			$table->string('bcc',512)->nullable();
+			$table->string('subject',512);
+			$table->string('template_path',150);
+			$table->tinyInteger('limit_retry')->default(3);
+			$table->tinyInteger('count_retry')->default(0);
+			$table->dateTime('start_datetime')->nullable();
+			$table->dateTime('completed_datetime')->nullable();
+			$table->tinyInteger('is_active')->default(1);
+			$table->string('created_by',50)->default('System');
+			$table->string('updated_by',50)->nullable();
+			$table->timestamps();
+		});
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('email_notify_transactions');
+	}
+
+}

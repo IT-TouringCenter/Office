@@ -1,0 +1,43 @@
+<?php /*<?php echo $__env->make('easybook.templates.ticket.watermark', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>*/ ?>
+<div style="background-color: #a8ddf5;padding: 5px 10px 5px 10px;border: 1px dashed #020202;border-radius: 5px;max-width: 360px;margin-bottom: 10px;margin-top:10px">
+    <?php echo $__env->make('easybook.templates.ticket.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>  
+    <div>
+        <?php /* ticket number */ ?>
+        <div style="margin-top: 10px;">
+            <div style="width: 105px;float: left;">Ticket Number</div>
+            <div>:&nbsp;<?php echo e(array_get($ticket,'ticketNumber')); ?>&nbsp;(<?php echo e(array_get($ticket,'transferMode')); ?>)</div>
+        </div>        
+       
+        <?php if(array_get($ticket,'transferMode') =='One Way'): ?>
+            <div style="margin-top: 10px;">
+                <?php if(array_get($ticket,'isArrival') ==true): ?>                    
+                    <div style="width: 105px;float: left;">Arrival</div>
+                <?php else: ?>
+                    <div style="width: 105px;float: left;">Departure</div>
+                <?php endif; ?>
+
+                <div>:&nbsp;<?php echo e(array_get($ticket,'arrivalFlightNumber')); ?>&nbsp;(<?php echo e(array_get($ticket,'arrivalDate')); ?>)</div>
+            </div>
+        <?php else: ?>
+            <?php /* arival flight detail */ ?>
+             <div style="margin-top: 10px;">            
+                <div style="width: 105px;float: left;">Arrival</div>           
+                <div>:&nbsp;<?php echo e(array_get($ticket,'arrivalFlightNumber')); ?>&nbsp;(<?php echo e(array_get($ticket,'arrivalDate')); ?>)</div>
+            </div>
+
+             <?php /* departure flight detail */ ?>
+             <div style="margin-top: 10px;">                        
+                <div style="width: 105px;float: left;">Departure</div>            
+                <div>:&nbsp;<?php echo e(array_get($ticket,'departureFlightNumber')); ?>&nbsp;(<?php echo e(array_get($ticket,'departureDate')); ?>)</div>
+            </div>
+        <?php endif; ?>
+
+        <?php /* hotel */ ?>
+        <div style="margin-top: 10px;">
+            <div style="width: 105px;float: left;">Hotel</div>
+            <div>:&nbsp;<?php echo e(array_get($ticket,'hotelName')); ?></div>
+        </div>
+
+    </div>
+    <?php echo $__env->make('easybook.templates.airport.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+</div>

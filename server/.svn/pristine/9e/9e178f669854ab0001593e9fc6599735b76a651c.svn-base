@@ -1,0 +1,64 @@
+<?php
+
+use App\job_qualification as job_qualification;
+use Illuminate\Database\Seeder;
+
+class JobQualificationSeeder extends Seeder{
+	public function run(){
+		job_qualification::truncate();
+		// Sale
+		job_qualification::create(["job_vacancy_id"=>"1","qualification"=>"Male, Thai National (age 25,30)"]);
+		job_qualification::create(["job_vacancy_id"=>"1","qualification"=>"Bachelor Degree in Marketing, Business Administration, Management (or Related Fields)"]);
+		job_qualification::create(["job_vacancy_id"=>"1","qualification"=>"Service Minded, Willing to Work as a Team and Able to Work Under Pressure"]);
+		job_qualification::create(["job_vacancy_id"=>"1","qualification"=>"Outstanding Oral and Written Skills with Excellent Sales and Negotiation Skills"]);
+		job_qualification::create(["job_vacancy_id"=>"1","qualification"=>"2 Year Working Experience (in the Sales or Tourism Field will be advantage)"]);
+		job_qualification::create(["job_vacancy_id"=>"1","qualification"=>"Proactive with Excellent Interpersonal and Communication skills and Flexible Attitude"]);
+		job_qualification::create(["job_vacancy_id"=>"1","qualification"=>"Able to Travel to Other Locations to Represent the Company on Sales Calls"]);
+		// Reservation
+		job_qualification::create(["job_vacancy_id"=>"3","qualification"=>"Male or Female, Thai National (age 22 - 30)"]);
+		job_qualification::create(["job_vacancy_id"=>"3","qualification"=>"Bachelor Degree in English, Business English, Tourism (or Related Fields)"]);
+		job_qualification::create(["job_vacancy_id"=>"3","qualification"=>"Service Minded and Willing to Work as a Team"]);
+		job_qualification::create(["job_vacancy_id"=>"3","qualification"=>"Good Command of English and Computer Literate"]);
+		job_qualification::create(["job_vacancy_id"=>"3","qualification"=>"Experience in Tourism will be Advantage"]);
+		job_qualification::create(["job_vacancy_id"=>"3","qualification"=>"Proactive with Good Interpersonal and Communication skills"]);
+		job_qualification::create(["job_vacancy_id"=>"3","qualification"=>"Able to Work in Shifts (is a must) and Under Presure"]);
+		// Guide
+		job_qualification::create(["job_vacancy_id"=>"5","qualification"=>"Male or Female, Thai national (age 30 and above)"]);
+		job_qualification::create(["job_vacancy_id"=>"5","qualification"=>"Own a tourist guide license from T.A.T."]);
+		job_qualification::create(["job_vacancy_id"=>"5","qualification"=>"Service minded and willing to work as a team"]);
+		job_qualification::create(["job_vacancy_id"=>"5","qualification"=>"Excellence command of English (Speaking, Reading & Writing)"]);
+		job_qualification::create(["job_vacancy_id"=>"5","qualification"=>"At least 5 year experience in guide field"]);
+		job_qualification::create(["job_vacancy_id"=>"5","qualification"=>"Proactive with excellence interpersonal and communication skills"]);
+		job_qualification::create(["job_vacancy_id"=>"5","qualification"=>"Able to work under pressure and high demanding customer"]);
+		// Interns
+		//----- Reservation
+		job_qualification::create(["job_vacancy_id"=>"2","qualification"=>"ชายหรือหญิง กำลังศึกษา (ปริญญาตรี) ในชั้นปีที่ 4 หรือปีสุดท้าย ในสาขาที่เกี่ยวข้อง"]);
+		job_qualification::create(["job_vacancy_id"=>"2","qualification"=>"มีใจรักงานบริการ และ สามารถทำงานเป็นทีมได้"]);
+		job_qualification::create(["job_vacancy_id"=>"2","qualification"=>"สามารถใช้โปรแกรมคอมพิวเตอร์พื้นฐานหรือตามสายงาน (ที่เรียนหรือฝึกงาน) เป็นอย่างดี"]);
+		job_qualification::create(["job_vacancy_id"=>"2","qualification"=>"สามารถสื่อสารภาษาอังกฤษได้จะรับการพิจารณาเป็นพิเศษ (โดยเฉพาะ Reservation/Admin)"]);
+		job_qualification::create(["job_vacancy_id"=>"2","qualification"=>"มีมนุษย์สัมพันธ์ดี มีความคิดริเริ่มสร้างสรรค์ กล้าแสดงออก ต้องการเรียนรู้สิ่งใหม่ๆ อยู่เสมอ"]);
+		job_qualification::create(["job_vacancy_id"=>"2","qualification"=>"สามารถทำงานตามที่ได้รับมอบหมายได้"]);
+		//----- Sale
+		job_qualification::create(["job_vacancy_id"=>"4","qualification"=>"ชายหรือหญิง กำลังศึกษา (ปริญญาตรี) ในชั้นปีที่ 4 หรือปีสุดท้าย ในสาขาที่เกี่ยวข้อง"]);
+		job_qualification::create(["job_vacancy_id"=>"4","qualification"=>"มีใจรักงานบริการ และ สามารถทำงานเป็นทีมได้"]);
+		job_qualification::create(["job_vacancy_id"=>"4","qualification"=>"สามารถใช้โปรแกรมคอมพิวเตอร์พื้นฐานหรือตามสายงาน (ที่เรียนหรือฝึกงาน) เป็นอย่างดี"]);
+		job_qualification::create(["job_vacancy_id"=>"4","qualification"=>"สามารถสื่อสารภาษาอังกฤษได้จะรับการพิจารณาเป็นพิเศษ (โดยเฉพาะ Reservation/Admin)"]);
+		job_qualification::create(["job_vacancy_id"=>"4","qualification"=>"มีมนุษย์สัมพันธ์ดี มีความคิดริเริ่มสร้างสรรค์ กล้าแสดงออก ต้องการเรียนรู้สิ่งใหม่ๆ อยู่เสมอ"]);
+		job_qualification::create(["job_vacancy_id"=>"4","qualification"=>"สามารถทำงานตามที่ได้รับมอบหมายได้"]);
+		//----- IT
+		job_qualification::create(["job_vacancy_id"=>"6","qualification"=>"ชายหรือหญิง กำลังศึกษา (ปริญญาตรี) ในชั้นปีที่ 4 หรือปีสุดท้าย ในสาขาที่เกี่ยวข้อง"]);
+		job_qualification::create(["job_vacancy_id"=>"6","qualification"=>"มีใจรักงานบริการ และ สามารถทำงานเป็นทีมได้"]);
+		job_qualification::create(["job_vacancy_id"=>"6","qualification"=>"สามารถใช้โปรแกรมคอมพิวเตอร์พื้นฐานหรือตามสายงาน (ที่เรียนหรือฝึกงาน) เป็นอย่างดี"]);
+		job_qualification::create(["job_vacancy_id"=>"6","qualification"=>"สามารถสื่อสารภาษาอังกฤษได้จะรับการพิจารณาเป็นพิเศษ (โดยเฉพาะ Reservation/Admin)"]);
+		job_qualification::create(["job_vacancy_id"=>"6","qualification"=>"มีมนุษย์สัมพันธ์ดี มีความคิดริเริ่มสร้างสรรค์ กล้าแสดงออก ต้องการเรียนรู้สิ่งใหม่ๆ อยู่เสมอ"]);
+		job_qualification::create(["job_vacancy_id"=>"6","qualification"=>"สามารถทำงานตามที่ได้รับมอบหมายได้"]);
+		//----- Online Marketing
+		job_qualification::create(["job_vacancy_id"=>"7","qualification"=>"ชายหรือหญิง กำลังศึกษา (ปริญญาตรี) ในชั้นปีที่ 4 หรือปีสุดท้าย ในสาขาที่เกี่ยวข้อง"]);
+		job_qualification::create(["job_vacancy_id"=>"7","qualification"=>"มีใจรักงานบริการ และ สามารถทำงานเป็นทีมได้"]);
+		job_qualification::create(["job_vacancy_id"=>"7","qualification"=>"สามารถใช้โปรแกรมคอมพิวเตอร์พื้นฐานหรือตามสายงาน (ที่เรียนหรือฝึกงาน) เป็นอย่างดี"]);
+		job_qualification::create(["job_vacancy_id"=>"7","qualification"=>"สามารถสื่อสารภาษาอังกฤษได้จะรับการพิจารณาเป็นพิเศษ (โดยเฉพาะ Reservation/Admin)"]);
+		job_qualification::create(["job_vacancy_id"=>"7","qualification"=>"มีมนุษย์สัมพันธ์ดี มีความคิดริเริ่มสร้างสรรค์ กล้าแสดงออก ต้องการเรียนรู้สิ่งใหม่ๆ อยู่เสมอ"]);
+		job_qualification::create(["job_vacancy_id"=>"7","qualification"=>"สามารถทำงานตามที่ได้รับมอบหมายได้"]);
+	}
+}
+?>

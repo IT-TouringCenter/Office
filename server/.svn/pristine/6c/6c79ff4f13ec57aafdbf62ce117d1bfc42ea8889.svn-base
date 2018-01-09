@@ -1,0 +1,33 @@
+<?php
+namespace App\Facades\ActivityFacades\ICAS;
+
+use App\Repositories\IcasRepo\ConfigurationHotelRepository as ConfigurationHotelRepository;
+use App\configuration_hotel as configuration_hotel;
+
+class IcasGetHotelClass extends BaseClass{
+  public function __construct(ConfigurationHotelRepository $repo){
+    $this->ConfigurationHotelRepository = $repo;
+  }
+
+  public function GetIcasHotel(){
+    $icas_hotel_arr = [];
+    $icas_hotel_repo = $this->ConfigurationHotelRepository->all();
+    $this->icas_hotel = new configuration_hotel;
+    foreach($icas_hotel_repo as $value){
+      $this->hotel = new configuration_hotel;
+      $this->GetHotelByIcas($value->hotel_id);
+      array_push($icas_hotel_arr,$this->hotel);
+    }
+    $this->icas_hotel = $icas_hotel_arr;
+    return  $this->icas_hotel;
+  }
+
+  public function GetHotelByIcas($hotel_id){
+    $hotel = \IcasHotelFacade::GetHotels($hotel_id);
+    $hotels = new configuration_hotel;
+    $hotels->hotelId = $hotel[0]->id;
+    $hotels->hotelName = $hotel[0]->hotel;
+    $this->hotel = $hotels;
+  }
+}
+?>

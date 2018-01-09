@@ -1,0 +1,16 @@
+<?php
+
+use App\myaccount_left_menu as myaccount_left_menu;
+use Illuminate\Database\Seeder;
+
+class MyaccountLeftMenuSeeder extends Seeder{
+	public function run(){
+		myaccount_left_menu::truncate();
+		myaccount_left_menu::create(['menu' => 'History book']);
+		myaccount_left_menu::create(['menu' => 'Commission']);
+		myaccount_left_menu::create(['menu' => 'Promotion']);
+		myaccount_left_menu::create(['menu' => 'My account']);
+		myaccount_left_menu::create(['menu' => 'Change password']);
+	}
+}
+?>

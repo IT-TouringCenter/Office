@@ -1,0 +1,70 @@
+<?php
+namespace App\Repositories\IcasRepo;
+
+use App\Repositories\Src\Contracts\IRepository;
+use App\Repositories\Src\Eloquent\Repository;
+use Carbon\Carbon;
+
+class ConfigurationActivityPriceRepository extends Repository{
+	function model(){return 'App\configuration_activity_price';}
+
+	// Get Config activity price
+	public function GetConfigActivityPriceById($activity_id){
+		// $datenow = Carbon::now('Asia/Bangkok');
+		$datenow = '2017-01-20 14:50:50';
+		return $this->model
+					->where('activity_id',$activity_id)
+					->where('validity_start','<=',$datenow)
+					->where('validity_end','>=',$datenow)
+					->where('is_active',1)
+					->get();
+	}
+
+	// Get Transfer Convention Centre
+	public function GetConfigActivityPriceByTransferConventionCentre(){
+		// $datenow = Carbon::now('Asia/Bangkok');
+		$datenow = '2017-01-20 14:50:50';
+		return $this->model
+					// ->where('transfer_mode_id',$transfer_mode_id)
+					->where('transfer_mode_id',3)
+					->where('validity_start','<=',$datenow)
+					->where('validity_end','>=',$datenow)
+					->where('is_active',1)
+					->get();
+	}
+	// Get Transfer Airport
+	public function GetConfigActivityPriceByTransferAirport(){
+		// $datenow = Carbon::now('Asia/Bangkok');
+		$datenow = '2017-01-20 14:50:50';
+		return $this->model
+					->groupBy('transfer_mode_id')
+					->where('transfer_mode_id','!=',3)
+					->where('validity_start','<=',$datenow)
+					->where('validity_end','>=',$datenow)
+					->where('is_active',1)
+					->get();
+	}
+
+	public function GetConfigActivityPriceByGroupTransferModeId($transfer_mode_id){
+		// $datenow = Carbon::now('Asia/Bangkok');
+		$datenow = '2017-01-20 14:50:50';
+		return $this->model
+					->groupBy('transfer_mode_id')
+					->where('transfer_mode_id',$transfer_mode_id)
+					->where('validity_start','<=',$datenow)
+					->where('validity_end','>=',$datenow)
+					->where('is_active',1)
+					->get();
+	}
+
+	public function GetConfigActivityPriceByTransferModeId($transfer_mode_id){
+		// $datenow = Carbon::now('Asia/Bangkok');
+		$datenow = '2017-01-20 14:50:50';
+		return $this->model
+					->where('transfer_mode_id',$transfer_mode_id)
+					->where('validity_start','<=',$datenow)
+					->where('validity_end','>=',$datenow)
+					->where('is_active',1)
+					->get();
+	}
+}

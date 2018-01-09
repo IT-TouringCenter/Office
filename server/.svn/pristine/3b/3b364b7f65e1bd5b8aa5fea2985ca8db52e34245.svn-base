@@ -1,0 +1,11 @@
+<?php
+namespace App\Facades\ActivityFacades;
+
+use Illuminate\Support\Facades\Facade;
+
+class IcasTransferModeFacade extends Facade{
+  protected static function getFacadeAccessor(){
+    return "App\Facades\ActivityFacades\ICAS\IcasTransferModeClass";
+  }
+}
+?>

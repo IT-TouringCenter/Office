@@ -1,0 +1,9 @@
+<?php namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class transaction_tour_program_change_history extends baseModel {
+
+	protected $table = 'transaction_tour_program_change_histories';
+
+}

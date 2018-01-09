@@ -1,0 +1,29 @@
+<?php
+
+use App\job_responsibility as job_responsibility;
+use Illuminate\Database\Seeder;
+
+class JobResponsibilitySeeder extends Seeder{
+	public function run(){
+		job_responsibility::truncate();
+		// Sale
+		job_responsibility::create(["job_vacancy_id"=>"1","responsibility"=>"Present and sell company products and services to current and potential clients"]);
+		job_responsibility::create(["job_vacancy_id"=>"1","responsibility"=>"Establish and maintain current cient and potential client relationships"]);
+		job_responsibility::create(["job_vacancy_id"=>"1","responsibility"=>"Develop and implement special sales activities to establish the advance booking"]);
+		job_responsibility::create(["job_vacancy_id"=>"1","responsibility"=>"Coordinate company staff to accomplish the work required to close sales"]);
+		job_responsibility::create(["job_vacancy_id"=>"1","responsibility"=>"Prepare a variety of status reports such as market situation, activity, closings, follow-up, etc"]);
+		job_responsibility::create(["job_vacancy_id"=>"1","responsibility"=>"Other duties as assigned"]);
+		// Reservation
+		job_responsibility::create(["job_vacancy_id"=>"3","responsibility"=>"Handle telephone and e-mail correspondence as well as walk-in client"]);
+		job_responsibility::create(["job_vacancy_id"=>"3","responsibility"=>"Dealing with guides, drivers and suppliers"]);
+		job_responsibility::create(["job_vacancy_id"=>"3","responsibility"=>"Undertaking general administrative tasks (basic accounting, basic office tasks, etc.)"]);
+		job_responsibility::create(["job_vacancy_id"=>"3","responsibility"=>"Handing customer orders and payments"]);
+		job_responsibility::create(["job_vacancy_id"=>"3","responsibility"=>"Other duties as assigned"]);
+		// Guide
+		job_responsibility::create(["job_vacancy_id"=>"5","responsibility"=>"Guidance Touring Center's Day Trips & Packages"]);
+		job_responsibility::create(["job_vacancy_id"=>"5","responsibility"=>"Coordinate with Reservations & Drivers as well as Suppliers (places of visit)"]);
+		job_responsibility::create(["job_vacancy_id"=>"5","responsibility"=>"Handing customer demands and payments & Maintain standard of Touring Center"]);
+		// Interns
+		// job_responsibility::create(["job_vacancy_id"=>"","responsibility"=>""]);
+	}
+}

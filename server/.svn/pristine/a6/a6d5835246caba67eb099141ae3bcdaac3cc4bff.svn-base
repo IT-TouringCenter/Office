@@ -1,0 +1,16 @@
+<?php
+namespace App\Facades\Tours;
+
+use App\Repositories\TourTypePriceRepository as TourTypePriceRepository;
+
+class TourTypePriceClass extends BaseClass{  
+  public function __construct(TourTypePriceRepository $repo){
+    $this->TourTypePriceRepository= $repo;
+  }
+
+  public function GetDataById($tour_type_price_id){
+    return $this->TourTypePriceRepository->findBy('id',$tour_type_price_id,['id','type']);
+  }
+}
+
+?>

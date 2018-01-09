@@ -1,0 +1,56 @@
+<?php 
+namespace App\Repositories;
+
+use App\Repositories\Src\Contracts\IRepository;
+use App\Repositories\Src\Eloquent\Repository;
+
+class DayTripRepository extends Repository{
+  function model(){return "App\configuration_tour_price";}
+
+  public function GetPriceByTourTypePriceTransportId($tour_type_price,$transport_id){
+    return  $this->model
+                ->where('tour_type_price_id','=',$tour_type_price)
+                ->where('transportation_id','=',$transport_id)
+                ->where('is_active',1)
+                ->groupBy('pax_id','transportation_id')
+                ->get(['tour_type_price_id','transportation_id','pax_id','sell_price_adult','sell_price_child','extra_charge']);
+  }
+
+  public function GetPriceByTourTypePriceId($program_id,$tour_type_price){
+    return  $this->model       
+                ->where('tour_program_id',$program_id)         
+                ->where('tour_type_price_id',$tour_type_price)
+                ->where('is_active',1)
+                ->groupBy('pax_id','transportation_id')                
+                ->get(['transportation_id','pax_id','sell_price_adult','sell_price_child','extra_charge']);
+                //->get();
+  }
+
+  public function GetGroupPriceByProgramIdAndTransportId($program_id,$transport_id,$tour_type_price_id){
+    return $this->model
+                ->where('tour_program_id',$program_id)
+                ->where('transportation_id',$transport_id)
+                ->where('tour_type_price_id',$tour_type_price_id)
+                ->where('is_active',1)
+                ->groupBy('pax_id')
+                ->get(['pax_id','sell_price_adult','sell_price_child','extra_charge']);
+  }
+
+  public function GetPriceByProgramId($program_id){
+    return $this->model
+                ->groupBy('tour_type_price_id')
+                ->where('tour_program_id',$program_id)
+                ->where('is_active',1)
+                ->get();
+  }
+
+  public function GetTourByCategory($tour_category_id){
+    return $this->model
+                ->groupBy('tour_program_id')
+                ->where('tour_category_id',$tour_category_id)
+                ->where('is_active',1)
+                ->select('tour_program_id')
+                ->get();
+  }
+} // end class
+?>

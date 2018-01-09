@@ -1,0 +1,14 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class tour_type extends baseModel
+{
+    protected $table = "tour_types";
+
+    public function tour_programs(){
+    	return $this->hasMany('App/tour_program','tour_type_id');
+    }
+}

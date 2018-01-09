@@ -1,0 +1,47 @@
+<?php
+
+use App\tour_traveling_time as tour_traveling_time;
+use Illuminate\Database\Seeder;
+
+class TourTravelingTimeSeeder extends Seeder{
+	public function run(){
+		tour_traveling_time::truncate();
+		// TC-01
+		tour_traveling_time::create(['tour_program_id'=>'1','traveling_time'=>'Morning Trip (08:30 AM - 12:00 AM)','medical'=>'AM','pickup_time'=>'08:00 AM']);
+		tour_traveling_time::create(['tour_program_id'=>'1','traveling_time'=>'Afternoon Trip (01:30 PM - 05:00 PM)','medical'=>'PM','pickup_time'=>'01:00 PM']);
+		// TC-02
+		tour_traveling_time::create(['tour_program_id'=>'2','traveling_time'=>'Morning Trip (08:30 AM - 12:00 AM)','medical'=>'AM','pickup_time'=>'08:00 AM']);
+		tour_traveling_time::create(['tour_program_id'=>'2','traveling_time'=>'Afternoon Trip (01:30 PM - 05:00 PM)','medical'=>'PM','pickup_time'=>'01:00 PM']);
+		// TC-03
+		tour_traveling_time::create(['tour_program_id'=>'3','traveling_time'=>'Morning Trip (08:00 AM - 12:00 AM)','medical'=>'AM','pickup_time'=>'07:30 AM']);
+		tour_traveling_time::create(['tour_program_id'=>'3','traveling_time'=>'Afternoon Trip (12:30 PM - 04:30 PM)','medical'=>'PM','pickup_time'=>'12:00 PM']);
+		// TC-04
+		tour_traveling_time::create(['tour_program_id'=>'4','traveling_time'=>'Morning Trip (08:30 AM - 12:00 AM)','medical'=>'AM','pickup_time'=>'08:00 AM']);
+		tour_traveling_time::create(['tour_program_id'=>'4','traveling_time'=>'Afternoon Trip (01:30 PM - 05:00 PM)','medical'=>'PM','pickup_time'=>'01:00 PM']);
+		// TC-05A
+		tour_traveling_time::create(['tour_program_id'=>'5','traveling_time'=>'Afternoon Trip (03:00 PM - 07:30 PM)','medical'=>'PM','pickup_time'=>'02:30 PM']);
+		// TC-05E
+		tour_traveling_time::create(['tour_program_id'=>'6','traveling_time'=>'Evening Trip (06:30 PM - 10:00 PM)','medical'=>'PM','pickup_time'=>'06:00 PM']);
+		// TC-06
+		tour_traveling_time::create(['tour_program_id'=>'7','traveling_time'=>'Evening Trip (06:30 PM - 10:00 PM)','medical'=>'PM','pickup_time'=>'06:00 PM']);
+		// TC-07
+		tour_traveling_time::create(['tour_program_id'=>'8','traveling_time'=>'Fullday Trip (08:30 AM - 04:30 PM)','medical'=>'','pickup_time'=>'08:00 AM']);
+		// TC-08
+		tour_traveling_time::create(['tour_program_id'=>'9','traveling_time'=>'Fullday Trip (07:30 AM - 08:00 PM)','medical'=>'','pickup_time'=>'07:00 AM']);
+		// TC-09
+		tour_traveling_time::create(['tour_program_id'=>'10','traveling_time'=>'Fullday Trip (08:30 AM - 05:00 PM)','medical'=>'','pickup_time'=>'08:00 AM']);
+		// TC-10
+		tour_traveling_time::create(['tour_program_id'=>'11','traveling_time'=>'Fullday Trip (08:30 AM - 05:00 PM)','medical'=>'','pickup_time'=>'08:00 AM']);
+		// TC-11
+		tour_traveling_time::create(['tour_program_id'=>'12','traveling_time'=>'Fullday Trip (08:30 AM - 04:30 PM)','medical'=>'','pickup_time'=>'08:00 AM']);
+		// TC-12
+		tour_traveling_time::create(['tour_program_id'=>'13','traveling_time'=>'Fullday Trip (08:00 AM - 02:30 PM)','medical'=>'','pickup_time'=>'07:30 AM']);
+		// TC-S01
+		tour_traveling_time::create(['tour_program_id'=>'14','traveling_time'=>'Fullday Trip (08:30 AM - 05:00 PM)','medical'=>'','pickup_time'=>'08:00 AM']);
+		// TC-S02M
+		tour_traveling_time::create(['tour_program_id'=>'15','traveling_time'=>'Morning Trip (08:00 AM - 01:00 PM)','medical'=>'AM','pickup_time'=>'07:30 AM']);
+		// TC-S02A
+		tour_traveling_time::create(['tour_program_id'=>'16','traveling_time'=>'Afternoon Trip (02:00 AM - 07:00 PM)','medical'=>'PM','pickup_time'=>'01:30 PM']);
+	}
+}
+?>

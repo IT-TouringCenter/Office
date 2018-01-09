@@ -1,0 +1,12 @@
+<?php
+namespace App\Facades;
+
+use Illuminate\Support\Facades\Facade;
+
+class JobVacancyFacade extends Facade{
+  protected static function getFacadeAccessor(){
+    return "App\Facades\Tours\JobVacancyClass";
+  }
+}
+
+?>

@@ -1,0 +1,250 @@
+<?php
+namespace App\Http\Controllers;
+
+use Request;
+// use Illuminate\Http\Request;
+// use App\Http\Requests;
+use App\Commons\ResponseCode;
+use App\Commons\ResponseStatus;
+use App\Http\Controllers\Controller;
+// model get data
+use App\configuration_tour_price as configuration_tour_price;
+use App\tour_program as tour_program;
+use App\pax as pax;
+use App\tour_category as tour_category;
+use App\tour_type as tour_type;
+use App\tour_type_price as tour_type_price;
+use App\transportation as transportation;
+use App\hotel as hotel;
+use App\country as country;
+
+// model set data
+use App\order as order;
+use App\order_item as order_item;
+use App\order_status as order_status;
+use App\passenger as passenger;
+use App\order_change_history as order_change_history;
+
+use Carbon\Carbon;
+
+
+class ReservationController extends MyBaseController {
+	//- Order booking
+	public function GetDayTripById($daytrip_id){
+		try{
+			$result = \DayTripFacade::GetDayTripById($daytrip_id);
+			if($result==null){
+        		return $this->Response(ResponseStatus::NoContent,ResponseCode::NoContent,null);
+      		}
+				return $this->Response(ResponseStatus::OK,ResponseCode::OK,$result);	
+		}catch(Exception $e) {			
+			return $this->Response(ResponseStatus::ServerError,ResponseCode::ServerError,'ReservationController.GetDayTripById error: '.$e);
+		}
+	}
+	//- ICAS
+	public function GetReserveIcas(){
+		try{
+			// $result = \IcasTransferModeFacade::GetModeByTransferModeId();
+			// $result = \IcasTransferReserveTypeFacade::GetTransferReserveTypeById(1);
+			// $result = \IcasConfigurationTransportationFacade::GetTransportationById(1);
+			$result = \IcasReserveFacade::GetReserveIcas();
+			if($result==null){
+				return $this->Response(ResponseStatus::NoContent,ResponseCode::NoContent,null);
+			}
+				return $this->Response(ResponseStatus::OK,ResponseCode::OK,$result);	
+		}catch(Exception $e) {			
+			return $this->Response(ResponseStatus::ServerError,ResponseCode::ServerError,'ReservationController.GetReserveIcas error: '.$e);
+		}
+	}
+	public function GetOrderNumber($_order_number){
+		$orderNumber = $_order_number; // don't have order number
+		// $orderNumber = ''; // have order number
+		$user_type = 'User';
+		$sub_user = substr($user_type,0,1);
+		$date_now = Carbon::now('Asia/Bangkok');
+		
+		if(empty($orderNumber) || !isset($orderNumber) || $orderNumber=='null'){ // 1 booking : order number == null , undefined
+			$get_last_order = order::orderBy('id','desc')->where('is_active',1)->get();
+			$last_order_number = $get_last_order[0]->order_number;
+
+			$year_order_number = substr($last_order_number,3,4);
+			$month_order_number = substr($last_order_number,7,2);
+			// run order number 'TC-201611-0001U'
+			if($month_order_number==$date_now->month){ // new run order number
+				$order_num = intval(substr($last_order_number,10,4));
+				$order_num_run = $order_num+1;
+				$order_length = strlen($order_num_run);
+				if($order_length<2){
+					$order_number = 'TC-'.$year_order_number.$month_order_number.'-000'.$order_num_run.$sub_user;
+				}else if($order_length<3){
+					$order_number = 'TC-'.$year_order_number.$month_order_number.'-00'.$order_num_run.$sub_user;
+				}else if($order_length<4){
+					$order_number = 'TC-'.$year_order_number.$month_order_number.'-0'.$order_num_run.$sub_user;
+				}else{
+					$order_number = 'TC-'.$year_order_number.$month_order_number.'-'.$order_num_run.$sub_user;
+				}
+			}else{
+				$order_number = 'TC-'.$date_now->year.$date_now->month.'-0001'.$sub_user;
+			} // end run order number
+
+			$set_order_number = new order;
+			$set_order_number->account_id = 1;
+			$set_order_number->order_number = $order_number;
+			$set_order_number->total_price = 0;
+			$set_order_number->save();
+			$this->last_order_id = $set_order_number->id; // get last id
+
+			// run booking number 'DT-201611-0001001U'
+			$sub_booking_num = substr($order_number,2,12);
+			$booking_num_run = '001';
+			$booking_number = 'DT'.$sub_booking_num.$booking_num_run.$sub_user;
+
+			$set_booking_number = new order_item;
+			$set_booking_number->order_id = $this->last_order_id;
+			$set_booking_number->tour_program_id = 0;
+			$set_booking_number->booking_number = $booking_number;
+			$set_booking_number->adult_price = 0;
+			$set_booking_number->total_price = 0;
+			$set_booking_number->save();
+			// $this->last_order_id = $set_booking_number->id;
+
+		}else{ // 2++ booking
+			$order_number = $orderNumber;
+			// run booking number 'DT-201611-0001001U'
+			$get_id_order = order::where('order_number',$order_number)->where('is_active',1)->get();
+			// $last_order_id = $get_id_order[0]->id;
+			if($get_id_order){
+				$booking_num = order_item::orderBy('id','desc')->where('order_id',$get_id_order[0]->id)->get();
+				if($booking_num){
+					$sub_booking_num = intval(substr($booking_num[0]->booking_number,14,3));
+					$booking_num_run = $sub_booking_num+1;
+					$booking_num_length = strlen($booking_num_run);
+					$sub_order = substr($order_number,2,12);
+
+					if($booking_num_length<2){
+						$booking_number = 'DT'.$sub_order.'00'.$booking_num_run.$sub_user;
+					}else if($booking_num_length<3){
+						$booking_number = 'DT'.$sub_order.'0'.$booking_num_run.$sub_user;
+					}else{
+						$booking_number = 'DT'.$sub_order.$booking_num_run.$sub_user;
+					}
+					$set_booking_number = new order_item;
+					$set_booking_number->order_id = $get_id_order[0]->id;
+					$set_booking_number->tour_program_id = 0;
+					$set_booking_number->booking_number = $booking_number;
+					$set_booking_number->adult_price = 0;
+					$set_booking_number->total_price = 0;
+					$set_booking_number->save();
+				}else{
+					$booking_number = null;
+				}
+			}else{
+				$booking_number = null;
+			}
+		} // end 2++ booking
+		return ["order_number"=>$order_number,"booking_number"=>$booking_number];
+	} // end GetOrderNumber function
+
+	public function SetDataBooking(Request $request){
+		return $request::all();
+		$customer_json_data = $request::all(); // JSON from client
+		return $customer_json_data;
+
+		$date_now = Carbon::now('Asia/Bangkok'); // set date time GMT+7
+		// $json = $customer_json_data['program'];
+		$json_program = $customer_json_data['tour'];
+		$json_passenger = $customer_json_data['passengers']; // array[]
+		$json_summary = $customer_json_data['summary'];
+
+		$transportation = $json_program['transportation'];
+		
+		// Set Order Item ------------------------------------------------------------------------
+		$order_item_table = order_item::where('booking_number',$json_program['booking_number'])->where('is_active',1)->first();
+		if($order_item_table==null || $order_item_table==''){
+			return;
+		}
+		$order_item_table->tour_program_id = $json_program['id'];
+		$order_item_table->transportation_id = $transportation['transportation_id'];
+		$order_item_table->traveller_adult = $json_summary['adult'];
+		$order_item_table->traveller_child = $json_summary['child'];
+		$order_item_table->adult_price = $json_summary['adult_price'];
+		$order_item_table->child_price = $json_summary['child_price'];
+		$order_item_table->extra_charge = $json_summary['extra_charge'];
+		$order_item_table->total_price = $json_summary['total_price'];
+		$order_item_table->updated_by = 'User';
+		$order_item_table->updated_at = $date_now;
+		$order_item_table->save();
+
+		// Set Order -----------------------------------------------------------------------------
+		$order = order::where('order_number',$json_program['order_number'])->where('is_active',1)->first();
+		if($order==null || $order==''){
+			return;
+		}
+		$get_total_price = intval($order->total_price);
+		$summary_price = intval($json_summary['total_price']);
+
+		$order->total_price = $get_total_price+$summary_price;
+		$order->updated_by = 'User';
+		$order->updated_at = $date_now;
+		$order->save();
+		
+		// // Set Passenger -------------------------------------------------------------------------
+		foreach($json_passenger as $val_passenger){
+			$set_passenger = new passenger;
+			$set_passenger->order_item_id = $order_item_table->id;
+			// set hotel
+			$hotel = $val_passenger['hotel'];
+			$set_passenger->hotel_id = $hotel['id'];
+			// set country
+			$country = $val_passenger['country'];
+			$set_passenger->country_id = $country['id'];
+			
+			$set_passenger->firstname = $val_passenger['firstname'];
+			$set_passenger->lastname = $val_passenger['lastname'];
+			$set_passenger->weight = $val_passenger['weight'];
+			$set_passenger->height = $val_passenger['height'];
+			$set_passenger->ages = $val_passenger['ages'];
+			$set_passenger->age = $val_passenger['age'];
+			$set_passenger->email = $val_passenger['email'];
+			$set_passenger->phone = $val_passenger['phone'];
+			$set_passenger->address = $val_passenger['address'];
+			$set_passenger->city = $val_passenger['city'];
+			$set_passenger->province = $val_passenger['province'];
+			$set_passenger->postcode = $val_passenger['postcode'];
+			$set_passenger->nationality = $val_passenger['nationality'];
+			// if country
+			if($country['country']=='Other'){
+				$set_passenger->country_other = $val_passenger['country_other'];
+			}
+			// if hotel
+			if($hotel['hotel']=='Other'){
+				$set_passenger->hotel_other = $val_passenger['hotel_other'];
+			}
+			// if primary
+			// $val_passenger['is_primary']==true?$set_passenger->is_primary=1:$set_passenger->is_primary=0;
+			// $val_passenger['is_virgin']==true?$set_passenger->is_virgin=1:$set_passenger->is_primary=0;
+			// $val_passenger['is_free_charge']==true?$set_passenger->is_free_charge=1:$set_passenger->is_primary=0;
+			if($val_passenger['is_primary']=='true'){
+				$set_passenger->is_primary = 1;
+			}else if($val_passenger['is_primary']=='false'){
+				$set_passenger->is_primary = 0;
+			}
+			// if virgin
+			if($val_passenger['is_virgin']=='true'){
+				$set_passenger->is_virgin = 1;
+			}else if($val_passenger['is_virgin']=='false'){
+				$set_passenger->is_virgin = 0;
+			}
+			// if free charge
+			if($val_passenger['is_free_charge']=='true'){
+				$set_passenger->is_free_charge = 1;
+			}else if($val_passenger['is_free_charge']=='false'){
+				$set_passenger->is_free_charge = 0;
+			}
+			$set_passenger->updated_by = 'User';
+			$set_passenger->updated_at = $date_now;
+			$set_passenger->save();
+		} // end for
+		// return ['is_primary'=>$set_passenger->is_primary, 'is_virgin'=>$set_passenger->is_virgin, 'is_free_charge'=>$set_passenger->is_free_charge];
+	} // end SetFirstDataBooking function
+} // end class

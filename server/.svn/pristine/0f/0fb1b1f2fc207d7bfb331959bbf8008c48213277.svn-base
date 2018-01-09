@@ -1,0 +1,21 @@
+<?php
+
+use App\country as country;
+use Illuminate\Database\Seeder;
+
+class CreateProcedureSeeder extends Seeder{
+    public function run(){
+        /*Create function: nst_fn_getIdentifies_reserveIdentifies*/
+		// $fn_getIdentifies = "DROP FUNCTION IF EXISTS nst_fn_getIdentifies_reserveIdentifies; DELIMITER $$ CREATE FUNCTION nst_fn_getIdentifies_reserveIdentifies(activityId INT) RETURNS VARCHAR(10) begin DECLARE tmpId varchar(10); DECLARE isExists INT; SELECT nst_fn_generateIdentifies() into tmpId; SELECT count(identify) INTO isExists FROM reserve_identifies WHERE identify = tmpId; WHILE isExists > 0 DO SELECT nst_fn_generateIdentifies() into tmpId; SELECT count(identify) INTO isExists FROM reserve_identifies WHERE identify = tmpId; END WHILE; CALL nst_sp_insert_reserveIdentifies(tmpId,activityId); RETURN tmpId; end $$ DELIMITER;";
+		// DB::unprepared($fn_getIdentifies);
+
+		/*Create function: nst_fn_generateIdentifies*/
+		// $nst_fn_generateIdentifies="drop function if exists nst_fn_generateIdentifies; DELIMITER $$ CREATE FUNCTION nst_fn_generateIdentifies() RETURNS VARCHAR(10) BEGIN DECLARE totalId INT; DECLARE lastId INT; DECLARE id varchar(4); DECLARE your_key varchar(10); DECLARE ym varchar(6); DECLARE y varchar(4); DECLARE m varchar(2); set y = DATE_FORMAT(CURDATE(),'%Y'); set m = DATE_FORMAT(CURDATE(),'%m'); set totalId = 0; set lastId = 0; select count(*) into totalId from reserve_identifies; if totalId = 0 then set lastId=1; else set lastId= totalId; end if; set id = LPAD(lastId,4,'0'); set ym = concat(y,m); set your_key = concat(ym,id); RETURN your_key; END $$ DELIMETER ;";
+		// DB::unprepared($nst_fn_generateIdentifies);
+
+		/*Create function: nst_sp_insert_reserveIdentifies*/
+		// $nst_sp_insert_reserveIdentifies="DROP PROCEDURE IF EXISTS nst_sp_insert_reserveIdentifies; DELIMITER $$ CREATE PROCEDURE nst_sp_insert_reserveIdentifies(IN identify INT,IN activityId INT) BEGIN INSERT INTO reserve_identifies( identify, activity_id, is_used, is_active, created_by, created_at) VALUES( identify, activityId, '1', '1', 'System', CURDATE() ); END $$ DELIMITER ;";
+		// DB::unprepared($nst_sp_insert_reserveIdentifies);
+    }
+}
+?>

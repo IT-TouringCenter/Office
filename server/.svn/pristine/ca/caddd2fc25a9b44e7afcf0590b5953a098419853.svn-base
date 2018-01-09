@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateTourTravelingTimesTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('tour_traveling_times', function(Blueprint $table)
+		{
+			$table->increments('id');
+			$table->integer('tour_program_id');			
+			$table->string('traveling_time',100);
+			$table->string('medical',2)->nullable();
+			$table->string('pickup_time',50);
+			$table->tinyInteger('is_active')->default(1);
+			$table->string('created_by',50)->default('System');
+			$table->string('updated_by',50)->nullable();
+			$table->timestamps();
+		});
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('tour_traveling_times');
+	}
+
+}

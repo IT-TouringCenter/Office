@@ -1,0 +1,9 @@
+<?php
+
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+class baseModel extends Model{
+   //protected $hidden = ['is_active','created_by','updated_by','created_at','updated_at'];    
+}
+?>

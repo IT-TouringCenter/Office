@@ -1,0 +1,9 @@
+<?php namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class booking_item_history extends baseModel {
+
+	protected $table = 'booking_item_histories';
+
+}
