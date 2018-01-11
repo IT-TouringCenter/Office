@@ -15,6 +15,16 @@ class CreateAffiliateCommissionsTable extends Migration {
 		Schema::create('affiliate_commissions', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->integer('account_id');
+			$table->integer('adult');
+			$table->integer('child')->default(0);
+			$table->integer('infant')->default(0);
+			$table->double('adult_price',10,2);
+			$table->double('child_price',10,2);
+			$table->double('commission',10,2);
+			$table->tinyInteger('is_active')->default(1);
+			$table->string('created_by',50)->default('System');
+			$table->string('updated_by',50)->nullable();
 			$table->timestamps();
 		});
 	}

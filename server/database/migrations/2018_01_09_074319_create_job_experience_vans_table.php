@@ -15,7 +15,16 @@ class CreateJobExperienceVansTable extends Migration {
 		Schema::create('job_experience_vans', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->timestamps();
+			$table->integer('job_application_van_id');
+			$table->string('company',150)->nullable();
+			$table->string('department',100)->nullable();
+			$table->string('period_start',50)->nullable();
+			$table->string('period_end',50)->nullable();
+			$table->text('cause')->nullable();
+			$table->tinyInteger('is_present')->default(0);
+			$table->string('created_by',50)->default('System');
+			$table->dateTime('created_at');
+			// $table->timestamps();
 		});
 	}
 

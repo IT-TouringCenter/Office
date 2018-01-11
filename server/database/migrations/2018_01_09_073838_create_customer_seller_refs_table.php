@@ -15,6 +15,10 @@ class CreateCustomerSellerRefsTable extends Migration {
 		Schema::create('customer_seller_refs', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('seller',50);
+			$table->tinyInteger('is_active')->default(1);
+			$table->string('created_by',50)->default('System');
+			$table->string('updated_by',50)->nullable();
 			$table->timestamps();
 		});
 	}

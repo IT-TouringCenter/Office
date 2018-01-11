@@ -15,6 +15,10 @@ class CreateCustomerPaymentRefsTable extends Migration {
 		Schema::create('customer_payment_refs', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('payment');
+			$table->tinyInteger('is_active')->default(1);
+			$table->string('created_by',50)->default('System');
+			$table->string('updated_by',50)->nullable();
 			$table->timestamps();
 		});
 	}

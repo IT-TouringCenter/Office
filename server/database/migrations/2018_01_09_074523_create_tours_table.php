@@ -15,6 +15,19 @@ class CreateToursTable extends Migration {
 		Schema::create('tours', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('code',10);
+			$table->string('title',100);
+			$table->text('short_description')->nullable();
+			$table->text('long_description')->nullable();
+			$table->string('note')->nullable();
+			$table->string('warning')->nullable();
+			$table->date('period_start');
+			$table->date('period_end');
+			$table->tinyInteger('is_recommend');
+			$table->tinyInteger('is_special');
+			$table->tinyInteger('is_active')->default(1);
+			$table->string('created_by',50)->default('System');
+			$table->string('updated_by',50)->nullable();
 			$table->timestamps();
 		});
 	}

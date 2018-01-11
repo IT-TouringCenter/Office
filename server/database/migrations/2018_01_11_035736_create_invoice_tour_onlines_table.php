@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTourTravelTimesTable extends Migration {
+class CreateInvoiceTourOnlinesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,14 @@ class CreateTourTravelTimesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('tour_travel_times', function(Blueprint $table)
+		Schema::create('invoice_tour_onlines', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('tour_id');
-			$table->string('travel_time_start',100);
-			$table->string('travel_time_end',100);
-			$table->string('pickup_time',100);
+			$table->integer('transaction_id');
+			$table->integer('transaction_tour_id');
+			$table->string('booking_number',20);
+			$table->string('invoice_number',20);
+			$table->string('issued_by',50);
 			$table->tinyInteger('is_active')->default(1);
 			$table->string('created_by',50)->default('System');
 			$table->string('updated_by',50)->nullable();
@@ -33,7 +34,7 @@ class CreateTourTravelTimesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tour_travel_times');
+		Schema::drop('invoice_tour_onlines');
 	}
 
 }

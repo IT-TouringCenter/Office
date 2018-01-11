@@ -15,6 +15,13 @@ class CreateTourMapsTable extends Migration {
 		Schema::create('tour_maps', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->integer('tour_id');
+			$table->string('place_name',100);
+			$table->string('latitude',50);
+			$table->string('longtitude',50);
+			$table->tinyInteger('is_active')->default(1);
+			$table->string('created_by',50)->default('System');
+			$table->string('updated_by',50)->nullable();
 			$table->timestamps();
 		});
 	}

@@ -15,6 +15,11 @@ class CreateTourIncludesTable extends Migration {
 		Schema::create('tour_includes', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->integer('tour_id');
+			$table->text('include');
+			$table->tinyInteger('is_active')->default(1);
+			$table->string('created_by',50)->default('System');
+			$table->string('updated_by',50)->nullable();
 			$table->timestamps();
 		});
 	}

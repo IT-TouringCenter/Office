@@ -15,6 +15,13 @@ class CreatePromotionTransferDetailsTable extends Migration {
 		Schema::create('promotion_transfer_details', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->integer('promotion_id');
+			$table->integer('transfer_mode_id');
+			$table->integer('transfer_type_id');
+			$table->tinyInteger('is_optional');
+			$table->tinyInteger('is_active')->default(1);
+			$table->string('created_by',50)->default('System');
+			$table->string('updated_by',50)->nullable();
 			$table->timestamps();
 		});
 	}

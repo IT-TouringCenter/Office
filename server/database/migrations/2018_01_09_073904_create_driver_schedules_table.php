@@ -15,6 +15,12 @@ class CreateDriverSchedulesTable extends Migration {
 		Schema::create('driver_schedules', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->integer('work_status_id');
+			$table->integer('driver_id');
+			$table->date('date');
+			$table->tinyInteger('is_active')->default(1);
+			$table->string('created_by',50)->default('System');
+			$table->string('updated_by',50)->nullable();
 			$table->timestamps();
 		});
 	}
