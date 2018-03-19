@@ -1,0 +1,310 @@
+<!-- Color head bar -->
+<div class="container">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 inv-show-print">
+    <img src="../assets/images/invoice/invoice-header.jpg">
+  </div>
+</div>
+<br>
+<!-- End color head bar -->
+
+<!-- Header invoice -->
+<div class="container">
+  <!-- Logo & header -->
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <table class="inv-table">
+      <tr>
+        <td class="inv-table-logo">
+          <p><img src="../assets/images/logo/logo-daytrip-inv.png" class="inv-head-logo"></p>
+          <p><small>
+            <a href="http://www.tour-in-chiangmai.com" target="_blank" class="inv-hidden-print">www.tour-in-chiangmai.com</a>
+            <!-- <a href="" target="_blank" class="inv-show-print">www.tour-in-chiangmai.com</a> -->
+            <span class="inv-show-print"><u class="text-primary">www.tour-in-chiangmai.com</u></span>
+
+          </small></p>
+        </td>
+        <td colspan="2" class="inv-hright">
+          <h4><b>CONFIRMATION & INVOICE</b></h4>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 inv-hright">
+            <h5><b>Invoice Number :</b></h5>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 inv-hright">
+            <h5 class="inv-text-primary"><b class="text-primary">{{_getInvoice.invoices.invoiceNo}}</b></h5>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- End header invoice -->
+
+<!-- Invoice table -->
+<div class="container">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <table class="inv-table-content">
+      <!-- Header table -->
+      <tr class="inv-border">
+        <th colspan="5" class="text-center"><h3 class="inv-head-table"><b class="text-primary">{{_getInvoice.tours.name}}</b></h3></th>
+      </tr>
+      <!-- Row 2 -->
+      <tr>
+        <td class="inv-border-left"><b>Travel Date</b></td>
+        <td class="inv-border-right">: <span class="text-danger">{{_getInvoice.tours.date}}</span></td>
+        <td rowspan="2" colspan="3" class="text-center inv-border inv-bg-gray">
+          <h4><b>UNIT PRICE</b></h4>
+          <small>(RATE IN THAI BAHT)</small>
+        </td>
+      </tr>
+      <!-- Row 3 -->
+      <tr>
+        <td class="inv-border-left"><b>Guest Name</b></td>
+        <td class="inv-border-right">: <span class="text-danger">{{_getInvoice.guest}}</span></td>
+      </tr>
+      <!-- Row 4 -->
+      <tr>
+        <td class="inv-border-left"><b>Type of Tour</b></td>
+        <td class="inv-border-right">: <span class="text-danger">{{_getInvoice.tours.privacy}}</span></td>
+        <td class="text-center inv-border inv-bg-gray"><b>Quantity</b></td>
+        <td class="text-center inv-border inv-bg-gray"><b>Price</b></td>
+        <td class="text-center inv-border inv-bg-gray"><b>Amount</b></td>
+      </tr>
+      <!-- Row 5 -->
+      <tr>
+        <td rowspan="3" class="inv-border-left"><b>No. of Pax</b></td>
+        <td class="inv-border-right">: Adult</td>
+        <td class="text-center inv-border-right"><span class="text-danger">{{_getInvoice.tours.adult}}</span></td>
+        <td class="text-right inv-border-right">{{_getInvoice.prices.adult}}</td>
+        <td class="text-right inv-border-right">{{_getInvoice.prices.adultAmount}}</td>
+      </tr>
+      <!-- Row 6 -->
+      <tr>
+        <td class="inv-border-right">: Child <small>(under 10 years, no higher than 120cm.)</small></td>
+        <td class="text-center inv-border-right"><span class="text-danger">{{_getInvoice.tours.child}}</span></td>
+        <td class="text-right inv-border-right">{{_getInvoice.prices.child}}</td>
+        <td class="text-right inv-border-right">{{_getInvoice.prices.childAmount}}</td>
+      </tr>
+      <!-- Row 7 -->
+      <tr>
+        <td class="inv-border-right">: Infant <small>(not over 2 years)</small></td>
+        <td class="inv-border-right"></td>
+        <td class="inv-border-right"></td>
+        <td class="inv-border-right"></td>
+      </tr>
+      <!-- Row 8 -->
+      <tr>
+        <td class="inv-border-left"><b>Hotel</b></td>
+        <td class="inv-border-right">: <span class="text-danger">{{_getInvoice.hotel.name}}</span></td>
+        <td class="text-center inv-border-right"></td>
+        <td class="text-right inv-border-right"></td>
+        <td class="text-right inv-border-right"></td>
+      </tr>
+      <!-- Row 9 -->
+      <tr>
+        <td class="inv-border-left"><b>Room No.</b></td>
+        <td class="inv-border-right">: <span class="text-danger">{{_getInvoice.hotel.room}}</span></td>
+        <td class="text-center inv-border-right"></td>
+        <td class="text-right inv-border-right"></td>
+        <td class="text-right inv-border-right"></td>
+      </tr>
+      <!-- Row 10 -->
+      <tr>
+        <td class="inv-border-left"><b>Pick up time</b></td>
+        <td class="inv-border-right">: {{_getInvoice.tours.date}} <small>({{_getInvoice.tours.time}})</small></td>
+        <td class="text-center inv-border-right"></td>
+        <td class="text-right inv-border-right"></td>
+        <td class="text-right inv-border-right"></td>
+      </tr>
+      <!-- Row 11 -->
+      <tr>
+        <td class="inv-border-left"><b>Discount</b></td>
+        <td class="inv-border-right">: 
+          <span class="text-danger" *ngIf="_getInvoice.tours.discount!='0%'">{{_getInvoice.tours.discount}}</span>
+          <span class="text-danger" *ngIf="_getInvoice.tours.discount=='0%'">-</span>
+        </td>
+        <td class="text-center inv-border-right">1</td>
+        <td class="text-right inv-border-right">
+          <span *ngIf="_getInvoice.tours.discountPrice!=0">-{{_getInvoice.tours.discountPrice}}</span>
+          <span *ngIf="_getInvoice.tours.discountPrice==0"></span>
+        </td>
+        <td class="text-right inv-border-right">
+          <span *ngIf="_getInvoice.tours.discountPrice!=0">-{{_getInvoice.tours.discountPrice}}</span>
+          <span *ngIf="_getInvoice.tours.discountPrice==0"></span>
+        </td>
+      </tr>
+      <!-- Row 12 -->
+      <tr>
+        <td class="inv-border-left"><b>Special Req.</b></td>
+        <td class="inv-border-right">: 
+          <span class="text-danger" *ngIf="_getInvoice.specialRequest!=''">{{_getInvoice.specialRequest}}</span>
+          <span class="text-danger" *ngIf="_getInvoice.specialRequest==''">-</span>
+        </td>
+        <td class="text-center inv-border-right">
+          <span *ngIf="_getInvoice.specialRequestPrice!=0">1</span>
+          <span *ngIf="_getInvoice.specialRequestPrice==0">-</span>
+        </td>
+        <td class="text-right inv-border-right" *ngIf="_getInvoice.specialRequestPrice!=0">
+          <span>-{{_getInvoice.specialRequestPrice}}</span>
+          <span class="text-right inv-border-right" *ngIf="_getInvoice.specialRequestPrice==0"></span>
+        </td>
+        <td class="text-right inv-border-right" *ngIf="_getInvoice.specialRequestPrice!=0">
+          <span>-{{_getInvoice.specialRequestPrice}}</span>
+          <span class="text-right inv-border-right" *ngIf="_getInvoice.specialRequestPrice==0"></span>
+        </td>
+      </tr>
+      <!-- Row 13 -->
+      <tr>
+        <td class="inv-border-left"><b>Extra charge</b></td>
+        <td class="inv-border-right">: 
+          <span class="text-danger" *ngIf="_getInvoice.prices.singleRiding!=0">Single riding</span>
+          <span class="text-danger" *ngIf="_getInvoice.prices.singleRiding==0">-</span>
+        </td>
+        <td class="text-center inv-border-right">
+          <span *ngIf="_getInvoice.prices.singleRiding!=0">1</span>
+          <span *ngIf="_getInvoice.prices.singleRiding==0">-</span>
+        </td>
+        <td class="text-right inv-border-right">
+          <span *ngIf="_getInvoice.prices.singleRiding!=0">{{_getInvoice.prices.singleRiding}}</span>
+          <span *ngIf="_getInvoice.prices.singleRiding==0"></span>
+        </td>
+        <td class="text-right inv-border-right">
+          <span *ngIf="_getInvoice.prices.singleRiding!=0">{{_getInvoice.prices.singleRiding}}</span>
+          <span *ngIf="_getInvoice.prices.singleRiding==0"></span>
+        </td>
+      </tr>
+      <!-- Row 14 -->
+      <tr>
+        <td class="inv-border-bot inv-border-left"><b>Other Service</b></td>
+        <td class="inv-border-right">: 
+          <span class="text-danger" *ngIf="_getInvoice.isServiceCharge==true">Service Charge 3%</span>
+          <span class="text-danger" *ngIf="_getInvoice.isServiceCharge==false">-</span>
+        </td>
+        <td class="text-center inv-border-bot inv-border-right">
+          <span *ngIf="_getInvoice.isServiceCharge==true">1</span>
+          <span *ngIf="_getInvoice.isServiceCharge==false"></span>
+        </td>
+        <td class="text-right inv-border-bot inv-border-right">
+          <span *ngIf="_getInvoice.isServiceCharge==true">{{_getInvoice.serviceCharge}}</span>
+          <span *ngIf="_getInvoice.isServiceCharge==false"></span>
+        </td>
+        <td class="text-right inv-border-bot inv-border-right">
+          <span *ngIf="_getInvoice.isServiceCharge==true">{{_getInvoice.serviceCharge}}</span>
+          <span *ngIf="_getInvoice.isServiceCharge==false"></span>
+        </td>
+      </tr>
+      <!-- Row 15 : Total -->
+      <tr>
+        <td colspan="2"></td>
+        <td colspan="2" class="text-center inv-border inv-bg-gray"><h4 class="inv-head-table"><b>Total</b></h4></td>
+        <td class="text-right inv-border inv-bg-green" style="background: #91ca7f;">
+          <h4 class="inv-head-table"><b *ngIf="_getInvoice.prices.totalPrice!=0">{{_getInvoice.prices.totalPrice}}</b></h4>
+          <h4 class="inv-head-table"><b *ngIf="_getInvoice.prices.totalPrice==0">0}}</b></h4>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<br>
+<!-- End invoice table -->
+
+<!-- Notify -->
+<div class="container">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="inv-bg-yellow inv-note-block-padding" style="background:#fad352;">
+      <p class="text-center text-danger"><b>** Clothing : Shoulders and Knees need to be covered for entry to temples. **</b></p>
+      <p class="text-center text-danger"><b>*** What to bring along : Camara , Sunglass , Coat ***</b></p>
+    </div>
+  </div>
+</div>
+<br>
+<!-- End notify -->
+
+<!-- Incluce & Exclude -->
+<div class="container">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <table class="inv-table inv-table-content">
+      <tr>
+        <th rowspan="4"><u>Tour Includes</u></th>
+        <td>: Round trip transfer from/to the hotel, Travel accident insurance</td>
+      </tr>
+      <tr>
+        <td>: Transportation for tour (VIP 9 seats air-con van),</td>
+      </tr>
+      <tr>
+        <td>: Experience English speaking guide, Admission fees,</td>
+      </tr>
+      <tr>
+        <td>: Lunch, Drinking water & cold towel for refreshment, Travel accident insurance</td>
+      </tr>
+      <tr>
+        <th rowspan="2"><u>Tour Excludes</u></th>
+        <td>: Other optional tour or meals than mentioned in the program,</td>
+      </tr>
+      <tr>
+        <td>: Personal expense, VAT 7% & Tax 3%</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<br>
+<!-- End include & exclude -->
+
+<!-- Note -->
+<div class="container">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <p><b><u class="text-danger">IMPORTANT NOTE</u></b></p>
+    <p><b>* Optional tours or side trips are not allowed for all <span class="text-danger">T</span>ouring <span class="text-danger">C</span>enter Join Trip (SIC)</b></p>
+    <p><b>* Cancel <u>Afternoon and Evening</u> Program less than 3 hours prior the departure, 100% cancellation charge</b></p>
+    <p><b>* Cancel <u>Full Day and Morning</u> Program less than 12 hours prior the departure, 100% cancellation charge</b></p>
+    <p><b>* Last Minute Cancelled and No Shows, 100% of total price will be applied</b></p>
+    <p><b>* Unused features are non-refundable</b></p>
+  </div>
+</div>
+<br>
+<!-- End note -->
+
+<!-- Book by -->
+<div class="container">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <table class="inv-table inv-table-content">
+      <tr>
+        <th>
+          <p>Booked By</p>
+          <p>Account Code</p>
+        </th>
+        <td>
+          <p>: <span class="text-danger">{{_getInvoice.bookBy}}</span></p>
+          <p>: <span class="text-danger">{{_getInvoice.accountCode}}</span></p>
+        </td>
+        <th>
+          <p>Issued By</p>
+          <p>Date & Time</p>
+        </th>
+        <td>
+          <p>: <span class="text-danger">{{_getInvoice.noteBy.name}}</span></p>
+          <p>: {{_getInvoice.noteBy.date}} &nbsp;|&nbsp; {{_getInvoice.noteBy.time}}</p>
+        </td>
+        <td class="text-right">
+          <p><img src="../assets/images/tripadvisor/tripadvisor-tc.jpg" alt="Tripadvisor - Touring Center" class="tc-img-tripadvisor"></p>
+          <p><img src="../assets/images/tripadvisor/tripadvisor-logo.png" alt="Tripadvisor logo" class="tc-img-tripadvisor-logo"></p>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<!-- End book by -->
+
+<!-- Credit -->
+<div class="container">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+    <p><b>" <span class="text-danger">T</span>ouring <span class="text-danger">C</span>enter " reserved the right to charge the program and price without prior notice</b></p>
+  </div>
+</div>
+<!-- End credit -->
+
+<!-- Color foot bar -->
+<div class="container">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 inv-show-print">
+    <p><img src="../assets/images/invoice/invoice-header.jpg"></p>
+  </div>
+</div>
+  <!-- End color foot bar -->

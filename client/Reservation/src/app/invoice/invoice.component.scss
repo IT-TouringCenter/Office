@@ -1,0 +1,110 @@
+// inv == invoice
+$border: 1px solid #828282;
+$color-primary: rgb(0, 134, 223);
+$color-gray: rgb(197, 201, 206);
+$color-green: #91ca7f;
+$color-yellow: #ffe385;
+$color-danger: rgb(209, 0, 0);
+
+.inv-show-print{
+    display: none;
+    max-height: 20px;
+}cc
+
+.inv-hidden-price{
+    display: block;
+}
+@media print{
+    .inv-show-print{
+        display: block;
+        max-height: 20px;
+    }
+    .inv-hidden-print{
+        display: none;
+    }
+}
+// inv head
+.inv-head-logo{
+    width: 160px;
+}
+.inv-table-logo{
+    width: 70%;
+}
+.inv-hright{
+    text-align: right;
+    padding: 0;
+}
+
+// inv content
+.inv-table{
+    width: 100%;
+}
+.inv-head-table{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.inv-table-content{
+    width: 100%;
+    padding: 0 15px;
+    // margin: 0 20px;
+}
+.inv-table-content tr td{
+    padding: 3px;
+    vertical-align: top;
+}
+.inv-table-content tr th{
+    padding: 3px;
+    vertical-align: top;
+}
+
+// inv border
+.inv-border{
+    border: $border;
+}
+.inv-border-left{
+    border-left: $border;
+}
+.inv-border-right{
+    border-right: $border;
+}
+.inv-border-lf{
+    border-left: $border;
+}
+.inv-border-bot{
+    border-bottom: $border;
+}
+.inv-noborder{
+    border: 0;
+}
+
+// inv text color
+.inv-text-primary{
+    color: $color-primary;
+}
+.inv-text-danger{
+    color: $color-danger;
+}
+// inv bg color
+.inv-bg-gray{
+    background: $color-gray;
+}
+.inv-bg-green{
+    background: $color-green;
+}
+.inv-bg-yellow{
+    background: $color-yellow !important;
+}
+// inv padding, margin
+.inv-note-block-padding{
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+// trip advisor
+.tc-img-tripadvisor{
+    max-width: 80px;
+    height: auto;
+}
+.tc-img-tripadvisor-logo{
+    max-width: 150px;
+    height: auto;
+}

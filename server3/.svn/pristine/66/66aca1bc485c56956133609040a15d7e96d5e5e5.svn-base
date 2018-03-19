@@ -1,0 +1,12 @@
+<?php
+namespace App\Facades;
+
+use Illuminate\Support\Facades\Facade;
+
+class JobQualificationFacade extends Facade{
+  protected static function getFacadeAccessor(){
+    return "App\Facades\Tours\JobQualificationClass";
+  }
+}
+
+?>

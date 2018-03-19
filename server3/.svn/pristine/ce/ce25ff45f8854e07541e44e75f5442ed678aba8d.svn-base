@@ -1,0 +1,12 @@
+<?php namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class transaction_transfer_convention extends Model {
+	
+	protected $table = 'transaction_transfer_conventions';
+
+	public function Person(){
+		return $this->belongsTo('App\passenger','passenger_id');
+	}
+}

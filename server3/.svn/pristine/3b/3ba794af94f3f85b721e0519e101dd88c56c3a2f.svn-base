@@ -1,0 +1,42 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateJobVacanciesTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('job_vacancies', function(Blueprint $table)
+		{
+			$table->increments('id');
+			$table->integer('job_department_id');
+			$table->integer('job_type_id');
+			$table->string('position',100);
+			$table->text('note');
+			$table->text('notify');
+			$table->dateTime('validity_start');
+			$table->dateTime('validity_stop');
+			$table->tinyInteger('is_active')->default(1);
+			$table->string('created_by',50)->default('System');
+			$table->string('updated_by',50)->nullable();
+			$table->timestamps();
+		});
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('job_vacancies');
+	}
+
+}

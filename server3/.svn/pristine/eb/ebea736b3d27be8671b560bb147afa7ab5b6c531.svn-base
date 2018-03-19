@@ -1,0 +1,15 @@
+<?php
+
+use App\email_status as email_status;
+use Illuminate\Database\Seeder;
+
+class EmailStatusSeeder extends Seeder{
+	public function run(){
+		email_status::truncate();
+		email_status::create(["status" => "Pending"]);
+		email_status::create(["status" => "Succeed"]);
+		email_status::create(["status" => "Error"]);
+		email_status::create(["status" => "Cancel"]);
+	}
+}
+?>

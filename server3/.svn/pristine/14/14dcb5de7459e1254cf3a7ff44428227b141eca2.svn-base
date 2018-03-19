@@ -1,0 +1,17 @@
+<?php
+
+use App\payment_transaction_channel as payment_transaction_channel;
+use Illuminate\Database\Seeder;
+
+class PaymentTransactionChannelSeeder extends Seeder{
+	public function run(){
+		payment_transaction_channel::truncate();
+		payment_transaction_channel::create(['channel' => 'Credit card']);
+		payment_transaction_channel::create(['channel' => 'eCheck']);
+		payment_transaction_channel::create(['channel' => 'Store Credit']);
+		payment_transaction_channel::create(['channel' => 'Cash']);
+		payment_transaction_channel::create(['channel' => 'Paypal']);		
+		payment_transaction_channel::create(['channel' => 'Voucher']);
+	}
+}
+?>

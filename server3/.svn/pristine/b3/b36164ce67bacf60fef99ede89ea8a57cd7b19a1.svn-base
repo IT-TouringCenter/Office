@@ -1,0 +1,20 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class notify_report_cronjob extends baseModel
+{
+    protected $table = "notify_report_cronjobs";
+
+    public function tour_programs(){
+    	return $this->belongsTo('App/tour_program','tour_program_id');
+    }
+    public function configuration_tour_prices(){
+    	return $this->belongsTo('App/configuration_tour_price','configuration_tour_price_id');
+    }
+    public function notify_status_cronjobs(){
+    	return $this->belongsTo('App/notify_status_cronjob','notify_status_cronjob_id');
+    }
+}

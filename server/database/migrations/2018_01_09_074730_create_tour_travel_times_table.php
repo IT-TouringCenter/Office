@@ -16,6 +16,7 @@ class CreateTourTravelTimesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('tour_id');
+			$table->string('meridiem',100);
 			$table->string('travel_time_start',100);
 			$table->string('travel_time_end',100);
 			$table->string('pickup_time',100);

@@ -1,0 +1,23 @@
+<?php
+namespace App\Facades\Tours;
+
+use App\Repositories\PaxRepository as PaxRepository;
+
+class PaxClass{
+  public function __construct(PaxRepository $repo){
+    $this->PaxRepository= $repo;
+  }
+
+  public function GetPaxById($value){
+    $pax_arr = [];
+    $attribute = 'id';
+    
+    $pax =  $this->PaxRepository->findBy($attribute,$value);
+    for($i=$pax[0]->min;$i<=$pax[0]->max;$i++){
+      array_push($pax_arr,$i);
+    }
+
+    return $pax_arr; //['id'=>$pax[0]->id,'pax'=>$pax_arr];
+  }
+}
+?>

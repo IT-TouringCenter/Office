@@ -1,0 +1,21 @@
+<?php
+
+use App\configuration_tour_program_discount as configuration_tour_program_discount;
+use Illuminate\Database\Seeder;
+
+class ConfigurationTourProgramDiscountSeeder extends Seeder{
+	public function run(){
+		configuration_tour_program_discount::truncate();
+		configuration_tour_program_discount::create(["activity_id"=>"1", "configuration_tour_program_id"=>"8", "discount_type_id"=>"2", "discount"=>'5', "validity_start"=>"2017-01-15 00:00:00", "validity_end"=>"2017-07-14 23:59:59"]);
+		configuration_tour_program_discount::create(["activity_id"=>"1", "configuration_tour_program_id"=>"22", "discount_type_id"=>"2", "discount"=>'5', "validity_start"=>"2017-01-15 00:00:00", "validity_end"=>"2017-07-14 23:59:59"]);
+		configuration_tour_program_discount::create(["activity_id"=>"1", "configuration_tour_program_id"=>"36", "discount_type_id"=>"2", "discount"=>'5', "validity_start"=>"2017-01-15 00:00:00", "validity_end"=>"2017-07-14 23:59:59"]);
+		configuration_tour_program_discount::create(["activity_id"=>"1", "configuration_tour_program_id"=>"43", "discount_type_id"=>"2", "discount"=>'5', "validity_start"=>"2017-01-15 00:00:00", "validity_end"=>"2017-07-14 23:59:59"]);
+		configuration_tour_program_discount::create(["activity_id"=>"1", "configuration_tour_program_id"=>"57", "discount_type_id"=>"2", "discount"=>'5', "validity_start"=>"2017-01-15 00:00:00", "validity_end"=>"2017-07-14 23:59:59"]);
+		configuration_tour_program_discount::create(["activity_id"=>"1", "configuration_tour_program_id"=>"64", "discount_type_id"=>"2", "discount"=>'5', "validity_start"=>"2017-01-15 00:00:00", "validity_end"=>"2017-07-14 23:59:59"]);
+		configuration_tour_program_discount::create(["activity_id"=>"1", "configuration_tour_program_id"=>"78", "discount_type_id"=>"2", "discount"=>'5', "validity_start"=>"2017-01-15 00:00:00", "validity_end"=>"2017-07-14 23:59:59"]);
+		configuration_tour_program_discount::create(["activity_id"=>"1", "configuration_tour_program_id"=>"85", "discount_type_id"=>"2", "discount"=>'5', "validity_start"=>"2017-01-15 00:00:00", "validity_end"=>"2017-07-14 23:59:59"]);
+		configuration_tour_program_discount::create(["activity_id"=>"1", "configuration_tour_program_id"=>"99", "discount_type_id"=>"2", "discount"=>'5', "validity_start"=>"2017-01-15 00:00:00", "validity_end"=>"2017-07-14 23:59:59"]);
+		configuration_tour_program_discount::create(["activity_id"=>"1", "configuration_tour_program_id"=>"106", "discount_type_id"=>"2", "discount"=>'5', "validity_start"=>"2017-01-15 00:00:00", "validity_end"=>"2017-07-14 23:59:59"]);
+	}
+}
+?>

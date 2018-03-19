@@ -1,19 +1,6 @@
 <?php
 
 return [
-	/*
-		PAYPAL_CGI:
-			https://www.paypal.com/cgi-bin/webscr
-			https://www.sandbox.paypal.com/cgi-bin/webscr
-		MAIL_USERNAME: ittouringcnx@gmail.com
-		MAIL_PASSWORD: it@touringcnx.1327
-		MAIL_HOST:
-			gmail: smtp.gmail.com
-			hostgator: gator4088.hostgator.com
-		MAIL_PORT:
-			gmail: 587
-			hostgator: 465
-	*/
 
 	/*
 	|--------------------------------------------------------------------------
@@ -40,11 +27,8 @@ return [
 	| the Mailgun mail service which will provide reliable deliveries.
 	|
 	*/
-	/*
-		gmail: smtp.gmail.com
-		hostgator: gator4088.hostgator.com
-	*/
-	'host' => env('MAIL_HOST'),
+
+	'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -56,11 +40,8 @@ return [
 	| stay compatible with the Mailgun e-mail application by default.
 	|
 	*/
-	/*
-		gmail: 587
-		hostgator: 465
-	*/
-	'port' => env('MAIL_PORT'), // 587 for gmail
+
+	'port' => env('MAIL_PORT', 587),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -73,7 +54,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' => 'reservations@northernsmiletravel.com', 'name' => 'Reservations::Northern Smile Travel'],
+	'from' => ['address' => null, 'name' => null],
 
 	/*
 	|--------------------------------------------------------------------------

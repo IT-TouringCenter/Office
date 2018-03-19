@@ -1,0 +1,16 @@
+<?php
+namespace App\Facades\ActivityFacades\ICAS;
+
+use App\Repositories\IcasRepo\ConfigurationTransportationRepository as ConfigurationTransportationRepository;
+
+class IcasConfigurationTransportationClass extends BaseClass{
+  public function __construct(ConfigurationTransportationRepository $repo){
+    $this->ConfigurationTransportationRepository = $repo;
+  }
+
+  public function GetTransportationById($config_transport_id){
+    $config_transport = $this->ConfigurationTransportationRepository->GetConfigTransportById($config_transport_id);
+    return $config_transport;
+  }
+}
+?>

@@ -12,12 +12,18 @@ class VerifyCsrfToken extends BaseVerifier {
 	 * @param  \Closure  $next
 	 * @return mixed
 	 */
-	 protected $except = [
-    	'api*'
-	];
+
 	public function handle($request, Closure $next)
 	{
 		return parent::handle($request, $next);
 	}
 
+	// protected $excludeRoutes = ['charge'];
+
+	// public function handle($request, Closure $next){
+    //     foreach($this -> excludeRoutes as $route){
+    //         if($request -> is($route)) return $next($request);
+    //     }
+    //     return parent::handle($request, $next);
+    // }
 }

@@ -1,8 +1,5 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
-use Illuminate\Http\Request;
-
 class WelcomeController extends Controller {
 
 	/*
@@ -34,19 +31,6 @@ class WelcomeController extends Controller {
 	public function index()
 	{
 		return view('welcome');
-	}
-
-	public function ActionPost(Request $request){
-		return $request->all();
-	}
-
-	public function PayPalNotiry(){
-		return "PayPal notify here.";
-	}
-
-	public function VerifyTicket(){
-		// return 'Verify ticket now.';
-		return \TicketFacade::Verify('TicketCron');
 	}
 
 }

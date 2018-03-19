@@ -1,0 +1,14 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class account_person_contact extends baseModel
+{
+    protected $table = "account_person_contacts";
+
+    public function accounts(){
+    	return $this->belongsTo('App/account','account_id');
+    }
+}

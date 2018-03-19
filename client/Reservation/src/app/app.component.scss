@@ -1,0 +1,32 @@
+body{
+    font-family: 'CenturyGothicRegular.ttf'
+}
+.booking-form-header {font-weight: 600}
+
+@media print{
+    #header-block{
+        display: none;
+    }
+    #sidebar-block{
+        display: none;
+    }
+    .wrapper{
+        margin-top: 15px;
+    }
+}
+
+#tc-header-menu {
+    position: fixed;
+    background: black;
+    z-index: 10;
+}
+
+#tc-sidebar-menu {
+    position: fixed;
+    background: rgb(153, 153, 153);
+}
+
+#tc-content{
+    width: 87.5% !important;
+    background: rgb(219, 219, 219);
+}

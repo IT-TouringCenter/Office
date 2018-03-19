@@ -1,0 +1,51 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateReserveIdentifiesTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('reserve_identifies', function(Blueprint $table)
+		{
+			$table->increments('id');			
+			$table->integer('identify')->default(0);			
+			$table->integer('activity_id');
+			$table->integer('is_used');//0: not yet, 1: used
+			$table->tinyInteger('is_active')->default(1);
+			$table->string('created_by',50)->default('System');
+			$table->string('updated_by',50)->nullable();
+			$table->timestamps();
+		});
+
+		$fn_getIdentifies = "CREATE FUNCTION nst_fn_getIdentifies_reserveIdentifies(activityId INT) RETURNS VARCHAR(10) begin DECLARE tmpId varchar(10); DECLARE isExists INT; SELECT nst_fn_generateIdentifies() into tmpId; SELECT count(identify) INTO isExists FROM reserve_identifies WHERE identify = tmpId; WHILE isExists > 0 DO SELECT nst_fn_generateIdentifies() into tmpId; SELECT count(identify) INTO isExists FROM reserve_identifies WHERE identify = tmpId; END WHILE; CALL nst_sp_insert_reserveIdentifies(tmpId,activityId); RETURN tmpId; end;";
+		DB::unprepared($fn_getIdentifies);
+
+		$nst_fn_generateIdentifies="CREATE FUNCTION nst_fn_generateIdentifies() RETURNS VARCHAR(10) BEGIN DECLARE totalId INT; DECLARE lastId INT; DECLARE id varchar(4); DECLARE your_key varchar(10); DECLARE ym varchar(6); DECLARE y varchar(4); DECLARE m varchar(2); set y = DATE_FORMAT(CURDATE(),'%Y'); set m = DATE_FORMAT(CURDATE(),'%m'); set totalId = 0; set lastId = 0; select count(*) into totalId from reserve_identifies; if totalId = 0 then set lastId=1; else set lastId= totalId + 1; end if; set id = LPAD(lastId,4,'0'); set ym = concat(y,m); set your_key = concat(ym,id); RETURN your_key; END;";
+		DB::unprepared($nst_fn_generateIdentifies);
+
+		$nst_sp_insert_reserveIdentifies="CREATE PROCEDURE nst_sp_insert_reserveIdentifies(IN identify INT,IN activityId INT) BEGIN INSERT INTO reserve_identifies( identify, activity_id, is_used, is_active, created_by, created_at) VALUES( identify, activityId, '1', '1', 'System', CURDATE() ); END;";
+		DB::unprepared($nst_sp_insert_reserveIdentifies);
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::drop('reserve_identifies');
+
+		DB::unprepared('DROP FUNCTION IF EXISTS nst_fn_getIdentifies_reserveIdentifies');
+		DB::unprepared('DROP FUNCTION IF EXISTS nst_fn_generateIdentifies');
+		DB::unprepared('DROP PROCEDURE IF EXISTS nst_sp_insert_reserveIdentifies');
+	}
+
+}

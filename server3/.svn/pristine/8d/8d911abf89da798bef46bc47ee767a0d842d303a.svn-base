@@ -1,0 +1,14 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class discount_type extends baseModel
+{
+    protected $table = "discount_types";
+
+    public function configuration_discounts(){
+    	return $this->hasMany('App/configuration_discount','discount_type_id');
+    }
+}

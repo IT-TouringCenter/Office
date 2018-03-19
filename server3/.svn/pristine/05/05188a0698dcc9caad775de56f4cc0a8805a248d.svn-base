@@ -1,0 +1,18 @@
+<?php
+namespace App\Facades\Tours;
+
+use App\Repositories\JobQualificationRepository as JobQualificationRepository;
+
+class JobQualificationClass extends BaseClass{  
+  public function __construct(JobQualificationRepository $repo){
+    $this->JobQualificationRepository = $repo;
+  }
+
+  public function GetJobQualification($id){
+  	$job_qualification_repo = $this->JobQualificationRepository->findBy('job_vacancy_id',$id);
+  	
+    return $job_qualification_repo;
+  }
+}
+
+?>

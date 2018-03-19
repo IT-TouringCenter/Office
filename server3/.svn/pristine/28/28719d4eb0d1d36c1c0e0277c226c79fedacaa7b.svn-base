@@ -1,0 +1,13 @@
+<?php
+
+use App\discount_type as discount_type;
+use Illuminate\Database\Seeder;
+
+class DiscountTypeSeeder extends Seeder{
+	public function run(){
+		discount_type::truncate();
+		discount_type::create(['type' => 'Baht']);
+		discount_type::create(['type' => 'Percent']);
+	}
+}
+?>

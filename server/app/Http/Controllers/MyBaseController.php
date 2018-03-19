@@ -2,8 +2,9 @@
 
 use App\Commons\ResponseCode;
 use App\Commons\ResponseStatus;
-use App\Commons\Validator;
-use Illuminate\Support\Facades\Log;
+// use App\Commons\Validator;
+// use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;

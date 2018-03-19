@@ -22,10 +22,13 @@ class CreateConfigurationTourPricesTable extends Migration {
 			$table->integer('tour_type_id');
 			$table->integer('tour_travel_time_type_id');
 			$table->integer('transportation_id');
+			$table->integer('payment_mode_id');
 			$table->double('net_price_adult',10,2);
 			$table->double('net_price_child',10,2);
 			$table->double('sell_price_adult',10,2);
 			$table->double('sell_price_child',10,2);
+			$table->double('adult_price',10,2);
+			$table->double('child_price',10,2);
 			$table->double('commission_adult',10,2);
 			$table->double('commission_child',10,2);
 			$table->double('single_riding',10,2);

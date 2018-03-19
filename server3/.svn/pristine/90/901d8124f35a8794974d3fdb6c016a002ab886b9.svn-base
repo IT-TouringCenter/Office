@@ -1,0 +1,16 @@
+<?php
+namespace App\Facades\Tours;
+
+use App\Repositories\TourCategoryRepository as TourCategoryRepository;
+
+class TourCategoryClass extends BaseClass{
+  public function __construct(TourCategoryRepository $repo){
+    $this->TourCategoryRepository= $repo;
+  }
+
+  public function GetTourCategory($category_id){
+    $category =  $this->TourCategoryRepository->GetCategory($category_id);
+    return $category;
+  }
+}
+?>

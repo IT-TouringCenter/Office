@@ -1,6 +1,5 @@
 <?php namespace App\Http;
-use Request;
-use App\Http\Requests;
+
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel {

@@ -1,0 +1,18 @@
+<?php
+namespace App\Facades\ActivityFacades\ICAS;
+
+use App\Repositories\IcasRepo\TransferModeRepository as TransferModeRepository;
+
+class IcasTransferModeClass extends BaseClass{
+  public function __construct(TransferModeRepository $repo){
+    $this->TransferModeRepository = $repo;
+  }
+
+  public function GetModeByTransferModeId($transfer_mode_id){
+  	// $transfer_mode = $this->TransferModeRepository->all();
+    $transfer_mode = $this->TransferModeRepository->GetTransferModeById($transfer_mode_id);
+    return $transfer_mode;
+  }
+}
+
+?>

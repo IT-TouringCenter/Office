@@ -1,0 +1,58 @@
+<?php
+namespace App\Http\Controllers;
+
+use App\Http\Requests;
+use App\Commons\ResponseCode;
+use App\Commons\ResponseStatus;
+use App\Http\Controllers\Controller;
+
+use App\configuration_hotel as configuration_hotel;
+// use App\hotel as hotel;
+
+use Illuminate\Http\Request;
+
+class HotelController extends MyBaseController {
+
+  //- Get All hotel
+	public function GetHotel(){
+    try {
+      $result = \HotelFacade::GetHotel();
+      if($result==null){
+       return $this->Response(ResponseStatus::NoContent,ResponseCode::NoContent,null);
+      }
+
+      return $this->Response(ResponseStatus::OK,ResponseCode::OK,$result);
+    } catch (Exception $e) {
+      return $this->Response(ResponseStatus::ServerError,ResponseCode::ServerError,'HotelController.GetHotel error: '.$e);
+    }		
+	}
+
+  //- Partner Feature (is_partner=1)
+	public function GetPartnerHotel(){
+    try {
+      $result = \HotelFacade::GetPartnerFromHotel();
+      if($result==null){
+       return $this->Response(ResponseStatus::NoContent,ResponseCode::NoContent,null);
+      }
+      return $this->Response(ResponseStatus::OK,ResponseCode::OK,$result);
+    } catch (Exception $e) {
+      return $this->Response(ResponseStatus::ServerError,ResponseCode::ServerError,'HotelController.GetPartnerHotel error: '.$e);
+    }		
+	}
+
+  //- ICAS
+  public function GetIcasHotel(){
+    try {
+      $result = \IcasGetHotelFacade::GetIcasHotel();
+      // $result = \IcasHotelFacade::GetHotels();
+      // $result = \ActivityFacade::GetActivity();
+      if($result==null){
+       return $this->Response(ResponseStatus::NoContent,ResponseCode::NoContent,null);
+      }
+      return $this->Response(ResponseStatus::OK,ResponseCode::OK,$result);
+    } catch (Exception $e) {
+      return $this->Response(ResponseStatus::ServerError,ResponseCode::ServerError,'HotelController.GetIcasHotel error: '.$e);
+    }   
+  }
+
+}

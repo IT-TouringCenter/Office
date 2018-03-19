@@ -1,0 +1,40 @@
+<?php namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class transaction_transfer extends baseModel {
+	protected $guarded = ['id'];
+	protected $table = 'transaction_transfers';
+
+	// public function GetTransferReserveType(){
+	// 	return $this->belongsTo('App\transfer_reserve_type','transfer_reserve_type_id');
+	// }
+
+	// public function GetTransferMode(){
+	// 	return $this->belongsTo('App\transfer_mode',"transfer_mode_id");
+	// }
+
+	// public function GetTransactionDetails(){
+	// 	//return $this->hasMany('App\transaction_transfer_detail','transaction_transfer_id');
+	// }
+
+	// public function GetHotelBySource(){
+	// 	return $this->belongsTo('App\hotel','source_id');
+	// }
+
+	// public function GetHotelByTarget(){
+	// 	return $this->belongsTo('App\hotel','target_id');
+	// }
+
+	public function GetPassengers(){
+		return $this->belongsTo('App\passenger','passenger_id');
+	}
+
+	public function GetHotel(){
+		return $this->belongsTo('App\hotel','hotel_id');
+	}
+
+	public function GetPaymentTransaction(){
+		return $this->hasMany('App\payment_transaction_transfer','transaction_transfer_id');
+	}
+}

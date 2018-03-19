@@ -1,0 +1,43 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreatePaymentTransactionsTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('payment_transactions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('transaction_id');
+            $table->integer('payment_transaction_status_id');
+            $table->integer('paymant_transaction_channel_id')->default(0);
+            $table->integer('activity_id')->default(0);
+            $table->double('amount',10,2)->defualt(0);
+            $table->dateTime('expired_date')->nullable();
+            $table->dateTime('payment_date')->nullable();
+            $table->tinyInteger('is_expired')->default(1);//0: no expired, 1: expired
+            $table->tinyInteger('is_active')->default(1);//0: no active, 1: active
+            $table->string('created_by',50)->default('System');
+            $table->string('updated_by',50)->nullable();            
+            $table->timestamps();
+        });
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('payment_transactions');
+	}
+
+}

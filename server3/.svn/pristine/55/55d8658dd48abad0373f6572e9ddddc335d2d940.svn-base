@@ -1,0 +1,14 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class notify_promotion_code_cronjob extends baseModel
+{
+    protected $table = "notify_promotion_code_cronjobs";
+
+    public function notify_status_cronjobs(){
+    	return $this->belongsTo('App/notify_status_cronjob','notify_status_cronjob_id');
+    }
+}

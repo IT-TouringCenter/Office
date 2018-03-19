@@ -1,0 +1,13 @@
+<?php namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class payment_transaction_status extends baseModel {
+
+	protected $table = "payment_transaction_statuses";
+
+    public function payment_transactions(){
+    	return $this->hasMany('App/payment_transaction','payment_transaction_status_id');
+    }
+
+}
