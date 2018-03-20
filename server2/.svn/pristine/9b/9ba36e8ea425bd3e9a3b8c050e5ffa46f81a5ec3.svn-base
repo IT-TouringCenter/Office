@@ -1,9 +1,0 @@
-<?php 
-namespace App\Repositories\IcasRepo;
-
-use App\Repositories\Src\Contracts\IRepository;
-use App\Repositories\Src\Eloquent\Repository;
-
-class ConfigurationHotelRepository extends Repository{
-  	function model(){return "App\configuration_hotel";}
-}

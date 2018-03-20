@@ -16,28 +16,15 @@ use Illuminate\Support\Facades\Redirect;
 class TransactionController extends MyBaseController {
 
 	public function ReservationSaveBookingData(Request $request){
-		// return 'Complete!!';
-		// return $request->input();
-		// header('Access-Control-Allow-Origin: *');
-		// header("Access-Control-Allow-Headers: *");
-		// header('Access-Control-Allow-Origin:  http://localhost:4200');
-		// header('Access-Control-Allow-Methods: POST');
-		// header('Access-Control-Allow-Headers: Content-Type, Authorization');
-		$server = $request->server('HTTP_ORIGIN', '');
-		if(isset($server)){
-			// header('Access-Control-Allow-Origin: *');
-			// header('Access-Control-Allow-Credentials: true');
-			// header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-		}
 		$bookingData  = $request->input();
-		
+		// header('Access-Control-Allow-Origin: *');
 		try{
 			$results = \ReservationTransactionFacade::SaveTransactionBookingData($bookingData);
 
 			if($results==null){
 				abort(400);
 			}
-			// header('Access-Control-Allow-Origin: *');
+
 			return $results;
 			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
 		}catch(Exception $e){

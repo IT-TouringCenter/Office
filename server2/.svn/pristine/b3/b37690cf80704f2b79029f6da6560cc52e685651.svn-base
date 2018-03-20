@@ -1,9 +1,0 @@
-<?php namespace App;
-
-use Illuminate\Database\Eloquent\Model;
-
-class transportation_detail extends baseModel {
-
-	protected $table = 'transportation_details';
-
-}

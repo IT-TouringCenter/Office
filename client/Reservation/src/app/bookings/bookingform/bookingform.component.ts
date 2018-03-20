@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
-import { Http, Response, Headers, RequestOptions} from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormsModule, FormControl, Validators, NgModel, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { Observable } from "rxjs/Observable";
 import "rxjs/Rx";
@@ -15,7 +16,6 @@ import { DataService } from './../../services/data.service';
 import { BookingdataInterface } from './../../interfaces/bookingdata-interface';
 import { AccountCodeInterface } from './../../interfaces/account-code-interface';
 import { SaveBookingInterface } from './../../interfaces/save-booking-interface';
-// import { BookingPrintInterface } from '../../interfaces/booking-print-interface';
 
 @Component({
   selector: 'app-bookingform',
@@ -37,7 +37,7 @@ export class BookingformComponent implements OnInit {
     tourTime:'',
     tourPrivacy:'',
     tourTravelDate:'',
-    tourPax:'',
+    tourPax:0,
     adultPax:0,
     childPax:0,
     infantPax:0
@@ -51,6 +51,7 @@ export class BookingformComponent implements OnInit {
     isServiceCharge:false,
     servicePrice:''
   };
+  bookByAcc = '';
   guestName = [];
   guestAges = [];
   guestData = [];
@@ -91,7 +92,7 @@ export class BookingformComponent implements OnInit {
     amount:0
   };
   specialRequest = '';
-  specialRequestPrice = '';
+  specialRequestPrice = 0;
   isSingleRiding = false;
   dataSave = {};
 
@@ -104,7 +105,6 @@ export class BookingformComponent implements OnInit {
     {ages:"Child", value:2},
     {ages:"infant", value:3}
   ];
-  // tourTypePriceArr = [];
   tourTypePriceArr = [
     {type:"Selling price"},
     {type:"Local agent"},
@@ -151,6 +151,7 @@ export class BookingformComponent implements OnInit {
 // Variable other
   _hotelName = '';
   _bookByAcc = '';
+  _bookByAccCode = '';
   _bookByPosition = '';
   _noteBy = '';
 
@@ -182,7 +183,8 @@ export class BookingformComponent implements OnInit {
     constructor(
       private bookingDataService: BookingdataServiceService,
       private dataService: DataService,
-      private http: Http
+      private http: Http,
+      private router: Router
     ) { }
 
     // JSON booking data
@@ -290,7 +292,6 @@ export class BookingformComponent implements OnInit {
 
       let totalTourPrice = this.summary.totalAdultPrice + this.summary.totalChildPrice;
 
-      // this.summary.discount = '';
       this.summary.discount = this.summary.discount;
       this.summary.discountPrice = totalTourPrice * (discountPercent / 100);
 
@@ -321,16 +322,10 @@ export class BookingformComponent implements OnInit {
         this.commission.commission = 0;
       }
 
-      // let price = [];
-      // price.push(this._getTourPrice[0]);
-      // console.log('---------');
-      console.log(JSON.stringify(this.summary.discountPrice));
-      // console.log('---------');
-    }
+    }// End Function Set Price
 
     dataToSave(){
       // Set Date format
-      // console.log(this.bookBy.accountName);
       let _date = new Date(this.tourInfo.tourTravelDate);
       let _month = _date.getMonth();
       this.tourInfo.tourTravelDate = _date.getDate()+' '+this.fullMonth[_month]+' '+_date.getFullYear();
@@ -343,10 +338,20 @@ export class BookingformComponent implements OnInit {
       }
 
       // Set Book by
+      // console.log('=='+JSON.stringify(this._getAccountCodeArr));
+      let countAcc = 0;
+      for(var acc in this._getAccountCodeArr){
+        if(this._getAccountCodeArr[countAcc].hotel==this.bookBy.accountName){
+          this.bookByAcc = this._getAccountCodeArr[countAcc].code;
+        }
+        countAcc++;
+      }
       if(this.bookBy.accountName=='Other'){
         this._bookByAcc = this.bookBy.accountNameOther;
+        this._bookByAccCode = '';
       }else{
         this._bookByAcc = this.bookBy.accountName;
+        this._bookByAccCode = this.bookByAcc;
       }
 
       // Set Book by position
@@ -364,7 +369,7 @@ export class BookingformComponent implements OnInit {
       }
 
       // Set guest data
-      let _pax = parseInt(this.tourInfo.tourPax);
+      let _pax = this.tourInfo.tourPax;
       let _guestName = this.guestName;
       let _guestAges = this.guestAges;
       let countAdult = 0;
@@ -372,7 +377,7 @@ export class BookingformComponent implements OnInit {
       let countInfant = 0;
 
       this.guestData = [];
-      for(var i=0; i < _pax; i++){
+      for(var i=0; i<_pax; i++){
         let _guestData = {
           name:_guestName[i],
           isAges:_guestAges[i]
@@ -421,7 +426,7 @@ export class BookingformComponent implements OnInit {
           "bookBy": {
             "name": this.bookBy.name,
             "position": this._bookByPosition,
-            "code": this._bookByAcc,
+            "code": this._bookByAccCode,
             "hotel": this._bookByAcc,
             "tel": this.bookBy.tel
           },
@@ -455,39 +460,25 @@ export class BookingformComponent implements OnInit {
 
         // Save data booking to API
         this.saveDataBooking(this.dataSave);
-    }
+    } // End Function Set Data To Save
 
     // Save to data service
     saveDataBooking(dataSave) {
-      // let content = _dataSave;
-      let content = {"bookingInfo":{"tourId":9,"tourCode":"TC-08","tourName":"Chiang Rai One Day","tourPrivacy":"Join","travelTime":"Fullday","travelDate":"23 January 2018","pax":3,"adultPax":2,"childPax":1,"infantPax":0,"isServiceCharge":true},"hotelInfo":{"name":"Ratti Lanna","room":"301"},"guestInfo":[{"name":"One 11111","isAges":1},{"name":"Two 22222","isAges":2},{"name":"Three 33333","isAges":3}],"paymentInfo":{"tourPrice":"Selling Price","paymentCollect":"Voucher"},"bookBy":{"name":"K'A","position":"Concierge","code":"42","hotel":"RattiLanna","tel":"01 234 5678"},"insurance":{"isInsurance":true,"insuranceReason":"คนแรกไม่ส่งประกัน"},"commission":{"isCommission":true,"amount":350},"noteBy":{"name":"Reservation team"},"summary":{"adultPrice":1900,"childPrice":1150,"totalAdultPrice":1900,"totalChildPrice":1150,"singleRiding":300,"serviceCharge":50,"discount":"10%","discountPrice":7500,"amount":3050},"specialRequest":"ไม่กินหมู","specialRequestPrice":500};
-      // let content = JSON.stringify(_content);
 
-      // let _url = 'http://localhost:9000/api/ReservationSaveBookingData';
-      let _url = 'http://api.tourinchiangmai.com/api/ReservationSaveBookingData';
-      // let _headers = new Headers({'Accept': 'application/json','Content-Type': 'text/plain'});
-      let _headers = new Headers();
-      let _options = new RequestOptions();
+      let url = 'http://localhost:9000/api/ReservationSaveBookingData';
+      // let _url = 'http://api.tourinchiangmai.com/api/ReservationSaveBookingData';
 
-      // this.createAuthorizationHeader(_headers);
-      // _headers.append('Accept','application/json');
-      // _headers.append('Access-Control-Allow-Origin', '*');
-      // _headers.append('Access-Control-Allow-Methods', 'HEAD, GET, POST, OPTIONS, PUT, PATCH, DELETE');
-      // _headers.append('Access-Control-Allow-Headers', "X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding");
+      let options = new RequestOptions();
 
       /*==================  Success  ===================*/
-      return this.http.post(_url, content, _options)
+      return this.http.post(url, dataSave, options)
                       .map(res => res.json())
                       .subscribe(
-                        data => {console.log('*-*'+data)},
+                        // data => {console.log('*-*'+data)},
+                        data => {this.router.navigate(['booked-statistics'])},
                         err => {console.log(err)}
                       );
       /*==================  Success  ===================*/
-    }
-
-    createAuthorizationHeader(_headers:Headers) {
-      _headers.append('Authorization', 'Basic ' +
-        btoa('a20e6aca-ee83-44bc-8033-b41f3078c2b6:c199f9c8-0548-4be79655-7ef7d7bf9d20')); 
     }
 
     private handleError(error: Response){
@@ -497,7 +488,6 @@ export class BookingformComponent implements OnInit {
   ngOnInit() {
     this.getBookingData();
     this.getAccountCode();
-    // this.setDataBooking();
   }
 
 }

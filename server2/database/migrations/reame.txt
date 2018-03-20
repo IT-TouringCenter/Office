@@ -1,2 +1,0 @@
-how to delete migrate file.
-http://stackoverflow.com/questions/30517098/how-to-delete-a-model-using-php-artisan#answers

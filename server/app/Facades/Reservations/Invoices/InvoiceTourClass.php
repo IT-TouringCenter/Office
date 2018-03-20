@@ -26,12 +26,18 @@ class InvoiceTourClass{
         $result = $this->InvoiceTourOfflineRepo->GetLastInvoiceNumber();
         return $result;
 	}
-	
+
 	// Get invoice number by transaction id
 	public function GetInvoiceTourOfflineByTransactionId($transactionId){
 		$result = $this->InvoiceTourOfflineRepo->GetInvoiceTourOfflineByTransactionId($transactionId);
 		return $result;
 	}
+
+    // Get invoice reference id by invoice id
+    public function GetReferenceInvoiceTourOfflineByTransactionId($transactionRefId){
+        $result = $this->invoiceTourOfflineRepo->GetReferenceInvoiceTourOfflineByTransactionId($transactionRefId);
+        return $result;
+    }
 
 	//=============== Confirmation & Invoice (RSVN) ===============//
     /*

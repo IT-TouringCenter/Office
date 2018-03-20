@@ -34,12 +34,10 @@ class BookingStatisticsClass{
         foreach($transaction as $value){
             $this->transaction = new Transaction;
             $TransactionTour = $this->GetTransactionTourById($value->id);
-            $InvoiceTourOffline = $this->GetInvoiceTourOffline($value->id);
-            $TransactionTourDetail = $this->GetTransactionTourDetailById($TransactionTour[0]->id);
+            $this->GetInvoiceTourOffline($value->id);
+            // $TransactionTourDetail = $this->GetTransactionTourDetailById($TransactionTour[0]->id);
 
             $this->transaction->transactionId = $value->id;
-            $this->transaction->bookingId = $InvoiceTourOffline[0]->booking_number;
-            $this->transaction->invoiceId = $InvoiceTourOffline[0]->invoice_number;
             $this->transaction->tourName = $TransactionTour[0]->tour_code.' : '.$TransactionTour[0]->tour_title;
             $this->transaction->tourPrivacy = $TransactionTour[0]->tour_privacy;
             $this->transaction->tourTravel = $TransactionTour[0]->tour_travel_date;
@@ -50,8 +48,9 @@ class BookingStatisticsClass{
             $this->transaction->noteBy = $value->note_by;
             $this->transaction->insurance = $value->is_insurance==1?true:false;
             $this->transaction->price = $value->amount;
-            $this->transaction->guestName = $TransactionTourDetail[0]->fullname;
-            
+            // $this->transaction->guestName = $TransactionTourDetail[0]->fullname;
+            $this->GetTransactionTourDetailById($TransactionTour[0]->id);
+            // $this->transaction->guestName = $TransactionTourDetail;
 
             array_push($transactionArr, $this->transaction);
         }
@@ -67,12 +66,22 @@ class BookingStatisticsClass{
     // 3. Invoice tour offline
     public function GetInvoiceTourOffline($transactionId){
         $result = $this->InvoiceTourOfflineRepo->GetInvoiceTourOfflineByTransactionId($transactionId);
-        return $result;
+        if($result){
+            $this->transaction->bookingId = $result[0]->booking_number;
+            $this->transaction->invoiceId = $result[0]->invoice_number;
+        }else{
+            $this->transaction->bookingId = '';
+            $this->transaction->invoiceId = '';
+        }
     }
 
     // 4. Transaction tour detail
     public function GetTransactionTourDetailById($transaction_tour_id){
         $result = $this->TransactionRepo->GetTransactionTourDetail($transaction_tour_id);
-        return $result;
+        if($result){
+            $this->transaction->guestName = $result[0]->fullname;
+        }else{
+            $this->transaction->guestName = '';
+        }
     }
 }

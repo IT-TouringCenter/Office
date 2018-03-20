@@ -25,4 +25,13 @@ class InvoiceTourRepository{
                                 ->get();
                 return $result;
         }
+
+        // Get reference invoice tour offline by invoice id
+        public function GetReferenceInvoiceTourOfflineByTransactionId($transactionRefId){
+                $result = \DB::table('invoice_tour_offlines')
+                                ->where('transaction_id',$transactionRefId)
+                                ->where('is_active',1)
+                                ->get();
+                return $result;
+        }
 }

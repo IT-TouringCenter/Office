@@ -1,6 +1,0 @@
-<?php
-namespace App\Facades\ActivityFacades\ICAS;
-
-  class BaseClass{    
-  }
-?>

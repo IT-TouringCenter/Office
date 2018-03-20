@@ -21,8 +21,7 @@ class ReservationController extends MyBaseController {
 			if($results==null){
 				abort(400);
 			}
-			// header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
-			// header('Access-Control-Allow-Origin: *');
+
 			return $results->tourInfo;
 			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
 		}catch(Exception $e){
@@ -39,7 +38,7 @@ class ReservationController extends MyBaseController {
 			if($results==null){
 				abort(400);
 			}
-			// header('Access-Control-Allow-Origin: *');
+
 			return $results;
 			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
 		}catch(Exception $e){
@@ -56,9 +55,6 @@ class ReservationController extends MyBaseController {
 			if($results==null){
 				abort(400);
 			}
-			// header('Access-Control-Allow-Origin: *');
-			// header('Access-Control-Allow-Credentials: true');
-			// header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 
 			return $results;
 			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
@@ -75,7 +71,7 @@ class ReservationController extends MyBaseController {
 			if($results==null){
 				abort(400);
 			}
-			// header('Access-Control-Allow-Origin: *');
+
 			return $results;
 			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
 		}catch(Exception $e){
@@ -91,7 +87,7 @@ class ReservationController extends MyBaseController {
 			if($results==null){
 				abort(400);
 			}
-			// header('Access-Control-Allow-Origin: *');
+
 			return $results;
 			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
 		}catch(Exception $e){
@@ -99,4 +95,21 @@ class ReservationController extends MyBaseController {
 		}
 	}
 
+	public function ReservationSaveBookingData(Request $request){
+		$bookingData  = $request->input();
+
+		try{
+			$results = \ReservationTransactionFacade::SaveTransactionBookingData($bookingData);
+
+			if($results==null){
+				abort(400);
+			}
+
+			return $results;
+			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
+		}catch(Exception $e){
+			// return $this->Response(ResponseStatus::ServerError,ResponseCode::ServerError,'TransactionControlelr.GetDataTransactionPaid error: '.$e);
+			abort(500);
+		}
+	}
 }
