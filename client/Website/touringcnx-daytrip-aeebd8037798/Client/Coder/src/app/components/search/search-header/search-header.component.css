@@ -1,0 +1,136 @@
+#logo{
+    max-width:190px;
+  }
+.navbar-noborder{
+    margin-bottom:0px;
+  }
+  
+  #breadcrumbs-container{
+    padding-left:15px;
+  }
+  
+  #breadcrumb-top{
+    margin-left:15px;
+  }
+  
+  .breadcrumb{
+    padding:15px 0px 0px 15px;
+    margin-bottom:15px;
+    list-style:none;
+    background-color:#ffffff;
+    border-radius:4px;
+  }
+  
+  .search-box{
+    margin:15px 0px;
+  }
+  
+  .search-box .search{
+  }
+  
+  .search-box i{
+    color:red;
+  }
+  
+  .search-box i:hover{
+    cursor:pointer;
+  }
+  
+  .sort{
+    text-align:center;
+  }
+  
+  .sort .item{
+    display:inline;
+    width:69px;
+    margin-left:5px;
+  }
+  
+  .sort .item:hover{
+    cursor:pointer;
+  }
+  
+  .navbar{
+    position:relative;
+    min-height:65px;
+    margin-bottom:0px;
+    border:1px solid transparent;
+  }
+  
+  .hvr-underline-reveal:before {
+    background: #f40b0b !important;
+}
+
+  .hvr-sweep-to-top:before{
+    background:#e31d17;
+    color:#000;
+  }
+  
+  .navbar-header{
+    position:relative;
+  }
+  
+  .search-box input{
+    width: 66%;
+    margin-left: 5px;
+  }
+
+  .search-body{
+    margin: 20px 0px;
+  }
+  
+  .search-container .search-info:hover{
+    color:#000;
+    border-radius:5px 5px 0px 0px;
+    webkit-transform:translateY(4px);
+  }
+  
+  .search-container .search-info{
+  }
+  
+  .search-container .search-info:hover h5{
+  }
+    
+  .search-navigate{
+    border-bottom:1px solid #ebebeb;
+    background:#fafafa;
+    color:#666;
+  }
+
+  .search-navigate a{
+      text-decoration: none;
+  }
+  
+  .top{
+    background:#eee;
+  }
+  
+  .search-box input{
+    caret-color:red;
+    padding-left:5px;
+  }
+  
+  .top > div{
+    border-bottom:1px solid #eae5e5;
+    background:#eeeeee;
+    color:#666;
+  }
+  
+  .search-box input{
+    caret-color:red;
+    padding-left:5px;
+  }
+  
+  .shadow-effect{
+    -webkit-box-shadow:0 10px 6px -6px #777;
+    -moz-box-shadow:0 10px 6px -6px #777;
+    box-shadow:0 10px 6px -6px #777;
+  }
+  
+  .searchResult {
+    margin-left: 55px;
+    color: #808080;
+    -webkit-transition: all 220ms ease-in-out;
+    font-weight: 400;
+    font-size: 12px;
+  }

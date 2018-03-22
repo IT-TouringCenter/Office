@@ -16,7 +16,7 @@ class CreateCustomerLocationRefsTable extends Migration {
 		{
 			$table->integer('id');
 			$table->string('location',50);
-			$table->string('continent',50);
+			$table->string('continent',50)->nullable();
 			$table->tinyInteger('is_active')->default(1);
 			$table->string('created_by',50)->default('System');
 			$table->string('updated_by',50)->nullable();

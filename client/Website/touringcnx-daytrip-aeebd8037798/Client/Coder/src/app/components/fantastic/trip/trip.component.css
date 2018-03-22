@@ -1,0 +1,83 @@
+  #description {
+    padding:60px 0px;
+  }
+
+  #head-trip{
+    text-align:right;
+    position:absolute;
+    top:5px;
+    right:1px;
+  }
+
+  .itinerary{
+    padding:10px 0px;
+    border-radius:4px;
+  }
+  
+  .itinerary:hover{
+    background:#eee;
+  }
+
+  .expertiesico{
+    padding:0px 10px 0px 0;
+    text-align:right;
+    font-family:'Crimson Text',serif;
+    font-size:21px;
+    line-height:24px;
+    color:#5b4c5c;
+    font-style:italic;
+  }
+
+  expertiesdesc{
+    border-left:2px solid #ada5ad;
+    padding:0 0 0 69px;
+  }
+  
+  .expertiesdesc p{
+    padding-bottom:0;
+  }
+  
+  .expertiesdesc h4{
+    font-size:14px;
+    font-weight:300;
+    /*color:#UIzards;*/
+    line-height:normal;
+    text-transform:uppercase;
+    letter-spacing:2px;
+  }
+  
+  .expertiesdesc h5{
+    font-family:'Crimson Text', serif;
+    color:#5b4c5c;
+    font-size:18px;
+    font-style:italic;
+    font-weight:400;
+  }
+
+  .expertiesdesc {
+    border-left: 2px solid #ada5ad;
+    padding: 0 0 0 69px;
+  }
+  
+  #schedule .media{
+    margin-bottom:25px;
+  }
+  
+  .itinerary{
+    padding:10px 0px;
+    border-radius:4px;
+  }
+  
+  .itinerary:hover{
+    background:#eee;
+  }
+  
+  .heading-option{
+    border-bottom:2px solid #ccc;
+  }
+
+  @media (max-width:767px) {
+    #head-trip{
+      position:relative;
+    }
+  }

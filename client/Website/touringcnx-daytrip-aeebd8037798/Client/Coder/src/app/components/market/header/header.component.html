@@ -1,0 +1,110 @@
+<!-- header -->
+<header role="header" class="header-top" id="header-top">
+    <div class="header-fixed-wrapper" role="header-fixed">
+      <div class="container">
+        <!-- hgroup -->
+        <div myattr='hgroup' class="row">
+          <!-- logo -->
+          <div class="col-xs-8 col-sm-3 col-md-3 col-lg-3 company header-tc-logo">
+            <h1>
+              <a href="#header-top" title="Touring Center" id="header-link-logo">
+                <!-- <img src="assets/images/tc-logo.png" alt="Rooky" title="www.tour-in-chiangmai.com"/> -->
+                <span class="logo-tc">
+                  <font class="logo-tc-front">T</font>
+                  <font class="logo-tc-back">ouring</font>
+                </span>
+                <span class="logo-tc">
+                  <font class="logo-tc-front">C</font>
+                  <font class="logo-tc-back">enter</font>
+                </span>
+              </a>
+            </h1>
+          </div>
+          <!-- logo -->
+
+          <!-- nav -->
+          <nav role="navigation" class="col-xs-12 col-sm-9 col-md-9 col-lg-9 navbar navbar-default header-menu-block">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                aria-controls="navbar">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+            </div>
+
+            <div id="navbar" class="navbar-collapse collapse header-menu-lg">              
+              <!-- <ul class="nav navbar-nav" *ngIf="!isShow"> -->
+                <!-- <ul class="nav navbar-nav animated" [ngClass]="{'fadeInDown':!isShow,'fadeOutUp':isShow}">
+                  <li class="active"><a href="#header-top" title="Home">Home</a></li>
+                  <li><a href="#section-one" title="Overview">Premiem Services</a></li>
+                  <li><a href="#section-two" title="Features">Fantasitc Trips</a></li>
+                  <li><a href="#section-three" title="Pricing">Happyness Package</a></li>
+                  <li><a href="#section-four" title="Team">Team</a></li>
+                  <li><a href="#section-five" title="Contact">Subscript</a></li>
+                  <li><a href="#section-six" title="Join Us">Contact</a></li>
+                  <li>
+                      <span>                      
+                         <i class="fa fa-search isearch" aria-hidden="true" (click)="showSearch($event)"></i>
+                      </span>
+                  </li>
+                </ul> -->
+                <ul class="nav navbar-nav animated" [ngClass]="{'fadeInDown':!isShow,'fadeOutUp':isShow}">
+                  <li class="active header-menu"><a href="/">HOME</a></li>
+                  <li class="header-menu"><a href="/">ABOUT</a></li>
+                  <li class="header-menu"><a href="/">DAY TRIP</a></li>
+                  <li class="header-menu"><a href="/">PACAKGE</a></li>
+                  <li class="header-menu"><a href="/">GALLERY</a></li>
+                  <li class="header-menu"><a href="/">PROMOTION</a></li>
+                  <li class="header-menu"><a href="/">CONTACT</a></li>
+                  <!-- <li>
+                      <span>                      
+                         <i class="fa fa-search isearch" aria-hidden="true" (click)="showSearch($event)"></i>
+                      </span>
+                  </li> -->
+                </ul>
+              <!-- <div class="search-container animated" *ngIf="isShow" [ngClass]="{'slideInDown':isShow, 'slideInUp':!isShow}"> -->
+                <div class="search-container animated" [ngClass]="{'fadeInDown':isShow, 'fadeOutUp':!isShow}">
+                  <input type="text" class="search" autofocus>          
+                  <span>
+                      <i class="fa fa-search isearch" aria-hidden="true" (click)="showSearch($event)"></i>
+                  </span>        
+              </div>
+            </div>
+          </nav>
+          <!-- nav -->
+        </div>
+        <!-- hgroup -->
+      </div>
+    </div>
+
+    <!-- banner Text -->
+    <section class="header-banner text-center">
+      <h2 class="header-title">Enjoin to happy with US to travel </h2>
+      <p class="header-text">Perfect and awesome theme to present your product or service</p>
+      <a class="header-video popup-vimeo video-button" href="https://vimeo.com/45830194">
+          <i class="fa fa-caret-right" aria-hidden="true"></i>
+        </a>
+      <a href="section-two" class="header-getstart button-header">Join Now!</a>
+    </section>
+    <!-- banner Text -->
+
+    <!-- banner image -->
+    <figure>
+      <div 
+        class="parallax-window item tp-banner-container" 
+        data-parallax="scroll" 
+        data-image-src="assets/images/tc-natual-2.jpeg" 
+        style=" height: 648px;
+        background-image: url(assets/images/tc-natual-2.jpeg);
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;">
+      </div>
+    </figure>
+    <!-- banner image -->
+
+  </header>
+  <!-- header -->

@@ -6,16 +6,16 @@ use Illuminate\Database\Seeder;
 class PaymentModeSeeder extends Seeder{
 	public function run(){
 		payment_mode::truncate();
-		payment_mode::create(["mode"=>"Selling price"]);
-		payment_mode::create(["mode"=>"Local agent"]);
-		payment_mode::create(["mode"=>"Local agent tax 3%"]);
-		payment_mode::create(["mode"=>"BKK"]);
-		payment_mode::create(["mode"=>"BKK tax 3%"]);
-		payment_mode::create(["mode"=>"Discount 15%"]);
-		payment_mode::create(["mode"=>"Discount 20%"]);
-		payment_mode::create(["mode"=>"Discount 25%"]);
-		payment_mode::create(["mode"=>"Discount 30%"]);
-		payment_mode::create(["mode"=>"Other"]);
+		payment_mode::create(["mode"=>"Selling price","paper_color"=>"purple"]);
+		payment_mode::create(["mode"=>"Local agent","paper_color"=>"pink"]);
+		payment_mode::create(["mode"=>"Local agent tax 3%","paper_color"=>"yellow"]);
+		payment_mode::create(["mode"=>"BKK","paper_color"=>"orenge"]);
+		payment_mode::create(["mode"=>"BKK tax 3%","paper_color"=>"orenge"]);
+		payment_mode::create(["mode"=>"Discount 15%","paper_color"=>"white"]);
+		payment_mode::create(["mode"=>"Discount 20%","paper_color"=>"white"]);
+		payment_mode::create(["mode"=>"Discount 25%","paper_color"=>"white"]);
+		payment_mode::create(["mode"=>"Discount 30%","paper_color"=>"white"]);
+		payment_mode::create(["mode"=>"Other","paper_color"=>"white"]);
 	}
 }
 ?>

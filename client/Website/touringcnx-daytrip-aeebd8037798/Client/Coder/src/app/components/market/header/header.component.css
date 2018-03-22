@@ -1,0 +1,231 @@
+header div .container{
+  padding: 0;
+}
+
+.header-menu-block{
+  padding-top: 10px !important;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.search-container{
+    position: relative;
+    top: -84px;
+}
+
+.search-container .search{
+    background: #fff;
+    border-radius: 25px;
+    padding-left: 15px;
+    /*height: 40px;*/
+    font-size: 20px;
+    width: 50%;
+    color:#000;
+    caret-color: red;
+}
+
+.search-container .search:hover{
+    /*border: 2px solid #1FA1F4;*/
+}
+
+.search-container span{
+    color: #fff;    
+}
+/*
+.search-container i{
+    font-size: 23px;
+    margin-left: 10px;
+}
+*/
+
+.search-container i:hover{
+    cursor: pointer;
+}
+
+#navbar span i {
+    font-size: 18px;
+    margin-left: 10px;
+    color: #fff;    
+}
+
+#navbar span i:hover {
+    cursor: pointer;   
+    color: red;
+}
+
+input[type=text], textarea {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+    border: 1px solid #DDDDDD;
+  }
+   
+  input[type=text]:focus, textarea:focus {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+    border: 1px solid rgba(81, 203, 238, 1);
+  }
+
+  /*======== Responsive =========*/
+  #header-link-logo{
+    text-decoration: none;
+  }
+  .header-menu-lg{
+    font-weight: 100;
+    padding: 0;
+  }
+
+  @media(min-width: 280px){
+      .header-tc-logo{
+        margin-top:0px;
+        height: 35px;
+        padding: 0;
+      }
+      .header-menu-lg{
+        min-height: 30px;
+        max-height: 40px;
+      }
+      .logo-tc{
+        font-family: 'Century Gothic';
+      }
+      .logo-tc-front{
+        font-size: 26px;
+        font-weight: bold;
+        color: red;
+      }
+      .logo-tc-back{
+        margin-left: -11px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+      }
+  }
+
+
+  @media(max-width:425px) {
+    .search-container {
+        position: absolute;
+        top: 21px;
+        background: rgba(13, 13, 14,0.7);
+        border-radius: 4px;
+        padding: 5px 0px;
+        width: 92%;
+    }
+
+    .search-container .search {
+        width: 80%;
+    }
+  }
+  
+  @media(min-width: 576px){
+      .header-tc-logo{
+        margin-top:5px;
+      }
+      .header-menu-lg{
+        min-height: 30px;
+        max-height: 40px;
+      }
+      .logo-tc{
+        font-family: 'Century Gothic';
+      }
+      .logo-tc-front{
+        font-size: 34px;
+        font-weight: bold;
+        color: red;
+      }
+      .logo-tc-back{
+        margin-left: -11px;
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+      }
+  } /* end min width 576px */
+
+  @media(min-width: 768px){
+      .header-tc-logo{
+        margin-top:5px;
+      }
+      .header-menu-lg{
+        min-height: 30px;
+        max-height: 40px;
+      }
+      .logo-tc{
+        font-family: 'Century Gothic';
+      }
+      .logo-tc-front{
+        font-size: 28px;
+        font-weight: bold;
+        color: red;
+      }
+      .logo-tc-back{
+        margin-left: -11px;
+        font-size: 19px;
+        font-weight: bold;
+        color: white;
+      }
+    /*--------------------------------*/
+    .header-menu a{
+        font-size: 10px !important;
+        padding: 0 5px !important;
+        margin: 0;
+    }
+  } /* end min width 768px */
+
+  @media(min-width:992px){
+      .header-tc-logo{
+        margin-top:5px;
+      }
+      .header-menu-lg{
+        min-height: 30px;
+        max-height: 40px;
+      }
+      .logo-tc{
+        font-family: 'Century Gothic';
+      }
+      .logo-tc-front{
+        font-size: 34px;
+        font-weight: bold;
+        color: red;
+      }
+      .logo-tc-back{
+        margin-left: -12px;
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+      }
+      .header-menu a{
+        font-size: 12px !important;
+        padding: 0 10px !important;
+        margin: 0;
+    }
+  }
+
+  /*@media(min-width:992px){
+      .header-tc-logo{
+        margin-top:10px;
+      }
+      .header-menu-lg{
+        min-height: 40px;
+        max-height: 50px;
+      }
+      .logo-tc{
+        font-family: 'Century Gothic';
+      }
+      .logo-tc-front{
+        font-size: 34px;
+        font-weight: bold;
+        color: red;
+      }
+      .logo-tc-back{
+        margin-left: -7px;
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+      }
+  }*/
+  

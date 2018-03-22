@@ -1,0 +1,88 @@
+#footer-tc {
+    margin-top: 0px;
+    padding: 30px 0;
+    font-weight: 100;
+    color: black;
+    background: #efefef;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+.footer-link {
+    color: black;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    color: #337ab7;
+}
+
+#footer-tc .container, #footer-tc .container div{
+    padding: 0;
+}
+
+.footer-contacts {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+.footer-head{
+    font-size: 15px;
+    margin-bottom: 7px;
+}
+
+.footer-logo{
+    margin-top: -7px;
+}
+
+.footer-logo-front{
+    color: red;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.footer-logo-back{
+    margin-left: -5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.footer-logo-tripadvisor{
+    width: 30%;
+    margin: 8px 5px;
+}
+
+.footer-other{
+    text-align: center;
+}
+
+.block-footer{
+    padding: 0;
+}
+
+.footer-credit{
+    border-top: red solid 1px;
+    background: black;
+    height: 25px;
+    font-size: 12px;
+    text-align: center;
+    color: white;
+}
+.footer-credit a{
+    color: white;
+    text-decoration: none;
+}
+.footer-credit a:hover{
+    color: #337ab7;
+}
+
+/*========== Responsive ========*/
+@media(max-width:425px){
+    footer{
+        margin-top: 0px;
+        font-size: 12px;
+    }
+
+    footer h2{
+        font-size: 20px;
+    }
+}

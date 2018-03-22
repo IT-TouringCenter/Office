@@ -15,6 +15,9 @@ export class InvoiceComponent implements OnInit {
 
   _getInvoice: InvoiceInterface.RootObject;
 
+  public paymentCollectColor = '';
+  
+
   constructor(
     private invoiceService: InvoiceService
   ) { }
@@ -23,7 +26,7 @@ export class InvoiceComponent implements OnInit {
   getInvoiceFromData(): void{
     this.invoiceService.getInvoiceData()
       .subscribe(
-        resultArray => console.log(this._getInvoice = resultArray),
+        resultArray => [console.log(this._getInvoice = resultArray),this.paymentCollectColor = this._getInvoice.paperColor],
         error => console.log("Error :: " + error)
       )
   }

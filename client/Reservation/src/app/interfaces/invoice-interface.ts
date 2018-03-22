@@ -55,6 +55,7 @@ export declare module InvoiceInterface {
         hotel: Hotel;
         guest: string;
         paymentMode: string;
+        paperColor: string;
         paymentCollect: string;
         isServiceCharge: boolean;
         serviceCharge: number;

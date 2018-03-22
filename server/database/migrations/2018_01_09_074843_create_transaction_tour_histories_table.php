@@ -30,6 +30,7 @@ class CreateTransactionTourHistoriesTable extends Migration {
 			$table->tinyInteger('infant_pax');
 			$table->double('single_riding',10,2);
 			$table->double('discount',10,2)->default(0);
+			$table->string('discount_rate',20)->default('0%');
 			$table->double('adult_price',10,2);
 			$table->double('child_price',10,2)->default(0);
 			$table->double('total_adult_price',10,2);

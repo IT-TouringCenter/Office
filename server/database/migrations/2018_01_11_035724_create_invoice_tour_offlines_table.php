@@ -19,8 +19,8 @@ class CreateInvoiceTourOfflinesTable extends Migration {
 			$table->integer('transaction_tour_id');
 			$table->integer('invoice_referent_id')->nullable();
 			$table->string('booking_number',20);
-			$table->string('invoice_number',20);
 			$table->string('booking_number_ref',20)->nullable();
+			$table->string('invoice_number',20);
 			$table->string('issued_by',50)->default('Reservation team');
 			$table->tinyInteger('is_revised')->default(0);
 			$table->tinyInteger('is_active')->default(1);

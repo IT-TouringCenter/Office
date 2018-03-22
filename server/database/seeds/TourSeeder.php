@@ -10,7 +10,7 @@ class TourSeeder extends Seeder{
 		tour::create(["code"=>"TC-02","title"=>"City Temple & Museum","short_description"=>"","long_description"=>"","period_start"=>"2018-01-02","period_end"=>"2018-10-31","is_recommend"=>"0"]);
 		tour::create(["code"=>"TC-03","title"=>"Elephant at Work & Ride @ Mae Sa Elephant Camp","short_description"=>"","long_description"=>"","period_start"=>"2018-01-02","period_end"=>"2018-10-31","is_recommend"=>"0"]);
 		tour::create(["code"=>"TC-04","title"=>"Handicraft Village","short_description"=>"","long_description"=>"","period_start"=>"2018-01-02","period_end"=>"2018-10-31","is_recommend"=>"0"]);
-		tour::create(["code"=>"TC-05A","title"=>"Chiang Mai Night Safari (Afternoon Trip; Day Safary","short_description"=>"","long_description"=>"","period_start"=>"2018-01-02","period_end"=>"2018-10-31","is_recommend"=>"0"]);
+		tour::create(["code"=>"TC-05A","title"=>"Chiang Mai Night Safari (Afternoon Trip; Day Safary)","short_description"=>"","long_description"=>"","period_start"=>"2018-01-02","period_end"=>"2018-10-31","is_recommend"=>"0"]);
 		tour::create(["code"=>"TC-05E","title"=>"Chiang Mai Night Safari (Evening Trip)","short_description"=>"","long_description"=>"","period_start"=>"2018-01-02","period_end"=>"2018-10-31","is_recommend"=>"1"]);
 		tour::create(["code"=>"TC-06","title"=>"Khan Toke Dinner with Cultural Performances","short_description"=>"","long_description"=>"","period_start"=>"2018-01-02","period_end"=>"2018-10-31","is_recommend"=>"0"]);
 		tour::create(["code"=>"TC-07","title"=>"Elephant Safari @ Mae Taman Elephant Camp","short_description"=>"","long_description"=>"","period_start"=>"2018-01-02","period_end"=>"2018-10-31","is_recommend"=>"0"]);

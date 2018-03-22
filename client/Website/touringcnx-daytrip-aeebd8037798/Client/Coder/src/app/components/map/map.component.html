@@ -1,0 +1,12 @@
+<div id="map-container">    
+  <div *ngIf="lat && lng">
+    <agm-map [latitude]="lat" [longitude]="lng">
+      <agm-marker [latitude]="lat" [longitude]="lng">
+        <agm-info-window>
+          <h4><strong>{{title}}</strong></h4>
+          <p>14 1<sup>st</sup> Floor, Ratchadamnoen Rd., Soi 5, Sriphum, Muang, Chiang Mai 50200 Thailand</p>
+        </agm-info-window>
+      </agm-marker>
+    </agm-map>
+  <div>
+</div>

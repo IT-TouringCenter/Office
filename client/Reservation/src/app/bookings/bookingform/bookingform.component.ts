@@ -304,7 +304,7 @@ export class BookingformComponent implements OnInit {
         this.summary.singleRiding = 0;
       }
 
-      this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice;      
+      this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice + this.specialRequestPrice;      
 
       // set service charge 3%
       if(this.service.isServiceCharge==true){

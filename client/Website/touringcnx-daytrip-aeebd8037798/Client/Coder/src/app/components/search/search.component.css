@@ -1,0 +1,19 @@
+.search-body{
+  padding: 15px 0px;
+}
+
+.search-info a{
+  color:#f40b0b;
+  font-size:18px;
+}
+
+.search-info p{
+  color:#545454;
+  font-size:small;
+  line-height:1.4;
+}
+
+.search-map {
+  position: relative;
+  top: -75px;
+}

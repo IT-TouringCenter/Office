@@ -1,0 +1,50 @@
+.intro {
+    background-color: #282A2A;
+    min-height: 271px;
+    height: auto;
+}
+
+.section {
+    padding: 60px 0;
+}
+
+.section .intro-text {
+    color: #fff;
+}
+
+blockquote {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    font-style: italic;
+    margin: 0.25em 0;
+    padding: 0.25em 40px;
+    line-height: 1.45;
+    position: relative;
+    color: #fff;
+    border: none;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote:before {
+    display: block;
+    content: "\201C";
+    font-size: 80px;
+    position: absolute;
+    left: 0px;
+    top: -45px;
+    color: #eee8e8;
+}
+
+blockquote cite {
+    color: #999999;
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+}
+
+blockquote cite:before {
+    content: "\2014 \2009";
+}
+blockquote cite:after {
+    content: "\2014 \2009";
+}

@@ -15,6 +15,7 @@ import { BookingPrintInterface } from './../../interfaces/booking-print-interfac
 export class BookingprintComponent implements OnInit {
 
   _getBookingForm: BookingPrintInterface.RootObject;
+  public paymentCollectColor = '';
 
   constructor(
     private bookingFormService: BookingprintService

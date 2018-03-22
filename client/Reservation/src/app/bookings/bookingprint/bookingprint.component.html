@@ -1,3 +1,10 @@
+<!-- Print booking form -->
+<div class="container bk-hidden-print" style="margin-top:10px;">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">
+    <app-btn-print [paperColorPrint]="paymentCollectColor"></app-btn-print>
+  </div>
+</div>
+
 <!-- Head booking form -->
 <div class="container">
   <!-- <div class="row"> -->
@@ -56,12 +63,12 @@
           <th>Tour price</th>
           <td>: {{_getBookingForm.paymentMode}}</td>
           <th>
-            <span *ngIf="_getBookingForm.tours.discountPrice!='0'">Discount</span>
+            <!-- <span *ngIf="_getBookingForm.tours.discountPrice!='0'">Discount</span> -->
             <!-- <span *ngIf="_getBookingForm.tours.discountPrice=='0'"></span> -->
           </th>
           <td>
-            <span *ngIf="_getBookingForm.tours.discountPrice!='0'">: {{_getBookingForm.tours.discount}}</span>
-            <span *ngIf="_getBookingForm.tours.discountPrice=='0'">: 0%</span>
+            <!-- <span *ngIf="_getBookingForm.tours.discountPrice!='0'">: {{_getBookingForm.tours.discount}}</span> -->
+            <!-- <span *ngIf="_getBookingForm.tours.discountPrice=='0'">: 0%</span> -->
           </td>
         </tr>
         <!-- Row 9 -->

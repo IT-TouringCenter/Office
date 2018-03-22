@@ -1,0 +1,11 @@
+.pagging-container {
+    margin: 15px 0px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.pagination > li > a:hover {
+    background-color: #f10e0e;
+    border-color: #f90324;
+    cursor: pointer;
+}

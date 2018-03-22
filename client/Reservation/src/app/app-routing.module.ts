@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
+// import { AgmCoreModule } from '@agm/core';
 import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
+
+// component
 import { HomeComponent } from './home/home.component';
 import { BookingformComponent } from './bookings/bookingform/bookingform.component';
 import { BookingprintComponent } from './bookings/bookingprint/bookingprint.component';
@@ -31,7 +34,10 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {useHash: true})
+    // AgmCoreModule.forRoot({
+    //   // apiKey: 'AIzaSyBWy_RhYudyI9DW3_Mp3zjgCXHmtfWbssQ'
+    // })
   ],
   exports: [
     RouterModule

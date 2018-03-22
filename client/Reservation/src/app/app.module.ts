@@ -1,8 +1,9 @@
-import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 // import { CallServices } from './services/call-api.service';
 // import { HttpClientModule } from '@angular/common/http';
 
@@ -20,10 +21,33 @@ import { BookingprintComponent } from './bookings/bookingprint/bookingprint.comp
 import { ReportsComponent } from './reports/reports.component';
 import { BookedstatisticsComponent } from './bookings/bookedstatistics/bookedstatistics.component';
 import { ProgressBarComponent } from './progress/progress-bar/progress-bar.component';
+import { PrintComponent } from './common/button/print/print.component';
 
 // Services
 // import { TourserviceService } from './services/tours/tourservice.service';
 
+// const appRoutes: Routes = [
+//   {
+//     path: '',
+//     component: HomeComponent
+//   },
+//   {
+//     path: 'reservation',
+//     component: BookingformComponent
+//   },
+//   {
+//     path: 'bookingform/:transactionId',
+//     component: BookingprintComponent
+//   },
+//   {
+//     path: 'invoice/:transactionId',
+//     component: InvoiceComponent
+//   },
+//   {
+//     path: 'booked-statistics',
+//     component: BookedstatisticsComponent
+//   }
+// ]
 
 @NgModule({
   declarations: [
@@ -36,6 +60,7 @@ import { ProgressBarComponent } from './progress/progress-bar/progress-bar.compo
     ReportsComponent,
     BookedstatisticsComponent,
     ProgressBarComponent,
+    PrintComponent,
   ],
   imports: [
     BrowserModule,

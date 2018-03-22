@@ -1,0 +1,41 @@
+.gallery-container {
+    padding: 15px 0px;
+    color: #848484;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 27px;
+}
+
+.wrapper {
+    background-color: #FFF;
+    padding: 0 25px;
+    position: relative;
+    z-index: 6;
+    /*margin-bottom: 396px;*/
+}
+
+.video-button {
+    margin: 39px auto;
+    display: block;
+    cursor: pointer;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.71);
+    border: 3px solid #e62117;
+    border-radius: 100%;
+    width: 94px;
+    height: 94px;
+    line-height: 94px;
+    font-size: 60px;
+    text-align: center;
+    color: #f40808;
+}
+
+.video-button i {
+    padding-left: 5px;
+}
+
+figure.effect-sarah:hover span {
+    border: 3px solid #F9F5F5;
+    color: #F9F5F5;
+    background-color: rgba(50, 0, 0, 0.50);
+}

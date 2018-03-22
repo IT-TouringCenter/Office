@@ -1,0 +1,32 @@
+<!-- search-container -->
+<div class="search-container">
+    
+    <!-- top search  -->
+      <!-- <app-search-header [message]='message' (messageEvent)="receiveMessage($event)"></app-search-header>  -->
+      <app-search-header (searchEvent)="onSearchBy($event)"></app-search-header>
+    <!-- top search -->
+
+    <!-- body -->
+    <div class="search-body" [ngSwitch]="searchBy">        
+        <!-- all component -->
+        <app-all *ngSwitchCase="'all'"></app-all>     
+        
+        <!-- video component -->
+        <app-search-video *ngSwitchCase="'video'"></app-search-video>
+
+        <!-- gallery -->
+        <!-- <app-search-gallery></app-search-gallery> -->
+        <app-gallery *ngSwitchCase="'image'"></app-gallery>
+
+        <!-- map -->
+        <app-map class="search-map" *ngSwitchCase="'map'"></app-map>
+
+    </div>
+    <!-- body -->
+
+    <!-- pagging container -->
+    <app-pagging></app-pagging>
+    <!-- pagging container -->
+</div>
+<!-- search-container -->
+<app-footer></app-footer>

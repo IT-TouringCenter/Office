@@ -17,7 +17,7 @@ class CreateDriversTable extends Migration {
 			$table->increments('id');
 			$table->string('fullname_th',50);
 			$table->string('fullname_en',50)->nullable();
-			$table->string('nickname',50);
+			$table->string('nickname',50)->nullable();
 			$table->string('tel',20);
 			$table->string('line',50)->nullable();
 			$table->string('license_no',50);

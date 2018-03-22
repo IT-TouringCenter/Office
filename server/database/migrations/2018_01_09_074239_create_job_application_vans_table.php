@@ -17,9 +17,9 @@ class CreateJobApplicationVansTable extends Migration {
 			$table->increments('id');
 			$table->integer('job_status_id');
 			$table->string('fullname',50);
-			$table->string('nickname',50);
+			$table->string('nickname',50)->nullable();
 			$table->string('gender',50);
-			$table->string('birth',50);
+			$table->string('birth',50)->nullable();
 			$table->tinyInteger('age')->nullable();
 			$table->tinyInteger('height')->nullable();
 			$table->tinyInteger('weight')->nullable();
@@ -53,6 +53,7 @@ class CreateJobApplicationVansTable extends Migration {
 			$table->tinyInteger('is_wifi')->default(0);
 			$table->tinyInteger('is_gps')->default(0);
 			$table->tinyInteger('is_audio')->default(0);
+			$table->tinyInteger('is_active')->default(1);
 			$table->string('created_by',50)->default('System');
 			$table->dateTime('created_at')->nullable();
 			// $table->timestamps();

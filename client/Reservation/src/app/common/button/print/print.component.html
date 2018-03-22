@@ -1,0 +1,35 @@
+<!-- Selling price -->
+<button *ngIf="paperColorPrint=='purple'" type="submit" mat-raised-button style="background:rgb(166, 133, 226);color:white;" (click)="windowPrint()">
+  <i class="fa fa-print fa-1x"></i>
+  <span><b> Print</b></span>
+</button>
+
+<!-- Local agent -->
+<button *ngIf="paperColorPrint=='pink'" type="submit" mat-raised-button style="background:rgb(240, 142, 210);color:rgb(0, 0, 0);" (click)="windowPrint()">
+  <i class="fa fa-print fa-1x"></i>
+  <span><b> Print</b></span>
+</button>
+
+<!-- Local agent 3% -->
+<button *ngIf="paperColorPrint=='yellow'" type="submit" mat-raised-button style="background:rgb(255, 190, 70);color:rgb(0, 0, 0);" (click)="windowPrint()">
+  <i class="fa fa-print fa-1x"></i>
+  <span><b> Print</b></span>
+</button>
+
+<!-- BKK & BKK 3% -->
+<button *ngIf="paperColorPrint=='orenge'" type="submit" mat-raised-button style="background:rgb(255, 81, 0);color:rgb(255, 255, 255);" (click)="windowPrint()">
+  <i class="fa fa-print fa-1x"></i>
+  <span><b> Print</b></span>
+</button>
+
+<!-- OTA & online -->
+<button *ngIf="paperColorPrint=='white'" type="submit" mat-raised-button style="background:rgb(255, 255, 255);color:rgb(0, 0, 0); border:1px solid rgb(0, 0, 0);" (click)="windowPrint()">
+  <i class="fa fa-print fa-1x"></i>
+  <span><b> Print</b></span>
+</button>
+
+<!-- Other -->
+<button *ngIf="paperColorPrint==''" type="submit" mat-raised-button color="primary" (click)="windowPrint()">
+  <i class="fa fa-print fa-1x"></i>
+  <span><b> Print</b></span>
+</button>

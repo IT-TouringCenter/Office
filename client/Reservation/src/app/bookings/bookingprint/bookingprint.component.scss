@@ -40,3 +40,10 @@
 .bf-text-right{
     text-align: right;
 }
+
+// display print
+@media print{
+    .bk-hidden-print{
+        display: none;
+    }
+}
