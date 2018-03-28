@@ -1,4 +1,4 @@
-export declare module BookingdataInterface {
+export declare module BookingFormInterface {
 
     export interface Time {
         id: number;

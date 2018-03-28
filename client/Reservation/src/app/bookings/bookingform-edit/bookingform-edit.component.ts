@@ -13,7 +13,8 @@ import { ProgressBarComponent } from './../../progress/progress-bar/progress-bar
 import { BookingformEditService } from './bookingform-edit.service';
 import { DataService } from './../../services/data.service';
 // Interfaces
-import { BookingdataInterface } from './../../interfaces/bookingdata-interface';
+import { BookingFormInterface } from './../bookingform/bookingform-interface';
+import { BookingFormEditInterface } from './bookingform-edit-interface';
 import { AccountCodeInterface } from './../../interfaces/account-code-interface';
 import { SaveBookingInterface } from './../../interfaces/save-booking-interface';
 
@@ -169,17 +170,17 @@ export class BookingformEditComponent implements OnInit {
   _getAccountCodeArr: AccountCodeInterface.RootObject;
 
   // Booking data interface
-  _getBookingDataArr: BookingdataInterface.RootObject;
+  _getBookingDataArr: BookingFormInterface.RootObject;
 
   // Save booking interface
   _saveBookingInterface: SaveBookingInterface.RootObject;
 
-  // _getTourInfo: BookingdataInterface.Privacy;
-  _getTourTime: BookingdataInterface.Time;
-  _getTourPrivacy: BookingdataInterface.Privacy;
-  _getTourTypePrice: BookingdataInterface.TourPrice;
-  _getTourPrice: BookingdataInterface.Price;
-  _getTourPax: BookingdataInterface.Pax;
+  // _getTourInfo: BookingFormInterface.Privacy;
+  _getTourTime: BookingFormInterface.Time;
+  _getTourPrivacy: BookingFormInterface.Privacy;
+  _getTourTypePrice: BookingFormInterface.TourPrice;
+  _getTourPrice: BookingFormInterface.Price;
+  _getTourPax: BookingFormInterface.Pax;
 
   // Active sidenav
   public activeSideNav = 'addbooking';

@@ -3,7 +3,8 @@ import { FormsModule, FormControl, Validators } from '@angular/forms';
 // Services
 import { BookedstatisticsService } from './bookedstatistics.service';
 // Interfaces
-import { BookedStatisticsInterface } from './../../interfaces/booked-statistics';
+// import { BookedStatisticsInterface } from './../../interfaces/booked-statistics';
+import { BookedStatisticsInterface } from './bookedstatistics-interface';
 
 @Component({
   selector: 'app-bookedstatistics',

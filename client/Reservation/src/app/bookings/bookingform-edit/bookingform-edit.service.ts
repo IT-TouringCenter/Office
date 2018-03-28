@@ -5,27 +5,27 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/Rx";
 
 // interface
-import { BookingdataInterface } from "./../../interfaces/bookingdata-interface";
+import { BookingFormInterface } from "./../bookingform/bookingform-interface";
 import { AccountCodeInterface } from "./../../interfaces/account-code-interface";
 
 @Injectable()
 export class BookingformEditService {
 
-  // private _getBookingData = "http://localhost:9000/api/GetDataBooking";
-  // private _getAccountCode = "http://localhost:9000/api/GetAccountCodeData";
-  private _getBookingData = "http://api.tourinchiangmai.com/api/GetDataBooking";
-  private _getAccountCode = "http://api.tourinchiangmai.com/api/GetAccountCodeData";
+  private _getBookingData = "http://localhost:9000/api/GetDataBooking";
+  private _getAccountCode = "http://localhost:9000/api/GetAccountCodeData";
+  // private _getBookingData = "http://api.tourinchiangmai.com/api/GetDataBooking";
+  // private _getAccountCode = "http://api.tourinchiangmai.com/api/GetAccountCodeData";
   // private _getBookingData = "../../../assets/json/reservations/bookingData.json";
   // private _getAccountCode = "../../../assets/json/accounts/accountCode.json";
 
   constructor(private http: Http) { }
 
   // get data booking
-  getBookingData(): Observable<BookingdataInterface.RootObject>{
+  getBookingData(): Observable<BookingFormInterface.RootObject>{
     return this.http
       .get(this._getBookingData)
       .map((response: Response) => {
-        return <BookingdataInterface.RootObject>response.json();
+        return <BookingFormInterface.RootObject>response.json();
       })
       .catch(this.handleError);
   }

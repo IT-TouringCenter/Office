@@ -10,10 +10,12 @@ import "rxjs/Rx";
 // Component
 import { ProgressBarComponent } from './../../progress/progress-bar/progress-bar.component';
 // Services
-import { BookingdataServiceService } from './bookingdata-service.service';
+// import { BookingFormService } from './bookingdata-service.service';
+import { BookingFormService } from './bookingform.service';
 import { DataService } from './../../services/data.service';
 // Interfaces
-import { BookingdataInterface } from './../../interfaces/bookingdata-interface';
+// import { BookingFormInterface } from './../../interfaces/bookingdata-interface';
+import { BookingFormInterface } from './bookingform-interface';
 import { AccountCodeInterface } from './../../interfaces/account-code-interface';
 import { SaveBookingInterface } from './../../interfaces/save-booking-interface';
 
@@ -22,7 +24,7 @@ import { SaveBookingInterface } from './../../interfaces/save-booking-interface'
   templateUrl: './bookingform.component.html',
   styleUrls: ['./bookingform.component.scss'],
   providers: [
-    BookingdataServiceService,
+    BookingFormService,
     DataService
   ]
 })
@@ -168,23 +170,23 @@ export class BookingformComponent implements OnInit {
   _getAccountCodeArr: AccountCodeInterface.RootObject;
 
   // Booking data interface
-  _getBookingDataArr: BookingdataInterface.RootObject;
+  _getBookingDataArr: BookingFormInterface.RootObject;
 
   // Save booking interface
   _saveBookingInterface: SaveBookingInterface.RootObject;
 
-  // _getTourInfo: BookingdataInterface.Privacy;
-  _getTourTime: BookingdataInterface.Time;
-  _getTourPrivacy: BookingdataInterface.Privacy;
-  _getTourTypePrice: BookingdataInterface.TourPrice;
-  _getTourPrice: BookingdataInterface.Price;
-  _getTourPax: BookingdataInterface.Pax;
+  // _getTourInfo: BookingFormInterface.Privacy;
+  _getTourTime: BookingFormInterface.Time;
+  _getTourPrivacy: BookingFormInterface.Privacy;
+  _getTourTypePrice: BookingFormInterface.TourPrice;
+  _getTourPrice: BookingFormInterface.Price;
+  _getTourPax: BookingFormInterface.Pax;
 
   // Active sidenav
   public activeSideNav = 'addbooking';
 
     constructor(
-      private bookingDataService: BookingdataServiceService,
+      private bookingDataService: BookingFormService,
       private dataService: DataService,
       private http: Http,
       private router: Router
@@ -317,11 +319,11 @@ export class BookingformComponent implements OnInit {
       }
 
       this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice + this.specialRequestPrice;
-      
-      console.log('Tour price : '+totalTourPrice);
-      console.log('Single ride : '+this.summary.singleRiding);
-      console.log('Discount price : '+this.summary.discountPrice);
-      console.log('Special req. : '+this.specialRequestPrice);
+
+      // console.log('Tour price : '+totalTourPrice);
+      // console.log('Single ride : '+this.summary.singleRiding);
+      // console.log('Discount price : '+this.summary.discountPrice);
+      // console.log('Special req. : '+this.specialRequestPrice);
 
       // set service charge 3%
       if(this.service.isServiceCharge==true){
@@ -471,7 +473,11 @@ export class BookingformComponent implements OnInit {
             "amount": this.summary.amount
           },
           "specialRequest": this.specialRequest,
-          "specialRequestPrice": this.specialRequestPrice
+          "specialRequestPrice": this.specialRequestPrice,
+          "invoiceRef":{
+            "id":"50",
+            "number":"61-03-050"
+          }
         };
         console.log(JSON.stringify(this.dataSave));
 
@@ -482,8 +488,8 @@ export class BookingformComponent implements OnInit {
     // Save to data service
     saveDataBooking(dataSave) {
 
-      // let url = 'http://localhost:9000/api/ReservationSaveBookingData';
-      let url = 'http://api.tourinchiangmai.com/api/ReservationSaveBookingData';
+      let url = 'http://localhost:9000/api/ReservationSaveBookingData';
+      // let url = 'http://api.tourinchiangmai.com/api/ReservationSaveBookingData';
 
       let options = new RequestOptions();
 

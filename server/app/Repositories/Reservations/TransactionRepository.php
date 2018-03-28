@@ -221,14 +221,15 @@ class TransactionRepository{
 	}
 
 	// Save invoice
-	public function SaveInvoiceTourOffline($transactionId,$transactionTourId,$invoiceNumberData,$noteBy){
+	public function SaveInvoiceTourOffline($transactionId,$transactionTourId,$invoiceNumberData,$noteBy,$invoiceRef){
 		// $dateTimeNow = date('Y-m-d H:i:s');
 		$dateTimeNow = Carbon::now('Asia/Bangkok');
 		$bookingNumber = [
 			'transaction_id'=>$transactionId,
 			'transaction_tour_id'=>$transactionTourId,
-			'invoice_referent_id'=>0,
+			'invoice_referent_id'=>array_get($invoiceRef,'id'),
 			'booking_number'=>array_get($invoiceNumberData,'bookingNumber'),
+			'booking_number_ref'=>array_get($invoiceRef,'number'),
 			'invoice_number'=>array_get($invoiceNumberData,'invoiceNumber'),
 			'issued_by'=>array_get($noteBy,'name'),
 			'is_revised'=>0,

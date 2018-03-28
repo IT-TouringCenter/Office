@@ -3,7 +3,8 @@ import { FormsModule, FormControl, Validators } from '@angular/forms';
 // Services
 import { InvoiceService } from './invoice.service';
 // Interfaces
-import { InvoiceInterface } from './../interfaces/invoice-interface';
+// import { InvoiceInterface } from './../interfaces/invoice-interface';
+import { InvoiceInterface } from './invoice-interface';
 
 @Component({
   selector: 'app-invoice',

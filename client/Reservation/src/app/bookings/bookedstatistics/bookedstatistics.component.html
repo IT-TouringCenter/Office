@@ -6,16 +6,16 @@
 
     <!-- Table Header -->
     <tr class="font-table-13px">
-      <th class="text-center bg-info text-light">No.</th>
-      <th class="text-center bg-info text-light">Inv No.</th>
-      <th class="text-center bg-info text-light">Tour Name</th>
-      <th class="text-center bg-info text-light">Privacy</th>
-      <th class="text-center bg-info text-light">Pax</th>
-      <th class="text-center bg-info text-light">Guest</th>
-      <th class="text-center bg-info text-light">Hotel</th>
-      <!-- <th class="text-center bg-info text-light">Room</th> -->
-      <th class="text-center bg-secondary text-light">Booking</th>
-      <th class="text-center bg-secondary text-light">Invoice</th>
+      <th class="text-center bg-damask text-light">No.</th>
+      <th class="text-center bg-damask text-light">Inv No.</th>
+      <th class="text-center bg-damask text-light">Tour Name</th>
+      <th class="text-center bg-damask text-light">Privacy</th>
+      <th class="text-center bg-damask text-light">Pax</th>
+      <th class="text-center bg-damask text-light">Guest</th>
+      <th class="text-center bg-damask text-light">Hotel</th>
+      <!-- <th class="text-center bg-damask text-light">Room</th> -->
+      <th class="text-center bg-dark-gray text-light">Booking</th>
+      <th class="text-center bg-dark-gray text-light">Invoice</th>
       <th class="text-center bg-dark text-light">Edit</th>
     </tr>
     <!-- Table Body -->
@@ -30,17 +30,17 @@
       <td>{{booked.hotel}}</td>
       <!-- <td>{{booked.hotelRoom}}</td> -->
       <td class="text-center table-valign-mid">
-        <a href="/#/bookingform/{{booked.transactionId}}" target="_blank">
+        <a href="/#/bookingform/{{booked.transactionId}}" target="_blank" class="book-link-doc">
           <i class="fa fa-file font-table-1-5em" aria-hidden="true"></i>
         </a>
       </td>
       <td class="text-center table-valign-mid">
-        <a href="/#/invoice/{{booked.transactionId}}" target="_blank">
+        <a href="/#/invoice/{{booked.transactionId}}" target="_blank" class="book-link-doc">
           <i class="fa fa-file-text font-table-1-5em"></i>
         </a>
       </td>
       <td class="text-center table-valign-mid">
-        <a href="/#/bookingform/edit/{{booked.transactionId}}" target="_blank">
+        <a href="/#/bookingform/edit/{{booked.transactionId}}" target="_blank" class="book-link-doc">
           <i class="fa fa-pencil-square-o font-table-1-5em"></i>
         </a>
       </td>

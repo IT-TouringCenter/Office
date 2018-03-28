@@ -3,7 +3,8 @@ import { FormsModule, FormControl, Validators } from '@angular/forms';
 // Services
 import { BookingprintService } from './bookingprint.service';
 // Interfaces
-import { BookingPrintInterface } from './../../interfaces/booking-print-interface';
+// import { BookingPrintInterface } from './../../interfaces/booking-print-interface';
+import { BookingPrintInterface } from './bookingprint-interface';
 // import { BookingdataInterface } from '../bookingform/bookingdata-interface';
 
 @Component({

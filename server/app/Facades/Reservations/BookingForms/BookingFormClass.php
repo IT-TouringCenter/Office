@@ -197,7 +197,7 @@ class BookingFormClass{
         $bookData = new Tour;
         // $bookData->booking = $invoice;
         $bookData->bookingNo = $invoice[0]->booking_number;
-        $bookData->refBookingNo = $invoice[0]->booking_number_ref==null?"":$invoice[0]->booking_number_ref;
+        $bookData->refBookingNo = $invoice[0]->booking_number_ref==""?"":$invoice[0]->booking_number_ref;
         $bookData->invoiceNo = $invoice[0]->invoice_number;
 
         return $this->BookingData->invoices = $bookData;

@@ -5,7 +5,7 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/Rx";
 
 // interface
-import { BookedStatisticsInterface } from "./../../interfaces/booked-statistics";
+import { BookedStatisticsInterface } from "./bookedstatistics-interface";
 
 @Injectable()
 export class BookedstatisticsService {
@@ -16,8 +16,8 @@ export class BookedstatisticsService {
 
   // get data booking
   getBookingStatisticsData(): Observable<BookedStatisticsInterface>{
-    // this._getBookedStatistics = "http://localhost:9000/api/GetBookingStatisticData";
-    this._getBookedStatistics = "http://api.tourinchiangmai.com/api/GetBookingStatisticData";
+    this._getBookedStatistics = "http://localhost:9000/api/GetBookingStatisticData";
+    // this._getBookedStatistics = "http://api.tourinchiangmai.com/api/GetBookingStatisticData";
 
     return this.http
       .get(this._getBookedStatistics)

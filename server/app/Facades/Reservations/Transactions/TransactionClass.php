@@ -35,6 +35,7 @@ class TransactionClass{
 		$summary = array_get($bookingData,'summary');
 		$guestData = array_get($bookingData, 'guestInfo');
 		$noteBy = array_get($bookingData, 'noteBy');
+		$invoiceRef = array_get($bookingData, 'invoiceRef');
 		$count = 1;
 
 		$this->transaction = new Transaction;
@@ -45,7 +46,7 @@ class TransactionClass{
 		// Payment
 		$PaymentId = $this->SaveBookingPayment($saveTransactionId,$summary,$noteBy);
 		// Invoice
-		$Invoice = $this->SaveInvoiceTourOffline($saveTransactionId,$TransactionTourId->transactionTourId,$noteBy);
+		$Invoice = $this->SaveInvoiceTourOffline($saveTransactionId,$TransactionTourId->transactionTourId,$noteBy,$invoiceRef);
 
 		// Guest & Tour & Tour history
 		foreach($guestData as $value){
@@ -96,7 +97,7 @@ class TransactionClass{
 
 	// Save to DB : Invoice table
 	// 1. Check booking number
-	public function SaveInvoiceTourOffline($transactionId,$transactionTourId,$noteBy){
+	public function SaveInvoiceTourOffline($transactionId,$transactionTourId,$noteBy,$invoiceRef){
 		// Get booking number
 		$bookingNumber = \InvoiceBookingFacade::GetLastInvoiceNumber();
 		
@@ -104,7 +105,7 @@ class TransactionClass{
 		// Run invoice number
 		$this->RunInvoiceNumber($bookingNumber);
 
-		$result = $this->TransactionRepo->SaveInvoiceTourOffline($transactionId,$transactionTourId,$this->InvoiceTourOffline,$noteBy);
+		$result = $this->TransactionRepo->SaveInvoiceTourOffline($transactionId,$transactionTourId,$this->InvoiceTourOffline,$noteBy,$invoiceRef);
 		return $this->transaction->invoiceTour = $this->InvoiceTourOffline;
 	}
 
