@@ -8,6 +8,7 @@ import { BookingformComponent } from './bookings/bookingform/bookingform.compone
 import { BookingprintComponent } from './bookings/bookingprint/bookingprint.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { BookedstatisticsComponent } from './bookings/bookedstatistics/bookedstatistics.component';
+import { BookingformEditComponent } from './bookings/bookingform-edit/bookingform-edit.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'bookingform/:transactionId',
     component: BookingprintComponent
+  },
+  {
+    path: 'bookingform/edit/:transactionId',
+    component: BookingformEditComponent
   },
   {
     path: 'invoice/:transactionId',

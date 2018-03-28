@@ -110,6 +110,7 @@ class InvoiceTourClass{
 
         $bookData = new InvoiceTourOffline;
         $bookData->name = $tour[0]->tour_code.' : '.$tour[0]->tour_title;
+        $bookData->code = $tour[0]->tour_code;
 		$bookData->type = $tour[0]->tour_travel_time;
 		$bookData->time = $travelTime[0]->travel_time_start.' - '.$travelTime[0]->travel_time_end;
 		$bookData->standBy = $travelTime[0]->pickup_time;
@@ -186,8 +187,12 @@ class InvoiceTourClass{
 	
 	// account code
 	public function SetAccountCode($accountCodeId){
-		$accountCode = $this->AccountCodeRepo->GetAccountCodeById($accountCodeId);
-		$setAccountCode = intval($accountCode[0]->code).'-'.$accountCode[0]->customer_name;
+        $accountCode = $this->AccountCodeRepo->GetAccountCodeById($accountCodeId);
+        if($accountCode){
+            $setAccountCode = intval($accountCode[0]->code).'-'.$accountCode[0]->customer_name;
+        }else{
+		    $setAccountCode = '';
+        }
 
 		return $this->BookingData->accountCode = $setAccountCode;
 	}

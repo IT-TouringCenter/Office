@@ -55,7 +55,7 @@
       <tr>
         <td class="inv-border-left"><b>Travel Date</b></td>
         <td class="inv-border-right">: <span class="text-danger">{{_getInvoice.tours.date}}</span></td>
-        <td rowspan="2" colspan="3" class="text-center inv-border inv-bg-gray">
+        <td rowspan="2" colspan="3" class="text-center inv-border inv-bg-gray" style="background:rgb(197, 201, 206) !important;">
           <h4><b>UNIT PRICE</b></h4>
           <small>(RATE IN THAI BAHT)</small>
         </td>
@@ -69,9 +69,9 @@
       <tr>
         <td class="inv-border-left"><b>Type of Tour</b></td>
         <td class="inv-border-right">: <span class="text-danger">{{_getInvoice.tours.privacy}}</span></td>
-        <td class="text-center inv-border inv-bg-gray"><b>Quantity</b></td>
-        <td class="text-center inv-border inv-bg-gray"><b>Price</b></td>
-        <td class="text-center inv-border inv-bg-gray"><b>Amount</b></td>
+        <td class="text-center inv-border inv-bg-gray" style="background:rgb(197, 201, 206) !important;"><b>Quantity</b></td>
+        <td class="text-center inv-border inv-bg-gray" style="background:rgb(197, 201, 206) !important;"><b>Price</b></td>
+        <td class="text-center inv-border inv-bg-gray" style="background:rgb(197, 201, 206) !important;"><b>Amount</b></td>
       </tr>
       <!-- Row 5 -->
       <tr>
@@ -126,7 +126,10 @@
           <span class="text-danger" *ngIf="_getInvoice.tours.discount!='0%'">{{_getInvoice.tours.discount}}</span>
           <span class="text-danger" *ngIf="_getInvoice.tours.discount=='0%'">-</span>
         </td>
-        <td class="text-center inv-border-right">1</td>
+        <td class="text-center inv-border-right">
+          <span *ngIf="_getInvoice.tours.discountPrice!=0">1</span>
+          <span *ngIf="_getInvoice.tours.discountPrice!=0"></span>
+        </td>
         <td class="text-right inv-border-right">
           <span *ngIf="_getInvoice.tours.discountPrice!=0">-{{_getInvoice.tours.discountPrice}}</span>
           <span *ngIf="_getInvoice.tours.discountPrice==0"></span>
@@ -199,10 +202,10 @@
       <!-- Row 15 : Total -->
       <tr>
         <td colspan="2"></td>
-        <td colspan="2" class="text-center inv-border inv-bg-gray"><h4 class="inv-head-table"><b>Total</b></h4></td>
-        <td class="text-right inv-border inv-bg-green" style="background: #91ca7f;">
+        <td colspan="2" class="text-center inv-border inv-bg-gray" style="background:rgb(197, 201, 206) !important;"><h4 class="inv-head-table"><b>Total</b></h4></td>
+        <td class="text-right inv-border inv-bg-green" style="background: #91ca7f !important;">
           <h4 class="inv-head-table"><b *ngIf="_getInvoice.prices.totalPrice!=0">{{_getInvoice.prices.totalPrice}}</b></h4>
-          <h4 class="inv-head-table"><b *ngIf="_getInvoice.prices.totalPrice==0">0}}</b></h4>
+          <h4 class="inv-head-table"><b *ngIf="_getInvoice.prices.totalPrice==0">0</b></h4>
         </td>
       </tr>
     </table>
@@ -212,58 +215,17 @@
 <!-- End invoice table -->
 
 <!-- Notify -->
-<div class="container">
-  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <div class="inv-bg-yellow inv-note-block-padding" style="background:#fad352;">
-      <p class="text-center text-danger"><b>** Clothing : Shoulders and Knees need to be covered for entry to temples. **</b></p>
-      <p class="text-center text-danger"><b>*** What to bring along : Camara , Sunglass , Coat ***</b></p>
-    </div>
-  </div>
-</div>
+<app-invoice-note [invoiceNotice]="invoiceNote"></app-invoice-note>
 <br>
 <!-- End notify -->
 
 <!-- Incluce & Exclude -->
-<div class="container">
-  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <table class="inv-table inv-table-content">
-      <tr>
-        <th rowspan="4"><u>Tour Includes</u></th>
-        <td>: Round trip transfer from/to the hotel, Travel accident insurance</td>
-      </tr>
-      <tr>
-        <td>: Transportation for tour (VIP 9 seats air-con van),</td>
-      </tr>
-      <tr>
-        <td>: Experience English speaking guide, Admission fees,</td>
-      </tr>
-      <tr>
-        <td>: Lunch, Drinking water & cold towel for refreshment, Travel accident insurance</td>
-      </tr>
-      <tr>
-        <th rowspan="2"><u>Tour Excludes</u></th>
-        <td>: Other optional tour or meals than mentioned in the program,</td>
-      </tr>
-      <tr>
-        <td>: Personal expense, VAT 7% & Tax 3%</td>
-      </tr>
-    </table>
-  </div>
-</div>
+<app-invoice-include-exclude></app-invoice-include-exclude>
 <br>
 <!-- End include & exclude -->
 
 <!-- Note -->
-<div class="container">
-  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <p><b><u class="text-danger">IMPORTANT NOTE</u></b></p>
-    <p><b>* Optional tours or side trips are not allowed for all <span class="text-danger">T</span>ouring <span class="text-danger">C</span>enter Join Trip (SIC)</b></p>
-    <p><b>* Cancel <u>Afternoon and Evening</u> Program less than 3 hours prior the departure, 100% cancellation charge</b></p>
-    <p><b>* Cancel <u>Full Day and Morning</u> Program less than 12 hours prior the departure, 100% cancellation charge</b></p>
-    <p><b>* Last Minute Cancelled and No Shows, 100% of total price will be applied</b></p>
-    <p><b>* Unused features are non-refundable</b></p>
-  </div>
-</div>
+<app-invoice-important-note></app-invoice-important-note>
 <br>
 <!-- End note -->
 

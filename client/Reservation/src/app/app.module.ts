@@ -22,32 +22,18 @@ import { ReportsComponent } from './reports/reports.component';
 import { BookedstatisticsComponent } from './bookings/bookedstatistics/bookedstatistics.component';
 import { ProgressBarComponent } from './progress/progress-bar/progress-bar.component';
 import { PrintComponent } from './common/button/print/print.component';
-
-// Services
-// import { TourserviceService } from './services/tours/tourservice.service';
-
-// const appRoutes: Routes = [
-//   {
-//     path: '',
-//     component: HomeComponent
-//   },
-//   {
-//     path: 'reservation',
-//     component: BookingformComponent
-//   },
-//   {
-//     path: 'bookingform/:transactionId',
-//     component: BookingprintComponent
-//   },
-//   {
-//     path: 'invoice/:transactionId',
-//     component: InvoiceComponent
-//   },
-//   {
-//     path: 'booked-statistics',
-//     component: BookedstatisticsComponent
-//   }
-// ]
+import { InvoiceIncludeExcludeComponent } from './invoice/invoice-include-exclude/invoice-include-exclude.component';
+import { InvoiceNoteComponent } from './invoice/invoice-note/invoice-note.component';
+import { InvoiceImportantNoteComponent } from './invoice/invoice-important-note/invoice-important-note.component';
+// import { MenubarComponent } from './common/header/menubar/menubar.component';
+import { MenuSidebarComponent } from './common/header/menu-sidebar/menu-sidebar.component';
+import { MenuBarComponent } from './common/header/menu-bar/menu-bar.component';
+import { BookingformEditComponent } from './bookings/bookingform-edit/bookingform-edit.component';
+import { AuthenticationComponent } from './authentication/authentication/authentication.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { LogoutComponent } from './authentication/logout/logout.component';
+import { SignupComponent } from './authentication/signup/signup.component';
+import { TemplateComponent } from './common/template/template.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +47,18 @@ import { PrintComponent } from './common/button/print/print.component';
     BookedstatisticsComponent,
     ProgressBarComponent,
     PrintComponent,
+    InvoiceIncludeExcludeComponent,
+    InvoiceNoteComponent,
+    InvoiceImportantNoteComponent,
+    // MenubarComponent,
+    MenuSidebarComponent,
+    MenuBarComponent,
+    BookingformEditComponent,
+    AuthenticationComponent,
+    LoginComponent,
+    LogoutComponent,
+    SignupComponent,
+    TemplateComponent,
   ],
   imports: [
     BrowserModule,

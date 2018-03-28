@@ -11,10 +11,10 @@ import { AccountCodeInterface } from "./../../interfaces/account-code-interface"
 @Injectable()
 export class BookingdataServiceService {
 
-  private _getBookingData = "http://localhost:9000/api/GetDataBooking";
-  private _getAccountCode = "http://localhost:9000/api/GetAccountCodeData";
-  // private _getBookingData = "http://api.tourinchiangmai.com/api/GetDataBooking";
-  // private _getAccountCode = "http://api.tourinchiangmai.com/api/GetAccountCodeData";
+  // private _getBookingData = "http://localhost:9000/api/GetDataBooking";
+  // private _getAccountCode = "http://localhost:9000/api/GetAccountCodeData";
+  private _getBookingData = "http://api.tourinchiangmai.com/api/GetDataBooking";
+  private _getAccountCode = "http://api.tourinchiangmai.com/api/GetAccountCodeData";
   // private _getBookingData = "../../../assets/json/reservations/bookingData.json";
   // private _getAccountCode = "../../../assets/json/accounts/accountCode.json";
 

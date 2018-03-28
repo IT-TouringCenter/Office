@@ -180,6 +180,9 @@ export class BookingformComponent implements OnInit {
   _getTourPrice: BookingdataInterface.Price;
   _getTourPax: BookingdataInterface.Pax;
 
+  // Active sidenav
+  public activeSideNav = 'addbooking';
+
     constructor(
       private bookingDataService: BookingdataServiceService,
       private dataService: DataService,
@@ -257,11 +260,12 @@ export class BookingformComponent implements OnInit {
         }
         count2++;
       }
-
+      // this.tourInfo.adultPax;
       // Set tour type price by [tour paxs]
       let count3 = 0;
       for(var data in this._getTourPax){
-        if(this._getTourPax[count3].min<=this.tourInfo.tourPax && this.tourInfo.tourPax<=this._getTourPax[count3].max){
+        // if(this._getTourPax[count3].min<=this.tourInfo.tourPax && this.tourInfo.tourPax<=this._getTourPax[count3].max){
+        if(this._getTourPax[count3].min<=this.tourInfo.adultPax && this.tourInfo.adultPax<=this._getTourPax[count3].max){
           this._getTourTypePrice = this._getTourPax[count3].tourPrices;  
         }
         count3++;
@@ -277,34 +281,47 @@ export class BookingformComponent implements OnInit {
       }
 
       // Set tour price summary
-      let adultNo = this.tourInfo.adultPax;
-      let childNo = this.tourInfo.childPax;
-      let totalPax = adultNo + childNo;
+      // set pax
+      let adultNo = this.tourInfo.adultPax?this.tourInfo.adultPax:0;
+      let childNo = this.tourInfo.childPax?this.tourInfo.childPax:0;
       let infantNo = this.tourInfo.infantPax;
-      let commissionAdult = this._getTourPrice[0].commissionAdult * adultNo;
-      let commissionChild = this._getTourPrice[0].commissionChild * childNo;
-      let discountPercent = this.summary.discount;
+      let totalPax = adultNo + childNo;
 
-      this.summary.adultPrice = this._getTourPrice[0].adultPrice;
-      this.summary.childPrice = this._getTourPrice[0].childPrice;
-      this.summary.totalAdultPrice = this._getTourPrice[0].adultPrice * adultNo;
-      this.summary.totalChildPrice = this._getTourPrice[0].childPrice * childNo;
+      // set price
+      this.summary.adultPrice = this._getTourPrice[0].adultPrice?this._getTourPrice[0].adultPrice:0;
+      this.summary.childPrice = this._getTourPrice[0].childPrice?this._getTourPrice[0].childPrice:0;
 
+      // set commission
+      let getCommittionAdult = this._getTourPrice[0].commissionAdult?this._getTourPrice[0].commissionAdult:0;
+      let getCommittionChild = this._getTourPrice[0].commissionChild?this._getTourPrice[0].commissionChild:0;
+      let commissionAdult = getCommittionAdult * adultNo;
+      let commissionChild = getCommittionChild * childNo;
+
+      // set total price
+      this.summary.totalAdultPrice = this.summary.adultPrice * adultNo;
+      this.summary.totalChildPrice = this.summary.childPrice * childNo;
       let totalTourPrice = this.summary.totalAdultPrice + this.summary.totalChildPrice;
 
+      // set discount
+      let discountPercent = this.summary.discount?this.summary.discount:0;
       this.summary.discount = this.summary.discount;
       this.summary.discountPrice = totalTourPrice * (discountPercent / 100);
 
       // set single riding
       if(totalPax%2!=0){
-        this.summary.singleRiding = this._getTourPrice[0].singleRiding;
+        this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding);
       }else if(this.isSingleRiding==true){
-        this.summary.singleRiding = this._getTourPrice[0].singleRiding;
+        this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding);
       }else{
         this.summary.singleRiding = 0;
       }
 
-      this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice + this.specialRequestPrice;      
+      this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice + this.specialRequestPrice;
+      
+      console.log('Tour price : '+totalTourPrice);
+      console.log('Single ride : '+this.summary.singleRiding);
+      console.log('Discount price : '+this.summary.discountPrice);
+      console.log('Special req. : '+this.specialRequestPrice);
 
       // set service charge 3%
       if(this.service.isServiceCharge==true){
@@ -465,8 +482,8 @@ export class BookingformComponent implements OnInit {
     // Save to data service
     saveDataBooking(dataSave) {
 
-      let url = 'http://localhost:9000/api/ReservationSaveBookingData';
-      // let _url = 'http://api.tourinchiangmai.com/api/ReservationSaveBookingData';
+      // let url = 'http://localhost:9000/api/ReservationSaveBookingData';
+      let url = 'http://api.tourinchiangmai.com/api/ReservationSaveBookingData';
 
       let options = new RequestOptions();
 

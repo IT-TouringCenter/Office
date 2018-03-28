@@ -1,0 +1,120 @@
+// Create valiable
+$center : center;
+
+// Add style to ID or Class
+#bookingform-header{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+#bookingform-content1{
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+}
+#bookingform-content2{
+    margin-bottom: 30px;
+    // padding-bottom: 15px;
+    background: #e8e8e8;
+}
+.header-form{
+    text-align: $center !important;
+    color: rgb(48, 48, 48);
+    font-weight: 600;
+    margin: 0;
+}
+.hr-header-form{
+    min-width: 70px;
+    max-width: 150px;
+    // width: 15%;
+    color: #b30000;
+    border: 1px solid #b30000;
+    margin: 0 auto;
+}
+
+.front-paragraph{
+    padding-top:15px;
+}
+.field-booking{
+    width:90%;
+    height: calc(3.25rem + 2px) !important;
+}
+.space-checkbox{
+    margin-right: 8px;
+}
+.block-data-booking{
+    padding: 0 !important;
+    margin-bottom: 5px !important;
+    height: 45px;
+}
+.book-form-total{
+    font-weight: 600;
+}
+.btn-add-guest{
+    // float: right !important;
+    padding: 0 !important;
+    margin-top: 8px !important;
+    margin-right: 15px;
+}
+// Content
+// .bk-table{
+//     width: 100%;
+// }
+// .bk-full-width{
+//     width: 90%;
+// }
+
+/* Progress */
+.progress-block{
+    margin: 40px 0 20px 0;
+}
+.progress-runing{
+    width: 18%;
+    background: #f0ad4e;
+    border-radius: 10px;
+    height: 10px !important;
+}
+.progress-one, .progress-two, .progress-three, .progress-four{
+    position:absolute;
+    margin-top:-7px;
+    z-index:1;
+    height:25px;
+    width:25px;
+    border-radius:25px;
+}
+.progress-one{
+    left:23%;
+}
+.progress-two{
+    left:42%;
+}
+.progress-three{
+    left:65%;
+}
+.progress-four{
+    left:88%;
+}
+.primary-color{
+    background-color:#4989bd;
+}
+.success-color{
+    background-color:#5cb85c;
+}
+.danger-color{
+    background-color:#d9534f;
+}
+.warning-color{
+    background-color:#f0ad4e;
+}
+.info-color{
+    background-color:#5bc0de;
+}
+.no-color{
+    background-color: inherit;
+    border: 1px solid #e2e2e2;
+}
+.progress{
+    font-size: 14px !important;
+    margin: 20px auto 30px auto;
+    width: 80%;
+    border-radius: 10px;
+    height: 10px !important;
+}

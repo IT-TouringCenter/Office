@@ -5,7 +5,7 @@
   <table class="table table-bordered">
 
     <!-- Table Header -->
-    <tr>
+    <tr class="font-table-13px">
       <th class="text-center bg-info text-light">No.</th>
       <th class="text-center bg-info text-light">Inv No.</th>
       <th class="text-center bg-info text-light">Tour Name</th>
@@ -19,10 +19,11 @@
       <th class="text-center bg-dark text-light">Edit</th>
     </tr>
     <!-- Table Body -->
-    <tr *ngFor="let booked of _getBookingStatistics; let i = index">
-      <td class="text-center">{{i+1}}</td>
+    <tr *ngFor="let booked of _getBookingStatistics; let i = index;" class="font-table-12px">
+      <!-- <td class="text-center">{{i+1}}</td> -->
+      <td class="text-center">{{_getBookingStatistics.length-i}}</td>
       <td>{{booked.invoiceId}}</td>
-      <td>{{booked.tourName}}</td>
+      <td title="{{booked.tourFullname}}">{{booked.tourName}}</td>
       <td class="text-center">{{booked.tourPrivacy}}</td>
       <td class="text-center">{{booked.tourPax}}</td>
       <td>{{booked.guestName}}</td>
@@ -30,17 +31,17 @@
       <!-- <td>{{booked.hotelRoom}}</td> -->
       <td class="text-center table-valign-mid">
         <a href="/#/bookingform/{{booked.transactionId}}" target="_blank">
-          <i class="fa fa-file fa-2x" aria-hidden="true"></i>
+          <i class="fa fa-file font-table-1-5em" aria-hidden="true"></i>
         </a>
       </td>
       <td class="text-center table-valign-mid">
         <a href="/#/invoice/{{booked.transactionId}}" target="_blank">
-          <i class="fa fa-file-text fa-2x"></i>
+          <i class="fa fa-file-text font-table-1-5em"></i>
         </a>
       </td>
       <td class="text-center table-valign-mid">
-        <a href="#" target="_blank">
-          <i class="fa fa-pencil-square-o fa-2x"></i>
+        <a href="/#/bookingform/edit/{{booked.transactionId}}" target="_blank">
+          <i class="fa fa-pencil-square-o font-table-1-5em"></i>
         </a>
       </td>
     </tr>

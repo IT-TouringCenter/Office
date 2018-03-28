@@ -25,8 +25,8 @@ export class InvoiceService {
   // get data booking
   getInvoiceData(): Observable<InvoiceInterface.RootObject>{
     // Get parameter from URL
-    this._getInvoiceData = "http://localhost:9000/api/GetInvoiceData/"+this.transactionId;
-    // this._getInvoiceData = "http://api.tourinchiangmai.com/api/GetInvoiceData/"+this.transactionId;
+    // this._getInvoiceData = "http://localhost:9000/api/GetInvoiceData/"+this.transactionId;
+    this._getInvoiceData = "http://api.tourinchiangmai.com/api/GetInvoiceData/"+this.transactionId;
 
     return this.http
       .get(this._getInvoiceData)

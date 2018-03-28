@@ -8,6 +8,7 @@ export declare module InvoiceInterface {
 
     export interface Tours {
         name: string;
+        code: string;
         type: string;
         time: string;
         standBy: string;
@@ -17,6 +18,8 @@ export declare module InvoiceInterface {
         adult: number;
         child: number;
         infant: number;
+        discount: string;
+        discountPrice: number;
     }
 
     export interface Hotel {

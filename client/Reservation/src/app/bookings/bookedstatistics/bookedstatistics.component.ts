@@ -14,6 +14,9 @@ import { BookedStatisticsInterface } from './../../interfaces/booked-statistics'
 export class BookedstatisticsComponent implements OnInit {
 
   _getBookingStatistics: BookedStatisticsInterface;
+  
+  // Active sidenav
+  public activeSideNav = 'bookedstatistics';
 
   constructor(
     private BookedstatisticsService: BookedstatisticsService

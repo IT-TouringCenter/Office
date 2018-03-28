@@ -36,9 +36,12 @@ class BookingStatisticsClass{
             $TransactionTour = $this->GetTransactionTourById($value->id);
             $this->GetInvoiceTourOffline($value->id);
             // $TransactionTourDetail = $this->GetTransactionTourDetailById($TransactionTour[0]->id);
+            $tourName = $TransactionTour[0]->tour_code.' : '.$TransactionTour[0]->tour_title;
+            $subTour = substr($tourName,0,25);
 
             $this->transaction->transactionId = $value->id;
-            $this->transaction->tourName = $TransactionTour[0]->tour_code.' : '.$TransactionTour[0]->tour_title;
+            $this->transaction->tourName = $subTour.'...';
+            $this->transaction->tourFullname = $tourName;
             $this->transaction->tourPrivacy = $TransactionTour[0]->tour_privacy;
             $this->transaction->tourTravel = $TransactionTour[0]->tour_travel_date;
             $this->transaction->tourPax = $TransactionTour[0]->pax;

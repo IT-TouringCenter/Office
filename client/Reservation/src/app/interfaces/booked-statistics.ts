@@ -3,6 +3,7 @@ export interface BookedStatisticsInterface {
     bookingId: string;
     invoiceId: string;
     tourName: string;
+    tourFullname: string;
     tourPrivacy: string;
     tourTravel: string;
     tourPax: number;
