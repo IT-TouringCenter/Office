@@ -23,6 +23,8 @@ class EmailSeeder extends Seeder{
 		email::create(["email"=>"nui@northernsmiletravel.com"]);
 		email::create(["email"=>"online@northernsmiletravel.com"]);
 		email::create(["email"=>"online@touringcnx.com"]);
+		email::create(["email"=>"recruit@northernsmiletravel.com"]);
+		email::create(["email"=>"recruit@touringcnx.com"]);
 		email::create(["email"=>"operations@northernsmiletravel.com"]);
 		email::create(["email"=>"reservations@northernsmiletravel.com"]);
 		email::create(["email"=>"reservations@touringcnx.com"]);

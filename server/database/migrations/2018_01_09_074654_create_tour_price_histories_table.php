@@ -20,6 +20,8 @@ class CreateTourPriceHistoriesTable extends Migration {
 			$table->double('net_price_child',10,2);
 			$table->double('sell_price_adult',10,2);
 			$table->double('sell_price_child',10,2);
+			$table->double('adultPrice',10,2);
+			$table->double('childPrice',10,2);
 			$table->double('commission_adult',10,2);
 			$table->double('commission_child',10,2);
 			$table->double('single_riding',10,2);

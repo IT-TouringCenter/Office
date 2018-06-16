@@ -1,35 +1,44 @@
 import { Component, OnInit } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 import { HttpHeaders } from '@angular/common/http';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormsModule, FormControl, Validators, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Observable } from "rxjs/Observable";
+import { startWith } from "rxjs/operators/startWith";
+import { map } from "rxjs/operators/map";
 import "rxjs/Rx";
 
 // Component
 import { ProgressBarComponent } from './../../progress/progress-bar/progress-bar.component';
 // Services
-// import { BookingFormService } from './bookingdata-service.service';
 import { BookingFormService } from './bookingform.service';
 import { DataService } from './../../services/data.service';
+import { CurrencyService } from './../../common/currency/currency.service';
 // Interfaces
-// import { BookingFormInterface } from './../../interfaces/bookingdata-interface';
 import { BookingFormInterface } from './bookingform-interface';
 import { AccountCodeInterface } from './../../interfaces/account-code-interface';
 import { SaveBookingInterface } from './../../interfaces/save-booking-interface';
-
+import { currencyInterface } from './../../common/currency/currency-interface';
 @Component({
   selector: 'app-bookingform',
   templateUrl: './bookingform.component.html',
   styleUrls: ['./bookingform.component.scss'],
   providers: [
     BookingFormService,
+    CurrencyService,
     DataService
   ]
 })
+
 export class BookingformComponent implements OnInit {
+
+  myControl: FormControl = new FormControl();
+
   // Set model
+  minDate = new Date(2017, 12, 1);
+  maxDate = new Date(2018, 9, 31);
   tourInfo = {
     tourData:{
       id:'',
@@ -39,6 +48,7 @@ export class BookingformComponent implements OnInit {
     tourTime:'',
     tourPrivacy:'',
     tourTravelDate:'',
+    rateTwoPax:0,
     tourPax:0,
     adultPax:0,
     childPax:0,
@@ -67,7 +77,8 @@ export class BookingformComponent implements OnInit {
     positionOther:'',
     tel:'',
     accountName:'',
-    accountNameOther:''
+    accountNameOther:'',
+    otaCode:''
   };
   insurance = {
     isInsurance:false,
@@ -82,21 +93,35 @@ export class BookingformComponent implements OnInit {
     other:''
   };
   summary = {
+    adultSellPrice:0,
+    childSellPrice:0,
     adultPrice:0,
     childPrice:0,
     totalAdultPrice:0,
     totalChildPrice:0,
+    singleRidingPax:0,
     singleRiding:0,
     serviceCharge:0,
+    deposit:0,
     discount:0,
     discountPrice:0,
     totalPrice:0,
-    amount:0
+    amount:0,
   };
+  isSpecialRequestOperator = 0;
+  specialRequestOperator = '';
+  specialChargePrice = 0;
   specialRequest = '';
   specialRequestPrice = 0;
   isSingleRiding = false;
+  singleRidingPax = 0;
+  rateTwoPax = false;
   dataSave = {};
+
+  realPriceAdult = 0;
+  realPriceChild = 0;
+  currency = '';
+  currencyRate = 31.5;
 
   // Set data bliding
   travelTimeArr = [];
@@ -120,14 +145,15 @@ export class BookingformComponent implements OnInit {
     {type:"Other"}
   ];
   tourPriceArr = [];
-  tourPaxArr = [1,2,3,4,5,6,7,8,9];
+  tourPaxArr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
   tourPaymentCollectArr = [
     {collect:"Guest"},
     {collect:"Front"},
     {collect:"Concierge"},
     {collect:"Voucher"},
     {collect:"Voucher 3%"},
-    {collect:"No Voucher"}
+    {collect:"No Voucher"},
+    {collect:"Other"}
   ];
   bookByPositionArr = [
     {position:"Guest"},
@@ -149,6 +175,11 @@ export class BookingformComponent implements OnInit {
     {type:"Yes", value:true},
     {type:"No", value:false}
   ];
+  operatorArr = [
+    {operator:"+", value:"+"},
+    {operator:"-", value:"-"}
+  ];
+  activeSingleRiding = false;
 
 // Variable other
   _hotelName = '';
@@ -159,10 +190,6 @@ export class BookingformComponent implements OnInit {
 
 // Set index
   indexTour: number;
-  indexTourPrivacy: number;
-  indexTourTypePrice: number;
-  indexTourPax: number;
-  indexTourPrice: number;
 
   tourControl = new FormControl('',[Validators.required]);
 
@@ -175,6 +202,9 @@ export class BookingformComponent implements OnInit {
   // Save booking interface
   _saveBookingInterface: SaveBookingInterface.RootObject;
 
+  // Currency interface
+  _getCurrencyInterface : currencyInterface.RootObject;
+
   // _getTourInfo: BookingFormInterface.Privacy;
   _getTourTime: BookingFormInterface.Time;
   _getTourPrivacy: BookingFormInterface.Privacy;
@@ -182,12 +212,15 @@ export class BookingformComponent implements OnInit {
   _getTourPrice: BookingFormInterface.Price;
   _getTourPax: BookingFormInterface.Pax;
 
+  filteredOptions: Observable<string[]>;
+
   // Active sidenav
   public activeSideNav = 'addbooking';
 
     constructor(
       private bookingDataService: BookingFormService,
       private dataService: DataService,
+      private currencyService: CurrencyService,
       private http: Http,
       private router: Router
     ) { }
@@ -206,6 +239,15 @@ export class BookingformComponent implements OnInit {
       this.bookingDataService.getAccountCode()
         .subscribe(
           resultArray => this._getAccountCodeArr = resultArray,
+          error => console.log("Error :: " + error)
+        )
+    }
+
+    // JSON currency
+    getCurrency(): void{
+      this.currencyService.getInvoiceData()
+        .subscribe(
+          resultArray => this._getCurrencyInterface = resultArray,
           error => console.log("Error :: " + error)
         )
     }
@@ -230,6 +272,12 @@ export class BookingformComponent implements OnInit {
           this.indexTour = count;
         }
         count++;
+      }
+
+      if(tourId=='3' || tourId=='8' || tourId=='11' || tourId=='12'){
+        this.activeSingleRiding = true;
+      }else{
+        this.activeSingleRiding = false;
       }
     }
 
@@ -262,13 +310,20 @@ export class BookingformComponent implements OnInit {
         }
         count2++;
       }
-      // this.tourInfo.adultPax;
+
       // Set tour type price by [tour paxs]
       let count3 = 0;
+      // No select ages & fill guest data
+      if(this.tourInfo.adultPax==undefined || this.tourInfo.adultPax==null || this.tourInfo.adultPax==0){
+        if(this.tourInfo.tourPax>=1){
+          this.tourInfo.adultPax = this.tourInfo.tourPax;
+        }
+      }else{
+        this.tourInfo.adultPax = this.tourInfo.adultPax;
+      }
       for(var data in this._getTourPax){
-        // if(this._getTourPax[count3].min<=this.tourInfo.tourPax && this.tourInfo.tourPax<=this._getTourPax[count3].max){
-        if(this._getTourPax[count3].min<=this.tourInfo.adultPax && this.tourInfo.adultPax<=this._getTourPax[count3].max){
-          this._getTourTypePrice = this._getTourPax[count3].tourPrices;  
+        if(this._getTourPax[count3].min<=this.tourInfo.tourPax && this.tourInfo.tourPax<=this._getTourPax[count3].max){
+          this._getTourTypePrice = this._getTourPax[count3].tourPrices;
         }
         count3++;
       }
@@ -284,18 +339,37 @@ export class BookingformComponent implements OnInit {
 
       // Set tour price summary
       // set pax
-      let adultNo = this.tourInfo.adultPax?this.tourInfo.adultPax:0;
-      let childNo = this.tourInfo.childPax?this.tourInfo.childPax:0;
+      let adultNo = this.tourInfo.adultPax;
+      let childNo = this.tourInfo.childPax;
       let infantNo = this.tourInfo.infantPax;
       let totalPax = adultNo + childNo;
 
       // set price
-      this.summary.adultPrice = this._getTourPrice[0].adultPrice?this._getTourPrice[0].adultPrice:0;
-      this.summary.childPrice = this._getTourPrice[0].childPrice?this._getTourPrice[0].childPrice:0;
+      if(this.rateTwoPax==true){
+        this.tourInfo.rateTwoPax = 1;
+        this.specialChargePrice = this._getTourPrice[0].adultPrice;
+      }else{
+        this.tourInfo.rateTwoPax = 0;
+        this.specialChargePrice = 0;
+      }
+
+      if(this.tourInfo.tourPax>1){
+        this.tourInfo.rateTwoPax = 0;
+      }
+
+      this.summary.adultSellPrice = this._getTourPrice[0].adultSellPrice;
+      this.summary.childSellPrice = this._getTourPrice[0].childSellPrice;
+      this.summary.adultPrice = this._getTourPrice[0].adultPrice;
+      this.summary.childPrice = this._getTourPrice[0].childPrice;
+
+      // set deposit price
+      if(this.summary.deposit==null || this.summary.deposit==undefined){
+        this.summary.deposit = 0;
+      }
 
       // set commission
-      let getCommittionAdult = this._getTourPrice[0].commissionAdult?this._getTourPrice[0].commissionAdult:0;
-      let getCommittionChild = this._getTourPrice[0].commissionChild?this._getTourPrice[0].commissionChild:0;
+      let getCommittionAdult = this._getTourPrice[0].commissionAdult>0?this._getTourPrice[0].commissionAdult:0;
+      let getCommittionChild = this._getTourPrice[0].commissionChild>0?this._getTourPrice[0].commissionChild:0;
       let commissionAdult = getCommittionAdult * adultNo;
       let commissionChild = getCommittionChild * childNo;
 
@@ -305,25 +379,88 @@ export class BookingformComponent implements OnInit {
       let totalTourPrice = this.summary.totalAdultPrice + this.summary.totalChildPrice;
 
       // set discount
-      let discountPercent = this.summary.discount?this.summary.discount:0;
-      this.summary.discount = this.summary.discount;
-      this.summary.discountPrice = totalTourPrice * (discountPercent / 100);
-
-      // set single riding
-      if(totalPax%2!=0){
-        this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding);
-      }else if(this.isSingleRiding==true){
-        this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding);
+      if(this.summary.discount==null || this.summary.discount==undefined){
+        this.summary.discount=0;
+      }
+      let checkDiscount = this.paymentInfo.tourPrice;
+      let subDiscount = 0;
+      console.log('check discount : '+checkDiscount.includes("Discount"));
+      if(checkDiscount.includes("Discount")==true){
+        subDiscount = parseInt(this.paymentInfo.tourPrice.substring(11,9));
+        // set total price
+        this.summary.totalAdultPrice = this.summary.adultSellPrice * adultNo;
+        this.summary.totalChildPrice = this.summary.childSellPrice * childNo;
+        totalTourPrice = this.summary.totalAdultPrice + this.summary.totalChildPrice;
+        this.realPriceAdult = this.summary.adultSellPrice;
+        this.realPriceChild = this.summary.childSellPrice;
       }else{
-        this.summary.singleRiding = 0;
+        subDiscount = 0;
+        // set total price
+        this.summary.totalAdultPrice = this.summary.adultPrice * adultNo;
+        this.summary.totalChildPrice = this.summary.childPrice * childNo;
+        totalTourPrice = this.summary.totalAdultPrice + this.summary.totalChildPrice;
+        this.realPriceAdult = this.summary.adultPrice;
+        this.realPriceChild = this.summary.childPrice;
       }
 
-      this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice + this.specialRequestPrice;
+      let discountPercent = subDiscount;
+      this.summary.discount = subDiscount;
+      this.summary.discountPrice = totalTourPrice * (discountPercent/100);
+      console.log((this.realPriceAdult + this.realPriceChild)+' x '+ (discountPercent/100)+' = '+this.summary.discountPrice);
 
-      // console.log('Tour price : '+totalTourPrice);
-      // console.log('Single ride : '+this.summary.singleRiding);
-      // console.log('Discount price : '+this.summary.discountPrice);
-      // console.log('Special req. : '+this.specialRequestPrice);
+      // set single riding
+      if(this.singleRidingPax==0){
+        this.summary.singleRidingPax=1;
+      }else{
+        this.summary.singleRidingPax=this.singleRidingPax;
+      }
+
+      if(totalPax%2!=0){ // normal case % 2
+        this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding);
+        if(this.isSingleRiding==true){
+          if(this.summary.singleRidingPax!=null || this.summary.singleRidingPax!=undefined){
+            this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding) * this.summary.singleRidingPax;
+          }else{
+            this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding);
+          }
+        }else{
+          this.summary.singleRidingPax = 1;
+          this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding);
+        }
+      }else{
+        this.summary.singleRiding = 0;
+        if(this.isSingleRiding==true){
+          if(this.summary.singleRidingPax!=null || this.summary.singleRidingPax!=undefined){
+            this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding) * this.summary.singleRidingPax;
+          }else{
+            this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding);
+          }
+        }else{
+          this.summary.singleRidingPax = 0;
+          this.summary.singleRiding = 0;
+        }
+      }
+
+      // set special request price
+      if(this.specialRequestPrice==null || this.specialRequestPrice==undefined){
+        this.specialRequestPrice = 0;
+      }
+
+      // set total price
+      // set special request operator
+      // '+'==1 | '-'==2 | none==0
+      if(this.specialRequestOperator=='+'){
+        this.isSpecialRequestOperator=1;
+        this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice + this.specialRequestPrice + this.specialChargePrice - this.summary.deposit;
+      }else if(this.specialRequestOperator=='-'){
+        this.isSpecialRequestOperator=2;
+        this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice - this.specialRequestPrice + this.specialChargePrice - this.summary.deposit;
+      }else{
+        this.isSpecialRequestOperator=0;
+        this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice + this.specialRequestPrice + this.specialChargePrice - this.summary.deposit;
+      }
+
+      // this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice + this.specialRequestPrice + this.specialChargePrice - this.summary.deposit;
 
       // set service charge 3%
       if(this.service.isServiceCharge==true){
@@ -339,6 +476,20 @@ export class BookingformComponent implements OnInit {
         this.commission.commission = commissionAdult + commissionChild;
       }else{
         this.commission.commission = 0;
+      }
+
+      // converse currency
+      if(this.currency=='USDTHB'){
+        this.realPriceAdult = this.realPriceAdult / this.currencyRate;
+        this.realPriceChild = this.realPriceChild / this.currencyRate;
+        this.summary.totalAdultPrice = this.summary.totalAdultPrice / this.currencyRate;
+        this.summary.totalChildPrice = this.summary.totalChildPrice / this.currencyRate;
+        this.summary.singleRiding = this.summary.singleRiding / this.currencyRate;
+        this.summary.serviceCharge = this.summary.serviceCharge / this.currencyRate;
+        this.summary.deposit = this.summary.deposit / this.currencyRate;
+        this.summary.discountPrice = this.summary.discountPrice / this.currencyRate;
+        this.summary.totalPrice = this.summary.totalPrice / this.currencyRate;
+        this.summary.amount = this.summary.amount / this.currencyRate;
       }
 
     }// End Function Set Price
@@ -357,7 +508,6 @@ export class BookingformComponent implements OnInit {
       }
 
       // Set Book by
-      // console.log('=='+JSON.stringify(this._getAccountCodeArr));
       let countAcc = 0;
       for(var acc in this._getAccountCodeArr){
         if(this._getAccountCodeArr[countAcc].hotel==this.bookBy.accountName){
@@ -387,6 +537,11 @@ export class BookingformComponent implements OnInit {
         this._noteBy = this.noteBy.name;
       }
 
+      // Set GYG Code
+      if(this.bookBy.otaCode==null || this.bookBy.otaCode==undefined){
+        this.bookBy.otaCode='';
+      }
+
       // Set guest data
       let _pax = this.tourInfo.tourPax;
       let _guestName = this.guestName;
@@ -394,13 +549,29 @@ export class BookingformComponent implements OnInit {
       let countAdult = 0;
       let countChild = 0;
       let countInfant = 0;
-
       this.guestData = [];
+
       for(var i=0; i<_pax; i++){
+        let guestName = '';
+        let guestAges = 0;
+
+        if(_guestName[i]=='' || _guestName[i]==undefined || _guestName[i]==null){
+          guestName = '';
+        }else{
+          guestName = _guestName[i];
+        }
+
+        if(_guestAges[i]=='' || _guestAges[i]==undefined || _guestAges[i]==null){
+          guestAges = 1;
+        }else{
+          guestAges = _guestAges[i];
+        }
+
         let _guestData = {
-          name:_guestName[i],
-          isAges:_guestAges[i]
+          name:guestName,
+          isAges:guestAges
         };
+
         this.guestData.push(_guestData);
 
         if(_guestAges[i]==1){
@@ -409,11 +580,14 @@ export class BookingformComponent implements OnInit {
         }else if(_guestAges[i]==2){
           countChild++;
           this.tourInfo.childPax = countChild;
-        }else{
+        }else if(_guestAges[i]==3){
           countInfant++;
           this.tourInfo.infantPax = countInfant;
+        }else{
+          countAdult++;
+          this.tourInfo.adultPax = countAdult;
         }
-      }
+      } // end for
 
       // Set price
       this.setPrice();
@@ -427,6 +601,7 @@ export class BookingformComponent implements OnInit {
             "tourPrivacy": this.tourInfo.tourPrivacy,
             "travelTime": this.tourInfo.tourTime,
             "travelDate": this.tourInfo.tourTravelDate,
+            "rateTwoPax": this.tourInfo.rateTwoPax,
             "pax": this.tourInfo.tourPax,
             "adultPax": countAdult,
             "childPax": countChild,
@@ -447,11 +622,12 @@ export class BookingformComponent implements OnInit {
             "position": this._bookByPosition,
             "code": this._bookByAccCode,
             "hotel": this._bookByAcc,
-            "tel": this.bookBy.tel
+            "tel": this.bookBy.tel,
+            "otaCode":this.bookBy.otaCode
           },
           "insurance": {
             "isInsurance": this.insurance.isInsurance,
-            "insuranceReason": this.insurance.insuranceReason
+            "insuranceReason": this.insurance.isInsurance==false?'':this.insurance.insuranceReason
           },
           "commission":{
             "isCommission": this.commission.isCommission,
@@ -461,23 +637,32 @@ export class BookingformComponent implements OnInit {
             "name": this._noteBy
           },
           "summary": {
-            "adultPrice": this.summary.adultPrice,
-            "childPrice": this.summary.childPrice,
+            "adultPrice": this.realPriceAdult,
+            "childPrice": this.realPriceChild,
             "totalAdultPrice": this.summary.totalAdultPrice,
             "totalChildPrice": this.summary.totalChildPrice,
+            "singleRidingPax": this.summary.singleRidingPax,
             "singleRiding": this.summary.singleRiding,
             "serviceCharge": this.summary.serviceCharge,
+            "deposit": this.summary.deposit,
             "discount": this.summary.discount + '%',
             "discountPrice": this.summary.discountPrice,
             "totalPrice": this.summary.totalPrice,
             "amount": this.summary.amount
           },
+          "specialChargePrice": this.specialChargePrice,
+          "specialRequestOperator": this.isSpecialRequestOperator,
           "specialRequest": this.specialRequest,
           "specialRequestPrice": this.specialRequestPrice,
           "invoiceRef":{
-            "id":"50",
-            "number":"61-03-050"
-          }
+            "id":"",
+            "number":""
+          },
+          "isRevised":0,
+          "isSpecialTour":0,
+          "currency": this.currency,
+          "currency_rate": this.currencyRate,
+          "issuedBy": "Office"
         };
         console.log(JSON.stringify(this.dataSave));
 
@@ -488,8 +673,8 @@ export class BookingformComponent implements OnInit {
     // Save to data service
     saveDataBooking(dataSave) {
 
-      let url = 'http://localhost:9000/api/ReservationSaveBookingData';
-      // let url = 'http://api.tourinchiangmai.com/api/ReservationSaveBookingData';
+      let url = 'http://localhost:9000/api/Reservations/ReservationSaveBookingData';
+      // let url = 'http://api.tourinchiangmai.com/api/Reservations/ReservationSaveBookingData';
 
       let options = new RequestOptions();
 
@@ -498,7 +683,7 @@ export class BookingformComponent implements OnInit {
                       .map(res => res.json())
                       .subscribe(
                         // data => {console.log('*-*'+data)},
-                        data => {this.router.navigate(['booked-statistics'])},
+                        data => {this.router.navigate(['reservationsummary'])},
                         err => {console.log(err)}
                       );
       /*==================  Success  ===================*/
@@ -511,6 +696,7 @@ export class BookingformComponent implements OnInit {
   ngOnInit() {
     this.getBookingData();
     this.getAccountCode();
+    this.getCurrency();
   }
 
 }

@@ -1,23 +1,19 @@
-/*
-Template Name: DASHGUM FREE - Bootstrap 3.2 Admin Theme
-Template Version: 1.0
-Author: Carlos Alvarez
-Website: http://blacktie.co
-Premium: http://www.gridgum.com
-*/
-
 /* Import fonts */
 @import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900);
 
 /* BASIC THEME CONFIGURATION */
 body {
     color: #080808;
-	background: #f2f2f2;
+	background: #ffffff;
     /* font-family: 'Ruda', sans-serif; */
     font-family: 'Century Gothic', sans-serif;
     padding: 0px !important;
     margin: 0px !important;
     font-size:15px;
+}
+
+.sidebar-toggle-box{
+    color: #cdcdcd;
 }
 
 @media(min-width: 1200px){
@@ -27,7 +23,7 @@ body {
 }
 @media(max-width: 1199px){
     .container{
-        /* width: 1000px; */
+        width: 1000px;
     }
 }
 
@@ -1768,7 +1764,7 @@ label {
 	-webkit-border-radius: 500px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 300px) {
 		.form-horizontal .control-label {
 		text-align: left;
 	}
@@ -2252,3 +2248,8 @@ label {
 }
 
 
+@media print{
+    #main-content{
+        margin-left: 0 !important;
+    }
+}

@@ -16,7 +16,7 @@ class CreateTransactionTransferHistoriesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('transaction_transfer_id');
-			$table->integer('transaction_status_id');
+			// $table->integer('transaction_status_id');
 			$table->integer('transfer_mode_id');
 			$table->integer('transfer_type_id');
 			$table->integer('transportation_id');

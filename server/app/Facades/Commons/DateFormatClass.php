@@ -17,10 +17,15 @@ class DateFormatClass{
         return $result;
     }
 
-
     // 01 January 2018
     public function SetFullDate($date){
         $result = date('d F Y');
+        return $result;
+    }
+
+    // 01 January 2018
+    public function SetFormatFullDate($date){
+        $result = date('d F Y',strtotime($date));
         return $result;
     }
 
@@ -29,4 +34,11 @@ class DateFormatClass{
         $result = date('g:i a',strtotime($time));
         return $result;
     }
+
+    // 2018-01-01
+    public function ReverseDate($date){
+        $result = date('Y-m-d',strtotime($date));
+        return $result;
+    }
+
 }

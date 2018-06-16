@@ -57,7 +57,8 @@
         <td class="inv-border-right">: <span class="text-danger">{{_getInvoice.tours.date}}</span></td>
         <td rowspan="2" colspan="3" class="text-center inv-border inv-bg-gray" style="background:rgb(197, 201, 206) !important;">
           <h4><b>UNIT PRICE</b></h4>
-          <small>(RATE IN THAI BAHT)</small>
+          <small *ngIf="_getInvoice.gygCode==null">(RATE IN THAI BAHT)</small>
+          <small *ngIf="_getInvoice.gygCode!=null">(RATE IN USD)</small>
         </td>
       </tr>
       <!-- Row 3 -->
@@ -83,7 +84,7 @@
       </tr>
       <!-- Row 6 -->
       <tr>
-        <td class="inv-border-right">: Child <small>(under 10 years, no higher than 120cm.)</small></td>
+        <td class="inv-border-right">: Child <small>(under 10 years, no higher than 120 cm.)</small></td>
         <td class="text-center inv-border-right"><span class="text-danger">{{_getInvoice.tours.child}}</span></td>
         <td class="text-right inv-border-right">{{_getInvoice.prices.child}}</td>
         <td class="text-right inv-border-right">{{_getInvoice.prices.childAmount}}</td>
@@ -92,8 +93,8 @@
       <tr>
         <td class="inv-border-right">: Infant <small>(not over 2 years)</small></td>
         <td class="text-center inv-border-right">{{_getInvoice.tours.infant}}</td>
-        <td class="text-right inv-border-right">0</td>
-        <td class="text-right inv-border-right">0</td>
+        <td class="text-right inv-border-right">0.00</td>
+        <td class="text-right inv-border-right">0.00</td>
       </tr>
       <!-- Row 8 -->
       <tr>
@@ -114,16 +115,16 @@
       <!-- Row 10 -->
       <tr>
         <td class="inv-border-left"><b>Pick up time</b></td>
-        <td class="inv-border-right">: {{_getInvoice.tours.date}} <small>({{_getInvoice.tours.time}})</small></td>
+        <td class="inv-border-right">: {{_getInvoice.tours.pickupTime}} (Standby for pick up {{_getInvoice.tours.standBy}})</td>
         <td class="text-center inv-border-right"></td>
         <td class="text-right inv-border-right"></td>
         <td class="text-right inv-border-right"></td>
       </tr>
       <!-- Row 11 -->
-      <tr>
+      <tr *ngIf="_getInvoice.tours.discount!='0%'">
         <td class="inv-border-left"><b>Discount</b></td>
         <td class="inv-border-right">: 
-          <span class="text-danger" *ngIf="_getInvoice.tours.discount!='0%'">{{_getInvoice.tours.discount}}</span>
+          <span class="text-danger" *ngIf="_getInvoice.tours.discount!='0%'">Discount {{_getInvoice.tours.discount}}</span>
           <span class="text-danger" *ngIf="_getInvoice.tours.discount=='0%'">-</span>
         </td>
         <td class="text-center inv-border-right">
@@ -131,7 +132,7 @@
           <span *ngIf="_getInvoice.tours.discountPrice!=0"></span>
         </td>
         <td class="text-right inv-border-right">
-          <span *ngIf="_getInvoice.tours.discountPrice!=0">-{{_getInvoice.tours.discountPrice}}</span>
+          <span *ngIf="_getInvoice.tours.discountPrice!=0">{{_getInvoice.tours.discountPrice}}</span>
           <span *ngIf="_getInvoice.tours.discountPrice==0"></span>
         </td>
         <td class="text-right inv-border-right">
@@ -140,6 +141,72 @@
         </td>
       </tr>
       <!-- Row 12 -->
+      <tr *ngIf="_getInvoice.prices.singleRiding!=0">
+        <td class="inv-border-left"><b>Extra charge</b></td>
+        <td class="inv-border-right">: 
+          <span class="text-danger" *ngIf="_getInvoice.prices.singleRiding!=0">Single riding</span>
+          <span class="text-danger" *ngIf="_getInvoice.prices.singleRiding==0">-</span>
+        </td>
+        <td class="text-center inv-border-right">
+          <span *ngIf="_getInvoice.prices.singleRiding!=0">{{_getInvoice.tours.singleRidingPax}}</span>
+          <span *ngIf="_getInvoice.prices.singleRiding==0"></span>
+        </td>
+        <td class="text-right inv-border-right">
+          <span *ngIf="_getInvoice.prices.singleRiding!=0">{{_getInvoice.prices.singleRidingPerPax}}</span>
+          <span *ngIf="_getInvoice.prices.singleRiding==0"></span>
+        </td>
+        <td class="text-right inv-border-right">
+          <span *ngIf="_getInvoice.prices.singleRiding!=0">{{_getInvoice.prices.singleRiding}}</span>
+          <span *ngIf="_getInvoice.prices.singleRiding==0"></span>
+        </td>
+      </tr>
+      <!-- Row 13 -->
+      <tr *ngIf="_getInvoice.prices.depositPrice!=0">
+        <td class="inv-border-left"><b>Deposit</b></td>
+        <td class="inv-border-right">: 
+          <span class="text-danger" *ngIf="_getInvoice.prices.depositPrice!=0">Deposit price</span>
+          <span class="text-danger" *ngIf="_getInvoice.prices.depositPrice==0">-</span>
+        </td>
+        <td class="text-center inv-border-right">
+          <span *ngIf="_getInvoice.prices.depositPrice!=0">1</span>
+          <span *ngIf="_getInvoice.prices.depositPrice==0"></span>
+        </td>
+        <td class="text-right inv-border-right">
+          <span *ngIf="_getInvoice.prices.depositPrice!=0">
+            <span></span>
+            {{_getInvoice.prices.depositPrice}}
+          </span>
+          <span *ngIf="_getInvoice.prices.depositPrice==0"></span>
+        </td>
+        <td class="text-right inv-border-right">
+          <span *ngIf="_getInvoice.prices.depositPrice!=0">
+            <!-- <span>-</span> -->
+            -{{_getInvoice.prices.depositPrice}}
+          </span>
+          <span *ngIf="_getInvoice.prices.depositPrice==0"></span>
+        </td>
+      </tr>
+      <!-- Row 14 -->
+      <tr *ngIf="_getInvoice.prices.specialChargePrice!=0">
+        <td class="inv-border-left"><b>Special charge.</b></td>
+        <td class="inv-border-right">: 
+          <span class="text-danger" *ngIf="_getInvoice.prices.specialChargePrice!=0">Charge for 1 person.</span>
+          <span class="text-danger" *ngIf="_getInvoice.prices.specialChargePrice==0">-</span>
+        </td>
+        <td class="text-center inv-border-right">
+          <span *ngIf="_getInvoice.prices.specialChargePrice!=0">1</span>
+          <span *ngIf="_getInvoice.prices.specialChargePrice==0"></span>
+        </td>
+        <td class="text-right inv-border-right">
+          <span *ngIf="_getInvoice.prices.specialChargePrice!=0">{{_getInvoice.prices.specialChargePrice}}</span>
+          <span *ngIf="_getInvoice.prices.specialChargePrice==0" class="text-right"></span>
+        </td>
+        <td class="text-right inv-border-right">
+          <span *ngIf="_getInvoice.prices.specialChargePrice!=0">{{_getInvoice.prices.specialChargePrice}}</span>
+          <span *ngIf="_getInvoice.prices.specialChargePrice==0" class="text-right"></span>
+        </td>
+      </tr>
+      <!-- Row 15 -->
       <tr>
         <td class="inv-border-left"><b>Special Req.</b></td>
         <td class="inv-border-right">: 
@@ -151,35 +218,21 @@
           <span *ngIf="_getInvoice.specialRequestPrice==0"></span>
         </td>
         <td class="text-right inv-border-right">
-          <span *ngIf="_getInvoice.specialRequestPrice!=0">{{_getInvoice.specialRequestPrice}}</span>
+          <span *ngIf="_getInvoice.specialRequestPrice!=0">
+            <span *ngIf="_getInvoice.isSpecialRequestOperator==2"></span>
+            {{_getInvoice.specialRequestPrice}}
+          </span>
           <span *ngIf="_getInvoice.specialRequestPrice==0" class="text-right"></span>
         </td>
         <td class="text-right inv-border-right">
-          <span *ngIf="_getInvoice.specialRequestPrice!=0">{{_getInvoice.specialRequestPrice}}</span>
+          <span *ngIf="_getInvoice.specialRequestPrice!=0">
+            <span *ngIf="_getInvoice.isSpecialRequestOperator==2">-{{_getInvoice.specialRequestPrice}}</span>
+            <span *ngIf="_getInvoice.isSpecialRequestOperator!=2">{{_getInvoice.specialRequestPrice}}</span>
+          </span>
           <span *ngIf="_getInvoice.specialRequestPrice==0" class="text-right"></span>
         </td>
       </tr>
-      <!-- Row 13 -->
-      <tr>
-        <td class="inv-border-left"><b>Extra charge</b></td>
-        <td class="inv-border-right">: 
-          <span class="text-danger" *ngIf="_getInvoice.prices.singleRiding!=0">Single riding</span>
-          <span class="text-danger" *ngIf="_getInvoice.prices.singleRiding==0">-</span>
-        </td>
-        <td class="text-center inv-border-right">
-          <span *ngIf="_getInvoice.prices.singleRiding!=0">1</span>
-          <span *ngIf="_getInvoice.prices.singleRiding==0"></span>
-        </td>
-        <td class="text-right inv-border-right">
-          <span *ngIf="_getInvoice.prices.singleRiding!=0">{{_getInvoice.prices.singleRiding}}</span>
-          <span *ngIf="_getInvoice.prices.singleRiding==0"></span>
-        </td>
-        <td class="text-right inv-border-right">
-          <span *ngIf="_getInvoice.prices.singleRiding!=0">{{_getInvoice.prices.singleRiding}}</span>
-          <span *ngIf="_getInvoice.prices.singleRiding==0"></span>
-        </td>
-      </tr>
-      <!-- Row 14 -->
+      <!-- Row 16 -->
       <tr>
         <td class="inv-border-bot inv-border-left"><b>Other Service</b></td>
         <td class="inv-border-right">: 
@@ -199,7 +252,7 @@
           <span *ngIf="_getInvoice.isServiceCharge==false"></span>
         </td>
       </tr>
-      <!-- Row 15 : Total -->
+      <!-- Row 17 : Total -->
       <tr>
         <td colspan="2"></td>
         <td colspan="2" class="text-center inv-border inv-bg-gray" style="background:rgb(197, 201, 206) !important;"><h4 class="inv-head-table"><b>Total</b></h4></td>
@@ -237,17 +290,19 @@
         <th>
           <p>Booked By</p>
           <p>Account Code</p>
+          <p *ngIf="_getInvoice.gygCode!=null">GYG Reference No</p>
         </th>
         <td>
           <p>: <span class="text-danger">{{_getInvoice.bookBy}}</span></p>
           <p>: <span class="text-danger">{{_getInvoice.accountCode}}</span></p>
+          <p *ngIf="_getInvoice.otaCode!=null">: <span class="text-danger">{{_getInvoice.otaCode}}</span></p>
         </td>
         <th>
           <p>Issued By</p>
           <p>Date & Time</p>
         </th>
         <td>
-          <p>: <span class="text-danger">{{_getInvoice.noteBy.name}}</span></p>
+          <p>: <span class="text-danger">{{_getInvoice.noteBy.name}} / TC</span></p>
           <p>: {{_getInvoice.noteBy.date}} &nbsp;|&nbsp; {{_getInvoice.noteBy.time}}</p>
         </td>
         <td class="text-right">

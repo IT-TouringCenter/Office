@@ -8,20 +8,21 @@ import "rxjs/Rx";
 import { BookingFormInterface } from "./bookingform-interface";
 import { AccountCodeInterface } from "./../../interfaces/account-code-interface";
 
+// import {} from "./../../../assets/json/accounts/accountCode.json";
+
 @Injectable()
 export class BookingFormService {
 
-  private _getBookingData = "http://localhost:9000/api/GetDataBooking";
-  private _getAccountCode = "http://localhost:9000/api/GetAccountCodeData";
-  // private _getBookingData = "http://api.tourinchiangmai.com/api/GetDataBooking";
-  // private _getAccountCode = "http://api.tourinchiangmai.com/api/GetAccountCodeData";
-  // private _getBookingData = "../../../assets/json/reservations/bookingData.json";
-  // private _getAccountCode = "../../../assets/json/accounts/accountCode.json";
+  private _getBookingData;
+  private _getAccountCode;
 
   constructor(private http: Http) { }
 
   // get data booking
   getBookingData(): Observable<BookingFormInterface.RootObject>{
+    this._getBookingData = "./../../../assets/json/reservations/bookingData.json";
+    // this._getBookingData = "http://localhost:9000/api/Reservations/GetDataBooking";
+    // this._getBookingData = "http://api.tourinchiangmai.com/api/Reservations/GetDataBooking";
     return this.http
       .get(this._getBookingData)
       .map((response: Response) => {
@@ -32,6 +33,9 @@ export class BookingFormService {
 
   // get account code
   getAccountCode(): Observable<AccountCodeInterface.RootObject>{
+    this._getAccountCode = "./../../../assets/json/accounts/accountCode.json";
+    // this._getAccountCode = "http://localhost:9000/api/Reservations/GetAccountCodeData";
+    // this._getAccountCode = "http://api.tourinchiangmai.com/api/Reservations/GetAccountCodeData";
     return this.http
       .get(this._getAccountCode)
       .map((response: Response) => {

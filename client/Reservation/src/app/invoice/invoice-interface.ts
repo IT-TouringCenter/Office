@@ -49,6 +49,7 @@ export declare module InvoiceInterface {
         child: number;
         childAmount: number;
         singleRiding: number;
+        depositPrice: number;
         totalPrice: number;
     }
 

@@ -32,7 +32,7 @@ const routes: Routes = [
     component: InvoiceComponent
   },
   {
-    path: 'booked-statistics',
+    path: 'reservationsummary',
     component: BookedstatisticsComponent
   }
 ];

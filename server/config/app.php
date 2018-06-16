@@ -194,10 +194,33 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 
 		// Reservation System
+		//-- Save booking
 		'ReservationTransactionFacade' => 'App\Facades\Reservations\Transactions\TransactionFacade',
+		//-- Update booking
+		'EditReservationFacade' => 'App\Facades\Reservations\Transactions\EditReservationFacade',
+
 		'ReservationBookingFacade' => 'App\Facades\Reservations\BookingForms\BookingFormFacade',
 		'ReservationBookingStatisticsFacade' => 'App\Facades\Reservations\BookingStatistics\BookingStatisticsFacade',
 		'InvoiceBookingFacade' => 'App\Facades\Reservations\Invoices\InvoiceTourFacade',
 		'DateFormatFacade' => 'App\Facades\Commons\DateFormatFacade',
+		'BookingFormEditFacade' => 'App\Facades\Reservations\BookingFormEdit\BookingFormEditFacade',
+
+		// Online booking
+		//-- Save booking
+		'SaveBookingFacade' => 'App\Facades\Bookings\SaveBookingFacade',
+		'UpdateBookingPaymentFacade' => 'App\Facades\Bookings\UpdateBookingPaymentFacade',
+
+		// Account
+		'AccountFacade' => 'App\Facades\Accounts\AccountFacade',
+		
+		// Affiliate
+		'AffiliateFacade' => 'App\Facades\Affiliates\AffiliateFacade',
+
+		// Tour
+		'TourCommissionFacade' => 'App\Facades\Tours\TourCommissionFacade',
+		'TourTraveledFacade' => 'App\Facades\Tours\TourTraveledFacade',
+
+		// Payment
+		'PaymentAffiliateCommissionFacade' => 'App\Facades\Payments\PaymentAffiliateCommissionFacade',
 	],
 ];

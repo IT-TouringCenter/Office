@@ -5,18 +5,18 @@ use Carbon\Carbon;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
-use App\Repositories\Reservations\Invoices\InvoiceTourRepository as InvoiceTourOfflineRepo;
+use App\Repositories\Reservations\Invoices\InvoiceTourRepository as InvoiceTourRepo;
 use App\Repositories\Reservations\TransactionRepository as TransactionRepo;
 use App\Repositories\Reservations\Tours\TourRepository as TourRepo;
 use App\Repositories\Reservations\Accounts\AccountCodeRepository as AccountCodeRepo;
 use App\Repositories\Reservations\Payments\PaymentModeRepository as PaymentModeRepo;
 
-use App\invoice_tour_offline as InvoiceTourOffline;
+use App\invoice_tour as InvoiceTour;
 
 class InvoiceTourClass{
 
-	public function __construct(InvoiceTourOfflineRepo $InvoiceTourOfflineRepo, TransactionRepo $TransactionRepo, TourRepo $TourRepo, AccountCodeRepo $AccountCodeRepo, PaymentModeRepo $PaymentModeRepo){
-		$this->InvoiceTourOfflineRepo = $InvoiceTourOfflineRepo;
+	public function __construct(InvoiceTourRepo $InvoiceTourRepo, TransactionRepo $TransactionRepo, TourRepo $TourRepo, AccountCodeRepo $AccountCodeRepo, PaymentModeRepo $PaymentModeRepo){
+		$this->InvoiceTourRepo = $InvoiceTourRepo;
 		$this->TransactionRepo = $TransactionRepo;
 		$this->TourRepo = $TourRepo;
         $this->AccountCodeRepo = $AccountCodeRepo;
@@ -25,19 +25,19 @@ class InvoiceTourClass{
 
 	// Get invoice number
 	public function GetLastInvoiceNumber(){
-        $result = $this->InvoiceTourOfflineRepo->GetLastInvoiceNumber();
+        $result = $this->InvoiceTourRepo->GetLastInvoiceNumber();
         return $result;
 	}
 
 	// Get invoice number by transaction id
-	public function GetInvoiceTourOfflineByTransactionId($transactionId){
-		$result = $this->InvoiceTourOfflineRepo->GetInvoiceTourOfflineByTransactionId($transactionId);
+	public function GetInvoiceTourByTransactionId($transactionId){
+		$result = $this->InvoiceTourRepo->GetInvoiceTourByTransactionId($transactionId);
 		return $result;
 	}
 
     // Get invoice reference id by invoice id
-    public function GetReferenceInvoiceTourOfflineByTransactionId($transactionRefId){
-        $result = $this->invoiceTourOfflineRepo->GetReferenceInvoiceTourOfflineByTransactionId($transactionRefId);
+    public function GetReferenceInvoiceTourByTransactionId($transactionRefId){
+        $result = $this->invoiceTourRepo->GetReferenceInvoiceTourByTransactionId($transactionRefId);
         return $result;
     }
 
@@ -58,12 +58,12 @@ class InvoiceTourClass{
 		$GetTransaction = $this->TransactionRepo->GetTransactionById($transactionId);
         $GetTransactionTour = $this->TransactionRepo->GetTransactionTourById($transactionId);
         $GetTransactionTourDetail = $this->TransactionRepo->GetTransactionTourDetail($GetTransactionTour[0]->id);
-		$GetInvoiceTourOffline = $this->GetInvoiceTourOfflineByTransactionId($transactionId);
+		$GetInvoiceTour = $this->GetInvoiceTourByTransactionId($transactionId);
         $GetPaymentMode = $this->PaymentModeRepo->GetPaymentModeByMode($GetTransaction[0]->payment_mode);
 
-		$this->BookingData = new InvoiceTourOffline;
+		$this->BookingData = new InvoiceTour;
 
-        $this->SetInvoiceData($GetInvoiceTourOffline);
+        $this->SetInvoiceData($GetInvoiceTour);
         $this->SetTourData($GetTransaction,$GetTransactionTour);
         $this->SetHotelData($GetTransactionTour);
 		$this->SetGuestData($GetTransactionTourDetail);
@@ -74,9 +74,22 @@ class InvoiceTourClass{
 		$this->BookingData->serviceCharge = number_format($GetTransaction[0]->service_charge,2);
         $this->BookingData->specialRequest = $GetTransactionTour[0]->special_request;
         $this->BookingData->specialRequestPrice = number_format($GetTransactionTour[0]->special_request_price,2);
+        $this->BookingData->isSpecialRequestOperator = $GetTransactionTour[0]->is_special_request_operator;
+        
+        if($GetTransactionTour[0]->ota_code=='' || empty($GetTransactionTour[0]->ota_code)){
+            $this->BookingData->otaCode = null;
+            $this->BookingData->ota = null;
+        }else{
+            $this->BookingData->otaCode = $GetTransactionTour[0]->ota_code;
+            if($this->BookingData->otaCode=='GYG%'){
+                $this->BookingData->ota = 'GYG';
+            }else if($this->BookingData->otaCode=='BR-%'){
+                $this->BookingData->ota = 'Viator';
+            }
+        }
 
 		// Get acccount code
-		$this->SetAccountCode($GetTransaction[0]->customer_code_id);
+        $this->SetAccountCode($GetTransaction);
 
 		// $this->BookingData->accountCode = '';
         $this->SetBookByData($GetTransaction);
@@ -84,18 +97,13 @@ class InvoiceTourClass{
         $this->SetCommissionData($GetTransaction);
         $this->SetNoteByData($GetTransaction);
 		$this->SetPrice($GetTransaction,$GetTransactionTour);
-        // $this->BookingData->paymentMode = $GetTransaction[0]->payment_mode;
-        // $this->BookingData->paymentCollect = $GetTransaction[0]->payment_collect;
-        // $this->BookingData->isServiceCharge = $GetTransaction[0]->is_service_charge==1?true:false;
-        // $this->BookingData->serviceCharge = $GetTransaction[0]->service_charge;
-        // $this->BookingData->specialRequest = $GetTransaction[0]->special_request;
 
         return  $this->BookingData;
 	}
 
     // 1. invoice
     public function SetInvoiceData($invoice){
-        $bookData = new InvoiceTourOffline;
+        $bookData = new InvoiceTour;
         $bookData->bookingNo = $invoice[0]->booking_number;
         $bookData->refBookingNo = $invoice[0]->booking_number_ref==null?"":$invoice[0]->booking_number_ref;
         $bookData->invoiceNo = $invoice[0]->invoice_number;
@@ -108,14 +116,17 @@ class InvoiceTourClass{
 		// Set tour travel time
 		$travelTime = $this->TourRepo->GetTourTravelTimeByTourId($tour[0]->tour_id);
 
-        $bookData = new InvoiceTourOffline;
+        $bookData = new InvoiceTour;
         $bookData->name = $tour[0]->tour_code.' : '.$tour[0]->tour_title;
         $bookData->code = $tour[0]->tour_code;
 		$bookData->type = $tour[0]->tour_travel_time;
-		$bookData->time = $travelTime[0]->travel_time_start.' - '.$travelTime[0]->travel_time_end;
+        $bookData->time = $travelTime[0]->travel_time_start.' - '.$travelTime[0]->travel_time_end;
+        $bookData->pickupTime = $travelTime[0]->pickup_time.' - '.$travelTime[0]->travel_time_start;
 		$bookData->standBy = $travelTime[0]->pickup_time;
-        $bookData->date = \DateFormatFacade::SetFullDate($tour[0]->tour_travel_date);
+        // $bookData->date = \DateFormatFacade::SetFullDate($tour[0]->tour_travel_date);
+        $bookData->date = $tour[0]->tour_travel_date;
         $bookData->privacy = $tour[0]->tour_privacy;
+        $bookData->singleRidingPax = $tour[0]->single_riding_pax;
 		$bookData->pax = $tour[0]->pax;
 		$bookData->adult = $tour[0]->adult_pax;
 		$bookData->child = $tour[0]->child_pax;
@@ -128,7 +139,7 @@ class InvoiceTourClass{
 
     // 3. hotel
     public function SetHotelData($hotel){
-        $bookData = new InvoiceTourOffline;
+        $bookData = new InvoiceTour;
         $bookData->name = $hotel[0]->hotel;
         $bookData->room = $hotel[0]->hotel_room;
 
@@ -137,29 +148,37 @@ class InvoiceTourClass{
 
     // 4. guest
     public function SetGuestData($guest){
-		// $bookData = new InvoiceTourOffline;
-
-        // $guestArr = [];
-
-        // foreach($guest as $value){
-        //     $bookData = new InvoiceTourOffline;
-        //     $bookData->name = $value->fullname;
-        //     $bookData->ages = $value->ages;
-
-        //     array_push($guestArr, $bookData);
-        // }
         return $this->BookingData->guest = $guest[0]->fullname;
     }
 
     // 5. book by
     public function SetBookByData($bookBy){
-		$bookBy = $bookBy[0]->book_by_name.' / '.$bookBy[0]->book_by_position;
+        // name null
+        if($bookBy[0]->book_by_name=='' || $bookBy[0]->book_by_name==null){
+            if($bookBy[0]->book_by_position!='' || $bookBy[0]->book_by_position!=null){
+                $bookby = $bookBy[0]->book_by_position;
+            }else{
+                $bookby = '';
+            }
+        }else{
+            if($bookBy[0]->book_by_position!='' || $bookBy[0]->book_by_position!=null){
+                $bookBy = $bookBy[0]->book_by_name.' / '.$bookBy[0]->book_by_position;
+            }else{
+                $bookBy = $bookBy[0]->book_by_name;
+            }
+        }
+
+        // position null
+        // if($bookBy[0]->book_by_position=='' || $bookBy[0]->book_by_position==null){
+        //     $bookby = $bookBy[0]->book_by_name;
+        // }
+		// $bookBy = $bookBy[0]->book_by_name.' / '.$bookBy[0]->book_by_position;
         return $this->BookingData->bookBy = $bookBy;
     }
 
     // 6. insurance
     public function SetInsuranceData($insurance){
-        $bookData = new InvoiceTourOffline;
+        $bookData = new InvoiceTour;
         $bookData->isInsurance = $insurance[0]->is_insurance==1?true:false;
         $bookData->note = $insurance[0]->insurance_note;
 
@@ -168,7 +187,7 @@ class InvoiceTourClass{
 
     // 7. commission
     public function SetCommissionData($commission){
-        $bookData = new InvoiceTourOffline;
+        $bookData = new InvoiceTour;
         $bookData->isCommission = $commission[0]->is_commission==1?true:false;
         $bookData->amount = number_format($commission[0]->commission,2);
 
@@ -177,7 +196,7 @@ class InvoiceTourClass{
 
     // 8. note by
     public function SetNoteByData($noteBy){
-        $bookData = new InvoiceTourOffline;
+        $bookData = new InvoiceTour;
         $bookData->name = $noteBy[0]->note_by;
         $bookData->date = \DateFormatFacade::SetShortDate($noteBy[0]->book_date);
         $bookData->time = \DateFormatFacade::SetTimeMeridiem($noteBy[0]->book_time);
@@ -186,31 +205,42 @@ class InvoiceTourClass{
 	}
 	
 	// account code
-	public function SetAccountCode($accountCodeId){
-        $accountCode = $this->AccountCodeRepo->GetAccountCodeById($accountCodeId);
-        if($accountCode){
-            $setAccountCode = intval($accountCode[0]->code).'-'.$accountCode[0]->customer_name;
+    public function SetAccountCode($transaction){
+        if($transaction[0]->book_by_hotel){
+            $setAccountCode = $transaction[0]->customer_code_id.'-'.$transaction[0]->book_by_hotel;    
         }else{
-		    $setAccountCode = '';
+            $setAccountCode = '-';
         }
-
-		return $this->BookingData->accountCode = $setAccountCode;
+        // $setAccountCode = $transaction[0]->customer_code_id.'-'.$transaction[0]->book_by_hotel;
+        return $this->BookingData->accountCode = $setAccountCode;
 	}
 
 	// price
 	public function SetPrice($transaction,$transactionTour){
-		$price = new InvoiceTourOffline;
-		$price->adult = number_format($transactionTour[0]->adult_price,2);
-		$price->adultAmount = number_format($transactionTour[0]->total_adult_price,2);
-		$price->child = number_format($transactionTour[0]->child_price,2);
-		$price->childAmount = number_format($transactionTour[0]->total_child_price,2);
-		$price->singleRiding = number_format($transactionTour[0]->single_riding,2);
-		// $price->specialRequest = $transactionTour[0]->special_request_price;
-		// $price->serviceCharge = $transactionTour[0]->service_charge;
-		$price->totalPrice = number_format($transaction[0]->amount,2);
-		// $price->transaction = $transaction;
-		// $price->transactionTour = $transactionTour;
+        $singleRiding = $this->TourRepo->GetSingleRiding($transactionTour[0]->tour_id);
 
-		return $this->BookingData->prices = $price;
-	}
+		$this->price = new InvoiceTour;
+		$this->price->adult = number_format($transactionTour[0]->adult_price,2);
+		$this->price->adultAmount = number_format($transactionTour[0]->total_adult_price,2);
+		$this->price->child = number_format($transactionTour[0]->child_price,2);
+        $this->price->childAmount = number_format($transactionTour[0]->total_child_price,2);
+        $this->price->singleRidingPerPax = number_format($singleRiding->single_riding,2);
+        $this->price->singleRiding = number_format($transactionTour[0]->single_riding,2);
+        $this->price->specialChargePrice = number_format($transactionTour[0]->special_charge_price,2);
+        $this->price->depositPrice = number_format($transactionTour[0]->deposit_price,2);
+		$this->price->totalPrice = number_format($transaction[0]->amount,2);
+        $this->SetPayment($transaction);
+		return $this->BookingData->prices = $this->price;
+    }
+    
+    // payment
+    public function SetPayment($transaction){
+        // $payment = new InvoiceTour;
+        $discount = '';
+        if(strpos($transaction[0]->payment_mode,'Discount')){
+            $discount = $transaction[0]->payment_mode;
+        }
+        $this->price->discountMode = $discount;
+        $this->price->paymentMode = $transaction[0]->payment_mode;
+    }
 }

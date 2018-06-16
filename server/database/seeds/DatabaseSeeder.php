@@ -90,5 +90,8 @@ class DatabaseSeeder extends Seeder {
 
 		//- Work status
 		$this->call(WorkStatusSeeder::class);
+
+		//- Affiliate
+		$this->call(TourCommissionPriceRateSeeder::class);
 	}
 }

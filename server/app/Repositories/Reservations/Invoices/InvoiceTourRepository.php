@@ -7,9 +7,9 @@ class InvoiceTourRepository{
 		
 	}
 
-	// Get invoice tour offline
+	// Get invoice tour
 	public function GetLastInvoiceNumber(){
-                $result = \DB::table('invoice_tour_offlines')
+                $result = \DB::table('invoice_tours')
                                 ->select('booking_number')
                                 ->where('is_active',1)
                                 ->orderBy('id','desc')
@@ -17,18 +17,18 @@ class InvoiceTourRepository{
                 return $result;
 	}
 
-        // Get invoice tour offline by transaction id
-        public function GetInvoiceTourOfflineByTransactionId($transactionId){
-                $result = \DB::table('invoice_tour_offlines')
+        // Get invoice tour by transaction id
+        public function GetInvoiceTourByTransactionId($transactionId){
+                $result = \DB::table('invoice_tours')
                                 ->where('transaction_id',$transactionId)
                                 ->where('is_active',1)
                                 ->get();
                 return $result;
         }
 
-        // Get reference invoice tour offline by invoice id
-        public function GetReferenceInvoiceTourOfflineByTransactionId($transactionRefId){
-                $result = \DB::table('invoice_tour_offlines')
+        // Get reference invoice tour by invoice id
+        public function GetReferenceInvoiceTourByTransactionId($transactionRefId){
+                $result = \DB::table('invoice_tours')
                                 ->where('transaction_id',$transactionRefId)
                                 ->where('is_active',1)
                                 ->get();

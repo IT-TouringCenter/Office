@@ -9,6 +9,8 @@ export declare module BookingFormInterface {
     }
 
     export interface Price {
+        adultSellPrice: number;
+        childSellPrice: number;
         adultPrice: number;
         childPrice: number;
         singleRiding: number;

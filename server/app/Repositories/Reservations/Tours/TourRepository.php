@@ -31,6 +31,7 @@ class TourRepository{
 		//             ->get();
 		$result = \DB::table('tours as t')
 					->select('t.id','t.code','t.title')
+					->where('is_active',1)
 					->get();
 		// $result = $this->Tour
 		// 				->select('id','code','title')
@@ -104,6 +105,8 @@ class TourRepository{
 	public function GetTourPrice($tourId,$tourPrivacyId,$paxId,$tourPaymentModeId){
 		$result = $this->ConfigTourPrice
 						->select(
+							'sell_price_adult as adultSellPrice',
+							'sell_price_child as childSellPrice',
 							'adult_price as adultPrice',
 							'child_price as childPrice',
 							'single_riding as singleRiding',
@@ -121,13 +124,14 @@ class TourRepository{
 		return $result;
 	}
 
-	// Get tour travel time by tour ID
-	// public function GetTourTravelTimeByTourId($tourId){
-	// 	$result = \DB::table('tour_travel_times')
-	// 				->where('tour_id',$tourId)
-	// 				->where('is_active',1)
-	// 				->get();
-	// 	return $result;
-	// }
+	// Get single riding by tour id
+	public function GetSingleRiding($tourId){
+		$result = $this->ConfigTourPrice
+						->select('single_riding')
+						->where('tour_id',$tourId)
+						->where('is_active',1)
+						->first();
+		return $result;
+	}
 
 }

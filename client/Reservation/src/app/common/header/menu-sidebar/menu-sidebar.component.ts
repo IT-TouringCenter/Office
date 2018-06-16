@@ -9,7 +9,13 @@ export class MenuSidebarComponent implements OnInit {
 
   constructor() { }
 
+  sidebarActive(){
+    let getActive = JSON.parse(sessionStorage.getItem('sidebar-active'));
+    // $('.sidebar-active').addClass('active');
+  }
+
   ngOnInit() {
+    this.sidebarActive();
   }
 
 }

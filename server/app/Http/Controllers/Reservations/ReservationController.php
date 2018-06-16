@@ -17,11 +17,9 @@ class ReservationController extends MyBaseController {
 	public function GetDataBooking(){
 		try{
 			$results = \ReservationBookingFacade::GetDataBooking();
-
 			if($results==null){
 				abort(400);
 			}
-
 			return $results->tourInfo;
 			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
 		}catch(Exception $e){
@@ -34,11 +32,9 @@ class ReservationController extends MyBaseController {
 	public function GetAccountCodeData(){
 		try{
 			$results = \ReservationBookingFacade::GetAccountCode();
-
 			if($results==null){
 				abort(400);
 			}
-
 			return $results;
 			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
 		}catch(Exception $e){
@@ -51,11 +47,9 @@ class ReservationController extends MyBaseController {
 	public function GetBookingStatisticData(){
 		try{
 			$results = \ReservationBookingStatisticsFacade::GetBookingStatistics();
-
 			if($results==null){
 				abort(400);
 			}
-
 			return $results;
 			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
 		}catch(Exception $e){
@@ -67,11 +61,9 @@ class ReservationController extends MyBaseController {
 	public function GetBookingFormData($transactionId){
 		try{
 			$results = \ReservationBookingFacade::GetBookingFormData($transactionId);
-
 			if($results==null){
 				abort(400);
 			}
-
 			return $results;
 			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
 		}catch(Exception $e){
@@ -83,11 +75,9 @@ class ReservationController extends MyBaseController {
 	public function GetInvoiceData($transactionId){
 		try{
 			$results = \InvoiceBookingFacade::GetInvoiceData($transactionId);
-
 			if($results==null){
 				abort(400);
 			}
-
 			return $results;
 			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
 		}catch(Exception $e){
@@ -95,16 +85,12 @@ class ReservationController extends MyBaseController {
 		}
 	}
 
-	public function ReservationSaveBookingData(Request $request){
-		$bookingData  = $request->input();
-
+	public function GetBookingFormEdit($transactionId){
 		try{
-			$results = \ReservationTransactionFacade::SaveTransactionBookingData($bookingData);
-
+			$results = \BookingFormEditFacade::GetBookingFormEdit($transactionId);
 			if($results==null){
 				abort(400);
 			}
-
 			return $results;
 			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
 		}catch(Exception $e){

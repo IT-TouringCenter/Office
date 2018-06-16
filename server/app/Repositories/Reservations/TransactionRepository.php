@@ -10,11 +10,11 @@ use App\transaction_tour_detail as TransactionTourDetail;
 use App\transaction_tour_detail_history as TransactionTourDetailHistory;
 use App\guest as Guest;
 use App\payment as Payment;
-use App\invoice_tour_offline as InvoiceTourOffline;
+use App\invoice_tour as InvoiceTour;
 
 class TransactionRepository{    
 
-	public function __construct(Transaction $Transaction, TransactionTour $TransactionTour, TransactionTourHistory $TransactionTourHistory, TransactionTourDetail $TransactionTourDetail, Guest $Guest, Payment $Payment, InvoiceTourOffline $InvoiceTourOffline, TransactionTourDetailHistory $TransactionTourDetailHistory){
+	public function __construct(Transaction $Transaction, TransactionTour $TransactionTour, TransactionTourHistory $TransactionTourHistory, TransactionTourDetail $TransactionTourDetail, Guest $Guest, Payment $Payment, InvoiceTour $InvoiceTour, TransactionTourDetailHistory $TransactionTourDetailHistory){
 		$this->Transaction = $Transaction;
 		$this->TransactionTour = $TransactionTour;		
 		$this->TransactionTourHistory = $TransactionTourHistory;
@@ -22,7 +22,7 @@ class TransactionRepository{
 		$this->TransactionTourDetailHistory = $TransactionTourDetailHistory;
 		$this->Guest = $Guest;
 		$this->Payment = $Payment;
-		$this->InvoiceTourOffline = $InvoiceTourOffline;
+		$this->InvoiceTour = $InvoiceTour;
 	}
 
 	// Save transaction
@@ -44,14 +44,11 @@ class TransactionRepository{
 			'account_id'=>'',
 			'transaction_status_id'=>1,
 			'customer_code_id'=>array_get($bookBy,'code'),
-			// 'pax'=>array_get($bookingInfo,'pax'),
-			// 'adult_pax'=>array_get($bookingInfo,'adultPax'),
-			// 'child_pax'=>array_get($bookingInfo,'childPax'),
-			// 'infant_pax'=>array_get($bookingInfo,'infantPax'),
 			'payment_mode'=>array_get($paymentInfo,'tourPrice'),
 			'payment_collect'=>array_get($paymentInfo,'paymentCollect'),
 			'book_by_name'=>array_get($bookBy,'name'),
 			'book_by_position'=>array_get($bookBy,'position'),
+			'book_by_hotel'=>array_get($bookBy,'hotel'),
 			'book_by_tel'=>array_get($bookBy,'tel'),
 			'note_by'=>array_get($noteBy,'name'),
 			'book_date'=>$dateNow,
@@ -60,12 +57,12 @@ class TransactionRepository{
 			'discount'=>array_get($summary,'discountPrice'),
 			'service_charge'=>array_get($summary,'serviceCharge'),
 			'amount'=>array_get($summary,'amount'),
-			// 'special_request'=>array_get($bookingData,'specialRequest')==null?'-':array_get($bookingData,'specialRequest'),
-			// 'special_request_price'=>array_get($bookingData,'specialRequestPrice'),
-			'insurance_note'=>array_get($insurance,'insuranceReason')==null?'-':array_get($insurance,'insuranceReason'),
+			'insurance_note'=>array_get($insurance,'insuranceReason')==null?'':array_get($insurance,'insuranceReason'),
+			'issued_by'=>array_get($bookingData,'issuedBy'),
 			'is_insurance'=>array_get($insurance,'isInsurance')==true?1:0,
 			'is_service_charge'=>array_get($bookingInfo,'isServiceCharge')==true?1:0,
 			'is_advance'=>0,
+			'is_commission'=>array_get($commission,'isCommission')==true?1:0,
 			'created_by'=>array_get($noteBy,'name'),
 			'created_at'=>$dateTimeNow
 		];
@@ -93,22 +90,30 @@ class TransactionRepository{
 			'tour_privacy'=>array_get($bookingInfo,'tourPrivacy'),
 			'tour_travel_time'=>array_get($bookingInfo,'travelTime'),
 			'tour_travel_date'=>array_get($bookingInfo,'travelDate'),
+			'rate_two_pax'=>array_get($bookingInfo,'rateTwoPax'),
 			'pax'=>array_get($bookingInfo,'pax'),
 			'adult_pax'=>array_get($bookingInfo,'adultPax'),
 			'child_pax'=>array_get($bookingInfo,'childPax'),
 			'infant_pax'=>array_get($bookingInfo,'infantPax'),
+			'single_riding_pax'=>array_get($summary,'singleRidingPax'),
 			'single_riding'=>array_get($summary,'singleRiding'),
+			'deposit_price'=>array_get($summary,'deposit')==null?0:array_get($summary,'deposit'),
 			'discount_rate'=>array_get($summary,'discount'),
 			'discount'=>array_get($summary,'discountPrice'),
 			'adult_price'=>array_get($summary,'adultPrice'),
 			'child_price'=>array_get($summary,'childPrice'),
 			'total_adult_price'=>array_get($summary,'totalAdultPrice'),
 			'total_child_price'=>array_get($summary,'totalChildPrice'),
+			'total_price'=>array_get($summary,'totalPrice'),
 			'amount'=>array_get($summary,'amount'),
 			'hotel'=>array_get($hotel,'name'),
 			'hotel_room'=>array_get($hotel,'room'),
-			'special_request'=>array_get($bookingData,'specialRequest')==null?'-':array_get($bookingData,'specialRequest'),
+			'ota_code'=>array_get($bookBy,'otaCode'),
+			'special_charge_price'=>array_get($bookingData,'specialChargePrice'),
+			'special_request'=>array_get($bookingData,'specialRequest')==null?'':array_get($bookingData,'specialRequest'),
 			'special_request_price'=>array_get($bookingData,'specialRequestPrice'),
+			'is_special_request_operator'=>array_get($bookingData,'specialRequestOperator'),
+			'is_special_tour'=>array_get($bookingData,'isSpecialTour'),
 			'created_by'=>array_get($noteBy,'name'),
 			'created_at'=>$dateNow
 		];
@@ -123,22 +128,30 @@ class TransactionRepository{
 			'tour_privacy'=>array_get($tour,'tour_privacy'),
 			'tour_travel_time'=>array_get($tour,'tour_travel_time'),
 			'tour_travel_date'=>array_get($tour,'tour_travel_date'),
+			'rate_two_pax'=>array_get($tour,'rate_two_pax'),
 			'pax'=>array_get($tour,'pax'),
 			'adult_pax'=>array_get($tour,'adult_pax'),
 			'child_pax'=>array_get($tour,'child_pax'),
 			'infant_pax'=>array_get($tour,'infant_pax'),
+			'single_riding_pax'=>array_get($tour,'single_riding_pax'),
 			'single_riding'=>array_get($tour,'single_riding'),
+			'deposit_price'=>array_get($tour,'deposit_price')==null?0:array_get($tour,'deposit_price'),
 			'discount_rate'=>array_get($tour,'discount_rate'),
 			'discount'=>array_get($tour,'discount'),
 			'adult_price'=>array_get($tour,'adult_price'),
 			'child_price'=>array_get($tour,'child_price'),
 			'total_adult_price'=>array_get($tour,'total_adult_price'),
 			'total_child_price'=>array_get($tour,'total_child_price'),
+			'total_price'=>array_get($tour,'total_price'),
 			'amount'=>array_get($tour,'amount'),
 			'hotel'=>array_get($tour,'hotel'),
 			'hotel_room'=>array_get($tour,'hotel_room'),
-			'special_request'=>array_get($tour,'special_request')==null?'-':array_get($tour,'special_request'),
+			'ota_code'=>array_get($tour,'ota_code'),
+			'special_charge_price'=>array_get($tour,'special_charge_price'),
+			'special_request'=>array_get($tour,'special_request')==null?'':array_get($tour,'special_request'),
 			'special_request_price'=>array_get($tour,'special_request_price'),
+			'is_special_request_operator'=>array_get($tour,'is_special_request_operator'),
+			'is_special_tour'=>array_get($tour,'is_special_tour'),
 			'created_by'=>array_get($tour,'created_by'),
 			'created_at'=>array_get($tour,'created_at')
 		];
@@ -221,7 +234,7 @@ class TransactionRepository{
 	}
 
 	// Save invoice
-	public function SaveInvoiceTourOffline($transactionId,$transactionTourId,$invoiceNumberData,$noteBy,$invoiceRef){
+	public function SaveInvoiceTour($transactionId,$transactionTourId,$invoiceNumberData,$noteBy,$invoiceRef,$isRevised){
 		// $dateTimeNow = date('Y-m-d H:i:s');
 		$dateTimeNow = Carbon::now('Asia/Bangkok');
 		$bookingNumber = [
@@ -232,11 +245,11 @@ class TransactionRepository{
 			'booking_number_ref'=>array_get($invoiceRef,'number'),
 			'invoice_number'=>array_get($invoiceNumberData,'invoiceNumber'),
 			'issued_by'=>array_get($noteBy,'name'),
-			'is_revised'=>0,
+			'is_revised'=>$isRevised,
 			'created_by'=>array_get($noteBy,'name'),
 			'created_at'=>$dateTimeNow
 		];
-		return $this->InvoiceTourOffline->insertGetId($bookingNumber);
+		return $this->InvoiceTour->insertGetId($bookingNumber);
 	}
 
 	//----------------------------------------------------------------------------------------------------
@@ -276,4 +289,15 @@ class TransactionRepository{
 					->get();
 		return $result;
 	}
+
+	// Get tour travel time by tour id
+	public function GetTourTravelTimeByTourId($tourId, $tourTravelTime){
+		$result = \DB::table('tour_travel_times')
+					->where('tour_id',$tourId)
+					->where('meridiem',$tourTravelTime)
+					->where('is_active',1)
+					->get();
+		return $result;
+	}
+
 }

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Repositories\Reservations\TransactionRepository as TransactionRepo;
 
 use App\transaction as Transaction;
-use App\invoice_tour_offline as InvoiceTourOffline;
+use App\invoice_tour as InvoiceTour;
 
 class TransactionClass{
 
@@ -25,7 +25,7 @@ class TransactionClass{
 			4. transaction_tour_detail
 			5. transaction_tour_detail_history
 			6. payment
-			7. invoice_tour_offline
+			7. invoice_tour
 	------------------------------------ */
 
 	// Save to DB : transaction table
@@ -46,7 +46,7 @@ class TransactionClass{
 		// Payment
 		$PaymentId = $this->SaveBookingPayment($saveTransactionId,$summary,$noteBy);
 		// Invoice
-		$Invoice = $this->SaveInvoiceTourOffline($saveTransactionId,$TransactionTourId->transactionTourId,$noteBy,$invoiceRef);
+		$Invoice = $this->SaveInvoiceTour($saveTransactionId,$TransactionTourId->transactionTourId,$noteBy,$invoiceRef,array_get($bookingData,'isRevised'));
 
 		// Guest & Tour & Tour history
 		foreach($guestData as $value){
@@ -97,21 +97,21 @@ class TransactionClass{
 
 	// Save to DB : Invoice table
 	// 1. Check booking number
-	public function SaveInvoiceTourOffline($transactionId,$transactionTourId,$noteBy,$invoiceRef){
+	public function SaveInvoiceTour($transactionId,$transactionTourId,$noteBy,$invoiceRef,$isRevised){
 		// Get booking number
 		$bookingNumber = \InvoiceBookingFacade::GetLastInvoiceNumber();
-		
-		$this->InvoiceTourOffline = new InvoiceTourOffline;
+
+		$this->InvoiceTour = new InvoiceTour;
 		// Run invoice number
 		$this->RunInvoiceNumber($bookingNumber);
 
-		$result = $this->TransactionRepo->SaveInvoiceTourOffline($transactionId,$transactionTourId,$this->InvoiceTourOffline,$noteBy,$invoiceRef);
-		return $this->transaction->invoiceTour = $this->InvoiceTourOffline;
+		$result = $this->TransactionRepo->SaveInvoiceTour($transactionId,$transactionTourId,$this->InvoiceTour,$noteBy,$invoiceRef,$isRevised);
+		return $this->transaction->invoiceTour = $this->InvoiceTour;
 	}
 
 	// run booking and invoice number
 	public function RunInvoiceNumber($bookingNumber){
-		$invoice = new InvoiceTourOffline;
+		$invoice = new InvoiceTour;
 
 		// set date
 		$yearNow = date('Y')+543;
@@ -158,7 +158,7 @@ class TransactionClass{
 		$invoice->bookingNumber = $setBookingNumber;
 		$invoice->invoiceNumber = $setInvoiceNumber;
 
-		return $this->InvoiceTourOffline = $invoice;
+		return $this->InvoiceTour = $invoice;
 	}
 
 }

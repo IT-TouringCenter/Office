@@ -16,9 +16,9 @@ class CreateGuestsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('fullname',150);
-			$table->tinyInteger('weight')->nullable();
-			$table->tinyInteger('height')->nullable();
-			$table->tinyInteger('age')->nullable();
+			$table->integer('weight')->nullable();
+			$table->integer('height')->nullable();
+			$table->integer('age')->nullable();
 			$table->string('email')->nullable();
 			$table->string('phone')->nullable();
 			$table->text('address')->nullable();

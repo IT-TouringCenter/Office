@@ -10,52 +10,71 @@ use App\transaction as Transaction;
 
 // Repository
 use App\Repositories\Reservations\TransactionRepository as TransactionRepo;
-use App\Repositories\Reservations\Invoices\InvoiceTourRepository as InvoiceTourOfflineRepo;
+use App\Repositories\Reservations\Invoices\InvoiceTourRepository as InvoiceTourRepo;
 
 class BookingStatisticsClass{
 	
-	public function __construct(TransactionRepo $TransactionRepo, InvoiceTourOfflineRepo $InvoiceTourOfflineRepo){
+	public function __construct(TransactionRepo $TransactionRepo, InvoiceTourRepo $InvoiceTourRepo){
         $this->TransactionRepo = $TransactionRepo;
-        $this->InvoiceTourOfflineRepo = $InvoiceTourOfflineRepo;
+        $this->InvoiceTourRepo = $InvoiceTourRepo;
     }
 
     /* -----------------------------------------------------------------------------------------------------
     Get booking data to schedule
     1. Transaction
     2. Transaction tour
-    3. Invoice tour offline
+    3. Invoice tour
     ----------------------------------------------------------------------------------------------------- */
 
     // 1. Transaction
     public function GetBookingStatistics(){
         $transaction = $this->TransactionRepo->GetTransactionAll();
+        if($transaction==null){
+            return null;
+        }
         $transactionArr = [];
 
         foreach($transaction as $value){
             $this->transaction = new Transaction;
             $TransactionTour = $this->GetTransactionTourById($value->id);
-            $this->GetInvoiceTourOffline($value->id);
+            $Invoice = $this->GetInvoiceTour($value->id);
             // $TransactionTourDetail = $this->GetTransactionTourDetailById($TransactionTour[0]->id);
-            $tourName = $TransactionTour[0]->tour_code.' : '.$TransactionTour[0]->tour_title;
-            $subTour = substr($tourName,0,25);
 
-            $this->transaction->transactionId = $value->id;
-            $this->transaction->tourName = $subTour.'...';
-            $this->transaction->tourFullname = $tourName;
-            $this->transaction->tourPrivacy = $TransactionTour[0]->tour_privacy;
-            $this->transaction->tourTravel = $TransactionTour[0]->tour_travel_date;
-            $this->transaction->tourPax = $TransactionTour[0]->pax;
-            $this->transaction->hotel = $TransactionTour[0]->hotel;
-            $this->transaction->hotelRoom = $TransactionTour[0]->hotel_room;
-            $this->transaction->bookBy = $value->book_by_name;
-            $this->transaction->noteBy = $value->note_by;
-            $this->transaction->insurance = $value->is_insurance==1?true:false;
-            $this->transaction->price = $value->amount;
-            // $this->transaction->guestName = $TransactionTourDetail[0]->fullname;
-            $this->GetTransactionTourDetailById($TransactionTour[0]->id);
-            // $this->transaction->guestName = $TransactionTourDetail;
+            if($TransactionTour && $this->transaction->bookingId!=''){
+                $tourName = $TransactionTour[0]->tour_code.' : '.$TransactionTour[0]->tour_title;
+                $subTour = substr($tourName,0,25);
 
-            array_push($transactionArr, $this->transaction);
+                $this->transaction->transactionId = $value->id;
+                $this->transaction->tourName = $subTour.'...';
+                $this->transaction->tourFullname = $tourName;
+                $this->transaction->tourPrivacy = $TransactionTour[0]->tour_privacy;
+                $this->transaction->tourTravel = $TransactionTour[0]->tour_travel_date;
+                $this->transaction->tourPax = $TransactionTour[0]->pax;
+                $this->transaction->hotel = $TransactionTour[0]->hotel;
+                $this->transaction->hotelRoom = $TransactionTour[0]->hotel_room;
+                $this->transaction->bookBy = $value->book_by_name;
+                $this->transaction->noteBy = $value->note_by;
+                $this->transaction->insurance = $value->is_insurance==1?true:false;
+                $this->transaction->price = $value->amount;
+                $this->GetTransactionTourDetailById($TransactionTour[0]->id);
+
+                array_push($transactionArr, $this->transaction);
+            }else{
+                $this->transaction->transactionId = $value->id;
+                $this->transaction->tourName = '';
+                $this->transaction->tourFullname = '';
+                $this->transaction->tourPrivacy = '';
+                $this->transaction->tourTravel = '';
+                $this->transaction->tourPax = '';
+                $this->transaction->hotel = '';
+                $this->transaction->hotelRoom = '';
+                $this->transaction->bookBy = $value->book_by_name;
+                $this->transaction->noteBy = $value->note_by;
+                $this->transaction->insurance = $value->is_insurance==1?true:false;
+                $this->transaction->price = $value->amount;
+
+                // array_push($transactionArr, $this->transaction);
+            }
         }
         return $transactionArr;
     }
@@ -63,18 +82,24 @@ class BookingStatisticsClass{
     // 2. Transaction Tour
     public function GetTransactionTourById($transactionId){
         $result = $this->TransactionRepo->GetTransactionTourById($transactionId);
-        return $result;
+        if($result){
+            return $result;
+        }else{
+            return null;
+        }
     }
 
-    // 3. Invoice tour offline
-    public function GetInvoiceTourOffline($transactionId){
-        $result = $this->InvoiceTourOfflineRepo->GetInvoiceTourOfflineByTransactionId($transactionId);
+    // 3. Invoice tour
+    public function GetInvoiceTour($transactionId){
+        $result = $this->InvoiceTourRepo->GetInvoiceTourByTransactionId($transactionId);
         if($result){
             $this->transaction->bookingId = $result[0]->booking_number;
             $this->transaction->invoiceId = $result[0]->invoice_number;
+            $this->transaction->isRevised = $result[0]->is_revised==1?true:false;
         }else{
             $this->transaction->bookingId = '';
             $this->transaction->invoiceId = '';
+            $this->transaction->isRevised = '';
         }
     }
 

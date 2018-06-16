@@ -20,9 +20,9 @@ class CreateJobApplicationVansTable extends Migration {
 			$table->string('nickname',50)->nullable();
 			$table->string('gender',50);
 			$table->string('birth',50)->nullable();
-			$table->tinyInteger('age')->nullable();
-			$table->tinyInteger('height')->nullable();
-			$table->tinyInteger('weight')->nullable();
+			$table->integer('age')->nullable();
+			$table->integer('height')->nullable();
+			$table->integer('weight')->nullable();
 			$table->string('phone',50);
 			$table->string('address_no',50)->nullable();
 			$table->string('address_village',50)->nullable();

@@ -2,10 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 // import { CallServices } from './services/call-api.service';
-// import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,6 +34,7 @@ import { LoginComponent } from './authentication/login/login.component';
 import { LogoutComponent } from './authentication/logout/logout.component';
 import { SignupComponent } from './authentication/signup/signup.component';
 import { TemplateComponent } from './common/template/template.component';
+import { MatSelectSearchComponent } from './material/mat-select-search/mat-select-search.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { TemplateComponent } from './common/template/template.component';
     LogoutComponent,
     SignupComponent,
     TemplateComponent,
+    MatSelectSearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,8 @@ import { TemplateComponent } from './common/template/template.component';
     BrowserAnimationsModule,
     NoopAnimationsModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

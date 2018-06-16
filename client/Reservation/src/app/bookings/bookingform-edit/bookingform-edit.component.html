@@ -1,9 +1,10 @@
 <!-- Header -->
 <div class="container" id="bookingform-header">
   <h2 class="header-form text-center block-data-booking">
-    Booking Form
+    Edit Booking
   </h2>
   <hr class="hr-header-form">
+  <!-- <small>{{tourInfo.tourTravelDate}}</small> -->
 </div>
 
 <!-- Content -->
@@ -13,12 +14,13 @@
     <!-- Col 1.1 Tour -->
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
       <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-        <label class="front-paragraph">Tour</label>
+        <label class="front-paragraph">Tour </label>
       </div>
       <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
         <span>: &nbsp;</span>
         <mat-form-field class="field-booking">
-          <mat-select required [(ngModel)]="tourInfo.tourData" (focus)="setTourData()" ngDefaultControl>
+          <mat-select [(ngModel)]="tourInfo.tourData" (focus)="setTourData()" ngDefaultControl>
+            <!-- <mat-option>-</mat-option> -->
             <mat-option *ngFor="let tourName of _getBookingDataArr" [value]="tourName">{{tourName.code}} : {{tourName.title}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -27,7 +29,7 @@
     <!-- Col 1.2 Travel Time -->
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
       <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngFor="let time of travelTimeArr">
-        <mat-radio-group [(ngModel)]="tourInfo.tourTime">
+        <mat-radio-group [(ngModel)]="tourInfo.tourTime" *ngIf="tourInfo.tourData!=null">
           <mat-radio-button color="primary" class="front-paragraph" name="tourTime" [value]="time.meridiem" ngDefaultControl>{{time.meridiem}}</mat-radio-button>
         </mat-radio-group>
       </div>
@@ -44,9 +46,9 @@
       <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
         <span>: &nbsp;</span>
         <mat-form-field class="field-booking">
-          <input matInput [matDatepicker]="picker" [(ngModel)]="tourInfo.tourTravelDate">
+          <input matInput [matDatepicker]="picker" [(ngModel)]="tourInfo.tourTravelDateSelect" [min]="minDate" [max]="maxDate" readonly>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker disabled="false"></mat-datepicker>
+          <mat-datepicker #picker disabled="false" touchUi="false"></mat-datepicker>
         </mat-form-field>
       </div>
     </div>
@@ -70,9 +72,9 @@
       <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
         <span>: &nbsp;</span>
         <mat-form-field class="field-booking">
-          <mat-select [(ngModel)]="hotel.hotelName" required>
+          <mat-select [(ngModel)]="hotel.hotelName">
             <!-- <mat-option>-</mat-option> -->
-            <mat-option *ngFor="let accountCode of _getAccountCodeArr" [value]="accountCode.hotel">{{accountCode.hotel}}</mat-option>
+            <mat-option *ngFor="let accountCode of _getAccountCodeArr" [value]="accountCode.hotel">{{accountCode.code}} : {{accountCode.hotel}}</mat-option>
             <mat-option value="Other">Other</mat-option>
           </mat-select>
         </mat-form-field>
@@ -121,7 +123,7 @@
       <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
         <span>: &nbsp;</span>
         <mat-form-field class="field-booking">
-          <!-- <input type="number" min="1" max="9" name="tourPax" [(ngModel)]="tourPax" matInput required> -->
+          <!-- <input type="number" min="1" max="9" name="tourPax" [(ngModel)]="tourPax" matInput> -->
           <mat-select [(ngModel)]="tourInfo.tourPax">
             <mat-option *ngFor="let pax of tourPaxArr" [value]="pax">{{pax}}</mat-option>
           </mat-select>
@@ -130,7 +132,12 @@
     </div>
     <!-- Col 4.2 empty field -->
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-      <button type="button" class="btn-add-guest" mat-raised-button color="primary" (click)="setGuestData(tourInfo.tourPax);" [disabled]="tourInfo.tourPax<1">Add guest</button>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 front-paragraph" *ngIf="tourInfo.tourPax==1">
+        <mat-checkbox [(ngModel)]="rateTwoPax" color="primary">Rate 2 pax</mat-checkbox>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <button type="button" class="btn-add-guest" mat-raised-button color="primary" (click)="setGuestData(tourInfo.tourPax);" [disabled]="tourInfo.tourPax<1">Add guest</button>  
+      </div>    
     </div>
   </div>
 </div>
@@ -155,19 +162,10 @@
     </div>
     <!-- Col 5.2 Ages -->
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-      <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <mat-form-field>
-          <mat-select name="guest.ages" [(ngModel)]="guest.ages" (click)="testGuest(guest.ages)">
-            <mat-option *ngFor="let ages of agesArr" [value]="ages.value">{{ages.ages}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div> -->
       <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngFor="let ages of agesArr;">
         <mat-radio-group [(ngModel)]="guestAges[i]">
           <mat-radio-button color="primary" class="front-paragraph" name="guestAges[i]" [value]="ages.value">{{ages.ages}}</mat-radio-button>
         </mat-radio-group>
-        <!-- <mat-radio-button color="primary" name="ages[i]" [(ngModel)]="guestAges[i]" class="front-paragraph" [value]="ages.value"></mat-radio-button> -->
-        <!-- <span>{{ages.ages}}</span> -->
       </div>
     </div>
   </div>
@@ -184,7 +182,7 @@
       <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
         <span>: &nbsp;</span>
         <mat-form-field class="field-booking">
-          <mat-select required [(ngModel)]="paymentInfo.tourPrice">
+          <mat-select [(ngModel)]="paymentInfo.tourPrice">
             <mat-option *ngFor="let tourPrice of tourTypePriceArr" [value]="tourPrice.type">
               {{tourPrice.type}}
             </mat-option>
@@ -193,7 +191,7 @@
       </div>
     </div>
     <!-- Col 6.2 Discount -->
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+    <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
       <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
         <label class="front-paragraph">Discount <small>(%)</small></label>
       </div>
@@ -201,6 +199,17 @@
         <span>: &nbsp;</span>
         <mat-form-field class="field-booking">
           <input type="number" min="0" max="100" [(ngModel)]="summary.discount" matInput>
+        </mat-form-field>
+      </div>
+    </div> -->
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+      <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+        <label class="front-paragraph">Deposit <small>(฿)</small></label>
+      </div>
+      <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+        <span>: &nbsp;</span>
+        <mat-form-field class="field-booking">
+          <input type="number" min="0" [(ngModel)]="summary.deposit" matInput>
         </mat-form-field>
       </div>
     </div>
@@ -216,7 +225,7 @@
       <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
         <span>: &nbsp;</span>
         <mat-form-field class="field-booking">
-          <mat-select required [(ngModel)]="paymentInfo.paymentCollect">
+          <mat-select [(ngModel)]="paymentInfo.paymentCollect">
             <mat-option *ngFor="let paymentCollect of tourPaymentCollectArr" [value]="paymentCollect.collect">
               {{paymentCollect.collect}}
             </mat-option>
@@ -224,15 +233,18 @@
         </mat-form-field>
       </div>
     </div>
-    <!-- Col 7.2 Service charge 3% -->
+    <!-- Col 7.2 Service charge 3% and Single riding -->
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 front-paragraph">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 front-paragraph" *ngIf="paymentInfo.tourPrice=='Selling price'">
         <mat-checkbox color="primary" class="front-paragraph space-checkbox" [(ngModel)]="service.isServiceCharge"></mat-checkbox>
         <span class="front-paragraph">Service charge 3%</span>
       </div>
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 front-paragraph">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="activeSingleRiding==true">
         <mat-checkbox color="primary" class="front-paragraph space-checkbox" [(ngModel)]="isSingleRiding"></mat-checkbox>
-        <span class="front-paragraph">Single Riding</span>
+        <span class="front-paragraph">Single riding &nbsp;: </span>&nbsp;
+        <mat-form-field>
+          <input matInput type="number" [(ngModel)]="singleRidingPax" min="1" max="9">
+        </mat-form-field>
       </div>
     </div>
   </div>
@@ -255,16 +267,25 @@
     </div>
     <!-- Col 8.2 empty field -->
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-        <label class="front-paragraph">Charge <small>(฿)</small></label>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+          <label class="front-paragraph">Charge <small>(฿)</small></label>
+        </div>
+        <div class="col-lg-7 col-md-6 col-sm-6 col-xs-12">
+          <span>: &nbsp;</span>
+          <mat-form-field class="field-booking">
+            <input matInput type="number" [(ngModel)]="specialRequestPrice">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="padding-left: 0;">
+          <mat-form-field class="field-booking">
+            <mat-select [(ngModel)]="specialRequestOperator" required>
+              <mat-option *ngFor="let operator of operatorArr" [value]="operator.value">
+                {{operator.operator}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
-      <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12">
-        <span>: &nbsp;</span>
-        <mat-form-field class="field-booking">
-          <input matInput type="number" [(ngModel)]="specialRequestPrice">
-        </mat-form-field>
-      </div>
-    </div>
   </div>
 
   <!-- Row 9 : Booked By & Position -->
@@ -305,7 +326,7 @@
       <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12">
         <span>: &nbsp;</span>
         <mat-form-field class="field-booking">
-          <mat-select [(ngModel)]="bookBy.position" required>
+          <mat-select [(ngModel)]="bookBy.position">
             <mat-option *ngFor="let position of bookByPositionArr" [value]="position.position">
               {{position.position}}
             </mat-option>
@@ -337,14 +358,27 @@
       <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12">
         <span>: &nbsp;</span>
         <mat-form-field class="field-booking">
-          <mat-select [(ngModel)]="bookBy.accountName" required>
-            <mat-option *ngFor="let accountName of _getAccountCodeArr" [value]="accountName.hotel">{{accountName.hotel}}</mat-option>
+          <mat-select [(ngModel)]="bookBy.accountName">
+            <mat-option *ngFor="let accountName of _getAccountCodeArr" [value]="accountName.hotel">{{accountName.code}} : {{accountName.hotel}}</mat-option>
             <mat-option value="Other">Other</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
     </div>
     <!-- Col 10-2.2 -->
+    <!-- GYG Code -->
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" *ngIf="bookBy.accountName=='Get Your Guide'">
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <label class="front-paragraph">GYG Code</label>
+      </div>
+      <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12">
+        <span>: &nbsp;</span>
+        <mat-form-field class="field-booking">
+          <input matInput [(ngModel)]="bookBy.otaCode">
+        </mat-form-field>
+      </div>
+    </div>
+    <!-- Other -->
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" *ngIf="bookBy.accountName=='Other'">
       <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <label class="front-paragraph">Account name <small>(Other)</small></label>
@@ -394,17 +428,6 @@
           </mat-radio-group>
         </div>
         <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
-          <!-- <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
-            <label class="front-paragraph">Amount</label>
-          </div>
-          <div class="col-lg-9 col-md-8 col-sm-7 col-sm-12">
-            <span>: &nbsp;</span>
-            <mat-form-field>
-              <input matInput type="number" class="example-right-align">
-              <span matPrefix>฿&nbsp;</span>
-              <span matSuffix>.00</span>
-            </mat-form-field>
-          </div> -->
         </div>
       </div>
     </div>
@@ -440,13 +463,25 @@
       </div>
     </div>
   </div>
+  <h3></h3>
 </div>
 <!-- End container Content -->
 
 <div class="container">
   <!-- Button submit & cancel -->
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-    <button type="submit" mat-raised-button color="warn" (click)="dataToSave()">BOOK</button>
-    <button type="reset" mat-raised-button>Reset</button>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+      <button type="submit" mat-raised-button color="primary" (click)="dataToSave(1)">Update</button>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left">
+      <button type="submit" mat-raised-button color="warn" (click)="dataToSave(2)">Revise</button>
+      <p><small class="text-danger"> new booking no. </small></p>
+      <!-- <label class="switch">
+        <span>New invoice no.</span>
+        <input type="checkbox" checked>
+        <span class="slider round"></span>
+      </label> -->
+    </div>
+    <!-- <button type="reset" mat-raised-button id="reset">Reset</button> -->
   </div>
 </div>

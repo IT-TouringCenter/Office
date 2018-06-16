@@ -169,11 +169,11 @@ class BookingFormClass{
         $GetTransaction = $this->TransactionRepo->GetTransactionById($transactionId);
         $GetTransactionTour = $this->TransactionRepo->GetTransactionTourById($transactionId);
         $GetTransactionTourDetail = $this->TransactionRepo->GetTransactionTourDetail($GetTransactionTour[0]->id);
-        $GetInvoiceTourOffline = \InvoiceBookingFacade::GetInvoiceTourOfflineByTransactionId($transactionId);
+        $GetInvoiceTour = \InvoiceBookingFacade::GetInvoiceTourByTransactionId($transactionId);
 
         $this->BookingData = new Tour;
 
-        $this->SetInvoiceData($GetInvoiceTourOffline);
+        $this->SetInvoiceData($GetInvoiceTour);
         $this->SetTourData($GetTransaction,$GetTransactionTour);
         $this->SetHotelData($GetTransactionTour);
         $this->SetGuestData($GetTransactionTourDetail);
@@ -205,10 +205,19 @@ class BookingFormClass{
 
     // 2. tour
     public function SetTourData($transaction,$tour){
+        $getTourTravelTime = $this->TransactionRepo->GetTourTravelTimeByTourId($tour[0]->tour_id, $tour[0]->tour_travel_time);
+
         $bookData = new Tour;
         $bookData->name = $tour[0]->tour_code.' : '.$tour[0]->tour_title;
         $bookData->type = $tour[0]->tour_travel_time;
-        $bookData->date = \DateFormatFacade::SetFullDate($tour[0]->tour_travel_date);
+        
+        if($getTourTravelTime){
+            $bookData->timePeriod = $getTourTravelTime[0]->travel_time_start.' - '.$getTourTravelTime[0]->travel_time_end;
+        }else{
+            $bookData->timePeriod = ' - ';
+        }
+        
+        $bookData->date = $tour[0]->tour_travel_date;
         $bookData->privacy = $tour[0]->tour_privacy;
         $bookData->pax = $tour[0]->pax;
         $bookData->discount = $tour[0]->discount_rate;

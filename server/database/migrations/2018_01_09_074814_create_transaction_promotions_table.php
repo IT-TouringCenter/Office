@@ -19,8 +19,8 @@ class CreateTransactionPromotionsTable extends Migration {
 			$table->integer('guest_id');
 			$table->integer('promotion_id');
 			$table->string('promotion_title',100);
-			$table->tinyInteger('adult');
-			$table->tinyInteger('child');
+			$table->integer('adult');
+			$table->integer('child');
 			$table->double('adult_price',10,2);
 			$table->double('child_price',10,2);
 			$table->double('discount',10,2);
