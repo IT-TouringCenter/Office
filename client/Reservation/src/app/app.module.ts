@@ -25,7 +25,6 @@ import { PrintComponent } from './common/button/print/print.component';
 import { InvoiceIncludeExcludeComponent } from './invoice/invoice-include-exclude/invoice-include-exclude.component';
 import { InvoiceNoteComponent } from './invoice/invoice-note/invoice-note.component';
 import { InvoiceImportantNoteComponent } from './invoice/invoice-important-note/invoice-important-note.component';
-// import { MenubarComponent } from './common/header/menubar/menubar.component';
 import { MenuSidebarComponent } from './common/header/menu-sidebar/menu-sidebar.component';
 import { MenuBarComponent } from './common/header/menu-bar/menu-bar.component';
 import { BookingformEditComponent } from './bookings/bookingform-edit/bookingform-edit.component';
@@ -35,6 +34,18 @@ import { LogoutComponent } from './authentication/logout/logout.component';
 import { SignupComponent } from './authentication/signup/signup.component';
 import { TemplateComponent } from './common/template/template.component';
 import { MatSelectSearchComponent } from './material/mat-select-search/mat-select-search.component';
+// Reservations
+import { BookedRsvnComponent } from './reservations/bookings/booked-rsvn/booked-rsvn.component';
+import { BookformRsvnComponent } from './reservations/bookings/bookform-rsvn/bookform-rsvn.component';
+import { BookformEditRsvnComponent } from './reservations/bookings/bookform-edit-rsvn/bookform-edit-rsvn.component';
+import { BookprintRsvnComponent } from './reservations/bookings/bookprint-rsvn/bookprint-rsvn.component';
+import { ButtonRsvnComponent } from './reservations/commons/button-rsvn/button-rsvn.component';
+import { HeaderRsvnComponent } from './reservations/commons/header-rsvn/header-rsvn.component';
+import { TemplateRsvnComponent } from './reservations/templates/template-rsvn/template-rsvn.component';
+import { InvoiceRsvnComponent } from './reservations/invoices/invoice-rsvn/invoice-rsvn.component';
+import { ButtonPrintRsvnComponent } from './reservations/commons/button-rsvn/button-print-rsvn/button-print-rsvn.component';
+import { MenuBarRsvnComponent } from './reservations/commons/header-rsvn/menu-bar-rsvn/menu-bar-rsvn.component';
+import { MenuSidebarRsvnComponent } from './reservations/commons/header-rsvn/menu-sidebar-rsvn/menu-sidebar-rsvn.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +62,6 @@ import { MatSelectSearchComponent } from './material/mat-select-search/mat-selec
     InvoiceIncludeExcludeComponent,
     InvoiceNoteComponent,
     InvoiceImportantNoteComponent,
-    // MenubarComponent,
     MenuSidebarComponent,
     MenuBarComponent,
     BookingformEditComponent,
@@ -61,6 +71,18 @@ import { MatSelectSearchComponent } from './material/mat-select-search/mat-selec
     SignupComponent,
     TemplateComponent,
     MatSelectSearchComponent,
+    // Reservations
+    BookedRsvnComponent,
+    BookformRsvnComponent,
+    BookformEditRsvnComponent,
+    BookprintRsvnComponent,
+    ButtonRsvnComponent,
+    HeaderRsvnComponent,
+    TemplateRsvnComponent,
+    InvoiceRsvnComponent,
+    ButtonPrintRsvnComponent,
+    MenuBarRsvnComponent,
+    MenuSidebarRsvnComponent,
   ],
   imports: [
     BrowserModule,
