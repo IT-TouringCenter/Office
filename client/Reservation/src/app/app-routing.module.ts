@@ -9,6 +9,13 @@ import { BookingprintComponent } from './bookings/bookingprint/bookingprint.comp
 import { InvoiceComponent } from './invoice/invoice.component';
 import { BookedstatisticsComponent } from './bookings/bookedstatistics/bookedstatistics.component';
 import { BookingformEditComponent } from './bookings/bookingform-edit/bookingform-edit.component';
+// Reservations
+import { BookedRsvnComponent } from './reservations/bookings/booked-rsvn/booked-rsvn.component';
+import { BookformRsvnComponent } from './reservations/bookings/bookform-rsvn/bookform-rsvn.component';
+import { BookformAddRsvnComponent } from './reservations/bookings/bookform-add-rsvn/bookform-add-rsvn.component';
+import { BookformEditRsvnComponent } from './reservations/bookings/bookform-edit-rsvn/bookform-edit-rsvn.component';
+import { InvoiceRsvnComponent } from './reservations/invoices/invoice-rsvn/invoice-rsvn.component';
+import { TemplateRsvnComponent } from './reservations/templates/template-rsvn/template-rsvn.component';
 
 const routes: Routes = [
   {
@@ -34,6 +41,31 @@ const routes: Routes = [
   {
     path: 'reservationsummary',
     component: BookedstatisticsComponent
+  },
+  // Reservations
+  {
+    path: 'reservations',
+    component: TemplateRsvnComponent
+  },
+  {
+    path: 'reservations/booked',
+    component: BookedRsvnComponent
+  },
+  {
+    path: 'reservations/book-form-add',
+    component: BookformAddRsvnComponent
+  },
+  {
+    path: 'reservations/book-form-edit/:transactionId',
+    component: BookformEditRsvnComponent
+  },
+  {
+    path: 'reservations/book-form/:transactionId',
+    component: BookformRsvnComponent
+  },
+  {
+    path: 'reservations/invoice/:transactionId',
+    component: InvoiceRsvnComponent
   }
 ];
 

@@ -102,7 +102,7 @@ export class BookedstatisticsComponent implements OnInit {
             this.pagination();
           }
         });
-    
+
     let params = this.route.snapshot.paramMap;
     if(params.has('transactionId')){
       this.highlightId = +params.get('transactionId');
@@ -139,5 +139,5 @@ export class BookedstatisticsComponent implements OnInit {
   ngOnInit() {
     this.getInvoiceFromData();
   }
-  
+
 }

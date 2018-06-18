@@ -89,4 +89,3 @@ export declare module BookformEditRsvnInterface {
     }
 
 }
-

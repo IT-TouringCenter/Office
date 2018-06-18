@@ -1,56 +1,42 @@
 import { Component, OnInit } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 import { HttpHeaders } from '@angular/common/http';
-import { ActivatedRoute, Params } from "@angular/router";
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { FormsModule, FormControl, Validators, NgModel, ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { FormsModule, FormControl, Validators, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Observable } from "rxjs/Observable";
+import { startWith } from "rxjs/operators/startWith";
+import { map } from "rxjs/operators/map";
 import "rxjs/Rx";
 
-// Component
-import { ProgressBarComponent } from './../../progress/progress-bar/progress-bar.component';
 // Services
-import { BookingformEditService } from './bookingform-edit.service';
-// import { BookingFormService } from './../bookingform/bookingform.service';
-import { DataService } from './../../services/data.service';
+import { BookformAddRsvnService } from './bookform-add-rsvn.service';
+// import { DataService } from './../../services/data.service';
+// import { CurrencyService } from './../../common/currency/currency.service';
 // Interfaces
-// import { BookingFormInterface } from './../../interfaces/bookingdata-interface';
-import { BookingFormInterface } from './../bookingform/bookingform-interface';
+import { BookformAddRsvnInterface } from './bookform-add-rsvn-interface';
 import { AccountCodeInterface } from './../../interfaces/account-code-interface';
 import { SaveBookingInterface } from './../../interfaces/save-booking-interface';
-import { BookingFormEditInterface } from './bookingform-edit-interface';
-
+// import { currencyInterface } from './../../common/currency/currency-interface';
 @Component({
-  selector: 'app-bookingform-edit',
-  templateUrl: './bookingform-edit.component.html',
-  styleUrls: ['./bookingform-edit.component.scss'],
+  selector: 'app-bookform-add-rsvn',
+  templateUrl: './bookform-add-rsvn.component.html',
+  styleUrls: ['./bookform-add-rsvn.component.scss'],
   providers: [
-    BookingformEditService,
-    // BookingFormService,
-    DataService
+    BookformAddRsvnService,
+    // CurrencyService,
+    // DataService
   ]
 })
-export class BookingformEditComponent implements OnInit {
-  // Edit by API
-  // getBookingEditByApi;
 
-  // Edit form
-  selectedTour;
-  selectedTourTravelTime;
-  selectedTourPrivacy;
-  selectedHotel;
-  selectedTourPrice;
-  selectedPaymentCollect;
-  setInvoiceReference = {
-    id:0,
-    number:''
-  };
+export class BookformAddRsvnComponent implements OnInit {
+
+  myControl: FormControl = new FormControl();
 
   // Set model
   minDate = new Date(2017, 12, 1);
   maxDate = new Date(2018, 9, 31);
-
   tourInfo = {
     tourData:{
       id:'',
@@ -59,7 +45,6 @@ export class BookingformEditComponent implements OnInit {
     },
     tourTime:'',
     tourPrivacy:'',
-    tourTravelDateSelect: new Date(), // edit only
     tourTravelDate:'',
     rateTwoPax:0,
     tourPax:0,
@@ -119,7 +104,7 @@ export class BookingformEditComponent implements OnInit {
     discount:0,
     discountPrice:0,
     totalPrice:0,
-    amount:0
+    amount:0,
   };
   isSpecialRequestOperator = 0;
   specialRequestOperator = '';
@@ -133,6 +118,8 @@ export class BookingformEditComponent implements OnInit {
 
   realPriceAdult = 0;
   realPriceChild = 0;
+  currency = '';
+  currencyRate = 31.5;
 
   // Set data bliding
   travelTimeArr = [];
@@ -204,112 +191,66 @@ export class BookingformEditComponent implements OnInit {
 
   tourControl = new FormControl('',[Validators.required]);
 
-  // interface
+  // Account code interface
   _getAccountCodeArr: AccountCodeInterface.RootObject;
-  _getBookingDataArr: BookingFormInterface.RootObject;
-  _getBookingEditArr: BookingFormEditInterface.RootObject;
+
+  // Booking data interface
+  _getBookingDataArr: BookformAddRsvnInterface.RootObject;
+
+  // Save booking interface
   _saveBookingInterface: SaveBookingInterface.RootObject;
 
-  // interface (book data)
-  _getTourTime: BookingFormInterface.Time;
-  _getTourPrivacy: BookingFormInterface.Privacy;
-  _getTourTypePrice: BookingFormInterface.TourPrice;
-  _getTourPrice: BookingFormInterface.Price;
-  _getTourPax: BookingFormInterface.Pax;
+  // Currency interface
+  // _getCurrencyInterface : currencyInterface.RootObject;
 
-  // interface (book edit)
-  _getBookingInfo: BookingFormEditInterface.BookingInfo;
-  _getHotelInfo: BookingFormEditInterface.HotelInfo;
-  _getGuestInfo: BookingFormEditInterface.GuestInfo;
-  _getPaymentInfo: BookingFormEditInterface.PaymentInfo;
-  _getBookBy: BookingFormEditInterface.BookBy;
-  _getInsurance: BookingFormEditInterface.Insurance;
-  _getCommission: BookingFormEditInterface.Commission;
-  _getNoteBy: BookingFormEditInterface.NoteBy;
-  _getSummary: BookingFormEditInterface.Summary;
-  _getInvoiceRef: BookingFormEditInterface.InvoiceRef;
+  // _getTourInfo: BookformAddRsvnInterface.Privacy;
+  _getTourTime: BookformAddRsvnInterface.Time;
+  _getTourPrivacy: BookformAddRsvnInterface.Privacy;
+  _getTourTypePrice: BookformAddRsvnInterface.TourPrice;
+  _getTourPrice: BookformAddRsvnInterface.Price;
+  _getTourPax: BookformAddRsvnInterface.Pax;
+
+  filteredOptions: Observable<string[]>;
 
   // Active sidenav
   public activeSideNav = 'addbooking';
 
-    private routeTransactionId;
-
     constructor(
-      private bookingformEditService: BookingformEditService,
-      // private bookingDataService: BookingFormService,
-      private dataService: DataService,
+      private BookformAddRsvnService: BookformAddRsvnService,
+      // private dataService: DataService,
+      // private currencyService: CurrencyService,
       private http: Http,
-      private router: Router,
-      private route: ActivatedRoute
-    ) { 
-      let _params = this.route.snapshot.paramMap.get(('transactionId'));
-      this.routeTransactionId = _params;
-     }
+      private router: Router
+    ) { }
 
     // JSON booking data
     getBookingData(): void {
-      this.bookingformEditService.getBookingData()
+      this.BookformAddRsvnService.getBookingData()
         .subscribe(
-          resultArray => [
-            this._getBookingDataArr = resultArray
-          ],
+          resultArray => this._getBookingDataArr = resultArray,
           error => console.log("Error :: " + error)
         )
-      // this.editDataBinding();
     }
 
     // JSON account code data
     getAccountCode(): void {
-      this.bookingformEditService.getAccountCode()
+      this.BookformAddRsvnService.getAccountCode()
         .subscribe(
-          resultArray => [
-            this._getAccountCodeArr = resultArray
-          ],
+          resultArray => this._getAccountCodeArr = resultArray,
           error => console.log("Error :: " + error)
         )
     }
 
-    // JSON booking edit
-    getBookingEdit(): void {
-      this.bookingformEditService.getBookingFormEdit()
-        .subscribe(
-          resultArray => [
-            this._getBookingEditArr= resultArray,
-            this.editTourProgram(),
-            this.editHotel(),
-            this.editGuestPax(),
-            this.editTourPrice(),
-            this.editPaymentCollect(),
-            this.editDiscount(),
-            this.editServiceCharge(),
-            this.editSingleRiding(),
-            this.editSpecialRequest(),
-            this.editBookedBy(),
-            this.editBookedByPosition(),
-            this.editAccountName(),
-            this.editInsurance(),
-            this.editCommission(),
-            this.editNoteBy(),
-            this.setInvoiceRef(),
-            this.setRateTwoPax(),
-            this.setSingleRidingPax(),
-            this.setOtaCode(),
-            this.setDepositPrice(),
-            this.setSpecialRequestOperator()
-          ],
-          error => console.log("Error :: " + error)
-        )
-    }
+    // JSON currency
+    // getCurrency(): void{
+    //   this.currencyService.getInvoiceData()
+    //     .subscribe(
+    //       resultArray => this._getCurrencyInterface = resultArray,
+    //       error => console.log("Error :: " + error)
+    //     )
+    // }
 
     /*======== Data to Save ========*/
-    /* -------------------------------
-      1. Set tour data
-      2. Set guest data
-      3. Set Price
-      4. Set data format
-      5. Save to API
-    ------------------------------- */
-
     // Step 1 : Set tour data
     setTourData(){
       let tourArr = [];
@@ -346,12 +287,9 @@ export class BookingformEditComponent implements OnInit {
       }
       // Set tour pax
       this.tourInfo.tourPax = pax;
-
-      // Binding guest data
-      this.editGuestInfo();
     }
 
-    // Step 3 : Set Price
+    // Set Price
     setPrice(){
       // Set privacy by [tour id]
       let count1 = 0;
@@ -509,7 +447,6 @@ export class BookingformEditComponent implements OnInit {
       // set total price
       // set special request operator
       // '+'==1 | '-'==2 | none==0
-      // console.log('Operator : '+this.specialRequestOperator);
       if(this.specialRequestOperator=='+'){
         this.isSpecialRequestOperator=1;
         this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice + this.specialRequestPrice + this.specialChargePrice - this.summary.deposit;
@@ -539,12 +476,25 @@ export class BookingformEditComponent implements OnInit {
         this.commission.commission = 0;
       }
 
+      // converse currency
+      if(this.currency=='USDTHB'){
+        this.realPriceAdult = this.realPriceAdult / this.currencyRate;
+        this.realPriceChild = this.realPriceChild / this.currencyRate;
+        this.summary.totalAdultPrice = this.summary.totalAdultPrice / this.currencyRate;
+        this.summary.totalChildPrice = this.summary.totalChildPrice / this.currencyRate;
+        this.summary.singleRiding = this.summary.singleRiding / this.currencyRate;
+        this.summary.serviceCharge = this.summary.serviceCharge / this.currencyRate;
+        this.summary.deposit = this.summary.deposit / this.currencyRate;
+        this.summary.discountPrice = this.summary.discountPrice / this.currencyRate;
+        this.summary.totalPrice = this.summary.totalPrice / this.currencyRate;
+        this.summary.amount = this.summary.amount / this.currencyRate;
+      }
+
     }// End Function Set Price
 
-    // Step 4 : Set data format
-    dataToSave(params){
+    dataToSave(){
       // Set Date format
-      let _date = new Date(this.tourInfo.tourTravelDateSelect); // edit only
+      let _date = new Date(this.tourInfo.tourTravelDate);
       let _month = _date.getMonth();
       this.tourInfo.tourTravelDate = _date.getDate()+' '+this.fullMonth[_month]+' '+_date.getFullYear();
 
@@ -608,7 +558,7 @@ export class BookingformEditComponent implements OnInit {
         }else{
           guestName = _guestName[i];
         }
-        
+
         if(_guestAges[i]=='' || _guestAges[i]==undefined || _guestAges[i]==null){
           guestAges = 1;
         }else{
@@ -642,7 +592,6 @@ export class BookingformEditComponent implements OnInit {
 
       this.dataSave = 
         {
-          "transId":this.routeTransactionId,
           "bookingInfo": {
             "tourId": this.tourInfo.tourData.id,
             "tourCode": this.tourInfo.tourData.code,
@@ -704,37 +653,35 @@ export class BookingformEditComponent implements OnInit {
           "specialRequest": this.specialRequest,
           "specialRequestPrice": this.specialRequestPrice,
           "invoiceRef":{
-            "id":this.setInvoiceReference.id,
-            "number":this.setInvoiceReference.number
+            "id":"",
+            "number":""
           },
-          "isRevised":1,
+          "isRevised":0,
           "isSpecialTour":0,
+          "currency": this.currency,
+          "currency_rate": this.currencyRate,
           "issuedBy": "Office"
         };
         console.log(JSON.stringify(this.dataSave));
 
         // Save data booking to API
-        this.saveDataBooking(this.dataSave,params);
+        this.saveDataBooking(this.dataSave);
     } // End Function Set Data To Save
 
-    // Step 5 : Save to API
-    saveDataBooking(dataSave,params) {
-      let url = '';
-      if(params==2){
-        url = 'http://localhost:9000/api/Reservations/ReservationSaveBookingData';
-      // url = 'http://api.tourinchiangmai.com/api/ReservationSaveBookingData';
-      }else if(params==1){
-        url = 'http://localhost:9000/api/Reservations/EditReservation';
-      // url = 'http://api.tourinchiangmai.com/api/EditReservation';
-      }
-      
+    // Save to data service
+    saveDataBooking(dataSave) {
+
+      let url = 'http://localhost:9000/api/Reservations/ReservationSaveBookingData';
+      // let url = 'http://api.tourinchiangmai.com/api/Reservations/ReservationSaveBookingData';
+
       let options = new RequestOptions();
 
       /*==================  Success  ===================*/
       return this.http.post(url, dataSave, options)
                       .map(res => res.json())
                       .subscribe(
-                        data => {this.router.navigate(['reservationsummary'])}, // success go to page 'booked-statistics'
+                        // data => {console.log('*-*'+data)},
+                        data => {this.router.navigate(['reservations/booked'])},
                         err => {console.log(err)}
                       );
       /*==================  Success  ===================*/
@@ -744,247 +691,10 @@ export class BookingformEditComponent implements OnInit {
       return Observable.throw(error.statusText);
     }
 
-  /*============ Edit Form (start) ==============*/
-  /*=============== 1 - 24 Step =================*/
-
-    // 1. Set & binding [ Tour program ]
-    editTourProgram(){
-      if(this._getBookingDataArr==null || this._getBookingDataArr==undefined){
-        this.getBookingEdit();
-      }else{
-        let count = 0;
-        for(var data in this._getBookingDataArr){
-          if(this._getBookingDataArr[count].code==this._getBookingEditArr.bookingInfo.tourCode){
-            this.selectedTour = this._getBookingDataArr[count];
-          }
-          count++;
-        }
-        this.tourInfo.tourData = this.selectedTour;
-        this.setTourData();
-        this.editTourTravelingTime();
-        this.editTourPrivacy();
-        this.editTourDate();
-      } 
-    }
-
-    // 2. Set & binding [ Tour traveling time (Morning, Afternoon, Evening, Fullday) ]
-    editTourTravelingTime(){  
-      this.tourInfo.tourTime = this._getBookingEditArr.bookingInfo.travelTime;
-    }
-
-    // 3. Set & binding [ Tour privacy (Join, Private) ]
-    editTourPrivacy(){
-      this.tourInfo.tourPrivacy = this._getBookingEditArr.bookingInfo.tourPrivacy;
-    }
-    
-    // 4. Set & binding [ Tour date ]
-    editTourDate(){
-      let genDate = new Date(this._getBookingEditArr.bookingInfo.travelDate);
-      this.tourInfo.tourTravelDateSelect = genDate; // edit only
-    }
-
-    // 5. Set & binding [ Hotel & Room ]
-    editHotel(){
-      let count = 0;
-      for(var data in this._getAccountCodeArr){
-        if(this._getAccountCodeArr[count].hotel==this._getBookingEditArr.hotelInfo.name){
-          this.selectedHotel = this._getAccountCodeArr[count].hotel;
-        }
-        count++;
-      }
-      // Hotel & Hotel Other
-      if(this.selectedHotel=='' || this.selectedHotel==undefined || this.selectedHotel==null || this.selectedHotel=='Other'){
-        this.hotel.hotelName = 'Other';
-        this.hotel.hotelOther = this._getBookingEditArr.hotelInfo.name;
-      }else{
-        this.hotel.hotelName = this.selectedHotel;
-      }
-      // Room
-      this.hotel.hotelRoom = this._getBookingEditArr.hotelInfo.room;
-    }
-
-    // 6. Set & binding [ Guest Pax ]
-    editGuestPax(){
-      this.tourInfo.tourPax = this._getBookingEditArr.bookingInfo.pax;
-      this.setGuestData(this.tourInfo.tourPax); // add guest field by pax
-    }
-
-    // 7. Set & binding [ Guest info per person]
-    editGuestInfo(){
-      let count = 0;
-      for(var data in this._getBookingEditArr.guestInfo){
-        this.guestName[count] = this._getBookingEditArr.guestInfo[count].name;
-        this.guestAges[count] = this._getBookingEditArr.guestInfo[count].isAges;
-        count++;
-      }
-    }
-
-    // 8. Set & binding [ Tour price ]
-    editTourPrice(){
-      let count = 0;
-      for(var data in this.tourTypePriceArr){
-        if(this.tourTypePriceArr[count].type == this._getBookingEditArr.paymentInfo.tourPrice){
-          this.selectedTourPrice = this.tourTypePriceArr[count].type;
-        }
-        count++;
-      }
-      this.paymentInfo.tourPrice = this.selectedTourPrice;
-    }
-
-    // 9. Set & binding [ Payment collect ]
-    editPaymentCollect(){
-      let count = 0;
-      for(var data in this.tourPaymentCollectArr){
-        if(this.tourPaymentCollectArr[count].collect == this._getBookingEditArr.paymentInfo.paymentCollect){
-          this.selectedPaymentCollect = this.tourPaymentCollectArr[count].collect;
-        }
-        count++;
-      }
-      this.paymentInfo.paymentCollect = this.selectedPaymentCollect;
-    }
-
-    // 10. Set & binding [ Discount ]
-    editDiscount(){
-      let discountLength = this._getBookingEditArr.summary.discount.length;
-      let discountRate;
-      if(discountLength==3){
-        discountRate = this._getBookingEditArr.summary.discount.substr(-3,2);
-      }else if(discountLength==2){
-        discountRate = this._getBookingEditArr.summary.discount.substr(-2,1);
-      }else{
-        discountRate = 0;
-      }
-      this.summary.discount = discountRate;
-    }
-
-    // 11. Set & binding [ Service charge 3% ]
-    editServiceCharge(){
-      this.service.isServiceCharge = this._getBookingEditArr.bookingInfo.isServiceCharge;
-    }
-
-    // 12. Set & binding [ Single riding ]
-    editSingleRiding(){
-      let singleRide = this._getBookingEditArr.summary.singleRiding;
-      if(singleRide==0){
-        this.isSingleRiding = false;
-      }else if(singleRide>0){
-        this.isSingleRiding = true;
-      }
-    }
-
-    // 13. Set & binding [ Special request & charge price]
-    editSpecialRequest(){
-      this.specialRequest = this._getBookingEditArr.specialRequest;
-      this.specialRequestPrice = this._getBookingEditArr.specialRequestPrice;
-    }
-
-    // 14. Set & binding [ Booked by & tel ]
-    editBookedBy(){
-      this.bookBy.name = this._getBookingEditArr.bookBy.name;
-      this.bookBy.tel = this._getBookingEditArr.bookBy.tel;
-    }
-
-    // 15. Set & binding [ Booked by position & other ]
-    editBookedByPosition(){
-      let position = this._getBookingEditArr.bookBy.position;
-      let byPosition;
-      let count = 0;
-      this.bookBy.position = 'Other';
-      this.bookBy.positionOther = position;
-      for(var data in this.bookByPositionArr){
-        if(position==this.bookByPositionArr[count].position){
-          this.bookBy.position = position;
-        }
-        count++;
-      }
-    }
-
-    // 16. Set & binding [ Account name & other ]
-    editAccountName(){
-      let accountCode = this._getBookingEditArr.bookBy.code;
-      if(accountCode!=0){
-        this.bookBy.accountName = this._getBookingEditArr.bookBy.hotel;
-      }else if(accountCode==0){
-        this.bookBy.accountName = 'Other';
-        this.bookBy.accountNameOther = this._getBookingEditArr.bookBy.hotel;
-      }
-    }
-
-    // 17. Set & binding [ Insurance & note ]
-    editInsurance(){
-      this.insurance.isInsurance = this._getBookingEditArr.insurance.isInsurance;
-      this.insurance.insuranceReason = this._getBookingEditArr.insurance.insuranceReason;
-    }
-
-    // 18. Set & binding [ Commission ]
-    editCommission(){
-      this.commission.isCommission = this._getBookingEditArr.commission.isCommission;
-    }
-
-    // 19. Set & binding [ Note by ]
-    editNoteBy(){
-      let noteBy = this._getBookingEditArr.noteBy.name;
-      let count = 0;
-      this.noteBy.name = 'Other';
-      this.noteBy.other = noteBy;
-      for(var data in this.noteByArr){
-        if(noteBy==this.noteByArr[count].name){
-          this.noteBy.name = this.noteByArr[count].name;
-        }
-        count++;
-      }
-    }
-
-    // 20. Set invocie reference [ inv ref. ]
-    setInvoiceRef(){
-      let invoiceRefId = this._getBookingEditArr.invoiceRef.id;
-      let invoiceRefNum = this._getBookingEditArr.invoiceRef.number;
-      if(invoiceRefId==null || invoiceRefId==undefined){
-        this.setInvoiceReference.id = 0;
-        this.setInvoiceReference.number = '';
-      }else{
-        this.setInvoiceReference.id = invoiceRefId;
-        this.setInvoiceReference.number = invoiceRefNum;
-      }
-    }
-
-    // 21. Set rate 2 pax for booking 1 pax
-    setRateTwoPax(){
-      let rate2Pax = this._getBookingEditArr.bookingInfo.rateTwoPax;
-      if(rate2Pax==0){
-        this.rateTwoPax = false;
-      }else{
-        this.rateTwoPax = true;
-      }
-    }
-
-    // 22. Set single riding charge by pax
-    setSingleRidingPax(){
-      this.singleRidingPax  = this._getBookingEditArr.summary.singleRidingPax;
-    }
-
-    // 23. Set Get Your Guide Code
-    setOtaCode(){
-      this.bookBy.otaCode = this._getBookingEditArr.bookBy.otaCode;
-    }
-
-    // 24. Set Deposit price
-    setDepositPrice(){
-      this.summary.deposit = this._getBookingEditArr.summary.depositPrice;
-    }
-
-    // 25. Set Special request [Operator]
-    setSpecialRequestOperator(){
-      this.specialRequestOperator = this._getBookingEditArr.isSpecialRequestOperator;
-      // console.log('Model : '+this.specialRequestOperator);
-      // console.log('Get : '+this._getBookingEditArr.isSpecialRequestOperator);
-    }
-
-  /*============== Edit Form (end) ==============*/
-
   ngOnInit() {
-    this.getBookingEdit();
     this.getBookingData();
     this.getAccountCode();
+    // this.getCurrency();
   }
+
 }

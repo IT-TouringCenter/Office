@@ -37,8 +37,8 @@ import { MatSelectSearchComponent } from './material/mat-select-search/mat-selec
 // Reservations
 import { BookedRsvnComponent } from './reservations/bookings/booked-rsvn/booked-rsvn.component';
 import { BookformRsvnComponent } from './reservations/bookings/bookform-rsvn/bookform-rsvn.component';
+import { BookformAddRsvnComponent } from './reservations/bookings/bookform-add-rsvn/bookform-add-rsvn.component';
 import { BookformEditRsvnComponent } from './reservations/bookings/bookform-edit-rsvn/bookform-edit-rsvn.component';
-import { BookprintRsvnComponent } from './reservations/bookings/bookprint-rsvn/bookprint-rsvn.component';
 import { ButtonRsvnComponent } from './reservations/commons/button-rsvn/button-rsvn.component';
 import { HeaderRsvnComponent } from './reservations/commons/header-rsvn/header-rsvn.component';
 import { TemplateRsvnComponent } from './reservations/templates/template-rsvn/template-rsvn.component';
@@ -74,8 +74,8 @@ import { MenuSidebarRsvnComponent } from './reservations/commons/header-rsvn/men
     // Reservations
     BookedRsvnComponent,
     BookformRsvnComponent,
+    BookformAddRsvnComponent,
     BookformEditRsvnComponent,
-    BookprintRsvnComponent,
     ButtonRsvnComponent,
     HeaderRsvnComponent,
     TemplateRsvnComponent,

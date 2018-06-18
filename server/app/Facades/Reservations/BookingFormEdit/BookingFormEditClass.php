@@ -118,13 +118,24 @@ class BookingFormEditClass{
 
     // Set bookBy {}
     public function SetBookBy($transaction,$transactionTour){
+        // return $transaction;
         $bookBy = new Transaction;
         $bookBy->name = $transaction[0]->book_by_name;
         $bookBy->position = $transaction[0]->book_by_position;
         $bookBy->code = $transaction[0]->customer_code_id;
         $bookBy->hotel = $transaction[0]->book_by_hotel;
         $bookBy->tel = $transaction[0]->book_by_tel;
-        $bookBy->gygCode = $transactionTour[0]->gyg_code;
+        $bookBy->otaCode = $transactionTour[0]->ota_code;
+
+        if($bookBy->otaCode == 'GYG%'){
+            $ota = 'Get Your Guide';
+        }else if($bookBy->otaCode == 'BR-%'){
+            $ota = 'Viator';
+        }else{
+            $ota = '-';
+        }
+
+        $bookBy->ota = $ota;
 
         return $bookBy;
     }
