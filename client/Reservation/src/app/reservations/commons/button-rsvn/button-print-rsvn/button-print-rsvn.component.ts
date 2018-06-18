@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-button-print-rsvn',
@@ -8,6 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class ButtonPrintRsvnComponent implements OnInit {
 
   constructor() { }
+
+  windowPrint(){
+    window.print();
+  }
+
+  @Input() public paperColorPrint;
 
   ngOnInit() {
   }

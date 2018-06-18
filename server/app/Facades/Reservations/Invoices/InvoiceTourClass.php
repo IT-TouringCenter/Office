@@ -81,10 +81,12 @@ class InvoiceTourClass{
             $this->BookingData->ota = null;
         }else{
             $this->BookingData->otaCode = $GetTransactionTour[0]->ota_code;
-            if($this->BookingData->otaCode=='GYG%'){
-                $this->BookingData->ota = 'GYG';
-            }else if($this->BookingData->otaCode=='BR-%'){
+            if(strpos($this->BookingData->otaCode,'GYG')>=0){
+                $this->BookingData->ota = 'Get Your Guide';
+            }else if(strpos($this->BookingData->otaCode,'BR-')>=0){
                 $this->BookingData->ota = 'Viator';
+            }else{
+                $this->BookingData->ota = null;
             }
         }
 

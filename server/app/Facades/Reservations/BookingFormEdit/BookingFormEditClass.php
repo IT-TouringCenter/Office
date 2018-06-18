@@ -127,14 +127,13 @@ class BookingFormEditClass{
         $bookBy->tel = $transaction[0]->book_by_tel;
         $bookBy->otaCode = $transactionTour[0]->ota_code;
 
-        if($bookBy->otaCode == 'GYG%'){
+        if(strpos($bookBy->otaCode,'GYG')>=0){
             $ota = 'Get Your Guide';
-        }else if($bookBy->otaCode == 'BR-%'){
+        }else if(strpos($bookBy->otaCode,'BR-')>=0){
             $ota = 'Viator';
         }else{
             $ota = '-';
         }
-
         $bookBy->ota = $ota;
 
         return $bookBy;

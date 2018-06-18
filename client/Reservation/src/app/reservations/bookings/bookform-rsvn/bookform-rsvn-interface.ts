@@ -1,49 +1,65 @@
 export declare module BookformRsvnInterface {
-
-    export interface Time {
-        id: number;
-        meridiem: string;
-        travelTimeStart: string;
-        travelTimeEnd: string;
-        pickupTime: string;
+    export interface Invoices {
+        bookingNo: string;
+        refBookingNo: string;
+        invoiceNo: string;
     }
 
-    export interface Price {
-        adultSellPrice: number;
-        childSellPrice: number;
-        adultPrice: number;
-        childPrice: number;
-        singleRiding: number;
-        commissionAdult: number;
-        commissionChild: number;
-        periodStart: string;
-        periodEnd: string;
-    }
-
-    export interface TourPrice {
+    export interface Tours {
+        name: string;
         type: string;
-        prices: Price[];
-    }
-
-    export interface Pax {
-        id: number;
-        min: number;
-        max: number;
-        tourPrices: TourPrice[];
-    }
-
-    export interface Privacy {
-        id: number;
+        date: string;
         privacy: string;
-        paxs: Pax[];
+        pax: number;
+    }
+
+    export interface Hotel {
+        name: string;
+        room: string;
+    }
+
+    export interface Guest {
+        name: string;
+        ages: string;
+    }
+
+    export interface BookBy {
+        name: string;
+        position: string;
+        tel: string;
+    }
+
+    export interface Insurance {
+        isInsurance: boolean;
+        note: string;
+    }
+
+    export interface Commission {
+        isCommission: boolean;
+        amount: number;
+    }
+
+    export interface NoteBy {
+        name: string;
+        date: string;
+        time: string;
     }
 
     export interface RootObject {
-        id: number;
-        code: string;
-        title: string;
-        times: Time[];
-        privacies: Privacy[];
+        invoices: Invoices;
+        tours: Tours;
+        hotel: Hotel;
+        guest: Guest[];
+        bookBy: BookBy;
+        insurance: Insurance;
+        commission: Commission;
+        noteBy: NoteBy;
+        paymentMode: string;
+        paymentCollect: string;
+        isServiceCharge: boolean;
+        serviceCharge: number;
+        specialRequest: string;
+        specialRequestPrice: number;
     }
 
 }
