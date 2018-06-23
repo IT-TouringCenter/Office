@@ -724,14 +724,14 @@ export class BookformEditRsvnComponent implements OnInit {
         url = 'http://localhost:9000/api/Reservations/EditReservation';
       // url = 'http://api.tourinchiangmai.com/api/EditReservation';
       }
-      
+
       let options = new RequestOptions();
 
       /*==================  Success  ===================*/
       return this.http.post(url, dataSave, options)
                       .map(res => res.json())
                       .subscribe(
-                        data => {this.router.navigate(['reservationsummary'])}, // success go to page 'booked-statistics'
+                        data => {this.router.navigate(['reservations/booked'])}, // success go to page 'booked-statistics'
                         err => {console.log(err)}
                       );
       /*==================  Success  ===================*/

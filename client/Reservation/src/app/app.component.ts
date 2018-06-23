@@ -4,8 +4,6 @@ import { Http } from '@angular/http';
 // import 'rxjs/add/operator/map';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-import { BookedstatisticsComponent } from './bookings/bookedstatistics/bookedstatistics.component'
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,8 +11,15 @@ import { BookedstatisticsComponent } from './bookings/bookedstatistics/bookedsta
 })
 
 export class AppComponent {
-  constructor(){
-  
+  constructor(){}
+
+  private switchUser = 'all';
+
+  switchPage(){
+    this.switchUser = '1';
   }
 
+  ngOnInit() {
+    this.switchPage();
+  }
 }
