@@ -26,6 +26,18 @@ body {
         width: 1000px;
     }
 }
+@media(max-width: 768px){
+    .container{
+        width: auto;
+        max-width: 768px;
+    }
+}
+@media(max-width: 575px){
+    .container{
+        width: auto;
+        max-width: 575px;
+    }
+}
 
 ul li {
     list-style: none;
@@ -2228,7 +2240,6 @@ label {
     padding: 10px 0;
 }
 
-
 .go-top {
     margin-right: 1%;
     float: right;
@@ -2247,9 +2258,28 @@ label {
     min-height: 900px;
 }
 
-
 @media print{
     #main-content{
         margin-left: 0 !important;
     }
+}
+
+/* User style */
+
+#main-user{
+    background: black;
+    background-image: url(./../../../../assets/images/tours/inthanon-pagoda-filter.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 768px;
+}
+.user-logo-tc-block{
+    position: fixed;
+    margin: 10px 0px 0px 25px;
+    background-image: url(./../../../../assets/images/logo/tc-logo-white.png);
+    background-repeat: no-repeat;
+    min-height: 60px;
+    width: 100%;
+    z-index: 10;
 }

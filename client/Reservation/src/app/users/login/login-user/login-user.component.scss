@@ -1,0 +1,57 @@
+.user-logo-tc-block{
+    position: fixed;
+    margin: 10px 0px 0px 25px;
+    background-image: url(./../../../../assets/images/logo/tc-logo-white.png);
+    background-repeat: no-repeat;
+    min-height: 60px;
+    width: 100%;
+    z-index: 10;
+}
+.login-block{
+    padding-top: 120px;
+}
+.login-content-block{
+    background: white;
+    min-height: 400px;
+    margin: auto;
+    border-radius: 5px;
+    padding: 30px;
+    box-shadow:#fff 1px 1px 15px;
+    // box-shadow:#ff6262 1px 1px 15px;
+}
+.login-head-icon-block{
+    text-align: right;
+    margin-top:-80px;
+}
+.login-head-icon{
+    background-color:#6d0000;
+    border-radius: 50px;
+    padding: 22.5px 29px;
+    color:white;
+    box-shadow: white 0px 1px 15px;
+}
+.login-head-text{
+    margin: 30px 0px 30px 0px;
+    text-align:center;
+}
+.login-field-block{
+    margin:8px 0px;
+}
+.login-field{
+    height: 40px !important;
+}
+.login-register-block{
+    margin:25px 0px 15px 0px;
+    text-align: center;
+}
+.login-register-text{
+    font-size: 13px;
+}
+.login-btn-block{
+    margin:8px 0px;
+    text-align: center;
+}
+.login-btn{
+    background:#6d0000;
+    color:white;
+}

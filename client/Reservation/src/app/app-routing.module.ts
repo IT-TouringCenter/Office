@@ -33,27 +33,27 @@ const routes: Routes = [
   },
   // Reservations
   {
-    path: 'user/reservations',
+    path: 'user/:userId/reservations',
     component: HomeRsvnComponent
   },
   {
-    path: 'user/reservations/booked',
+    path: 'user/:userId/reservations/booked',
     component: BookedRsvnComponent
   },
   {
-    path: 'user/reservations/book-form-add',
+    path: 'user/:userId/reservations/book-form-add',
     component: BookformAddRsvnComponent
   },
   {
-    path: 'user/reservations/book-form-edit/:transactionId',
+    path: 'user/:userId/reservations/book-form-edit/:transactionId',
     component: BookformEditRsvnComponent
   },
   {
-    path: 'user/reservations/book-form/:transactionId',
+    path: 'user/:userId/reservations/book-form/:transactionId',
     component: BookformRsvnComponent
   },
   {
-    path: 'user/reservations/invoice/:transactionId',
+    path: 'user/:userId/reservations/invoice/:transactionId',
     component: InvoiceRsvnComponent
   },
   // Login
@@ -94,7 +94,7 @@ const routes: Routes = [
     component: ResetPasswordUserComponent
   },
   {
-    path: 'user/:userId/forgot-password',
+    path: 'user/forgot-password',
     component: ForgotPasswordUserComponent
   }
 ];

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ValidatorFn, Validator, AbstractControl, FormControl, NG_VALIDATORS } from '@angular/forms';
 
 @Component({
   selector: 'app-login-user',

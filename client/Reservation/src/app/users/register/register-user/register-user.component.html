@@ -1,3 +1,78 @@
-<p>
-  register-user works!
-</p>
+<!-- Re captcha google -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+<section id="main-user">
+  <!-- TC Logo -->
+  <div class="container user-logo-tc-block"></div>
+  
+  <!-- Form block -->
+  <div class="container register-block">
+    <div class="col-lg-8 col-md-6 col-sm-4 col-xs-2"></div>
+
+    <!-- Content start -->
+    <div class="col-lg-4 col-md-6 col-sm-8 col-xs-10 register-content-block">
+      
+      <!-- Icon register -->
+      <div class="register-head-icon-block">
+        <p><i class="fa fa-user-plus fa-3x register-head-icon" aria-hidden="true"></i></p>
+        <!-- <p><i class="fa fa-plus fa-2x register-head-icon-2" aria-hidden="true" style="box-shadow: #fff 0px 0px 2px; color:white; padding: 5px 7px; border-radius: 50px;z-index:1;"></i></p> -->
+      </div>
+      
+      <!-- Header register -->
+      <div class="register-head-text">
+        <!-- <h3><b>register</b></h3> -->
+        <h3><b>Register</b></h3>
+      </div>
+      
+      <!-- Email -->
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-field-block">
+        <input type="text" class="form-control" placeholder="email">
+      </div>
+      
+      <!-- Password -->
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-field-block">
+        <input type="text" class="form-control" placeholder="password">
+      </div>
+      
+      <!-- Fullname -->
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-field-block">
+        <input type="text" class="form-control" placeholder="fullname">
+      </div>
+      
+      <!-- Date of birth -->
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-field-block">
+        <mat-form-field class="register-datepicker">
+          <input matInput [matDatepicker]="picker" placeholder="date of birth">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker disabled="false" touchUi="true"></mat-datepicker>
+        </mat-form-field>
+      </div>
+      
+      <!-- Agree conditions -->
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-field-block">
+        <p class="register-condition">
+          <mat-checkbox></mat-checkbox> 
+          <span>You agree to <b>Touring Center</b> </span>
+          <a href="#">Conditions.</a>
+        </p>
+      </div>
+      
+      <!-- Button register -->
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-btn-block">
+        <button type="submit" mat-raised-button class="register-btn">
+          <span><b>Submit</b></span>
+        </button>
+      </div>
+
+      <!-- Back to Login -->
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-btn-block">
+        <p class="register-back-login">
+          <a href="/#/user/login">Back to Login</a>
+        </p>
+      </div>
+
+    </div>  
+    <!-- Content end -->
+
+  </div>
+</section>
