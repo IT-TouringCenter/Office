@@ -15,12 +15,10 @@
       <!-- Icon register -->
       <div class="register-head-icon-block">
         <p><i class="fa fa-user-plus fa-3x register-head-icon" aria-hidden="true"></i></p>
-        <!-- <p><i class="fa fa-plus fa-2x register-head-icon-2" aria-hidden="true" style="box-shadow: #fff 0px 0px 2px; color:white; padding: 5px 7px; border-radius: 50px;z-index:1;"></i></p> -->
       </div>
       
       <!-- Header register -->
       <div class="register-head-text">
-        <!-- <h3><b>register</b></h3> -->
         <h3><b>Register</b></h3>
       </div>
       
@@ -52,8 +50,10 @@
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-field-block">
         <p class="register-condition">
           <mat-checkbox></mat-checkbox> 
-          <span>You agree to <b>Touring Center</b> </span>
-          <a href="#">Conditions.</a>
+          <span>You agree to Touring Center </span>
+          <!-- <a href="#">Conditions.</a> -->
+          <span data-toggle="modal" data-target="#policy-modal" class="dialog-text"><b>Policy and Conditions.</b></span>
+          <!-- <span>.</span> -->
         </p>
       </div>
       
@@ -71,8 +71,41 @@
         </p>
       </div>
 
-    </div>  
+    </div>
     <!-- Content end -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="policy-modal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>Some text in the modal.</p>
+            <p>Some text in the modal.</p>
+            <p>Some text in the modal.</p>
+            <p>Some text in the modal.</p>
+            <p>Some text in the modal.</p>
+            <p>Some text in the modal.</p>
+            <p>Some text in the modal.</p>
+            <p>Some text in the modal.</p>
+            <p>Some text in the modal.</p>
+            <p>Some text in the modal.</p>
+            <p>Some text in the modal.</p>
+            <p>Some text in the modal.</p>
+            <p>Some text in the modal.</p>
+            <p>Some text in the modal.</p>
+          </div>
+          <!-- <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div> -->
+        </div>
+        
+      </div>
+    </div>
 
   </div>
 </section>

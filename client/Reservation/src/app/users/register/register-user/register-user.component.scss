@@ -2,7 +2,7 @@
     background-image: url(./../../../../assets/images/tours/coffee-breath-of-nature-filter.jpg);
 }
 .register-block{
-    padding-top: 120px;
+    padding-top: 100px;
 }
 .register-content-block{
     background: white;
@@ -32,7 +32,6 @@
 .register-field-block{
     margin:8px 0px;
 }
-
 .register-btn-block{
     margin:8px 0px;
     text-align: center;
@@ -52,7 +51,15 @@
     margin-top: 20px;
 }
 .register-back-login{
-    text-align:left;
+    text-align: left;
     font-size: 12px;
     margin-top: 10px;
+}
+// Dialog
+.dialog-text{
+    cursor: pointer;
+}
+.modal-header{
+    background: #fff;
+    // border: 1px solid #ddd;
 }

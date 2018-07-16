@@ -2268,7 +2268,8 @@ label {
 
 #main-user{
     background: black;
-    background-image: url(./../../../../assets/images/tours/inthanon-pagoda-filter.jpg);
+    /* background-image: url(./../../../../assets/images/tours/inthanon-pagoda-filter.jpg); */
+    background-image: url(./../../../../assets/images/tours/doi-inthanon-filter.jpg);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
