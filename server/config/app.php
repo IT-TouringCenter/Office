@@ -199,10 +199,13 @@ return [
 		//-- Update booking
 		'EditReservationFacade' => 'App\Facades\Reservations\Transactions\EditReservationFacade',
 
+		// Commons
+		'DateFormatFacade' => 'App\Facades\Commons\DateFormatFacade',
+		'GenerateCodeFacade' => 'App\Facades\Commons\GenerateCodeFacade',
+
 		'ReservationBookingFacade' => 'App\Facades\Reservations\BookingForms\BookingFormFacade',
 		'ReservationBookingStatisticsFacade' => 'App\Facades\Reservations\BookingStatistics\BookingStatisticsFacade',
 		'InvoiceBookingFacade' => 'App\Facades\Reservations\Invoices\InvoiceTourFacade',
-		'DateFormatFacade' => 'App\Facades\Commons\DateFormatFacade',
 		'BookingFormEditFacade' => 'App\Facades\Reservations\BookingFormEdit\BookingFormEditFacade',
 
 		// Online booking
@@ -212,6 +215,13 @@ return [
 
 		// Account
 		'AccountFacade' => 'App\Facades\Accounts\AccountFacade',
+		'AccountRegisterFacade' => 'App\Facades\Accounts\Register\AccountRegisterFacade',
+		'AccountRegisterConfirmFacade' => 'App\Facades\Accounts\Register\AccountRegisterConfirmFacade',
+		'AccountForgotPasswordFacade' => 'App\Facades\Accounts\Request\AccountForgotPasswordFacade',
+		'AccountResetPasswordFacade' => 'App\Facades\Accounts\Setting\AccountResetPasswordFacade',
+		'AccountLoginFacade' => 'App\Facades\Accounts\AccountLoginFacade',
+		'AccountLogoutFacade' => 'App\Facades\Accounts\AccountLogoutFacade',
+		'AccountForceLogoutFacade' => 'App\Facades\Accounts\AccountForceLogoutFacade',
 		
 		// Affiliate
 		'AffiliateFacade' => 'App\Facades\Affiliates\AffiliateFacade',

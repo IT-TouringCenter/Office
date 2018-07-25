@@ -17,8 +17,8 @@ class CreateAccountProfilesTable extends Migration {
 			$table->increments('id');
 			$table->integer('account_id');
 			$table->string('fullname');
-			$table->date('date_of_birth')->nullable();
-			$table->string('identification_number')->nullable();
+			$table->date('birth')->nullable();
+			$table->string('id_number')->nullable();
 			$table->string('address')->nullable();
 			$table->string('city')->nullable();
 			$table->string('province')->nullable();

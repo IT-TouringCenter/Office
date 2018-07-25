@@ -21,6 +21,7 @@ import { ResetPasswordUserComponent } from './users/reset-password-user/reset-pa
 import { ForgotPasswordUserComponent } from './users/forgot-password-user/forgot-password-user.component';
 import { LoginUserComponent } from './users/login/login-user/login-user.component';
 import { LogoutUserComponent } from './users/login/logout-user/logout-user.component';
+import { ForceLogoutUserComponent } from './users/login/force-logout-user/force-logout-user.component';
 import { RegisterUserComponent } from './users/register/register-user/register-user.component';
 import { RegisterConfirmUserComponent } from './users/register/register-confirm-user/register-confirm-user.component';
 import { ProfileUserComponent } from './users/profiles/profile-user/profile-user.component';
@@ -68,6 +69,10 @@ const routes: Routes = [
   {
     path: 'user/:userId/logout',
     component: LogoutUserComponent
+  },
+  {
+    path: 'user/:userId/force-logout',
+    component: ForceLogoutUserComponent
   },
   {
     path: 'user/register',

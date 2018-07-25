@@ -22,6 +22,7 @@ class CreateAccountsTable extends Migration {
 			$table->string('token');
 			$table->string('email')->nullable();
 			$table->string('tel')->nullable();
+			$table->string('active_code');
 			$table->date('active_expired');
 			$table->tinyInteger('is_active')->default(1);
 			$table->string('created_by',50)->default('System');

@@ -1,0 +1,60 @@
+#main-user{
+    // background-image: url(./../../../../assets/images/tours/inthanon-pagoda-filter.jpg);
+}
+.user-logo-tc-block{
+    position: fixed;
+    margin: 10px 0px 0px 25px;
+    background-image: url(./../../../../assets/images/logo/tc-logo-white.png);
+    background-repeat: no-repeat;
+    min-height: 60px;
+    width: 100%;
+    z-index: 10;
+}
+.force-logout-block{
+    padding-top: 100px;
+}
+.force-logout-content-block{
+    background: white;
+    min-height: 400px;
+    margin: auto;
+    border-radius: 5px;
+    padding: 30px;
+    box-shadow:#fff 1px 1px 15px;
+    // box-shadow:#ff6262 1px 1px 15px;
+}
+.force-logout-head-icon-block{
+    text-align: right;
+    margin-top:-80px;
+}
+.force-logout-head-icon{
+    background-color:#6d0000;
+    border-radius: 50px;
+    padding: 22.5px 24px;
+    color:white;
+    box-shadow: white 0px 1px 15px;
+}
+.force-logout-head-text{
+    margin: 30px 0px 30px 0px;
+    text-align:center;
+}
+.force-logout-field-block{
+    margin:8px 0px;
+}
+.force-logout-field{
+    height: 40px !important;
+}
+.force-logout-register-block{
+    margin:25px 0px 15px 0px;
+    text-align: center;
+}
+.force-logout-register-text{
+    font-size: 13px;
+}
+.force-logout-btn-block{
+    margin:8px 0px;
+    text-align: center;
+}
+.force-logout-btn{
+    background:#6d0000;
+    color:white;
+}

@@ -41,6 +41,7 @@ import { RegisterUserComponent } from './users/register/register-user/register-u
 import { RegisterConfirmUserComponent } from './users/register/register-confirm-user/register-confirm-user.component';
 import { ProfileUserComponent } from './users/profiles/profile-user/profile-user.component';
 import { ProfileEditUserComponent } from './users/profiles/profile-edit-user/profile-edit-user.component';
+import { ForceLogoutUserComponent } from './users/login/force-logout-user/force-logout-user.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { ProfileEditUserComponent } from './users/profiles/profile-edit-user/pro
     RegisterConfirmUserComponent,
     ProfileUserComponent,
     ProfileEditUserComponent,
+    ForceLogoutUserComponent,
   ],
   imports: [
     BrowserModule,

@@ -54,6 +54,20 @@ Route::get('/', 'WelcomeController@index');
 	Route::post('api/Tours/UpdateTourTraveledPerBook', 'Tours\TourController@UpdateTourTraveledPerBook');
 /*----------- Tour (End) ---------------------------------------*/
 
+/*----------- Account (Start) ----------------------------------*/
+	Route::post('api/Account/Register/CheckEmailRepeat', 'Accounts\Register\AccountRegisterController@CheckEmailRepeat');
+	Route::post('api/Account/Register/AccountRegister', 'Accounts\Register\AccountRegisterController@AccountRegister');
+	Route::post('api/Account/Register/AccountRegisterConfirm', 'Accounts\Register\AccountRegisterConfirmController@AccountRegisterConfirm');
+	Route::post('api/Account/Request/AccountForgotPassword', 'Accounts\Request\AccountForgotPasswordController@AccountForgotPassword');
+	Route::post('api/Account/Setting/AccountResetPassword', 'Accounts\Setting\AccountResetPasswordController@AccountResetPassword');
+	Route::post('api/Account/AccountLogin', 'Accounts\AccountLoginController@AccountLogin');
+	Route::post('api/Account/AccountLogout', 'Accounts\AccountLogoutController@AccountLogout');
+	Route::post('api/Account/AccountForceLogout', 'Accounts\AccountForceLogoutController@AccountForceLogout');
+/*----------- Account (End) ------------------------------------*/
+
+// Test Email
+	Route::get('api/TestMail', 'TestMailController@TestMail');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

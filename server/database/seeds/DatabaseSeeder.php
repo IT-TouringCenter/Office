@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder {
 
 		//- Account
 		$this->call(AccountTypeSeeder::class);
+		$this->call(AccountRequestTypeSeeder::class);
 
 		//- Configuration
 		$this->call(ConfigurationEmailSeeder::class);
