@@ -773,7 +773,7 @@ export class BookformEditRsvnComponent implements OnInit {
     editTourPrivacy(){
       this.tourInfo.tourPrivacy = this._getBookingEditArr.bookingInfo.tourPrivacy;
     }
-    
+
     // 4. Set & binding [ Tour date ]
     editTourDate(){
       let genDate = new Date(this._getBookingEditArr.bookingInfo.travelDate);

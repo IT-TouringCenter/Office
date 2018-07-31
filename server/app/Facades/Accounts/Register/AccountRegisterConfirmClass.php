@@ -114,7 +114,7 @@ class AccountRegisterConfirmClass{
                 <div class='block-layer' style='padding: 15px 0px 10px 0px;'>
                     <div class='table block-content' style='border: #ccc solid 1px; padding: 0px 10% 0 10%; background: #f7f7f7; width: 60% !important; width: 80%; margin: auto;'>
                         <p class='row-space' style='padding: 10px 0 10px 0;'>
-                            <h2 class='text-center' style='margin: 0; text-align: center;'>Register Confirm</h2>
+                            <h2 class='text-center' style='margin: 0; text-align: center;'>Confirm Register</h2>
                         </p>
                         <p class='text-center text-head-2 row-space' style='text-align: center; padding: 0 0 10px 0; font-size: 18px;'><b>Account</b> : ".array_get($data,'username')."</p>
                         <hr>
@@ -144,7 +144,7 @@ class AccountRegisterConfirmClass{
         $headers .= "Reply-To: noreply@example.com". "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: reservations@touringcnx.com" . "\r\n";
-        $headers .= "BCC: it@touringcnx.com";
+        // $headers .= "BCC: it@touringcnx.com";
 
         $mail = mail($to,$subject,$body,$headers);
         return $mail;

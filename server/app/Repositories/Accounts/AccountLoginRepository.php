@@ -16,6 +16,8 @@ class AccountLoginRepository{
 		4. Get account data
 		5. Get login data
 		6. Force logout
+		7. Get login last id
+		8. Update login history
 	*/
 
 	// 1. Check account
@@ -73,6 +75,25 @@ class AccountLoginRepository{
 						->where('account_id',$accountId)
 						->where('is_active',1)
 						->update($update);
+		return $result;
+	}
+
+	// 7. Get login last id
+	public function GetLoginLastId($accountId){
+		$result = \DB::table('login_histories')
+						->where('account_id',$accountId)
+						->where('is_active',1)
+						->orderBy('id','desc')
+						->get();
+		return $result[0]->id;
+	}
+
+	// 8. Update login history
+	public function UpdateLoginHistory($data,$loginId,$dateTimeNow){
+		$result = \DB::table('login_histories')
+						->where('id',$loginId)
+						->where('logout_code_expired','<',$dateTimeNow)
+						->update($data);
 		return $result;
 	}
 }

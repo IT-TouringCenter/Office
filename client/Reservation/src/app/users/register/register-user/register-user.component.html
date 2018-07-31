@@ -24,24 +24,26 @@
       
       <!-- Email -->
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-field-block">
-        <input type="text" class="form-control" placeholder="email">
+        <!-- <input type="text" class="form-control" placeholder="email" [(ngModel)]="registerData.email" id="email" (blur)="CheckEmailRepeat(registerData.email)" required> -->
+        <input type="text" class="form-control" placeholder="email" [(ngModel)]="registerData.email" id="email" (blur)="CheckEmailRepeat()">
       </div>
       
       <!-- Password -->
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-field-block">
-        <input type="text" class="form-control" placeholder="password">
+        <input type="password" class="form-control" placeholder="password" [(ngModel)]="registerData.password" id="password" (keyup)="ValidationField()" required>
       </div>
       
       <!-- Fullname -->
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-field-block">
-        <input type="text" class="form-control" placeholder="fullname">
+        <input type="text" class="form-control" placeholder="fullname" [(ngModel)]="registerData.fullname" id="fullname" (keyup)="ValidationField()" required>
       </div>
       
       <!-- Date of birth -->
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-field-block">
         <mat-form-field class="register-datepicker">
-          <input matInput [matDatepicker]="picker" placeholder="date of birth">
+          <input matInput [matDatepicker]="picker" placeholder="date of birth" [(ngModel)]="registerData.birth" id="birth" (dateChange)="ValidationField()" required>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <!-- <mat-datepicker #picker disabled="false" touchUi="true" (selectedChanged)="ValidationField()"></mat-datepicker> -->
           <mat-datepicker #picker disabled="false" touchUi="true"></mat-datepicker>
         </mat-form-field>
       </div>
@@ -49,7 +51,7 @@
       <!-- Agree conditions -->
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-field-block">
         <p class="register-condition">
-          <mat-checkbox></mat-checkbox> 
+          <mat-checkbox [(ngModel)]="registerData.isAgree" (change)="ValidationField()" required></mat-checkbox>
           <span>You agree to Touring Center </span>
           <!-- <a href="#">Conditions.</a> -->
           <span data-toggle="modal" data-target="#policy-modal" class="dialog-text"><b>Policy and Conditions.</b></span>
@@ -59,7 +61,7 @@
       
       <!-- Button register -->
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-btn-block">
-        <button type="submit" mat-raised-button class="register-btn">
+        <button type="submit" mat-raised-button class="register-btn" [disabled]="registerData.isRegister==false" (focus)="Submit()" required>
           <span><b>Submit</b></span>
         </button>
       </div>

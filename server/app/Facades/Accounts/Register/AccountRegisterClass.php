@@ -40,6 +40,8 @@ class AccountRegisterClass{
                         $register->status = 'true';
                         $register->message = 'Registered Successfully, please confirm register from your email.';
                         $register->notify = 'OK';
+                        $register->id = '1';
+                        $register->token = 'sdf489w4ef84s65d4f';
                     }else{
                         $register->status = 'false';
                         $register->message = 'Registered Failed, please contact our office.';
@@ -194,7 +196,7 @@ class AccountRegisterClass{
         $headers .= "Reply-To: noreply@example.com". "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: reservations@touringcnx.com" . "\r\n";
-        $headers .= "BCC: it@touringcnx.com";
+        // $headers .= "BCC: it@touringcnx.com";
 
         $mail = mail($to,$subject,$body,$headers);
         return $mail;

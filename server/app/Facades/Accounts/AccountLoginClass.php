@@ -21,7 +21,7 @@ class AccountLoginClass{
             3. Insert login data into login_history table
             4. Send email notify login history
             5. Return
-            6. Force logout (send mail error)
+            6. Force logout (send mail logout)
     */
 
     public function AccountLogin($data){
@@ -61,9 +61,18 @@ class AccountLoginClass{
         }else{
             $saveLoginRes = false;
 
-            $login->status = false;
-            $login->message = 'This account is active.';
-            $login->notify = 'Error';
+            // 6. Force logout (send mail logout)
+            $forceLogout = $this->ForceLogout($accountId);
+
+            if($forceLogout){
+                $login->status = false;
+                $login->message = 'This account is active, Please check email and get code to sign out.';
+                $login->notify = 'Error!';
+            }else{
+                $login->status = false;
+                $login->message = 'This account is active, Please check email to sign out.';
+                $login->notify = 'Error!!';
+            }
             return $login; // End
         }
 
@@ -79,14 +88,9 @@ class AccountLoginClass{
             $login->notify = 'OK';
         }else{
             $login->status = false;
-            $login->message = 'Signed in failed, please sign out or contact our team.';
+            $login->message = 'Signed in failed, Please sign out or contact our team.';
             $login->notify = 'Error';
             return $login; // End
-        }
-
-        // 6. Force logout (send mail error)
-        if($login->status==false){
-            // $forceLogout = $this->ForceLogout($accountId);
         }
 
         return $login;
@@ -120,11 +124,6 @@ class AccountLoginClass{
             'token'=>$accountData[0]->token,
             'logout_code'=>$logoutCode,
             'logout_code_expired'=>$logoutCodeExpired
-            // 'account_id'=>10,
-            // 'login_dateTime'=>$dateTimeNow,
-            // 'token'=>'SFijsef90j2rkjJDFKSLjf',
-            // 'logout_code'=>$logoutCode,
-            // 'logout_code_expired'=>$logoutCodeExpired
         ];
 
         $result = $this->AccountLoginRepo->SaveLoginHistory($data);
@@ -215,9 +214,9 @@ class AccountLoginClass{
         $subject = "Register mail";
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Reply-To: noreply@example.com". "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= "Content-type:text/html; charset=UTF-8" . "\r\n";
         $headers .= "From: reservations@touringcnx.com" . "\r\n";
-        $headers .= "BCC: it@touringcnx.com";
+        // $headers .= "BCC: it@touringcnx.com";
 
         $mail = mail($to,$subject,$body,$headers);
         
@@ -228,11 +227,29 @@ class AccountLoginClass{
         }
     }
 
-    // 6. Force logout (send mail error)
+    // 5. Return (non function)
+
+    // 6. Force logout (send mail logout)
     public function ForceLogout($accountId){
-        $result = $this->AccountLoginRepo->ForceLogout($accountId);
-        
-        if($result){
+        // 6.1 get login last id
+        $loginLastId = $this->AccountLoginRepo->GetLoginLastId($accountId);
+
+        // 6.2 update code logout & exp
+        $dateTimeNow = Carbon::now('Asia/Bangkok');
+        $logoutCode = \GenerateCodeFacade::Code5Chars();
+        $logoutCodeExpired = \DateFormatFacade::SetDatePlus30Minute($dateTimeNow);
+
+        $data = [
+            'account_id'=>$accountId,
+            'logout_code'=>$logoutCode,
+            'logout_code_expired'=>$logoutCodeExpired
+        ];
+
+        $updateLogin = $this->AccountLoginRepo->UpdateLoginHistory($data,$loginLastId,$dateTimeNow);
+
+        // 6.3 send email
+        if($updateLogin){
+            $mail = $this->SendMailLoginHistory($accountId,$loginLastId);
             return true;
         }else{
             return false;

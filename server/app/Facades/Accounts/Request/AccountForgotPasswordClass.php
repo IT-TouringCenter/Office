@@ -178,7 +178,7 @@ class AccountForgotPasswordClass{
         $headers .= "Reply-To: noreply@example.com". "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: reservations@touringcnx.com" . "\r\n";
-        $headers .= "BCC: it@touringcnx.com";
+        // $headers .= "BCC: it@touringcnx.com";
 
         $mail = mail($to,$subject,$body,$headers);
         
