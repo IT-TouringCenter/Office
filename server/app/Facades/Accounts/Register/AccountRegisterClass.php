@@ -8,11 +8,13 @@ use Illuminate\Http\Request;
 use App\account as Account;
 
 use App\Repositories\Accounts\Register\AccountRegisterRepository as AccountRegisterRepo;
+use App\Repositories\Commons\GenerateTokenRepository as GenerateTokenRepo;
 
 class AccountRegisterClass{
 
-	public function __construct(AccountRegisterRepo $AccountRegisterRepo){
-		$this->AccountRegisterRepo = $AccountRegisterRepo;
+	public function __construct(AccountRegisterRepo $AccountRegisterRepo, GenerateTokenRepo $GenerateTokenRepo){
+        $this->AccountRegisterRepo = $AccountRegisterRepo;
+        $this->GenerateTokenRepo = $GenerateTokenRepo;
 	}
 
     /*  Register logic
@@ -23,25 +25,27 @@ class AccountRegisterClass{
 
     public function AccountRegister($data){
 
-        // Check email repeat
+        // 1. Check email repeat
         $email = array_get($data,'email');
         $checkEmailRepeat = $this->CheckEmailRepeat($email);
 
         $register = new Account;
 
-        if(array_get($checkEmailRepeat,'isRegister')==true){
+        if(array_get($checkEmailRepeat,'isRepeat')==false){
             $accountId = $this->InsertAccount($data);
             if($accountId){
                 $accountProfileId = $this->InsertAccountProfile($accountId, $data);
                 if($accountProfileId){
+                    // Get account data by ID
+                    $accountData = $this->GetAccountDataByID($accountId);
                     // Send email
-                    $mail = $this->SendMailRegister($accountId);
+                    $mail = $this->SendMailRegister($accountData);
                     if($mail){
                         $register->status = 'true';
                         $register->message = 'Registered Successfully, please confirm register from your email.';
                         $register->notify = 'OK';
-                        $register->id = '1';
-                        $register->token = 'sdf489w4ef84s65d4f';
+                        $register->id = array_get($accountData,'accountId');
+                        $register->token = array_get($accountData,'token');
                     }else{
                         $register->status = 'false';
                         $register->message = 'Registered Failed, please contact our office.';
@@ -65,14 +69,18 @@ class AccountRegisterClass{
         return $register;
     }
 
-    // Save account table
+    // 2. Save account table
     public function InsertAccount($data){
         // date
         $date = Carbon::now('Asia/Bangkok');
         $tomorrow = \DateFormatFacade::SetTomorrow($date);
         // gen code
         $password = \GenerateCodeFacade::Encode(array_get($data,'password'));
+
+        // gen token
+        // $token = $this->GenerateToken();
         $token = \GenerateCodeFacade::GenerateToken();
+
         $activeCode = \GenerateCodeFacade::CreateActiveCode();
 
         $setData = [
@@ -92,7 +100,7 @@ class AccountRegisterClass{
         return $result;
     }
 
-    // Save account profile
+    // 3. Save account profile
     public function InsertAccountProfile($accountId, $data){
         $setData = [
             "account_id"=>$accountId,
@@ -105,24 +113,24 @@ class AccountRegisterClass{
         return $result;
     }
 
-    // Check email repeat
+    // 4. Check email repeat
     public function CheckEmailRepeat($email){
         $result = $this->AccountRegisterRepo->CheckEmailRepeat($email);
 
         $message = new Account;
 
-        if($result=='false'){
+        if($result==false){
             $message->message = 'This email does not work';
-            $message->isRegister = false;
+            $message->isRepeat = true;
         }else{
             $message->message = 'This email is valid';
-            $message->isRegister = true;
+            $message->isRepeat = false;
         }
         return $message;
     }
 
-    // Send email for confirm register
-    public function SendMailRegister($accountId){
+    // 5. Get account data by ID
+    public function GetAccountDataByID($accountId){
         // Get account data
         $accountData = $this->AccountRegisterRepo->GetAccountData($accountId);
 
@@ -139,7 +147,11 @@ class AccountRegisterClass{
             $data->activeCode = $value->active_code;
             $data->activeExpired = $value->active_expired;
         }
+        return $data;
+    }
 
+    // 6. Send email for confirm register
+    public function SendMailRegister($data){
         $activeExpired = \DateFormatFacade::SetFullDate(array_get($data,'activeExpired'));
         $userId = \GenerateCodeFacade::Encode(array_get($data,'id')+231327);
 
@@ -200,11 +212,17 @@ class AccountRegisterClass{
 
         $mail = mail($to,$subject,$body,$headers);
         return $mail;
-
-        // if($mail){
-        //     return "true";
-        // }else{
-        //     return "false";
-        // }
     }
+
+    // 7. Generate token
+    public function GenerateToken(){
+        $token = \GenerateCodeFacade::GenerateToken();
+        // Check token repeat
+        $tokenRepeat = $this->GenerateTokenRepo->CheckAccountTokenRepeat($token);
+        if($tokenRepeat==true){
+            return $token;
+        }else{
+            return $token;
+        }
+    }    
 }

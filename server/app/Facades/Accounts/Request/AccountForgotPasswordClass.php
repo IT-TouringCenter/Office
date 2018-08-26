@@ -34,8 +34,10 @@ class AccountForgotPasswordClass{
         if(array_get($getAccount,'status')==true){
             $requestId = $this->SaveRequest($getAccount);
             // return $requestId; // request id
+        }else{
+            $requestId = false;
         }
-
+        // return $requestId;
         // 3. Send mail forgot password
         if($requestId!=false){
             $mail = $this->SendMailForgotPasswordHistory($getAccount,$requestId);
@@ -43,10 +45,12 @@ class AccountForgotPasswordClass{
             $account->status = true;
             $account->message = "Send reset password code to your email successful.";
             $account->notify = "OK";
+            $account->data = $getAccount;
         }else{
             $account->status = false;
-            $account->message = "Can't send reset password code.";
+            $account->message = "This account invalid, can't send reset password code.";
             $account->notify = "Error";
+            $account->data = '';
         }
 
         return $account;

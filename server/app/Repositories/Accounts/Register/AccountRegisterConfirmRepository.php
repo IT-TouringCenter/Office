@@ -12,6 +12,7 @@ class AccountRegisterConfirmRepository{
 		2. Active account table
 		3. Active account profile table
 		4. Get account
+		5. Get account data from token
 	*/
 
 	// 1. Check email & confirm expired
@@ -65,6 +66,24 @@ class AccountRegisterConfirmRepository{
 						->where('id',$accountId)
 						->where('is_active',1)
 						->get();
+		return $result;
+	}
+
+	// 5. Get account data from token
+	public function GetAccountFromToken($token){
+		// $tokens = 1196955109;
+		$result = \DB::table('accounts')
+						->where('token',$token)
+						->where('is_active',0)
+						->get();
+		return $result;
+	}
+
+	// 6. Update confirm code by account id
+	public function UpdateConfirmCodeByAccountId($accountId, $accountData){
+		$result = \DB::table('accounts')
+						->where('id', $accountId)
+						->update($accountData);
 		return $result;
 	}
 }

@@ -11,7 +11,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 use Illuminate\Support\Facades\Redirect;
 
-class AccountLoginController extends Controller {
+class AccountController extends Controller {
 
     protected function Response($status,$message,$e){
 		switch ($status) {
@@ -23,32 +23,21 @@ class AccountLoginController extends Controller {
 			default:
 			break;
 		}		
-	}//end Response function
+	}// end Response function
 
     /*
-        1. Login
-        2. Session login
+        1. Get account login by token
+        2. Get account by token
     */
 
-    // 1. Login
-    public function AccountLogin(Request $request){
-        $accountData  = $request->input();
-        try{
-            $results = \AccountLoginFacade::AccountLogin($accountData);
-            if($results==null){
-                abort(400);
-            }
-            return $results;
-        }catch(Exception $e){
-            abort(500);
-        }
-    }
-
-    // 2. Session login
-    public function AccountSessionLogin(Request $request){
+    // 1. Get account login by token
+    public function GetAccountLoginByToken(Request $request){
+    // public function GetAccountLoginByToken($token){
         $accountData = $request->input();
+        $token = array_get($accountData,'token');
+        // return $token;
         try{
-            $results = \AccountLoginFacade::AccountSessionLogin($accountData);
+            $results = \AccountFacade::GetAccountLoginByToken($token);
             if($results==null){
                 abort(400);
             }
@@ -58,4 +47,18 @@ class AccountLoginController extends Controller {
         }
     }
 
+    // 2. Get account by token
+    public function GetAccountByToken(Request $request){
+        $accountData = $request->input();
+        $token = array_get($accountData,'token');
+        try{
+            $results = \AccountFacade::GetAccountByToken($token);
+            if($results==null){
+                abort(400);
+            }
+            return $results;
+        }catch(Exception $e){
+            abort(500);
+        }
+    }
 }

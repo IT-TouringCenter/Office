@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ValidatorFn, Validator, AbstractControl, FormControl, NG_VALIDATORS } from '@angular/forms';
+import { ActivatedRoute, Params } from "@angular/router";
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
+import "rxjs/Rx";
 
 @Component({
   selector: 'app-login-user',
@@ -8,7 +11,56 @@ import { ValidatorFn, Validator, AbstractControl, FormControl, NG_VALIDATORS } f
 })
 export class LoginUserComponent implements OnInit {
 
-  constructor() { }
+  data = {
+    username: '',
+    password: ''
+  };
+
+  constructor(
+    private http: Http,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
+
+  /*
+    1. Login
+    2. Set login
+  */
+
+  // 1. Login
+  login(){
+    let url = 'http://localhost:9000/api/Account/AccountLogin';
+    // let url = 'http://api.tourinchiangmai.com/api/Account/AccountLogin';
+
+      let options = new RequestOptions();
+      let dataSave = {
+          "username": this.data.username,
+          "password": this.data.password
+      };
+
+      /*==================  Success  ===================*/
+      // return this.http.post(url, dataSave, options)
+      return this.http.post(url, dataSave, options)
+                      .map(res => res.json())
+                      .subscribe(
+                        data => [
+                          this.setLogin(data)
+                        ],
+                        err => {console.log(err)}
+                      );
+      /*==================  Success  ===================*/
+  }
+
+  // 2. Set login
+  setLogin(data){
+    console.log(data);
+    if(data.status==true){
+      sessionStorage.setItem('users',JSON.stringify(data));
+      this.router.navigate(['user']);
+    }else if(data.status==false && data.notify=='Sign out not found'){
+      this.router.navigate(['user/force-logout/'+data.data.token]);
+    }
+  }
 
   ngOnInit() {
   }

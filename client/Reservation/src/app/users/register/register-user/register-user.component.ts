@@ -22,7 +22,7 @@ export class RegisterUserComponent implements OnInit {
         2. Check email repeat
         3. Validation field and enable submit button
         4. Submit button
-        5. Check email format
+        5. Email format
   */
 
   // 1. Set variable
@@ -33,12 +33,12 @@ export class RegisterUserComponent implements OnInit {
     fullname: '',
     birth: null,
     isAgree: false,
-    isEmailRepeat: false,
+    isEmail: false,
+    isEmailRepeat: true,
+    isEmailFormat: false,
     isRegister: false,
     countField: 0
   };
-
-  myform: FormGroup;
 
   constructor(
     private http: Http,
@@ -46,11 +46,13 @@ export class RegisterUserComponent implements OnInit {
   ) {}
 
   // 2. Check email repeat
-  CheckEmailRepeat(){
+  CheckEmailRepeat(){  
+    this.registerData.isEmailFormat = this.CheckEmailFormat(this.registerData.email);
+
     let options = new RequestOptions();
     let data = {
       email: this.registerData.email
-    }
+    };
     let url = 'http://localhost:9000/api/Account/Register/CheckEmailRepeat';
     // let url = 'http://api.tourinchiangmai.com/api/Account/Register/CheckEmailRepeat';
 
@@ -59,18 +61,24 @@ export class RegisterUserComponent implements OnInit {
                   .map(res => res.json())
                   .subscribe(
                     data => [
-                      // this.registerData.isRegister = data.isRegister,
-                      // this.registerData.isEmailRepeat = data.isRegister
+                      this.registerData.isEmailRepeat = data.isRepeat
                     ],
                     err => {console.log(err)}
                   );
+    if(this.registerData.isEmailRepeat==false && this.registerData.isEmailFormat==true){
+      this.registerData.isEmail = true;
+    }else{
+      this.registerData.isEmail = false;
+    }
     this.ValidationField();
+    console.log('Email no repeat : '+this.registerData.isEmail);
+    return this.registerData.isEmail;
   }
 
   // 3. Validation field and enable submit button
   ValidationField(){
     let countField = 0;
-    if(this.registerData.email.length>1){
+    if(this.registerData.isEmail==true){
       countField++;
     }
     if(this.registerData.password.length>1){
@@ -86,20 +94,20 @@ export class RegisterUserComponent implements OnInit {
       countField++;
     }
 
-    console.log('count field : '+countField);
-
+    // Open submit btn
     if(countField==5){
       this.registerData.isRegister = true;
-      console.log('Status : '+this.registerData.isRegister);
     }else{
       this.registerData.isRegister = false;
     }
+    console.log('status : '+this.registerData.isRegister);
   }
 
   // 4. Submit button
   Submit(){
+    let checkEmail = this.CheckEmailRepeat();
     if(this.registerData.isRegister==false){
-      console.log('Please fill data for register.');
+      // console.log('Please fill data for register.');
       return;
     }else{
       let options = new RequestOptions();
@@ -108,7 +116,7 @@ export class RegisterUserComponent implements OnInit {
         "password": this.registerData.password,
         "fullname": this.registerData.fullname,
         "birth": this.registerData.birth
-      }
+      };
       let url = 'http://localhost:9000/api/Account/Register/AccountRegister';
       // let url = 'http://api.tourinchiangmai.com/api/Account/Register/AccountRegister';
 
@@ -117,22 +125,21 @@ export class RegisterUserComponent implements OnInit {
                     .map(res => res.json())
                     .subscribe(
                       // data => console.log(data),
-                      data => {this.router.navigate(['user/'+data.token+'/register-confirm'])},
+                      data => {this.router.navigate(['user/register-confirm/'+data.token])},
                       err => {console.log(err)}
                     );
-      console.log(JSON.stringify(data));
+      // console.log(JSON.stringify(data));
     } 
   }
 
-  // 5. Check email format
-  CheckEmailFormat(){
-
+  // 5. Email format
+  CheckEmailFormat(email){
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
   }
 
-
   ngOnInit() {
-    // this.ValidationField();
-    // this.CheckEmailRepeat();
+    this.ValidationField();
   }
 
 }

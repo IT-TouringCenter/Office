@@ -18,30 +18,31 @@
       <!-- Header register -->
       <div class="register-confirm-head-text">
         <!-- <h3><b>register</b></h3> -->
-        <h3><b>Confirm account</b></h3>
+        <h3><b>Confirm register</b></h3>
       </div>
       
       <!-- Email -->
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-confirm-field-block">
-        <input type="text" class="form-control" value="user@email.com" disabled>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-confirm-field-block" >
+        <input type="text" class="form-control" value="{{data.user}}" disabled>
       </div>
       
       <!-- Confirm code -->
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-confirm-field-block">
-        <input type="text" class="form-control" placeholder="confirm code">
+        <input type="text" class="form-control" placeholder="confirm code" [(ngModel)]="data.code">
       </div>
 
       <!-- Send code again -->
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-confirm-field-block">
         <p class="register-confirm-send-code">
           Not received the code. 
-          <a href="/#">send again</a>
+          <!-- <a href="/#">send again</a> -->
+          <span class="register-confirm-link" (click)="sendConfirmCodeAgain()">send again</span>
         </p>
       </div>
 
       <!-- Button register -->
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 register-confirm-btn-block">
-        <button type="submit" mat-raised-button class="register-confirm-btn">
+        <button type="submit" mat-raised-button class="register-confirm-btn" (click)="confirmRegister()">
           <span><b>Submit</b></span>
         </button>
       </div>

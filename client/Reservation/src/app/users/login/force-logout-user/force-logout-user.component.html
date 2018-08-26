@@ -22,20 +22,20 @@
       
       <!-- Username -->
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 force-logout-field-block">
-        <input type="text" class="form-control force-logout-field" placeholder="email@mail.com" disabled>
+        <input type="text" class="form-control force-logout-field" value="{{data.username}}" disabled>
       </div>
       
-      <!-- Password -->
+      <!-- Logout code -->
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 force-logout-field-block">
-        <input type="text" class="form-control force-logout-field" placeholder="logout code">
+        <input type="text" class="form-control force-logout-field" placeholder="logout code" [(ngModel)]="data.logoutCode">
       </div>
     
       <!-- Forgot password -->
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 force-logout-register-block"></div>
+      <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 force-logout-register-block"></div> -->
 
       <!-- Button force-logout -->
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 force-logout-btn-block">
-        <button type="submit" mat-raised-button class="force-logout-btn">
+        <button type="submit" mat-raised-button class="force-logout-btn" (click)="submit()">
           <span><b>Logout</b></span>
         </button>
       </div>

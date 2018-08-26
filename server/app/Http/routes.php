@@ -55,14 +55,29 @@ Route::get('/', 'WelcomeController@index');
 /*----------- Tour (End) ---------------------------------------*/
 
 /*----------- Account (Start) ----------------------------------*/
+	Route::post('api/Account/GetAccountByToken', 'Accounts\Accountcontroller@GetAccountByToken');
+	// Register
 	Route::post('api/Account/Register/CheckEmailRepeat', 'Accounts\Register\AccountRegisterController@CheckEmailRepeat');
 	Route::post('api/Account/Register/AccountRegister', 'Accounts\Register\AccountRegisterController@AccountRegister');
+	// confirm register
+	// Route::post('api/Account/Register/GetAccountRegisterConfirm', 'Accounts\Register\AccountRegisterConfirmController@GetAccountRegisterConfirm');
+	Route::get('api/Account/Register/GetAccountRegisterConfirm/{accountToken}', 'Accounts\Register\AccountRegisterConfirmController@GetAccountRegisterConfirm');
+	Route::post('api/Account/Register/CheckConfirmCode', 'Accounts\Register\AccountRegisterConfirmController@CheckConfirmCode');
 	Route::post('api/Account/Register/AccountRegisterConfirm', 'Accounts\Register\AccountRegisterConfirmController@AccountRegisterConfirm');
+	Route::post('api/Account/Register/AccountRegisterConfirmCodeAgain', 'Accounts\Register\AccountRegisterConfirmController@AccountRegisterConfirmCodeAgain');
+	// forgot password
 	Route::post('api/Account/Request/AccountForgotPassword', 'Accounts\Request\AccountForgotPasswordController@AccountForgotPassword');
+	
 	Route::post('api/Account/Setting/AccountResetPassword', 'Accounts\Setting\AccountResetPasswordController@AccountResetPassword');
+	// login
 	Route::post('api/Account/AccountLogin', 'Accounts\AccountLoginController@AccountLogin');
+	// logout
 	Route::post('api/Account/AccountLogout', 'Accounts\AccountLogoutController@AccountLogout');
+	Route::get('api/Account/GetAccountForceLogout/{accountToken}', 'Accounts\AccountController@GetAccountLoginByToken');
+	Route::post('api/Account/GetAccountLoginData', 'Accounts\AccountController@GetAccountLoginByToken');
 	Route::post('api/Account/AccountForceLogout', 'Accounts\AccountForceLogoutController@AccountForceLogout');
+	// session login
+	Route::post('api/Account/AccountSessionLogin', 'Accounts\AccountLoginController@AccountSessionLogin');
 /*----------- Account (End) ------------------------------------*/
 
 // Test Email

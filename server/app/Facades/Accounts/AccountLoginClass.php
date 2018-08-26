@@ -17,11 +17,14 @@ class AccountLoginClass{
 
     /*  Login logic
             1. Check account in account table
-            2. Check status login in login_history table
-            3. Insert login data into login_history table
-            4. Send email notify login history
-            5. Return
-            6. Force logout (send mail logout)
+            2. Check account active
+            3. Check status login in login_history table
+            4. Insert login data into login_history table
+            5. Send email notify login history
+            6. Return
+            7. Force logout (send mail logout)
+            
+            8. Account session login
     */
 
     public function AccountLogin($data){
@@ -35,18 +38,37 @@ class AccountLoginClass{
         // 1. Check email in account table
         $checkAccount = $this->CheckAccount($data);
 
-        // 2. Check status login in login_history table
+        // 2. Check account active
         if($checkAccount){
+            $checkAccountActive = $this->CheckAccountActive($data);
+
+            // set data for return to client
+            $resData = new Account;
+            $resData->id = $checkAccountActive[0]->id;
+            $resData->token = $checkAccountActive[0]->token;
+            $resData->username = $checkAccountActive[0]->username;
+            $resData->name = $checkAccountActive[0]->fullname;
+            $resData->userType = $checkAccountActive[0]->account_type_id;
+        }else{
+            $login->status = false;
+            $login->message = 'Username or password is invalid.';
+            $login->notify = 'Not found';
+            return $login;
+        }
+
+        // 3. Check status login in login_history table
+        if($checkAccountActive){
             $accountId = $checkAccount[0]->id;
             $activeLoginRes = $this->CheckLoginStatus($accountId);
         }else{
             $login->status = false;
             $login->message = 'Username or password is invalid.';
-            $login->notify = 'Error';
+            $login->notify = 'Non active';
+            $login->data = $resData;
             return $login; // End
         }
 
-        // 3. Insert login data into login_history table
+        // 4. Insert login data into login_history table
         if($activeLoginRes==false){
             $saveLogin = $this->SaveLoginHistory($checkAccount);
             if($saveLogin){
@@ -55,45 +77,48 @@ class AccountLoginClass{
                 $saveLoginRes = false;
                 $login->status = false;
                 $login->message = 'Username or password is invalid.';
-                $login->notify = 'Error!';
+                $login->notify = 'Login not found';
+                $login->data = $resData;
                 return $login; // End
             }
         }else{
             $saveLoginRes = false;
 
-            // 6. Force logout (send mail logout)
+            // 7. Force logout (send mail logout)
             $forceLogout = $this->ForceLogout($accountId);
 
             if($forceLogout){
                 $login->status = false;
                 $login->message = 'This account is active, Please check email and get code to sign out.';
-                $login->notify = 'Error!';
+                $login->notify = 'Sign out not found or session expired.';
+                $login->data = $resData;
             }else{
                 $login->status = false;
                 $login->message = 'This account is active, Please check email to sign out.';
-                $login->notify = 'Error!!';
+                $login->notify = 'Sign out not found';
+                $login->data = $resData;
             }
             return $login; // End
         }
 
-        // 4. Send email notify login history
+        // 5. Send email notify login history
         if($saveLoginRes==true){
             $mail = $this->SendMailLoginHistory($accountId,$saveLogin);
-        }
-
-        // 5. Return
-        if($mail==true){
+                        
+            // 6. Return
             $login->status = true;
             $login->message = 'Signed in successfully.';
             $login->notify = 'OK';
+            $login->data = $resData;
         }else{
             $login->status = false;
             $login->message = 'Signed in failed, Please sign out or contact our team.';
             $login->notify = 'Error';
-            return $login; // End
+            $login->data = $resData;
+            return $login;
         }
 
-        return $login;
+        return $login; // End
     }
 
     // 1. Check account in account table
@@ -105,13 +130,22 @@ class AccountLoginClass{
         return $result;
     }
 
-    // 2. Check status login in login_history table
+    // 2. Check account active
+    public function CheckAccountActive($data){
+        $username = array_get($data,'username');
+        $password = \GenerateCodeFacade::Encode(array_get($data,'password'));
+
+        $result = $this->AccountLoginRepo->CheckAccountActive($username,$password);
+        return $result;
+    }
+
+    // 3. Check status login in login_history table
     public function CheckLoginStatus($accountId){
         $result = $this->AccountLoginRepo->CheckLoginStatus($accountId);
         return $result;
     }
 
-    // 3. Insert login data into login_history table
+    // 4. Insert login data into login_history table
     public function SaveLoginHistory($accountData){
         // set data
         $dateTimeNow = Carbon::now('Asia/Bangkok');
@@ -130,7 +164,7 @@ class AccountLoginClass{
         return $result;
     }
 
-    // 4. Send email notify login history
+    // 5. Send email notify login history
     public function SendMailLoginHistory($accountId,$loginId){
         // Get account data
         $accountData = $this->AccountLoginRepo->GetAccountData($accountId);
@@ -227,9 +261,9 @@ class AccountLoginClass{
         }
     }
 
-    // 5. Return (non function)
+    // 6. Return (non function)
 
-    // 6. Force logout (send mail logout)
+    // 7. Force logout (send mail logout)
     public function ForceLogout($accountId){
         // 6.1 get login last id
         $loginLastId = $this->AccountLoginRepo->GetLoginLastId($accountId);
@@ -254,5 +288,23 @@ class AccountLoginClass{
         }else{
             return false;
         }
+    }
+
+    // 8. Account session login
+    public function AccountSessionLogin($req){
+        $token = array_get($req,'token');
+        $checkAccount = $this->AccountLoginRepo->GetAccountByToken($token);
+
+        $account = new Account;
+        if($checkAccount){
+            $account->status = true;
+            $account->message = "This account actually exists.";
+            $account->notice = "OK";
+        }else{
+            $account->status = false;
+            $account->message = "This code is not in the system.";
+            $account->notice = "Failed";
+        }
+        return $account;
     }
 }

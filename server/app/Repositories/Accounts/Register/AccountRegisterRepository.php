@@ -30,9 +30,9 @@ class AccountRegisterRepository{
 	public function CheckEmailRepeat($data){
 		$result = \DB::table('accounts')->where('username',$data)->get();
 		if($result){
-			return 'false';
+			return false;
 		}else{
-			return 'true';
+			return true;
 		}
 	}
 
@@ -41,4 +41,5 @@ class AccountRegisterRepository{
 		$result = \DB::table('accounts')->where('id',$accountId)->get();
 		return $result;
 	}
+
 }

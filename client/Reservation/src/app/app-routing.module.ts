@@ -67,11 +67,11 @@ const routes: Routes = [
     component: LoginUserComponent
   },
   {
-    path: 'user/:userId/logout',
+    path: 'user/logout',
     component: LogoutUserComponent
   },
   {
-    path: 'user/:userId/force-logout',
+    path: 'user/force-logout/:userId',
     component: ForceLogoutUserComponent
   },
   {
@@ -79,23 +79,23 @@ const routes: Routes = [
     component: RegisterUserComponent
   },
   {
-    path: 'user/:userId/register-confirm',
+    path: 'user/register-confirm/:userId',
     component: RegisterConfirmUserComponent
   },
   {
-    path: 'user/:userId/profile',
+    path: 'user/profile/:userId',
     component: ProfileUserComponent
   },
   {
-    path: 'user/:userId/profile-edit',
+    path: 'user/profile-edit/:userId',
     component: ProfileEditUserComponent
   },
   {
-    path: 'user/:userId/change-password',
+    path: 'user/change-password/:userId',
     component: ChangePasswordUserComponent
   },
   {
-    path: 'user/:userId/reset-password',
+    path: 'user/reset-password/:userId',
     component: ResetPasswordUserComponent
   },
   {

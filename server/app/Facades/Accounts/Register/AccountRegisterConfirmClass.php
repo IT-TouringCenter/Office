@@ -16,16 +16,19 @@ class AccountRegisterConfirmClass{
 	}
 
     /*  Confirm register logic
-            1. Check email & confirm expired
-            2. Update account, account profile table
+            1. Confirm register
+            2. Active register
+            3. Send email confirm
+            4. Get account data from token
+            5. Set confirm code to account table
     */
 
-    // Confirm register
+    // 1. Confirm register
     public function AccountRegisterConfirm($data){
         $dateNow = Carbon::now('Asia/Bangkok');
         $this->confirmRes = new Account;
 
-        // 1. Check email & confirm expired
+        // Check email & confirm expired
         $checkConfirmExpired = $this->AccountRegisterConfirmRepo->CheckConfirmExpired($data,$dateNow);
 
         if($checkConfirmExpired!=false){
@@ -41,7 +44,7 @@ class AccountRegisterConfirmClass{
         return $this->confirmRes;
     }
 
-    // Active register
+    // 2. Active register
     public function ActiveRegister($accountId,$dateNow){
         // account
         $activeAccount = $this->AccountRegisterConfirmRepo->ActiveAccount($accountId,$dateNow);
@@ -72,7 +75,7 @@ class AccountRegisterConfirmClass{
         }
     }
 
-    // Send email confirm
+    // 3. Send email confirm
     public function SendMailConfirmRegister($accountId){
         // Get account data
         $accountData = $this->AccountRegisterConfirmRepo->GetAccountData($accountId);
@@ -148,5 +151,60 @@ class AccountRegisterConfirmClass{
 
         $mail = mail($to,$subject,$body,$headers);
         return $mail;
+    }
+
+    // 4. Get account data from token
+    public function GetAccountRegisterConfirm($token){
+        // $token = array_get($data,'token');
+        $accountData = new Account;
+        
+        $result = $this->AccountRegisterConfirmRepo->GetAccountFromToken($token);
+        // return $result;
+        if($result){
+            foreach($result as $value){
+                $accountData->status = true;
+                $accountData->id = $value->id;
+                $accountData->email = $value->email;
+            }
+        }else{
+            $accountData->status = false;
+            $accountData->id = '';
+            $accountData->email = '';
+        }
+        return $accountData;
+    }
+
+    // 5. Set confirm code to account table
+    public function AccountRegisterConfirmCodeAgain($token){
+        $data = new Account;
+        // Get account id by token
+        $account = \AccountFacade::GetAccountByTokenNonActive($token);
+        $accountId = $account->accountId;
+
+        // Set date
+        $date = Carbon::now('Asia/Bangkok');
+        $tomorrow = \DateFormatFacade::SetTomorrow($date);
+        // Set active code
+        $activeCode = \GenerateCodeFacade::CreateActiveCode();
+
+        $accountData = [
+            "active_code"=>$activeCode,
+            "active_expired"=>$tomorrow
+        ];
+
+        $result = $this->AccountRegisterConfirmRepo->UpdateConfirmCodeByAccountId($accountId, $accountData);
+        
+        // return & send mail
+        if($result){
+            $sendMail = $this->SendMailConfirmRegister($accountId);
+            $data->status = true;
+            $data->message = 'Send new confirm code complete.';
+            $data->notify = 'OK';
+        }else{
+            $data->status = false;
+            $data->message = 'Send new confirm code not found.';
+            $data->notify = 'Error!';
+        }
+        return $data;
     }
 }
