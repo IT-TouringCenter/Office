@@ -43,6 +43,14 @@ import { ProfileUserComponent } from './users/profiles/profile-user/profile-user
 import { ProfileEditUserComponent } from './users/profiles/profile-edit-user/profile-edit-user.component';
 import { ForceLogoutUserComponent } from './users/login/force-logout-user/force-logout-user.component';
 import { SessionLoginComponent } from './users/login/session-login/session-login.component';
+import { HomeAffComponent } from './affiliate/home/home-aff/home-aff.component';
+import { BookedAffComponent } from './affiliate/booking/booked-aff/booked-aff.component';
+import { TravelingAffComponent } from './affiliate/booking/traveling-aff/traveling-aff.component';
+import { CommissionAffComponent } from './affiliate/commission/commission-aff/commission-aff.component';
+import { HeaderAffComponent } from './affiliate/commons/header-aff/header-aff.component';
+import { MenuBarAffComponent } from './affiliate/commons/header-aff/menu-bar-aff/menu-bar-aff.component';
+import { MenuSidebarAffComponent } from './affiliate/commons/header-aff/menu-sidebar-aff/menu-sidebar-aff.component';
+import { CheckLogoutUserComponent } from './users/logout/check-logout-user/check-logout-user.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +85,14 @@ import { SessionLoginComponent } from './users/login/session-login/session-login
     ProfileEditUserComponent,
     ForceLogoutUserComponent,
     SessionLoginComponent,
+    HomeAffComponent,
+    BookedAffComponent,
+    TravelingAffComponent,
+    CommissionAffComponent,
+    HeaderAffComponent,
+    MenuBarAffComponent,
+    MenuSidebarAffComponent,
+    CheckLogoutUserComponent,
   ],
   imports: [
     BrowserModule,

@@ -26,6 +26,11 @@ import { RegisterUserComponent } from './users/register/register-user/register-u
 import { RegisterConfirmUserComponent } from './users/register/register-confirm-user/register-confirm-user.component';
 import { ProfileUserComponent } from './users/profiles/profile-user/profile-user.component';
 import { ProfileEditUserComponent } from './users/profiles/profile-edit-user/profile-edit-user.component';
+// Affiliate
+import { HomeAffComponent } from './affiliate/home/home-aff/home-aff.component';
+import { BookedAffComponent } from './affiliate/booking/booked-aff/booked-aff.component';
+import { TravelingAffComponent } from './affiliate/booking/traveling-aff/traveling-aff.component';
+import { CommissionAffComponent } from './affiliate/commission/commission-aff/commission-aff.component';
 
 const routes: Routes = [
   {
@@ -101,9 +106,24 @@ const routes: Routes = [
   {
     path: 'user/forgot-password',
     component: ForgotPasswordUserComponent
+  },
+  // Affiliate
+  {
+    path: 'user/affiliate',
+    component: HomeAffComponent
+  },
+  {
+    path: 'user/affiliate/booked',
+    component: BookedAffComponent
+  },
+  {
+    path: 'user/affiliate/traveling',
+    component: TravelingAffComponent
+  },
+  {
+    path: 'user/affiliate/commission',
+    component: CommissionAffComponent
   }
-  // Dashboard
-  
 ];
 
 @NgModule({
