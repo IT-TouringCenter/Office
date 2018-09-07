@@ -32,6 +32,8 @@ export class BookformEditRsvnComponent implements OnInit {
   // Edit by API
   // getBookingEditByApi;
 
+  userId = '1084873764';
+
   // Edit form
   selectedTour;
   selectedTourTravelTime;
@@ -726,6 +728,7 @@ export class BookformEditRsvnComponent implements OnInit {
       }
 
       let options = new RequestOptions();
+      let link = '/user'+this.userId+'reservations/booked';
 
       /*==================  Success  ===================*/
       return this.http.post(url, dataSave, options)

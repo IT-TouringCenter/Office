@@ -1,5 +1,5 @@
 <!-- Check login -->
-
+<!-- <app-session-login></app-session-login> -->
 
 <!-- Menu bar -->
 <app-menu-bar-rsvn></app-menu-bar-rsvn>
@@ -37,17 +37,17 @@
           <td>{{booked.guestName}}</td>
           <td>{{booked.hotel}}</td>
           <td class="text-center table-valign-mid display-print doc-background">
-            <a href="/#/reservations/book-form/{{booked.transactionId}}" target="_blank" class="book-link-doc">
+            <a href="/#/user/reservations/book-form/{{booked.transactionId}}" target="_blank" class="book-link-doc">
               <i class="fa fa-file font-table-1-5em" aria-hidden="true"></i>
             </a>
           </td>
           <td class="text-center table-valign-mid display-print doc-background">
-            <a href="/#/reservations/invoice/{{booked.transactionId}}" target="_blank" class="book-link-doc">
+            <a href="/#/user/reservations/invoice/{{booked.transactionId}}" target="_blank" class="book-link-doc">
               <i class="fa fa-file-text font-table-1-5em"></i>
             </a>
           </td>
           <td class="text-center table-valign-mid display-print doc-background">
-            <a href="/#/reservations/book-form-edit/{{booked.transactionId}}" class="book-link-doc">
+            <a href="/#/user/reservations/book-form-edit/{{booked.transactionId}}" class="book-link-doc">
               <i class="fa fa-pencil-square-o font-table-1-5em"></i>
             </a>
           </td>
@@ -60,19 +60,19 @@
           <p style="margin:0 !important; color:#3e3e3e;"><small>Page : {{activePage}} of {{totalPage}}</small></p>
           <ul class="pagination text-center">
             <li class="page-item">
-              <a class="page-link" [routerLink]="['/reservations/booked']" [queryParams]="{page: 1}"> First</a>
+              <a class="page-link" [routerLink]="['/user/reservations/booked']" [queryParams]="{page: 1}"> First</a>
             </li>
             <li class="page-item disabled" [class.disabled]="activePage==1">
-              <a class="page-link" [routerLink]="['/reservations/booked']" [queryParams]="{page: prevPage}"> Previous</a>
+              <a class="page-link" [routerLink]="['/user/reservations/booked']" [queryParams]="{page: prevPage}"> Previous</a>
             </li>
             <li class="page-item" *ngFor="let i of iPage" [class.active]="activePage==i">
-              <a class="page-link" [routerLink]="['/reservations/booked']" [queryParams]="{page: i}">{{i}}</a>
+              <a class="page-link" [routerLink]="['/user/reservations/booked']" [queryParams]="{page: i}">{{i}}</a>
             </li>
             <li class="page-item" [class.disabled]="activePage==totalPage">
-              <a class="page-link" [routerLink]="['/reservations/booked']" [queryParams]="{page: nextPage}"> Next</a>
+              <a class="page-link" [routerLink]="['/user/reservations/booked']" [queryParams]="{page: nextPage}"> Next</a>
             </li>
             <li class="page-item">
-              <a class="page-link" [routerLink]="['/reservations/booked']" [queryParams]="{page: totalPage}"> Last</a>
+              <a class="page-link" [routerLink]="['/user/reservations/booked']" [queryParams]="{page: totalPage}"> Last</a>
             </li>
             <!-- <li class="page-item">
               <span class="block-search-page">

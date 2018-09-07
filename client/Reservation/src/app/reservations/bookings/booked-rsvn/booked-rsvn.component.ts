@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, FormControl, Validators } from '@angular/forms';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/observable';
@@ -16,6 +17,7 @@ import { BookedRsvnInterface } from './booked-rsvn-interface';
 })
 export class BookedRsvnComponent implements OnInit {
 
+  userId = '1084873764';
   public activeSideNav = 'bookedstatistics';
 
   // interface
@@ -24,6 +26,8 @@ export class BookedRsvnComponent implements OnInit {
   public highlightId :number;
 
   // page
+  public routeLink = "['/user/'+this.userId+'/reservations/booked']";
+
   public iPage: number[] = [];
   public iPageStart: number = 1;
   public prevPage: number;
@@ -39,14 +43,17 @@ export class BookedRsvnComponent implements OnInit {
 
   constructor(
     private BookedRsvnService: BookedRsvnService,
-    private route: ActivatedRoute,
-    private router: Router
+    private http: Http,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   //------------------ Start Page ------------------------
   changePage(page:number){
     this.activePage = page;
-    this.router.navigate(['/reservations/booked'], {queryParams:{page:page}});
+    let link = '/user/reservations/booked';
+    this.router.navigate([link], {queryParams:{page:page}});
+    // this.router.navigate([link], {queryParams:{page:page}});
   }
 
   pagination(){
@@ -115,7 +122,7 @@ export class BookedRsvnComponent implements OnInit {
     this.BookedRsvnService.getBookedData()
       .subscribe(
         resultArray => [
-          console.log(this._getBookingStatistics = resultArray),
+          this._getBookingStatistics = resultArray,
           this.lengthDataFromGet(),
           this.PagePagination()
         ],

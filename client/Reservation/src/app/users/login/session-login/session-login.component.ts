@@ -22,16 +22,18 @@ export class SessionLoginComponent implements OnInit {
     2. Check login (API)
     3. Logout
     4. Clear session
+    5. Check logout (AI)
   */
 
   // 1. Check session storage
   checkStorage(){
-    // let getSession = sessionStorage.getItem('users');
     let sessionData = JSON.parse(sessionStorage.getItem('users'));
     if(sessionData){
+      // console.log('1111111');
       let checkLogin = this.checkLogin(sessionData);
     }else{
-      // this.logout(sessionData);
+      // console.log('0000000');
+      this.checkLogout();
       this.router.navigate(['user/login']);
     }
     return;
@@ -42,29 +44,30 @@ export class SessionLoginComponent implements OnInit {
     let url = 'http://localhost:9000/api/Account/AccountSessionLogin';
     // let url = 'http://api.tourinchiangmai.com/api/Account/AccountSessionLogin';
 
-      let options = new RequestOptions();
-      let checkLogin = {
-        // username: param.data.username,
-        token: sessionData.data.token
-      };
-      return this.http.post(url, checkLogin, options)
-                      .map(res => res.json())
-                      .subscribe(
-                        data => [
-                          // console.log(data),
-                          this.checkLoginStatus(data, sessionData)
-                        ],
-                        err => [
-                          console.log(err)
-                        ]
-                      );
+    let options = new RequestOptions();
+    let checkLogin = {
+      // username: param.data.username,
+      token: sessionData.data.token
+    };
+    return this.http.post(url, checkLogin, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      data => [
+                        this.checkLoginStatus(data, sessionData)
+                      ],
+                      err => [
+                        console.log(err)
+                      ]
+                    );
   }
 
   // 3. Check login status
   checkLoginStatus(data, sessionData){
     if(data.status==false){
+      // console.log('-----------');
       this.logout(sessionData);
     }else{
+      // console.log('-+++++++++-');
       this.router.navigate(['user']);
     }
     return data;
@@ -76,32 +79,67 @@ export class SessionLoginComponent implements OnInit {
     let url = 'http://localhost:9000/api/Account/AccountLogout';
     // let url = 'http://api.tourinchiangmai.com/api/Account/AccountLogout';
 
-      let options = new RequestOptions();
-      let dataLogout = {
-        username: data.data.username,
-        token: data.data.token
-      };
+    let options = new RequestOptions();
+    let dataLogout = {
+      username: data.data.username,
+      token: data.data.token
+    };
 
-      return this.http.post(url, dataLogout, options)
-                      .map(res => res.json())
-                      .subscribe(
-                        data => [
-                          this.clearSession(data)
-                        ],
-                        err => [
-                          console.log(err)
-                        ]
-                      );
+    return this.http.post(url, dataLogout, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      data => [
+                        // console.log(data),
+                        this.clearSession(data)
+                      ],
+                      err => [
+                        console.log(err)
+                      ]
+                    );
   }
 
   // 4. Clear session
   clearSession(data){
+    // console.log(data.status);
     sessionStorage.removeItem('users');
     this.router.navigate(['user/login']);
+    // if(data.status==true){
+    //   sessionStorage.removeItem('users');
+    //   this.router.navigate(['user/login']);
+    // }
+    return;
   }
+
+  // 5. Check logout (AI)
+  checkLogout(){
+    // Call API
+    let url = 'http://localhost:9000/api/Account/CheckAccountLoginExpired';
+    // let url = 'http://api.tourinchiangmai.com/api/Account/CheckAccountLoginExpired';
+
+    let options = new RequestOptions();
+    let dataLogout = {};
+
+    return this.http.post(url, dataLogout, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      data => [
+                        this.clearSession(data)
+                        // this.checkLogoutBySession(data)
+                      ],
+                      err => [
+                        console.log(err)
+                      ]
+                    );
+  }
+
+  // 6. Check logout by session
+  // checkLogoutBySession(data){
+
+  // }
 
   ngOnInit() {
     this.checkStorage();
+    // this.checkLogout();
   }
 
 }

@@ -24,6 +24,7 @@ class CreateLoginHistoriesTable extends Migration {
 			// $table->dateTime('otp_expire');
 			$table->string('logout_code',20);
 			$table->dateTime('logout_code_expired');
+			$table->dateTime('logout_expired');
 			$table->tinyInteger('is_active')->default(1);
 			$table->string('created_by',50)->default('System');
 			$table->string('updated_by',50)->nullable();

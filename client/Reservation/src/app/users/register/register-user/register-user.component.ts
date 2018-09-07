@@ -71,7 +71,7 @@ export class RegisterUserComponent implements OnInit {
       this.registerData.isEmail = false;
     }
     this.ValidationField();
-    console.log('Email no repeat : '+this.registerData.isEmail);
+    // console.log('Email no repeat : '+this.registerData.isEmail);
     return this.registerData.isEmail;
   }
 
@@ -100,7 +100,7 @@ export class RegisterUserComponent implements OnInit {
     }else{
       this.registerData.isRegister = false;
     }
-    console.log('status : '+this.registerData.isRegister);
+    // console.log('status : '+this.registerData.isRegister);
   }
 
   // 4. Submit button

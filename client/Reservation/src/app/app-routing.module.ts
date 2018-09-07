@@ -34,27 +34,27 @@ const routes: Routes = [
   },
   // Reservations
   {
-    path: 'user/:userId/reservations',
+    path: 'user/reservations',
     component: HomeRsvnComponent
   },
   {
-    path: 'user/:userId/reservations/booked',
+    path: 'user/reservations/booked',
     component: BookedRsvnComponent
   },
   {
-    path: 'user/:userId/reservations/book-form-add',
+    path: 'user/reservations/book-form-add',
     component: BookformAddRsvnComponent
   },
   {
-    path: 'user/:userId/reservations/book-form-edit/:transactionId',
+    path: 'user/reservations/book-form-edit/:transactionId',
     component: BookformEditRsvnComponent
   },
   {
-    path: 'user/:userId/reservations/book-form/:transactionId',
+    path: 'user/reservations/book-form/:transactionId',
     component: BookformRsvnComponent
   },
   {
-    path: 'user/:userId/reservations/invoice/:transactionId',
+    path: 'user/reservations/invoice/:transactionId',
     component: InvoiceRsvnComponent
   },
   // Login
@@ -102,6 +102,8 @@ const routes: Routes = [
     path: 'user/forgot-password',
     component: ForgotPasswordUserComponent
   }
+  // Dashboard
+  
 ];
 
 @NgModule({

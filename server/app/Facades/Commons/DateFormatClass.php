@@ -57,21 +57,29 @@ class DateFormatClass{
             +1 years
     */
 
-    // 2018-01-01 12:00:00 +30 minute
+    // Format 2018-01-01 12:00:00
+    // +1 hour
+    public function SetDatePlus1Hour($dateTime){
+        $dateTime1 = str_replace('-', '/', $dateTime);
+        $plus1Hour = date('Y-m-d H:i:s',strtotime($dateTime1. "+1 hour"));
+        return $plus1Hour;
+    }
+
+    // +30 minute
     public function SetDatePlus30Minute($dateTime){
         $dateTime1 = str_replace('-', '/', $dateTime);
         $plus30Min = date('Y-m-d H:i:s',strtotime($dateTime1. "+30 minutes"));
         return $plus30Min;
     }
 
-    // 2018-01-01 12:00:00 +15 minute
+    // +15 minute
     public function SetDatePlus15Minute($dateTime){
         $dateTime1 = str_replace('-', '/', $dateTime);
         $plus15Min = date('Y-m-d H:i:s',strtotime($dateTime1. "+15 minutes"));
         return $plus15Min;
     }
 
-    // 01:30 pm 01 January 2018
+    // Format 01:30 pm 01 January 2018
     public function SetFullDateTime($dateTime){
         $result = date('g:i a d F Y',strtotime($dateTime));
         return $result;

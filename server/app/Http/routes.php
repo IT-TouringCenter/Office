@@ -67,7 +67,7 @@ Route::get('/', 'WelcomeController@index');
 	Route::post('api/Account/Register/AccountRegisterConfirmCodeAgain', 'Accounts\Register\AccountRegisterConfirmController@AccountRegisterConfirmCodeAgain');
 	// forgot password
 	Route::post('api/Account/Request/AccountForgotPassword', 'Accounts\Request\AccountForgotPasswordController@AccountForgotPassword');
-	
+
 	Route::post('api/Account/Setting/AccountResetPassword', 'Accounts\Setting\AccountResetPasswordController@AccountResetPassword');
 	// login
 	Route::post('api/Account/AccountLogin', 'Accounts\AccountLoginController@AccountLogin');
@@ -78,6 +78,7 @@ Route::get('/', 'WelcomeController@index');
 	Route::post('api/Account/AccountForceLogout', 'Accounts\AccountForceLogoutController@AccountForceLogout');
 	// session login
 	Route::post('api/Account/AccountSessionLogin', 'Accounts\AccountLoginController@AccountSessionLogin');
+	Route::post('api/Account/CheckAccountLoginExpired', 'Accounts\AccountLoginController@CheckAccountLoginExpired');
 /*----------- Account (End) ------------------------------------*/
 
 // Test Email

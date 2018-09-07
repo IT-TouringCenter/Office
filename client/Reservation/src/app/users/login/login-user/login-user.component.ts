@@ -44,6 +44,7 @@ export class LoginUserComponent implements OnInit {
                       .map(res => res.json())
                       .subscribe(
                         data => [
+                          // console.log(data),
                           this.setLogin(data)
                         ],
                         err => {console.log(err)}
@@ -53,12 +54,19 @@ export class LoginUserComponent implements OnInit {
 
   // 2. Set login
   setLogin(data){
-    console.log(data);
+    // console.log(data);
     if(data.status==true){
+      alert(data.message);
       sessionStorage.setItem('users',JSON.stringify(data));
       this.router.navigate(['user']);
     }else if(data.status==false && data.notify=='Sign out not found'){
+      alert(data.message);
       this.router.navigate(['user/force-logout/'+data.data.token]);
+    }else if(data.status==false && data.notify=='Non active'){
+      alert(data.message);
+      this.router.navigate(['user/register-confirm/'+data.data.token]);
+    }else{
+      alert(data.message);
     }
   }
 

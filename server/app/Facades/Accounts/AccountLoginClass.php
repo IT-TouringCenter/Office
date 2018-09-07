@@ -25,6 +25,7 @@ class AccountLoginClass{
             7. Force logout (send mail logout)
             
             8. Account session login
+            9. Check login expired (Auto logout)
     */
 
     public function AccountLogin($data){
@@ -41,14 +42,26 @@ class AccountLoginClass{
         // 2. Check account active
         if($checkAccount){
             $checkAccountActive = $this->CheckAccountActive($data);
+            
+            // Check & return account non active
+            if($checkAccountActive){
+                // set data for return to client
+                $resData = new Account;
+                $resData->id = $checkAccountActive[0]->id;
+                $resData->token = $checkAccountActive[0]->token;
+                $resData->username = $checkAccountActive[0]->username;
+                $resData->name = $checkAccountActive[0]->fullname;
+                $resData->userType = $checkAccountActive[0]->account_type_id;
+            }else{
+                $resData = new Account;
+                $resData->token = $checkAccount[0]->token;
 
-            // set data for return to client
-            $resData = new Account;
-            $resData->id = $checkAccountActive[0]->id;
-            $resData->token = $checkAccountActive[0]->token;
-            $resData->username = $checkAccountActive[0]->username;
-            $resData->name = $checkAccountActive[0]->fullname;
-            $resData->userType = $checkAccountActive[0]->account_type_id;
+                $login->status = false;
+                $login->message = 'This account is not active.';
+                $login->notify = 'Non active';
+                $login->data = $resData;
+                return $login;
+            }            
         }else{
             $login->status = false;
             $login->message = 'Username or password is invalid.';
@@ -151,13 +164,15 @@ class AccountLoginClass{
         $dateTimeNow = Carbon::now('Asia/Bangkok');
         $logoutCode = \GenerateCodeFacade::Code5Chars();
         $logoutCodeExpired = \DateFormatFacade::SetDatePlus30Minute($dateTimeNow);
+        $logoutExpired = \DateFormatFacade::SetDatePlus1Hour($dateTimeNow);
 
         $data = [
             'account_id'=>$accountData[0]->id,
             'login_dateTime'=>$dateTimeNow,
             'token'=>$accountData[0]->token,
             'logout_code'=>$logoutCode,
-            'logout_code_expired'=>$logoutCodeExpired
+            'logout_code_expired'=>$logoutCodeExpired,
+            'logout_expired'=>$logoutExpired
         ];
 
         $result = $this->AccountLoginRepo->SaveLoginHistory($data);
@@ -293,7 +308,8 @@ class AccountLoginClass{
     // 8. Account session login
     public function AccountSessionLogin($req){
         $token = array_get($req,'token');
-        $checkAccount = $this->AccountLoginRepo->GetAccountByToken($token);
+        // $checkAccount = $this->AccountLoginRepo->GetAccountByToken($token);
+        $checkAccount = $this->AccountLoginRepo->GetAccountLoginByToken($token);
 
         $account = new Account;
         if($checkAccount){
@@ -304,6 +320,22 @@ class AccountLoginClass{
             $account->status = false;
             $account->message = "This code is not in the system.";
             $account->notice = "Failed";
+        }
+        return $account;
+    }
+
+    // 9. Check login expired (Auto logout)
+    public function CheckAccountLoginExpired(){
+        $dateTimeNow = Carbon::now('Asia/Bangkok');
+        $autoLogout = $this->AccountLoginRepo->AutoLogout($dateTimeNow);
+        $account = new Account;
+
+        if($autoLogout){
+            $account->status = true;
+            $account->message = 'Logout success.';
+        }else{
+            $account->status = false;
+            $account->message = 'Logout failed.';
         }
         return $account;
     }

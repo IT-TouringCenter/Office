@@ -34,6 +34,8 @@ export class BookformAddRsvnComponent implements OnInit {
 
   myControl: FormControl = new FormControl();
 
+  userId = '1084873764';
+
   // Set model
   minDate = new Date(2017, 12, 1);
   maxDate = new Date(2018, 9, 31);
@@ -675,13 +677,13 @@ export class BookformAddRsvnComponent implements OnInit {
       // let url = 'http://api.tourinchiangmai.com/api/Reservations/ReservationSaveBookingData';
 
       let options = new RequestOptions();
-
+      let link = '/user/'+this.userId+'/reservations/booked';
       /*==================  Success  ===================*/
       return this.http.post(url, dataSave, options)
                       .map(res => res.json())
                       .subscribe(
                         // data => {console.log('*-*'+data)},
-                        data => {this.router.navigate(['reservations/booked'])},
+                        data => {this.router.navigate([link])},
                         err => {console.log(err)}
                       );
       /*==================  Success  ===================*/

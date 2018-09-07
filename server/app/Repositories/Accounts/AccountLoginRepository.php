@@ -107,12 +107,34 @@ class AccountLoginRepository{
 		return $result;
 	}
 
-	// 10. Get account by id
+	// 10. Get account by token
 	public function GetAccountByToken($token){
 		$result = \DB::table('accounts')
 						->where('token',$token)
 						->where('is_active',1)
 						->get();
+		return $result;
+	}
+
+	// 11. Get account login by token
+	public function GetAccountLoginByToken($token){
+		$result = \DB::table('login_histories')
+						->where('token',$token)
+						->where('is_active',1)
+						->get();
+		return $result;
+	}
+
+	// 11. Auto logout all active
+	public function AutoLogout($dateTimeNow){
+		$data = [
+			'logout_datetime'=>$dateTimeNow,
+			'is_active'=>0
+		];
+		$result = \DB::table('login_histories')
+						->where('logout_expired','<',$dateTimeNow)
+						->where('is_active',1)
+						->update($data);		
 		return $result;
 	}
 }

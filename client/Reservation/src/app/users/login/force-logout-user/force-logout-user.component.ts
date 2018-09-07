@@ -90,9 +90,10 @@ export class ForceLogoutUserComponent implements OnInit {
   checkLogout(data){
     // console.log(data);
     if(data.status==true){
+      alert('Logout complete.');
       this.clearSession();
     }else{
-      alert('');
+      alert('Logout failed!');
       return;
     }
   }

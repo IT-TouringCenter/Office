@@ -58,4 +58,18 @@ class AccountLoginController extends Controller {
         }
     }
 
+    // 3. Check account expired
+    public function CheckAccountLoginExpired(Request $request){
+        $accountData = $request->input();
+        try{
+            $results = \AccountLoginFacade::CheckAccountLoginExpired();
+            if($results==null){
+                abort(400);
+            }
+            return $results;
+        }catch(Exception $e){
+            abort(500);
+        }
+    }
+
 }

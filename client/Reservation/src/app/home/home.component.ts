@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { $ } from 'protractor';
+import { ActivatedRoute, Params } from "@angular/router";
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
+import "rxjs/Rx";
 
 @Component({
   selector: 'app-home',
@@ -10,12 +11,20 @@ import { $ } from 'protractor';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() {
+  constructor(
+    private http: Http,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
 
   }
 
+  redirect(){
+    this.router.navigate(['user']);
+  }
+
   ngOnInit() {
-    
+    this.redirect();
   }
 
 }

@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuSidebarRsvnComponent implements OnInit {
 
+  // userId = '1084873764';
+
   constructor() { }
 
   ngOnInit() {
