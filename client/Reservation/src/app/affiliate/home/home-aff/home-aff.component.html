@@ -3,6 +3,120 @@
 <!-- Side bar -->
 <app-menu-sidebar-aff></app-menu-sidebar-aff>
 
-<p>
-  home-aff works!
-</p>
+<!-- Static (start) -->
+<section id="main-content" class="panel-block-1">
+  <section class="wrapper">
+    <div class="container">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h3>Dashboard</h3>
+      </div>
+      <!-- Booked -->
+      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <div class="panel panel-content-block-1">
+          <div class="panel-body panel-content-1">
+            <div class="panel-content-left-1">
+              <i class="fa fa-bar-chart fa-5x" aria-hidden="true" style="padding-top: 10px;"></i>
+            </div>
+            <div class="panel-content-right-1">
+              <p style="font-size: 22px; margin-bottom: 0;">Booked</p>
+              <p style="font-size: 45px; margin-bottom: 0;">{{dataDashboard.booked.amount}}</p>
+            </div>
+          </div>
+          <a href="/#/user/affiliate/booked">
+            <div class="panel-footer panel-footer-1">
+              Detail 
+              <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+            </div>
+          </a>
+        </div>
+      </div>
+      <!-- Traveling -->
+      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <div class="panel panel-content-block-2">
+          <div class="panel-body panel-content-2">
+            <div class="panel-content-left-2">
+              <i class="fa fa-calendar-check-o fa-5x" aria-hidden="true" style="padding-top: 10px;"></i>
+            </div>
+            <div class="panel-content-right-2">
+              <p style="font-size: 22px; margin-bottom: 0;">Traveling</p>
+              <p style="font-size: 45px; margin-bottom: 0;">{{dataDashboard.traveling.amount}}</p>
+            </div>
+          </div>
+          <a href="/#/user/affiliate/booked/traveled">
+            <div class="panel-footer panel-footer-2">
+              Detail 
+              <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+            </div>
+          </a>
+        </div>
+      </div>
+      <!-- Commission -->
+      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <div class="panel panel-content-block-3">
+          <div class="panel-body panel-content-3">
+            <div class="panel-content-left-3">
+              <i class="fa fa-usd fa-5x" aria-hidden="true" style="padding-top: 10px;"></i>
+              <!-- <i class="fa fa-bar-chart fa-5x" aria-hidden="true" style="font-size: 6em;"></i> -->
+            </div>
+            <div class="panel-content-right-3">
+              <p style="font-size: 22px;">Commission</p>
+              <p style="font-size: 28px; margin-bottom: 0;">{{dataDashboard.commission.amount}}฿</p>
+            </div>
+          </div>
+          <a href="/#/user/affiliate/commission">
+            <div class="panel-footer panel-footer-3">
+              Detail 
+              <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+<!-- Static (end) -->
+
+<!-- chart (start) -->
+<section id="main-content" class="panel-block-2">
+  <section class="wrapper" style="margin-top: 0px !important;">
+    <div class="container">
+      <!-- Booking statistics -->
+      <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+        <h3>Booked statistics</h3>
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [colors]="barChartColors"
+                [legend]="barChartLegend"
+                [chartType]="barChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+        </canvas>
+        <p style="text-align:center; padding-top:10px;">
+          <!-- <small>update 10/09/2018</small> -->
+        </p>
+        <!-- <button (click)="randomize()" class="btn btn-danger">2018</button> -->
+      </div>
+
+      <!-- Commission -->
+      <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+        <h3>Commission</h3>
+        <canvas baseChart
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [colors]="lineChartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+        </canvas>
+        <p style="text-align:center; padding-top:10px;">
+          <!-- <small>update 31/08/2018</small> -->
+        </p>
+      </div>
+    </div>
+  </section>
+</section>
+<!-- chart (end) -->

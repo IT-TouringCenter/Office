@@ -721,10 +721,10 @@ export class BookformEditRsvnComponent implements OnInit {
       let url = '';
       if(params==2){
         url = 'http://localhost:9000/api/Reservations/ReservationSaveBookingData';
-      // url = 'http://api.tourinchiangmai.com/api/ReservationSaveBookingData';
+        // url = 'http://api.tourinchiangmai.com/api/Reservations/ReservationSaveBookingData';
       }else if(params==1){
         url = 'http://localhost:9000/api/Reservations/EditReservation';
-      // url = 'http://api.tourinchiangmai.com/api/EditReservation';
+        // url = 'http://api.tourinchiangmai.com/api/Reservations/EditReservation';
       }
 
       let options = new RequestOptions();

@@ -17,7 +17,7 @@ export class BookedRsvnService {
   // get data booking
   getBookedData(): Observable<BookedRsvnInterface>{
     this._getBooked = "http://localhost:9000/api/Reservations/GetBookingStatisticData";
-    // this._getBookedStatistics = "http://api.tourinchiangmai.com/api/Reservations/GetBookingStatisticData";
+    // this._getBooked = "http://api.tourinchiangmai.com/api/Reservations/GetBookingStatisticData";
 
     return this.http
       .get(this._getBooked)

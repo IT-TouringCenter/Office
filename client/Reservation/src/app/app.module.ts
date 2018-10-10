@@ -43,14 +43,30 @@ import { ProfileUserComponent } from './users/profiles/profile-user/profile-user
 import { ProfileEditUserComponent } from './users/profiles/profile-edit-user/profile-edit-user.component';
 import { ForceLogoutUserComponent } from './users/login/force-logout-user/force-logout-user.component';
 import { SessionLoginComponent } from './users/login/session-login/session-login.component';
+import { CheckLogoutUserComponent } from './users/logout/check-logout-user/check-logout-user.component';
+
+// Angular charts
+import { ChartsModule } from 'ng2-charts';
+
+// Affiliate
 import { HomeAffComponent } from './affiliate/home/home-aff/home-aff.component';
 import { BookedAffComponent } from './affiliate/booking/booked-aff/booked-aff.component';
-import { TravelingAffComponent } from './affiliate/booking/traveling-aff/traveling-aff.component';
 import { CommissionAffComponent } from './affiliate/commission/commission-aff/commission-aff.component';
 import { HeaderAffComponent } from './affiliate/commons/header-aff/header-aff.component';
 import { MenuBarAffComponent } from './affiliate/commons/header-aff/menu-bar-aff/menu-bar-aff.component';
 import { MenuSidebarAffComponent } from './affiliate/commons/header-aff/menu-sidebar-aff/menu-sidebar-aff.component';
-import { CheckLogoutUserComponent } from './users/logout/check-logout-user/check-logout-user.component';
+import { BookedMonthlyAffComponent } from './affiliate/booking/booked-aff/booked-monthly-aff/booked-monthly-aff.component';
+import { BookedDayOfMonthAffComponent } from './affiliate/booking/booked-aff/booked-day-of-month-aff/booked-day-of-month-aff.component';
+import { TourAffComponent } from './affiliate/booking/tour-aff/tour-aff.component';
+import { TourDayOfMonthAffComponent } from './affiliate/booking/tour-aff/tour-day-of-month-aff/tour-day-of-month-aff.component';
+import { TourMonthlyAffComponent } from './affiliate/booking/tour-aff/tour-monthly-aff/tour-monthly-aff.component';
+import { CommissionDayOfMonthAffComponent } from './affiliate/commission/commission-day-of-month-aff/commission-day-of-month-aff.component';
+import { CommissionMonthlyAffComponent } from './affiliate/commission/commission-monthly-aff/commission-monthly-aff.component';
+import { CommissionTourAffComponent } from './affiliate/commission/commission-tour-aff/commission-tour-aff.component';
+import { TraveledAffComponent } from './affiliate/booking/traveled-aff/traveled-aff.component';
+import { TraveledDayOfMonthAffComponent } from './affiliate/booking/traveled-aff/traveled-day-of-month-aff/traveled-day-of-month-aff.component';
+import { TraveledMonthlyAffComponent } from './affiliate/booking/traveled-aff/traveled-monthly-aff/traveled-monthly-aff.component';
+import { TraveledTourAffComponent } from './affiliate/booking/traveled-aff/traveled-tour-aff/traveled-tour-aff.component';
 
 @NgModule({
   declarations: [
@@ -87,12 +103,23 @@ import { CheckLogoutUserComponent } from './users/logout/check-logout-user/check
     SessionLoginComponent,
     HomeAffComponent,
     BookedAffComponent,
-    TravelingAffComponent,
     CommissionAffComponent,
     HeaderAffComponent,
     MenuBarAffComponent,
     MenuSidebarAffComponent,
     CheckLogoutUserComponent,
+    BookedMonthlyAffComponent,
+    BookedDayOfMonthAffComponent,
+    TourAffComponent,
+    TourDayOfMonthAffComponent,
+    TourMonthlyAffComponent,
+    CommissionDayOfMonthAffComponent,
+    CommissionMonthlyAffComponent,
+    CommissionTourAffComponent,
+    TraveledAffComponent,
+    TraveledDayOfMonthAffComponent,
+    TraveledMonthlyAffComponent,
+    TraveledTourAffComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +129,8 @@ import { CheckLogoutUserComponent } from './users/logout/check-logout-user/check
     NoopAnimationsModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

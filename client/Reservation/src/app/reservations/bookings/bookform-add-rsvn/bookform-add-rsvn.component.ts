@@ -384,7 +384,7 @@ export class BookformAddRsvnComponent implements OnInit {
       }
       let checkDiscount = this.paymentInfo.tourPrice;
       let subDiscount = 0;
-      console.log('check discount : '+checkDiscount.includes("Discount"));
+      // console.log('check discount : '+checkDiscount.includes("Discount"));
       if(checkDiscount.includes("Discount")==true){
         subDiscount = parseInt(this.paymentInfo.tourPrice.substring(11,9));
         // set total price
@@ -406,7 +406,7 @@ export class BookformAddRsvnComponent implements OnInit {
       let discountPercent = subDiscount;
       this.summary.discount = subDiscount;
       this.summary.discountPrice = totalTourPrice * (discountPercent/100);
-      console.log((this.realPriceAdult + this.realPriceChild)+' x '+ (discountPercent/100)+' = '+this.summary.discountPrice);
+      // console.log((this.realPriceAdult + this.realPriceChild)+' x '+ (discountPercent/100)+' = '+this.summary.discountPrice);
 
       // set single riding
       if(this.singleRidingPax==0){
@@ -664,7 +664,7 @@ export class BookformAddRsvnComponent implements OnInit {
           "currency_rate": this.currencyRate,
           "issuedBy": "Office"
         };
-        console.log(JSON.stringify(this.dataSave));
+        // console.log(JSON.stringify(this.dataSave));
 
         // Save data booking to API
         this.saveDataBooking(this.dataSave);
@@ -677,7 +677,7 @@ export class BookformAddRsvnComponent implements OnInit {
       // let url = 'http://api.tourinchiangmai.com/api/Reservations/ReservationSaveBookingData';
 
       let options = new RequestOptions();
-      let link = '/user/'+this.userId+'/reservations/booked';
+      let link = '/user/reservations/booked';
       /*==================  Success  ===================*/
       return this.http.post(url, dataSave, options)
                       .map(res => res.json())

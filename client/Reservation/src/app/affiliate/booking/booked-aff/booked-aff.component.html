@@ -3,6 +3,64 @@
 <!-- Side bar -->
 <app-menu-sidebar-aff></app-menu-sidebar-aff>
 
-<p>
-  booked-aff works!
-</p>
+<!-- Content -->
+<section id="main-content" class="panel-block-1">
+  <section class="wrapper">
+    <!-- Graf -->
+    <div class="container">
+      <h3 style="text-align:center;margin-top:0px;margin-bottom:35px;padding:15px;font-weight:600 !important;width:85%;margin:auto;">Booked Statistics</h3>
+      <div style="margin:auto; margin-top:20px;width:80% !important;">
+        <div class="col-lg-10 col-md-8 col-sm-12 col-xs-12">
+          <canvas baseChart 
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [colors]="barChartColors"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)">
+          </canvas>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-12 col-xs-12 no-print" style="padding: 33px 0 0 0 !important;">
+          <mat-radio-group>
+            <p><mat-radio-button value="1" (click)="allBook()" color="primary" checked="checked"><small>All</small></mat-radio-button></p>
+            <p><mat-radio-button value="2" (click)="yearLyBook()" color="primary"><small>This year</small></mat-radio-button></p>
+            <p><mat-radio-button value="3" (click)="monthLyBook()" color="primary"><small>This month</small></mat-radio-button></p>
+          </mat-radio-group>
+        </div>
+        <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-print" style="padding: 33px 0 0 0 !important;">
+          <mat-radio-group>
+            <p><mat-radio-button value="1" (click)="typeBar()" color="primary" checked="checked"><small>Chart</small></mat-radio-button></p>
+            <p><mat-radio-button value="2" (click)="typePie()" color="primary"><small>Pie</small></mat-radio-button></p>
+          </mat-radio-group>
+        </div> -->
+      </div>
+    </div>
+    <!-- Stat -->
+    <div class="container">
+      <div style="margin:auto; width:60% !important;">
+        <table style="width:80%; border: solid 1px #cacaca;margin:auto !important;">
+          <tr style="background:#0f4675 !important;">
+            <th style="text-align:center;color:white !important;border-right:#cacaca solid 1px;">Tours</th>
+            <th style="text-align:center;color:white !important;">Booked</th>
+          </tr>
+          <tr *ngFor="let label of barChartLabels; let i=index">
+            <td style="text-align:center; width:50%;border-right:#cacaca solid 1px;"><small>{{label}}</small></td>
+            <td *ngFor="let data of barChartData" style="text-align:center;"><small>{{data.data[i]}}</small></td>
+          </tr>
+          <tr style="background: #e4e4e4; border: #cacaca solid 1px;">
+            <th style="text-align:center; width:50%;border-right:#cacaca solid 1px;">Total</th>
+            <th style="text-align:center;">{{summary}}</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <!-- Print -->
+    <div class="container no-print" style="margin-top:30px;margin-bottom:15px;">
+      <div style="margin:auto; width:60% !important;text-align:center;">
+        <button type="submit" mat-stroked-button color="warn" (click)="print()">Print</button>
+      </div>
+    </div>
+  </section>
+</section>

@@ -1,0 +1,14 @@
+{
+  "booked": {
+    "id": 15,
+    "amount": "185"
+  },
+  "traveling": {
+    "id": 21,
+    "amount": "154"
+  },
+  "commission": {
+    "id": 4,
+    "amount": "1,150,000"
+  }
+}

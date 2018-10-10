@@ -1,20 +1,65 @@
 <aside id="sidebar-block">
-  <div id="sidebar"  class="nav-collapse ">
-      <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><img src="./assets/images/logo/logo-daytrip-join.jpg" class="img-circle" width="100"></p>
-          <h5 class="centered">Affiliate</h5>
-          <li class="mt">
-              <a class="sidebar-active" href="/#/user/affiliate/booked">
-                  <i class="fa fa-desktop"></i>
-                  <span>Booked</span>
-              </a>
-          </li>
-          <li class="">
-              <a class="sidebar-active" href="/#/user/affiliate/commission">
-                  <i class="fa fa-book"></i>
-                  <span>Commission</span>
-              </a>
-          </li>
-      </ul>
-  </div>
+    <div id="sidebar"  class="nav-collapse" style="overflow-y: auto; direction: rtl;">
+        <ul class="sidebar-menu" id="nav-accordion">
+            <p class="centered"><img src="./assets/images/logo/logo-daytrip-join.jpg" class="img-circle" width="100"></p>
+            <h5 class="centered" style="margin-top: 20px; margin-bottom: 25px;">Affiliate</h5>
+            <!-- Dashboard -->
+            <li class="sub-menu">
+                <a class="sidebar-active" href="/#/user/affiliate" [ngClass]="{'active':id==0}" (click)="addClass(id=0);addSubClass(subId=0)">
+                    <span>Dashboard</span>
+                    <i class="fa fa-area-chart fa-5x" aria-hidden="true"></i>
+                </a>
+            </li>
+            <!-- Booked -->
+            <li class="sub-menu">
+                <a class="sidebar-active" href="/#/user/affiliate/booked" [ngClass]="{'active':id==1}" (click)="addClass(id=1)">
+                    <span>Booked</span>
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                </a>
+                <ul class="sub" [ngStyle]="{'display':id==1?'block':'none'}">
+                    <li><a href="/#/user/affiliate/booked" [ngClass]="{'sub-active':subId===101}" (click)="addClass(id=1);addSubClass(subId=101)">Summary</a></li>
+                    <li><a href="/#/user/affiliate/booked/days-of-month" [ngClass]="{'sub-active':subId===102}" (click)="addSubClass(subId=102)">Days of month</a></li>
+                    <li><a href="/#/user/affiliate/booked/monthly" [ngClass]="{'sub-active':subId===103}" (click)="addSubClass(subId=103)">Monthly</a></li>
+                </ul>
+            </li>
+            <!-- Traveled -->
+            <li class="sub-menu">
+                <a class="sidebar-active" href="/#/user/affiliate/booked/traveled" [ngClass]="{'active':id==2}" (click)="addClass(id=2)">
+                    <span>Traveled</span>
+                    <i class="fa fa-calendar-check-o fa-5x" aria-hidden="true"></i>
+                </a>
+                <ul class="sub" [ngStyle]="{'display':id==2?'block':'none'}">
+                    <li><a href="/#/user/affiliate/booked/traveled" [ngClass]="{'sub-active':subId===201}" (click)="addClass(id=2);addSubClass(subId=201)">Summary</a></li>
+                    <li><a href="/#/user/affiliate/booked/traveled/days-of-month" [ngClass]="{'sub-active':subId===202}" (click)="addSubClass(subId=202)">Days of month</a></li>
+                    <li><a href="/#/user/affiliate/booked/traveled/monthly" [ngClass]="{'sub-active':subId===203}" (click)="addSubClass(subId=203)">Monthly</a></li>
+                    <li><a href="/#/user/affiliate/booked/traveled/tour" [ngClass]="{'sub-active':subId===204}" (click)="addSubClass(subId=204)">Tour</a></li>
+                </ul>
+            </li>
+            <!-- Tours -->
+            <li class="sub-menu">
+                <a class="sidebar-active" href="/#/user/affiliate/booked/tours" [ngClass]="{'active':id==3}" (click)="addClass(id=3)">
+                    <span>Tours</span>
+                    <i class="fa fa-line-chart" aria-hidden="true"></i>
+                </a>
+                <ul class="sub" [ngStyle]="{'display':id==3?'block':'none'}">
+                    <li><a href="/#/user/affiliate/booked/tours" [ngClass]="{'sub-active':subId===301}" (click)="addClass(id=3);addSubClass(subId=301)">Summary</a></li>
+                    <li><a href="/#/user/affiliate/booked/tours/days-of-month" [ngClass]="{'sub-active':subId===302}" (click)="addSubClass(subId=302)">Days of month</a></li>
+                    <li><a href="/#/user/affiliate/booked/tours/monthly" [ngClass]="{'sub-active':subId===303}" (click)="addSubClass(subId=303)">Monthly</a></li>
+                </ul>
+            </li>
+            <!-- Commission -->
+            <li class="sub-menu">
+                <a class="sidebar-active" href="/#/user/affiliate/commission" [ngClass]="{'active':id==4}" (click)="addClass(id=4)">
+                    <span>Commission</span>
+                    <i class="fa fa-usd" aria-hidden="true"></i>
+                </a>
+                <ul class="sub" [ngStyle]="{'display':id==4?'block':'none'}">
+                    <li><a href="/#/user/affiliate/commission" [ngClass]="{'sub-active':subId===401}" (click)="addClass(id=3);addSubClass(subId=401)">Summary</a></li>
+                    <li><a href="/#/user/affiliate/commission/days-of-month" [ngClass]="{'sub-active':subId===402}" (click)="addSubClass(subId=402)">Days of month</a></li>
+                    <li><a href="/#/user/affiliate/commission/monthly" [ngClass]="{'sub-active':subId===403}" (click)="addSubClass(subId=403)">Monthly</a></li>
+                    <li><a href="/#/user/affiliate/commission/tour" [ngClass]="{'sub-active':subId===404}" (click)="addSubClass(subId=404)">Tour</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </aside>

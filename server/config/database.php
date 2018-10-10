@@ -85,7 +85,6 @@ return [
 			'password' => env('DB_PASSWORD', ''),
 			'prefix'   => '',
 		],
-
 	],
 
 	/*

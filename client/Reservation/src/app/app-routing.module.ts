@@ -29,8 +29,19 @@ import { ProfileEditUserComponent } from './users/profiles/profile-edit-user/pro
 // Affiliate
 import { HomeAffComponent } from './affiliate/home/home-aff/home-aff.component';
 import { BookedAffComponent } from './affiliate/booking/booked-aff/booked-aff.component';
-import { TravelingAffComponent } from './affiliate/booking/traveling-aff/traveling-aff.component';
+import { BookedDayOfMonthAffComponent } from './affiliate/booking/booked-aff/booked-day-of-month-aff/booked-day-of-month-aff.component';
+import { BookedMonthlyAffComponent } from './affiliate/booking/booked-aff/booked-monthly-aff/booked-monthly-aff.component';
+import { TourAffComponent } from './affiliate/booking/tour-aff/tour-aff.component';
+import { TourDayOfMonthAffComponent } from './affiliate/booking/tour-aff/tour-day-of-month-aff/tour-day-of-month-aff.component';
+import { TourMonthlyAffComponent } from './affiliate/booking/tour-aff/tour-monthly-aff/tour-monthly-aff.component';
+import { TraveledAffComponent } from './affiliate/booking/traveled-aff/traveled-aff.component';
+import { TraveledDayOfMonthAffComponent } from './affiliate/booking/traveled-aff/traveled-day-of-month-aff/traveled-day-of-month-aff.component';
+import { TraveledMonthlyAffComponent } from './affiliate/booking/traveled-aff/traveled-monthly-aff/traveled-monthly-aff.component';
+import { TraveledTourAffComponent } from './affiliate/booking/traveled-aff/traveled-tour-aff/traveled-tour-aff.component';
 import { CommissionAffComponent } from './affiliate/commission/commission-aff/commission-aff.component';
+import { CommissionDayOfMonthAffComponent } from './affiliate/commission/commission-day-of-month-aff/commission-day-of-month-aff.component';
+import { CommissionMonthlyAffComponent } from './affiliate/commission/commission-monthly-aff/commission-monthly-aff.component';
+import { CommissionTourAffComponent } from './affiliate/commission/commission-tour-aff/commission-tour-aff.component';
 
 const routes: Routes = [
   {
@@ -117,12 +128,56 @@ const routes: Routes = [
     component: BookedAffComponent
   },
   {
-    path: 'user/affiliate/traveling',
-    component: TravelingAffComponent
+    path: 'user/affiliate/booked/days-of-month',
+    component: BookedDayOfMonthAffComponent
+  },
+  {
+    path: 'user/affiliate/booked/monthly',
+    component: BookedMonthlyAffComponent
+  },
+  {
+    path: 'user/affiliate/booked/tours',
+    component: TourAffComponent
+  },
+  {
+    path: 'user/affiliate/booked/tours/days-of-month',
+    component: TourDayOfMonthAffComponent
+  },
+  {
+    path: 'user/affiliate/booked/tours/monthly',
+    component: TourMonthlyAffComponent
+  },
+  {
+    path: 'user/affiliate/booked/traveled',
+    component: TraveledAffComponent
+  },
+  {
+    path: 'user/affiliate/booked/traveled/days-of-month',
+    component: TraveledDayOfMonthAffComponent
+  },
+  {
+    path: 'user/affiliate/booked/traveled/monthly',
+    component: TraveledMonthlyAffComponent
+  },
+  {
+    path: 'user/affiliate/booked/traveled/tour',
+    component: TraveledTourAffComponent
   },
   {
     path: 'user/affiliate/commission',
     component: CommissionAffComponent
+  },
+  {
+    path: 'user/affiliate/commission/days-of-month',
+    component: CommissionDayOfMonthAffComponent
+  },
+  {
+    path: 'user/affiliate/commission/monthly',
+    component: CommissionMonthlyAffComponent
+  },
+  {
+    path: 'user/affiliate/commission/tour',
+    component: CommissionTourAffComponent
   }
 ];
 

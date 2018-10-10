@@ -81,6 +81,10 @@ Route::get('/', 'WelcomeController@index');
 	Route::post('api/Account/CheckAccountLoginExpired', 'Accounts\AccountLoginController@CheckAccountLoginExpired');
 /*----------- Account (End) ------------------------------------*/
 
+/*----------- Dashboard (Start) --------------------------------*/
+	Route::post('api/Dashboard/Affiliate/', 'Dashboard\Affiliate\AffiliateController@Affiliate');
+/*----------- Dashboard (End) ----------------------------------*/
+
 // Test Email
 	Route::get('api/TestMail', 'TestMailController@TestMail');
 

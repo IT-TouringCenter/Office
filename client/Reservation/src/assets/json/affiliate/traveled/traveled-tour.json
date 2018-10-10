@@ -1,0 +1,18 @@
+{
+  "tour": {
+    "code": "TC-01",
+    "title": "Doi Suthep Temple & Hmong Hill Tribe Village"
+  },
+  "years": [
+    "2017",
+    "2018"
+  ],
+  "booked": {
+    "data": [
+      550,
+      432
+    ],
+    "label": "2018",
+    "total": "982"
+  }
+}

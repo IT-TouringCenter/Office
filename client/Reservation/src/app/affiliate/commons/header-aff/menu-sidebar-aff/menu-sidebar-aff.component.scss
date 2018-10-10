@@ -1,0 +1,38 @@
+@media print{
+    #header-block{
+        display: none;
+    }
+    #sidebar-block{
+        display: none;
+    }
+    .wrapper{
+        margin-top: 15px;
+    }
+}
+.active{
+    font-weight: 600 !important;
+}
+.sub-active{
+    font-weight: 600 !important;
+    color: white !important;
+    background: transparent !important;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
