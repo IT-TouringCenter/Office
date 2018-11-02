@@ -26,12 +26,13 @@ class TransactionRepository{
 	}
 
 	// Save transaction
-	public function SaveTransactionBooking($bookingData){
+	public function SaveTransactionBooking($bookingData,$accountId){
 		// $dateTimeNow = date('Y-m-d H:i:s');
 		$dateTimeNow = Carbon::now('Asia/Bangkok');
 		$dateNow = $dateTimeNow->format('Y-m-d');
 		$timeNow = $dateTimeNow->format('H:i:s');
 
+		
 		$bookingInfo = array_get($bookingData,'bookingInfo');
 		$bookBy = array_get($bookingData,'bookBy');
 		$noteBy = array_get($bookingData,'noteBy');
@@ -41,7 +42,7 @@ class TransactionRepository{
 		$insurance = array_get($bookingData,'insurance');
 
 		$transaction = [
-			'account_id'=>'',
+			'account_id'=>$accountId,
 			'transaction_status_id'=>1,
 			'customer_code_id'=>array_get($bookBy,'code'),
 			'payment_mode'=>array_get($paymentInfo,'tourPrice'),

@@ -1,22 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from "@angular/router";
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
+import "rxjs/Rx";
+
+import { CommissionDayOfMonthAffService } from './commission-day-of-month-aff.service';
 
 @Component({
   selector: 'app-commission-day-of-month-aff',
   templateUrl: './commission-day-of-month-aff.component.html',
-  styleUrls: ['./commission-day-of-month-aff.component.scss']
+  styleUrls: ['./commission-day-of-month-aff.component.scss'],
+  providers: [CommissionDayOfMonthAffService]
 })
 export class CommissionDayOfMonthAffComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private http: Http,
+    private router: Router,
+    private route: ActivatedRoute,
+    private CommissionDayOfMonthAffService: CommissionDayOfMonthAffService
+  ) { }
 
-  public date = new Date();
-  public month = this.date.getMonth();
-  public year = this.date.getFullYear();
   public arrMonth = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   public arrYear = ['2018','2019','2020'];
-  public monthNow = this.arrMonth[this.month];
-  public shortMonthNow = this.monthNow.substr(0,3);
-  public summary;
+
+  public amount;
 
   // Bar chart
   public barChartOptions:any = {
@@ -32,41 +40,46 @@ export class CommissionDayOfMonthAffComponent implements OnInit {
     // { backgroundColor: '#0f4675'}
   ];
 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
-
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
-
+  // 1. print
   public print():void {
     window.print();
   }
 
-  // active menu
+  // 2. active menu
   public activeMenu(){
     // set storage
     sessionStorage.setItem('menu',JSON.stringify(4));
     sessionStorage.setItem('sub-menu',JSON.stringify(402));
   }
 
+  // 3. get data binding
+  public getCommissionDayOfMonthData() {
+    this.CommissionDayOfMonthAffService.getCommissionDayOfMonth()
+                    .subscribe(
+                      data => [
+                        // sessionStorage.removeItem('chart-data'),
+                        sessionStorage.setItem('commission-day-chart',JSON.stringify(data))
+                      ],
+                      err => {console.log(err)}
+                    );
+    setTimeout(()=>{
+      let _getData = JSON.parse(sessionStorage.getItem('commission-day-chart'));
+      this.barChartData = _getData.booked;
+      this.amount = _getData.amount;
+    }, 200);
+  }
+
   ngOnInit() {
     // binding bar data
     this.barChartData = [
-      {data: [1505,2020,2050,1550,2100,3100,2560,2650,4120,2170,3200,2050,3545,2630,3240,2355,2235,3375,4250,2165,2400,2800,2540,3600,4510,4100,2400,2300,3400,4650], label: this.monthNow+' '+this.year}
+      {data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], label: ''}
     ];
-    let sum = 0;
-    for(let i=0;i<this.barChartData[0].data.length;i++){
-      sum += this.barChartData[0].data[i];
-    }
-    this.summary = sum;
-    this.barChartLabels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'];
+    this.barChartLabels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
     this.barChartType = 'line';
     this.barChartLegend = true;
 
     this.activeMenu();
+    this.getCommissionDayOfMonthData();
   }
 
 }

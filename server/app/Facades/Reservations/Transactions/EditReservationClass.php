@@ -7,14 +7,16 @@ use Illuminate\Http\Request;
 
 // import repo
 use App\Repositories\Reservations\TransactionEditRepository as TransactionEditRepo;
+use App\Repositories\Reservations\Accounts\AccountRepository as AccountRepo;
 
 // import model
 use App\transaction as Transaction;
 
 class EditReservationClass{
 
-	public function __construct(TransactionEditRepo $TransactionEditRepo){
+	public function __construct(TransactionEditRepo $TransactionEditRepo, AccountRepo $AccountRepo){
 		$this->TransactionEditRepo = $TransactionEditRepo;
+		$this->AccountRepo = $AccountRepo;
 	}
 
 	/* ------------------------------------
@@ -37,6 +39,10 @@ class EditReservationClass{
 		$invoiceRef = array_get($bookingData, 'invoiceRef');
 		$count = 1;
         $transactionId = array_get($bookingData, 'transId');
+
+		// Check account
+		$checkAccount = $this->CheckAccountEmpty(array_get($bookingData,'accountInfo'));
+		$accountId = array_get($checkAccount,'id');
 
 		$this->transaction = new Transaction;
 		// Transaction
@@ -69,6 +75,22 @@ class EditReservationClass{
 		}
 		$this->transaction->tourDetail = $bookingArr;
         return $this->transaction;
+	}
+
+	// Check account empty
+	public function CheckAccountEmpty($accountInfo){
+		$token = array_get($accountInfo,'token');
+		$getAccount = $this->AccountRepo->GetAccountByToken($token);
+
+		$account = new Transaction;
+		if($getAccount){
+			$account->id = $getAccount[0]->id;
+			$account->token = $getAccount[0]->token;
+		}else{
+			$account->id = 0;
+			$account->token = '';
+		}
+		return $account;
 	}
 
 	// Edit to DB : Transaction tour table

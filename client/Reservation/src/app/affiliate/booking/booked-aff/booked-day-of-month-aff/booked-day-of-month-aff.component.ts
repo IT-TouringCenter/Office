@@ -1,22 +1,36 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from "@angular/router";
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
+import "rxjs/Rx";
+
+import { BookedDayOfMonthAffService } from './booked-day-of-month-aff.service';
 
 @Component({
   selector: 'app-booked-day-of-month-aff',
   templateUrl: './booked-day-of-month-aff.component.html',
-  styleUrls: ['./booked-day-of-month-aff.component.scss']
+  styleUrls: ['./booked-day-of-month-aff.component.scss'],
+  providers: [BookedDayOfMonthAffService]
 })
 export class BookedDayOfMonthAffComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private http: Http,
+    private router: Router,
+    private route: ActivatedRoute,
+    private BookedDayOfMonthAffService: BookedDayOfMonthAffService
+  ) { }
 
-  public date = new Date();
-  public month = this.date.getMonth();
-  public year = this.date.getFullYear();
   public arrMonth = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   public arrYear = ['2018','2019','2020'];
-  public monthNow = this.arrMonth[this.month];
-  public shortMonthNow = this.monthNow.substr(0,3);
-  public summary;
+  public amount;
+
+  // default valiable
+  public bookedData = {
+    token: "",
+    month: "",
+    year: ""
+  };
 
   // Bar chart
   public barChartOptions:any = {
@@ -32,41 +46,69 @@ export class BookedDayOfMonthAffComponent implements OnInit {
     { backgroundColor: '#0f4675'}
   ];
 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
-
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
-
+  // 1. print
   public print():void {
     window.print();
   }
 
-  // active menu
+  // 2. active menu
   public activeMenu(){
     // set storage
     sessionStorage.setItem('menu',JSON.stringify(1));
-    sessionStorage.setItem('sub-menu',JSON.stringify(102));
+    sessionStorage.setItem('sub-menu',JSON.stringify(103));
+  }
+
+  // 3. get data binding
+  public getBookedDayOfMonthData():void {
+    this.BookedDayOfMonthAffService.getBookedDayOfMonth()
+                    .subscribe(
+                      data => [
+                        // sessionStorage.removeItem('chart-data'),
+                        sessionStorage.setItem('booked-day-chart',JSON.stringify(data))
+                      ],
+                      err => {console.log(err)}
+                    );
+    setTimeout(()=>{
+      let _getData = JSON.parse(sessionStorage.getItem('booked-day-chart'));
+      this.barChartData = _getData.booked;
+      this.amount = _getData.amount;
+    }, 200);
+  }
+
+  // 4. search data
+  public searchData(){
+    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/DaysOfMonth';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/DaysOfMonth';
+    let options = new RequestOptions();
+
+    /*==================  Success  ===================*/
+    this.bookedData.token = '1355102035';
+    console.log(this.bookedData);
+    this.http.post(url, this.bookedData, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      data => {console.log(data)},
+                      err => {console.log(err)}
+                    );
+    // this.BookedDayOfMonthAffService.postBookedDayOfMonth(this.bookedData)
+    //                 .subscribe(
+    //                   data => {console.log(data)},
+    //                   err => {console.log(err)}
+    //                 );
+    // console.log(this.bookedData);
   }
 
   ngOnInit() {
-    // binding bar data
+    // set default binding bar data
     this.barChartData = [
-      {data: [55,22,25,58,21,31,25,65,42,17,32,20,54,63,24,35,35,37,25,26,24,28,54,36,45,41,24,23,34,46], label: this.monthNow+' '+this.year}
+      {data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], label: ''}
     ];
-    let sum = 0;
-    for(let i=0;i<this.barChartData[0].data.length;i++){
-      sum += this.barChartData[0].data[i];
-    }
-    this.summary = sum;
-    this.barChartLabels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'];
+    this.barChartLabels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
     this.barChartType = 'bar';
     this.barChartLegend = true;
 
     this.activeMenu();
+    this.getBookedDayOfMonthData();
   }
 
 }

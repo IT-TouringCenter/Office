@@ -13,20 +13,20 @@
         <!--  -->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-print" style="text-align: center;margin-bottom:30px;">
           <mat-form-field>
-            <mat-select placeholder="Month">
-              <mat-option *ngFor="let month of arrMonth; let i=index;" value="{{i+1}}">
+            <mat-select placeholder="Month" [(ngModel)]="bookedData.month">
+              <mat-option *ngFor="let month of arrMonth; let i=index;" value="{{month}}">
                 {{month}}
               </mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field>
-            <mat-select placeholder="Year">
-              <mat-option *ngFor="let year of arrYear; let i=index;" value="{{i+1}}">
+            <mat-select placeholder="Year" [(ngModel)]="bookedData.year">
+              <mat-option *ngFor="let year of arrYear; let i=index;" value="{{year}}">
                 {{year}}
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <button type="submit" mat-stroked-button>OK</button>
+          <button type="submit" (click)="searchData()" mat-stroked-button>OK</button>
         </div>
         <!--  -->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -57,7 +57,7 @@
           </tr>
           <tr style="background: #e4e4e4; border: #cacaca solid 1px;">
             <th style="text-align:center; width:50%;border-right:#cacaca solid 1px;">Total</th>
-            <th style="text-align:center;">{{summary}}</th>
+            <th style="text-align:center;">{{amount}}</th>
           </tr>
         </table>
       </div>

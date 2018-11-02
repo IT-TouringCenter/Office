@@ -4,18 +4,21 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
 import "rxjs/Rx";
 
+import { HomeAffService } from './home-aff.service';
+
 @Component({
   selector: 'app-home-aff',
   templateUrl: './home-aff.component.html',
   styleUrls: ['./home-aff.component.scss'],
-  providers: []
+  providers: [HomeAffService]
 })
 export class HomeAffComponent implements OnInit {
 
   constructor(
     private http: Http,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private HomeAffService: HomeAffService
   ) { }
 
   dataDashboard = null;
@@ -40,159 +43,11 @@ export class HomeAffComponent implements OnInit {
       backgroundColor: 'rgba(77,83,96,1)',
     },
     { // grey
-      backgroundColor: 'rgba(148,159,177,1)',
+      backgroundColor: 'rgba(108,99,97,0.5)',
     }
   ];
 
-  // 1. get data dashboard
-  getDataDashboard(){
-    // let url = 'http://localhost:9000/api/Account/Request/AccountForgotPassword';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/Request/AccountForgotPassword';
-    let url = './../../../../assets/json/affiliate/dashboard/dashboard.json';
-
-    return this.http.get(url)
-                    .map(res => res.json())
-                    .subscribe(
-                      data => [
-                        // console.log(data),
-                        this.dataDashboard = data
-                      ],
-                      err => {console.log(err)}
-                    );
-  }
-
-  // 2. get data booked statistics
-  getDataBooked(){
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate';
-    // let url = './../../../../assets/json/affiliate/dashboard/dashboard-booked.json';
-
-    let booked;
-
-    return this.http.get(url)
-                    .map(res => res.json())
-                    .subscribe(
-                      data => [
-                        // booked = data.bookedStatistics,
-                        // console.log(booked),
-                        this.dataBooked = data.bookedStatistics,
-                        // console.log(this.dataBooked),
-                        // this.bindingDataBooked(data.bookedStatistics)
-                      ],
-                      err => {console.log(err)}
-                    );
-
-    // this.barChartData = [
-    //   {
-    //     data: [38,45,56,58,30,46,57,49,39,0,0,0],label: "Booked",total: "418"
-    //   },
-    //   {
-    //     data: [28,38,40,19,46,27,40,38,2,0,0,0],label: "Traveling",total: "278"
-    //   },
-    //   {
-    //     data: [5,8,15,0,1,3,5,0,0,0,0,0],label: "Cancel",total: "37"
-    //   }
-    // ];
-
-    // this.barChartData = this.dataBooked;
-    // this.barChartLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    // this.barChartType = 'bar';
-    // this.barChartLegend = true;
-
-    // console.log('----------------');
-    // console.log(booked);
-    // console.log('----------------');
-    // console.log(this.barChartData);
-
-    // if(this.barChartData == booked){
-    //   console.log(true);
-    // }else{
-    //   console.log(false);
-    // }
-  }
-
-  // 3. get data commission
-  getDataCommission(){
-    // let url = 'http://localhost:9000/api/Account/Request/AccountForgotPassword';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/Request/AccountForgotPassword';
-    let url = './../../../../assets/json/affiliate/dashboard/dashboard-commission.json';
-
-    return this.http.get(url)
-                    .map(res => res.json())
-                    .subscribe(
-                      data => [
-                        // console.log(data),
-                        this.dataCommission = data
-                      ],
-                      err => {console.log(err)}
-                    );
-  }
-
-  // 4. binding data booked
-  bindingDataBooked(data){
-    // set data
-    console.log('==== '+data.length);
-    let count = 0;
-    let length = data.length;
-    let arrChartData = [];
-    let chartData = {
-      data: [],
-      label: "",
-      total: ""
-    }
-
-    // while(count < length){
-    //   arrChartData.push(data.bookedStatistics[count]);
-    //   count++;
-    // }
-
-    // console.log(arrChartData);
-    // binding bar data
-    // this.barChartData = [
-    //   {
-    //     data: [38,45,56,58,30,46,57,49,39,0,0,0],label: "Booked",total: "418"
-    //   },
-    //   {
-    //     data: [28,38,40,19,46,27,40,38,2,0,0,0],label: "Traveling",total: "278"
-    //   },
-    //   {
-    //     data: [5,8,15,0,1,3,5,0,0,0,0,0],label: "Cancel",total: "37"
-    //   }
-    // ];
-    this.barChartData = data.bookedStatistics;
-    this.barChartLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    this.barChartType = 'bar';
-    this.barChartLegend = true;
-
-    console.log('book data');
-    console.log(JSON.stringify(this.dataBooked));
-    console.log('cart data');
-    console.log(JSON.stringify(this.barChartData));
-    console.log('data');
-    console.log(JSON.stringify(data));
-
-    if(this.barChartData == this.dataBooked){
-      console.log(true);
-    }else{
-      console.log(false);
-    }
-  }
-
-  // 5. binding data commission
-  bindingDataCommission(){
-    // binding line data
-    this.lineChartData = [
-      {data: [3350, 4790, 3550, 2550, 3540, 3580, 5400, 3500, 1650, 8430, 4390, 1770], label: '2015'},
-      {data: [6500, 5900, 8000, 8010, 5600, 5500, 4000, 5000, 6500, 4300, 4900, 7700], label: '2016'},
-      {data: [2800, 4800, 4000, 1900, 8600, 2700, 9000, 8700, 5800, 6800, 4200, 3800], label: '2017'},
-      {data: [10000, 8500, 11500, 7870, 9800, 6855, 5800, 6500, 0, 0, 0, 0], label: '2018'}
-    ];
-    this.lineChartLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    this.lineChartType = 'line';
-    this.lineChartLegend = true;
-  }
-
-  // line Chart
+  // Line chart
   public lineChartData:Array<any>;
   public lineChartLabels:Array<any>;
   public lineChartType:string;
@@ -232,48 +87,95 @@ export class HomeAffComponent implements OnInit {
     },
   ];
 
-  // active menu
+  // 1. active menu
   public activeMenu(){
     // set storage
     sessionStorage.setItem('menu',JSON.stringify(0));
     sessionStorage.setItem('sub-menu',JSON.stringify(0));
+    console.log('Active menu OK!');
+  }
+
+  // 2. get data dashboard
+  public getDataDashboard(): void{
+    this.HomeAffService.getDashboardData()
+                      .subscribe(
+                        resultArray => [
+                          this.dataDashboard = resultArray
+                        ],
+                        error => console.log("Error :: " + error)
+                      )
+  }
+
+  // 3. get data booked statistics
+  public getDataBooked(): void{
+    this.HomeAffService.getBookedData()
+                      .subscribe(
+                        resultArray => [
+                          this.dataBooked = resultArray,
+                          sessionStorage.setItem('booking-data',JSON.stringify(resultArray))
+                        ],
+                        error => console.log("Error :: " + error)
+                      )
+
+    // set default booked data
+    let _data = {data: [0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: ''};
+    let arrData = <any>[];
+    for(let i=0; i<3; i++){
+      arrData.push(_data);
+    }
+    this.barChartData = arrData;
+    this.barChartLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    this.barChartType = 'bar';
+    this.barChartLegend = true;
+
+    setTimeout(()=>{
+      let _getData = JSON.parse(sessionStorage.getItem('booking-data'));
+      this.barChartData = _getData.bookedStatistics;
+    },200);
+  }
+
+  // 4. get data commission
+  public getDataCommission(): void{
+    this.HomeAffService.getCommissionData()
+                      .subscribe(
+                        resultArray => [
+                          this.dataCommission = resultArray,
+                          sessionStorage.setItem('commission-data',JSON.stringify(resultArray)),
+                        ],
+                        error => console.log("Error :: " + error)
+                      )
+    // loop
+    // set default commission data
+    // set default booked data
+    let _data = {data: [0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: ''};
+    let arrData = <any>[];
+    for(let i=0; i<4; i++){
+      arrData.push(_data);
+    }
+    this.lineChartData = arrData;
+    // this.lineChartData = [{data: [0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: ''},{data: [0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: ''},{data: [0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: ''},{data: [0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: ''}];
+    this.lineChartLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    this.lineChartType = 'line';
+    this.lineChartLegend = true;
+
+    setTimeout(()=>{
+      let _getData = JSON.parse(sessionStorage.getItem('commission-data'));
+      this.lineChartData = _getData.commission;
+    },200);
   }
 
   ngOnInit() {
-    // get data
-    let getDashboard = this.getDataDashboard();
-    let getBooked = this.getDataBooked();
-    let getCommission = this.getDataCommission();
-
-    // binding data
-    if(getBooked){
-      // this.bindingDataBooked(this.dataBooked);
-      this.barChartData = [{"data":[38,45,56,78,30,46,57,49,39,0,0,0],"label":"Booked","total":"418"},{"data":[28,38,40,19,46,27,40,38,2,0,0,0],"label":"Traveled","total":"278"},{"data":[5,8,15,0,1,3,5,0,0,0,0,0],"label":"Cancel","total":"37"}];
-      // this.barChartData = this.dataBooked;
-      this.barChartLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      this.barChartType = 'bar';
-      this.barChartLegend = true;
-
-      console.log('book data');
-      console.log(JSON.stringify(this.dataBooked));
-      console.log('cart data');
-      console.log(JSON.stringify(this.barChartData[0].data));
-      console.log('data');
-      // console.log(JSON.stringify(data));
-
-      if(this.barChartData == this.dataBooked){
-        console.log(true);
-      }else{
-        console.log(false);
-      }
-    }
-
-    if(getCommission){
-      this.bindingDataCommission();
-    }
+    sessionStorage.removeItem('chart-data'),
 
     // active menu
     this.activeMenu();
+
+    // get data
+    this.getDataDashboard();
+    this.getDataBooked();
+    this.getDataCommission();
+
+    // }
   }
 
 }

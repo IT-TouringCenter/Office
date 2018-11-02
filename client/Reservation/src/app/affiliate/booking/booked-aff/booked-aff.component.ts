@@ -1,19 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from "@angular/router";
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
+import "rxjs/Rx";
+
+import { BookedAffService } from './booked-aff.service';
 
 @Component({
   selector: 'app-booked-aff',
   templateUrl: './booked-aff.component.html',
-  styleUrls: ['./booked-aff.component.scss']
+  styleUrls: ['./booked-aff.component.scss'],
+  providers: [BookedAffService]
 })
 export class BookedAffComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private http: Http,
+    private router: Router,
+    private route: ActivatedRoute,
+    private BookedAffService: BookedAffService
+  ) { }
 
-  public date = new Date();
-  public month = this.date.getMonth();
-  public year = this.date.getFullYear();
-  public arrMonth = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  public summary;
+  public amount;
 
   // Bar chart
   public barChartOptions:any = {
@@ -29,84 +37,80 @@ export class BookedAffComponent implements OnInit {
     { backgroundColor: '#0f4675'}
   ];
 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
-
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
-
-  // switch button
-  public allBook():void {
-    this.barChartData = [
-      {data: [385,295,358,125,239,217,113,298,457,589,69,87,301,167,178,282], label: 'Summary'}
-    ];
-    let sum = 0;
-    for(let i=0;i<this.barChartData[0].data.length;i++){
-      sum += this.barChartData[0].data[i];
-    }
-    this.summary = sum;
-  }
-
-  public yearLyBook():void {
-    this.barChartData = [
-      {data: [288,255,276,108,145,156,79,233,367,458,51,71,217,112,108,177], label: this.year}
-    ];
-    let sum = 0;
-    for(let i=0;i<this.barChartData[0].data.length;i++){
-      sum += this.barChartData[0].data[i];
-    }
-    this.summary = sum;
-  }
-
-  public monthLyBook():void {
-    this.barChartData = [
-      {data: [56,77,58,37,85,95,44,47,33,75,66,53,58,87,86,71], label: this.arrMonth[this.month]+' '+this.year}
-    ];
-    let sum = 0;
-    for(let i=0;i<this.barChartData[0].data.length;i++){
-      sum += this.barChartData[0].data[i];
-    }
-    this.summary = sum;
-  }
-
-  // switch type
-  // public typeBar(){
-  //   this.barChartType = this.barChartType === 'bar' ? 'line' : 'bar';
-  // }
-
-  // public typePie(){
-  //   this.barChartType = this.barChartType === 'line' ? 'bar' : 'line';
-  // }
-
-  // active menu
-  public activeMenu(){
-    // set storage
-    sessionStorage.setItem('menu',JSON.stringify(1));
-    sessionStorage.setItem('sub-menu',JSON.stringify(101));
-  }
-
+  // 1. print
   public print():void {
     window.print();
   }
 
+  // 2. active menu
+  public activeMenu(){
+    // set storage
+    sessionStorage.setItem('menu',JSON.stringify(1));
+    sessionStorage.setItem('sub-menu',JSON.stringify(102));
+  }
+
+  // 3. switch button
+  // 3.1 get all booked data
+  public allBooked():void {
+    this.BookedAffService.getAllBook()
+                    .subscribe(
+                      data => [
+                        sessionStorage.setItem('booked-sum-all',JSON.stringify(data))
+                      ],
+                      err => {console.log(err)}
+                    );
+    setTimeout(()=>{
+      let _getData = JSON.parse(sessionStorage.getItem('booked-sum-all'));
+      this.barChartData = _getData.booked;
+      this.amount = _getData.amount;
+    }, 200);
+  }
+
+  // 3.2 get this month booked data
+  public monthBooked():void {
+    this.BookedAffService.getMonthBook()
+                    .subscribe(
+                      data => [
+                        sessionStorage.setItem('booked-sum-month',JSON.stringify(data))
+                      ],
+                      err => {console.log(err)}
+                    );
+    setTimeout(()=>{
+      let _getData = JSON.parse(sessionStorage.getItem('booked-sum-month'));
+      this.barChartData = _getData.booked;
+      this.amount = _getData.amount;
+    }, 200);
+  }
+
+  // 3.3 get this year booked data
+  public yearBooked():void {
+    this.BookedAffService.getYearBook()
+                    .subscribe(
+                      data => [
+                        // sessionStorage.removeItem('chart-data'),
+                        sessionStorage.setItem('booked-chart',JSON.stringify(data))
+                      ],
+                      err => {console.log(err)}
+                    );
+    setTimeout(()=>{
+      let _getData = JSON.parse(sessionStorage.getItem('booked-chart'));
+      this.barChartData = _getData.booked;
+      this.amount = _getData.amount;
+    }, 200);
+  }
+
   ngOnInit() {
-    // binding bar data
+    // set default binding bar data
     this.barChartData = [
-      {data: [385,295,358,125,239,217,113,298,457,589,69,87,301,167,178,282], label: 'Summary'}
+      {data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], label: 'Summary'}
     ];
-    let sum = 0;
-    for(let i=0;i<this.barChartData[0].data.length;i++){
-      sum += this.barChartData[0].data[i];
-    }
-    this.summary = sum;
+    this.amount = 0;
     this.barChartLabels = ['TC-01','TC-02','TC-03','TC-04','TC-05A','TC-05E','TC-06','TC-07','TC-08','TC-09','TC-10','TC-11','TC-12','TC-S01','TC-S02M','TC-S02A'];
     this.barChartType = 'bar';
     this.barChartLegend = true;
 
     this.activeMenu();
+    this.allBooked();
   }
 
 }

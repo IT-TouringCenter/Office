@@ -32,8 +32,6 @@ export class BookformEditRsvnComponent implements OnInit {
   // Edit by API
   // getBookingEditByApi;
 
-  userId = '1084873764';
-
   // Edit form
   selectedTour;
   selectedTourTravelTime;
@@ -50,6 +48,10 @@ export class BookformEditRsvnComponent implements OnInit {
   minDate = new Date(2017, 12, 1);
   maxDate = new Date(2018, 9, 31);
 
+  accountInfo = {
+    id: <any>'',
+    token: <any>''
+  };
   tourInfo = {
     tourData:{
       id:'',
@@ -308,6 +310,17 @@ export class BookformEditRsvnComponent implements OnInit {
       4. Set data format
       5. Save to API
     ------------------------------- */
+    setAccountInfo(){
+      let getAccount = sessionStorage.getItem('users');
+      if(getAccount==null || getAccount==undefined || getAccount==''){
+        this.accountInfo.id = 0;
+        this.accountInfo.token = '';
+      }else{
+        let account = JSON.parse(getAccount);
+        this.accountInfo.id = account.data.id;
+        this.accountInfo.token = account.data.token;
+      }
+    }
 
     // Step 1 : Set tour data
     setTourData(){
@@ -641,6 +654,7 @@ export class BookformEditRsvnComponent implements OnInit {
 
       this.dataSave = 
         {
+          "accountInfo": this.accountInfo,
           "transId":this.routeTransactionId,
           "bookingInfo": {
             "tourId": this.tourInfo.tourData.id,
@@ -728,13 +742,13 @@ export class BookformEditRsvnComponent implements OnInit {
       }
 
       let options = new RequestOptions();
-      let link = '/user'+this.userId+'reservations/booked';
+      let link = '/user/reservations/booked';
 
       /*==================  Success  ===================*/
       return this.http.post(url, dataSave, options)
                       .map(res => res.json())
                       .subscribe(
-                        data => {this.router.navigate(['reservations/booked'])}, // success go to page 'booked-statistics'
+                        data => {this.router.navigate([link])}, // success go to page 'booked-statistics'
                         err => {console.log(err)}
                       );
       /*==================  Success  ===================*/

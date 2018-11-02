@@ -1,41 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from "@angular/router";
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
+import "rxjs/Rx";
+
+import { TourDayOfMonthAffService } from './tour-day-of-month-aff.service';
 
 @Component({
   selector: 'app-tour-day-of-month-aff',
   templateUrl: './tour-day-of-month-aff.component.html',
-  styleUrls: ['./tour-day-of-month-aff.component.scss']
+  styleUrls: ['./tour-day-of-month-aff.component.scss'],
+  providers: [TourDayOfMonthAffService]
 })
 export class TourDayOfMonthAffComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private http: Http,
+    private router: Router,
+    private route: ActivatedRoute,
+    private TourDayOfMonthAffService: TourDayOfMonthAffService
+  ) { }
 
-  public tours = [
-    {'code': 'TC-01', 'title': 'Doi Suthep Temple & Hmong Hill Tribe Village'},
-    {'code': 'TC-02', 'title': 'City Temple & Museum'},
-    {'code': 'TC-03', 'title': 'Elephant at Work & Riding @ Mae Sa Elephant Camp'},
-    {'code': 'TC-04', 'title': 'Handicraft Village'},
-    {'code': 'TC-05A', 'title': 'Chiang Mai Night Safari (Afternoon Trip; Day Safari)'},
-    {'code': 'TC-05E', 'title': 'Chiang Mai Night Safari (Evening Trip)'},
-    {'code': 'TC-06', 'title': 'Khan Toke Dinner with Cultural Performances'},
-    {'code': 'TC-07', 'title': 'Elephant Safari @ Mae Taman Elephant Camp'},
-    {'code': 'TC-08', 'title': 'Chiang Rai Day Trip'},
-    {'code': 'TC-09', 'title': 'Inthanon National Park'},
-    {'code': 'TC-10', 'title': 'Elephant Trek to Long Neck and Tiger Kingdom'},
-    {'code': 'TC-11', 'title': 'Elephant Conservation Center @ Lampang'},
-    {'code': 'TC-12', 'title': 'Trekking Doi Suthep Area'},
-    {'code': 'TC-S01', 'title': 'Kew Mae Pan Natural Trail'},
-    {'code': 'TC-S02M', 'title': 'Breath of Nature (Morning)'},
-    {'code': 'TC-S02A', 'title': 'Breath of Nature (Afternoon)'}
-  ];
+  public tours = [];
+  public amount = [];
 
-  public date = new Date();
-  public month = this.date.getMonth();
-  public year = this.date.getFullYear();
   public arrMonth = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   public arrYear = ['2018','2019','2020'];
-  public monthNow = this.arrMonth[this.month];
-  public shortMonthNow = this.monthNow.substr(0,3);
-  public summary;
 
   // Bar chart (day)
   public barChartOptions:any = {
@@ -55,41 +45,47 @@ export class TourDayOfMonthAffComponent implements OnInit {
       pointHoverBorderColor: 'rgba(77,83,96,1)' }
   ];
 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
-
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
-
+  // 1. print
   public print():void {
     window.print();
   }
 
-  // active menu
+  // 2. active menu
   public activeMenu(){
     // set storage
     sessionStorage.setItem('menu',JSON.stringify(3));
     sessionStorage.setItem('sub-menu',JSON.stringify(302));
   }
 
+  // 3. get data binding
+  public getTourDaysOfMonthData() {
+    this.TourDayOfMonthAffService.getTourDayOfMonth()
+                    .subscribe(
+                      data => [
+                        // sessionStorage.removeItem('chart-data'),
+                        sessionStorage.setItem('tour-day-chart',JSON.stringify(data))
+                      ],
+                      err => {console.log(err)}
+                    );
+    setTimeout(()=>{
+      let _getData = JSON.parse(sessionStorage.getItem('tour-day-chart'));
+      this.barChartData = _getData.booked;
+      this.tours = _getData.tours;
+      this.amount = _getData.amount;
+    }, 200);
+  }
+
   ngOnInit() {
     // binding bar data (day)
     this.barChartData = [
-      {data: [5,2,5,8,2,3,5,6,4,7,3,2,4,6,4,5,3,7,2,6,4,8,4,3,5,1,4,2,3,6], label: this.monthNow+' '+this.year}
+      {data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], label: ''}
     ];
-    let sum = 0;
-    for(let i=0;i<this.barChartData[0].data.length;i++){
-      sum += this.barChartData[0].data[i];
-    }
-    this.summary = sum;
-    this.barChartLabels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'];
+    this.barChartLabels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
     this.barChartType = 'line';
     this.barChartLegend = true;
 
     this.activeMenu();
+    this.getTourDaysOfMonthData();
   }
 
 }

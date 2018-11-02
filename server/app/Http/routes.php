@@ -87,6 +87,7 @@ Route::get('/', 'WelcomeController@index');
 	Route::get('api/Dashboard/Affiliate/Booked', 'Dashboard\Affiliate\Home\DashboardAffiliateController@AffiliateDashboardBooked');
 	Route::get('api/Dashboard/Affiliate/Commission', 'Dashboard\Affiliate\Home\DashboardAffiliateController@AffiliateDashboardCommission');
 	// Booked
+	// Route::get('api/Dashboard/Affiliate/booked/table', 'Dashboard\Affiliate\Booked\');
 	Route::get('api/Dashboard/Affiliate/Booked/Summary', 'Dashboard\Affiliate\Booked\DashboardAffiliateBookedController@AffiliateDashboardBookedSummary');
 	Route::get('api/Dashboard/Affiliate/Booked/Summary/DaysOfMonth', 'Dashboard\Affiliate\Booked\DashboardAffiliateBookedController@AffiliateDashboardBookedSummaryDaysOfMonth');
 	Route::get('api/Dashboard/Affiliate/Booked/Summary/Monthly', 'Dashboard\Affiliate\Booked\DashboardAffiliateBookedController@AffiliateDashboardBookedSummaryMonthly');

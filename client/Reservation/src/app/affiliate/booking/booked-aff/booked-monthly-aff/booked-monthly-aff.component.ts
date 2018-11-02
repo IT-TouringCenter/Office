@@ -1,22 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from "@angular/router";
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
+import "rxjs/Rx";
+
+import { BookedMonthlyAffService } from './booked-monthly-aff.service';
 
 @Component({
   selector: 'app-booked-monthly-aff',
   templateUrl: './booked-monthly-aff.component.html',
-  styleUrls: ['./booked-monthly-aff.component.scss']
+  styleUrls: ['./booked-monthly-aff.component.scss'],
+  providers: [BookedMonthlyAffService]
 })
 export class BookedMonthlyAffComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private http: Http,
+    private router: Router,
+    private route: ActivatedRoute,
+    private BookedMonthlyAffService: BookedMonthlyAffService
+  ) { }
 
-  public date = new Date();
-  public month = this.date.getMonth();
-  public year = this.date.getFullYear();
   public arrMonth = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   public arrYear = ['2018','2019','2020'];
-  public monthNow = this.arrMonth[this.month];
-  public shortMonthNow = this.monthNow.substr(0,3);
-  public summary;
+  public amount;
 
   // Bar chart
   public barChartOptions:any = {
@@ -32,41 +39,46 @@ export class BookedMonthlyAffComponent implements OnInit {
     { backgroundColor: '#0f4675'}
   ];
 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
-
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
-
+  // 1. print
   public print():void {
     window.print();
   }
 
-  // active menu
+  // 2. active menu
   public activeMenu(){
     // set storage
     sessionStorage.setItem('menu',JSON.stringify(1));
-    sessionStorage.setItem('sub-menu',JSON.stringify(103));
+    sessionStorage.setItem('sub-menu',JSON.stringify(104));
+  }
+
+  // 3. get data binding
+  public getBookedMonthlyData():void {
+    this.BookedMonthlyAffService.getBookedMonthly()
+                    .subscribe(
+                      data => [
+                        // sessionStorage.removeItem('chart-data'),
+                        sessionStorage.setItem('booked-monthly-chart',JSON.stringify(data))
+                      ],
+                      err => {console.log(err)}
+                    );
+    setTimeout(()=>{
+      let _getData = JSON.parse(sessionStorage.getItem('booked-monthly-chart'));
+      this.barChartData = _getData.booked;
+      this.amount = _getData.amount;
+    }, 200);
   }
 
   ngOnInit() {
-    // binding bar data
+    // set default binding bar data
     this.barChartData = [
-      {data: [235,212,197,158,141,134,125,165,142,217,198,226], label: this.year}
+      {data: [0,0,0,0,0,0,0,0,0,0,0,0], label: ''}
     ];
-    let sum = 0;
-    for(let i=0;i<this.barChartData[0].data.length;i++){
-      sum += this.barChartData[0].data[i];
-    }
-    this.summary = sum;
     this.barChartLabels = this.arrMonth;
     this.barChartType = 'bar';
     this.barChartLegend = true;
 
     this.activeMenu();
+    this.getBookedMonthlyData();
   }
 
 }

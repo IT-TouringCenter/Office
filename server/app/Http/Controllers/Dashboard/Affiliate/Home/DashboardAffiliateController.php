@@ -28,39 +28,26 @@ class DashboardAffiliateController extends Controller {
 
     // Logout
     public function AffiliateDashboard(Request $request){
-
         $dataArr = [];
 
         $bookedRes = new Account;
-        $bookedRes->data = [38,45,56,78,30,46,57,49,39,0,0,0];
+        $bookedRes->data = [38,45,56,78,30,46,57,49,39,50,37,50];
         $bookedRes->label = "Booked";
         $bookedRes->total = "418";
         array_push($dataArr,$bookedRes);
 
         $travelRes = new Account;
-        $travelRes->data = [28,38,40,19,46,27,40,38,2,0,0,0];
+        $travelRes->data = [28,38,40,19,46,27,40,38,22,25,37,19];
         $travelRes->label = "Traveled";
         $travelRes->total = "278";
         array_push($dataArr,$travelRes);
 
         $cancelRes = new Account;
-        $cancelRes->data = [5,8,15,0,1,3,5,0,0,0,0,0];
+        $cancelRes->data = [5,8,15,0,1,3,5,1,1,0,3,2];
         $cancelRes->label = "Cancel";
         $cancelRes->total = "37";
         array_push($dataArr,$cancelRes);
 
         return $dataArr;
-        // return 'Account logout controller';
-        // $accountData  = $request->input();
-        // try{
-        //     $results = \AccountLogoutFacade::AccountLogout($accountData);
-        //     if($results==null){
-        //         abort(400);
-        //     }
-        //     return $results;
-        // }catch(Exception $e){
-        //     abort(500);
-        // }
-    } //
-
+    }
 }

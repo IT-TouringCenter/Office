@@ -24,9 +24,9 @@
         </div>
         <div class="col-lg-2 col-md-4 col-sm-12 col-xs-12 no-print" style="padding: 33px 0 0 0 !important;">
           <mat-radio-group>
-            <p><mat-radio-button value="1" (click)="allBook()" color="primary" checked="checked"><small>All</small></mat-radio-button></p>
-            <p><mat-radio-button value="2" (click)="yearLyBook()" color="primary"><small>This year</small></mat-radio-button></p>
-            <p><mat-radio-button value="3" (click)="monthLyBook()" color="primary"><small>This month</small></mat-radio-button></p>
+            <p><mat-radio-button value="1" (click)="allBooked()" color="primary" checked="checked"><small>All</small></mat-radio-button></p>
+            <p><mat-radio-button value="2" (click)="monthBooked()" color="primary"><small>This month</small></mat-radio-button></p>
+            <p><mat-radio-button value="3" (click)="yearBooked()" color="primary"><small>This year</small></mat-radio-button></p>
           </mat-radio-group>
         </div>
         <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-print" style="padding: 33px 0 0 0 !important;">
@@ -51,7 +51,7 @@
           </tr>
           <tr style="background: #e4e4e4; border: #cacaca solid 1px;">
             <th style="text-align:center; width:50%;border-right:#cacaca solid 1px;">Total</th>
-            <th style="text-align:center;">{{summary}}</th>
+            <th style="text-align:center;">{{amount}}</th>
           </tr>
         </table>
       </div>

@@ -1,41 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from "@angular/router";
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
+import "rxjs/Rx";
+
+import { TraveledTourAffService } from './traveled-tour-aff.service';
 
 @Component({
   selector: 'app-traveled-tour-aff',
   templateUrl: './traveled-tour-aff.component.html',
-  styleUrls: ['./traveled-tour-aff.component.scss']
+  styleUrls: ['./traveled-tour-aff.component.scss'],
+  providers: [TraveledTourAffService]
 })
 export class TraveledTourAffComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private http: Http,
+    private router: Router,
+    private route: ActivatedRoute,
+    private TraveledTourAffService: TraveledTourAffService
+  ) { }
 
-  public tours = [
-    {'code': 'TC-01', 'title': 'Doi Suthep Temple & Hmong Hill Tribe Village'},
-    {'code': 'TC-02', 'title': 'City Temple & Museum'},
-    {'code': 'TC-03', 'title': 'Elephant at Work & Riding @ Mae Sa Elephant Camp'},
-    {'code': 'TC-04', 'title': 'Handicraft Village'},
-    {'code': 'TC-05A', 'title': 'Chiang Mai Night Safari (Afternoon Trip; Day Safari)'},
-    {'code': 'TC-05E', 'title': 'Chiang Mai Night Safari (Evening Trip)'},
-    {'code': 'TC-06', 'title': 'Khan Toke Dinner with Cultural Performances'},
-    {'code': 'TC-07', 'title': 'Elephant Safari @ Mae Taman Elephant Camp'},
-    {'code': 'TC-08', 'title': 'Chiang Rai Day Trip'},
-    {'code': 'TC-09', 'title': 'Inthanon National Park'},
-    {'code': 'TC-10', 'title': 'Elephant Trek to Long Neck and Tiger Kingdom'},
-    {'code': 'TC-11', 'title': 'Elephant Conservation Center @ Lampang'},
-    {'code': 'TC-12', 'title': 'Trekking Doi Suthep Area'},
-    {'code': 'TC-S01', 'title': 'Kew Mae Pan Natural Trail'},
-    {'code': 'TC-S02M', 'title': 'Breath of Nature (Morning)'},
-    {'code': 'TC-S02A', 'title': 'Breath of Nature (Afternoon)'}
-  ];
+  public tours = [];
+  public amount;
 
-  public date = new Date();
-  public month = this.date.getMonth();
-  public year = this.date.getFullYear();
   public arrMonth = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   public arrYear = ['2018','2019','2020'];
-  public monthNow = this.arrMonth[this.month];
-  public shortMonthNow = this.monthNow.substr(0,3);
-  public summary;
 
   // Bar chart (all)
   public barChartOptions:any = {
@@ -48,41 +38,51 @@ export class TraveledTourAffComponent implements OnInit {
   public barChartLegend:boolean;
   public barChartColors:Array<any> = [];
 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
-
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
-
+  // 1. print
   public print():void {
     window.print();
   }
 
-  // active menu
+  // 2. active menu
   public activeMenu(){
     // set storage
     sessionStorage.setItem('menu',JSON.stringify(2));
     sessionStorage.setItem('sub-menu',JSON.stringify(204));
   }
 
-  ngOnInit() {
-    // all
-    this.barChartData = [
-      {data: [550,432], label: 'Tour statistics'}
-    ];
-    let sum = 0;
-    for(let i=0;i<this.barChartData[0].data.length;i++){
-      sum += this.barChartData[0].data[i];
+  // 3. get data binding
+  public getTraveledTourData(){
+    this.TraveledTourAffService.getTraveledTour()
+                    .subscribe(
+                      resultArray => [
+                        // sessionStorage.removeItem('chart-data'),
+                        sessionStorage.setItem('traveled-tour-chart',JSON.stringify(resultArray))
+                      ],
+                      error => console.log("Error :: " + error)
+                    )
+
+    // set default traveled tour data
+    let _data = {data: [0,0], label: '', total: ''};
+    let arrData = <any>[];
+    for(let i=0; i<1; i++){
+      arrData.push(_data);
     }
-    this.summary = sum;
+    this.barChartData = arrData;
     this.barChartLabels = ['2017','2018'];
     this.barChartType = 'pie';
     this.barChartLegend = true;
 
+    setTimeout(()=>{
+      let _getData = JSON.parse(sessionStorage.getItem('traveled-tour-chart'));
+      this.barChartData = _getData.booked;
+      this.amount = _getData.amount;
+    },200);
+  }
+
+  ngOnInit() {
+    // get data
     this.activeMenu();
+    this.getTraveledTourData();
   }
 
 }

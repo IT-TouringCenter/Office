@@ -31,6 +31,7 @@ import { HomeAffComponent } from './affiliate/home/home-aff/home-aff.component';
 import { BookedAffComponent } from './affiliate/booking/booked-aff/booked-aff.component';
 import { BookedDayOfMonthAffComponent } from './affiliate/booking/booked-aff/booked-day-of-month-aff/booked-day-of-month-aff.component';
 import { BookedMonthlyAffComponent } from './affiliate/booking/booked-aff/booked-monthly-aff/booked-monthly-aff.component';
+import { BookedTableAffComponent } from './affiliate/booking/booked-aff/booked-table-aff/booked-table-aff.component';
 import { TourAffComponent } from './affiliate/booking/tour-aff/tour-aff.component';
 import { TourDayOfMonthAffComponent } from './affiliate/booking/tour-aff/tour-day-of-month-aff/tour-day-of-month-aff.component';
 import { TourMonthlyAffComponent } from './affiliate/booking/tour-aff/tour-monthly-aff/tour-monthly-aff.component';
@@ -134,6 +135,10 @@ const routes: Routes = [
   {
     path: 'user/affiliate/booked/monthly',
     component: BookedMonthlyAffComponent
+  },
+  {
+    path: 'user/affiliate/booked/table',
+    component: BookedTableAffComponent
   },
   {
     path: 'user/affiliate/booked/tours',

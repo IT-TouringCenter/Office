@@ -34,11 +34,15 @@ export class BookformAddRsvnComponent implements OnInit {
 
   myControl: FormControl = new FormControl();
 
-  userId = '1084873764';
+  // userId = '1084873764';
 
   // Set model
   minDate = new Date(2017, 12, 1);
-  maxDate = new Date(2018, 9, 31);
+  maxDate = new Date(2018, 11, 31);
+  accountInfo = {
+    id: <any>'',
+    token: <any>''
+  };
   tourInfo = {
     tourData:{
       id:'',
@@ -253,6 +257,18 @@ export class BookformAddRsvnComponent implements OnInit {
     // }
 
     /*======== Data to Save ========*/
+    setAccountInfo(){
+      let getAccount = sessionStorage.getItem('users');
+      if(getAccount==null || getAccount==undefined || getAccount==''){
+        this.accountInfo.id = 0;
+        this.accountInfo.token = '';
+      }else{
+        let account = JSON.parse(getAccount);
+        this.accountInfo.id = account.data.id;
+        this.accountInfo.token = account.data.token;
+      }
+    }
+
     // Step 1 : Set tour data
     setTourData(){
       let tourArr = [];
@@ -495,6 +511,9 @@ export class BookformAddRsvnComponent implements OnInit {
     }// End Function Set Price
 
     dataToSave(){
+      // Set account
+      this.setAccountInfo();
+  
       // Set Date format
       let _date = new Date(this.tourInfo.tourTravelDate);
       let _month = _date.getMonth();
@@ -594,6 +613,7 @@ export class BookformAddRsvnComponent implements OnInit {
 
       this.dataSave = 
         {
+          "accountInfo": this.accountInfo,
           "bookingInfo": {
             "tourId": this.tourInfo.tourData.id,
             "tourCode": this.tourInfo.tourData.code,

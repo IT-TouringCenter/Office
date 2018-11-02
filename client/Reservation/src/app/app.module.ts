@@ -67,6 +67,7 @@ import { TraveledAffComponent } from './affiliate/booking/traveled-aff/traveled-
 import { TraveledDayOfMonthAffComponent } from './affiliate/booking/traveled-aff/traveled-day-of-month-aff/traveled-day-of-month-aff.component';
 import { TraveledMonthlyAffComponent } from './affiliate/booking/traveled-aff/traveled-monthly-aff/traveled-monthly-aff.component';
 import { TraveledTourAffComponent } from './affiliate/booking/traveled-aff/traveled-tour-aff/traveled-tour-aff.component';
+import { BookedTableAffComponent } from './affiliate/booking/booked-aff/booked-table-aff/booked-table-aff.component';
 
 @NgModule({
   declarations: [
@@ -119,12 +120,14 @@ import { TraveledTourAffComponent } from './affiliate/booking/traveled-aff/trave
     TraveledAffComponent,
     TraveledDayOfMonthAffComponent,
     TraveledMonthlyAffComponent,
-    TraveledTourAffComponent
+    TraveledTourAffComponent,
+    BookedTableAffComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
     MaterialModule,
@@ -132,7 +135,9 @@ import { TraveledTourAffComponent } from './affiliate/booking/traveled-aff/trave
     ReactiveFormsModule,
     ChartsModule
   ],
-  providers: [],
+  providers: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

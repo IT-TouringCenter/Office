@@ -6,14 +6,16 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 
 use App\Repositories\Reservations\TransactionRepository as TransactionRepo;
+use App\Repositories\Reservations\Accounts\AccountRepository as AccountRepo;
 
 use App\transaction as Transaction;
 use App\invoice_tour as InvoiceTour;
 
 class TransactionClass{
 
-	public function __construct(TransactionRepo $TransactionRepo){
+	public function __construct(TransactionRepo $TransactionRepo, AccountRepo $AccountRepo){
 		$this->TransactionRepo = $TransactionRepo;
+		$this->AccountRepo = $AccountRepo;
 	}
 
 	/* ------------------------------------
@@ -38,9 +40,13 @@ class TransactionClass{
 		$invoiceRef = array_get($bookingData, 'invoiceRef');
 		$count = 1;
 
+		// Check account
+		$checkAccount = $this->CheckAccountEmpty(array_get($bookingData,'accountInfo'));
+		$accountId = array_get($checkAccount,'id');
+
 		$this->transaction = new Transaction;
 		// Transaction
-		$saveTransactionId = $this->TransactionRepo->SaveTransactionBooking($bookingData);
+		$saveTransactionId = $this->TransactionRepo->SaveTransactionBooking($bookingData,$accountId);
 		// Transaction tour
 		$TransactionTourId = $this->SaveTransactionTourBooking($saveTransactionId,$bookingData);
 		// Payment
@@ -69,6 +75,22 @@ class TransactionClass{
 		}
 		$this->transaction->tourDetail = $bookingArr;
         return $this->transaction;
+	}
+
+	// Check account empty
+	public function CheckAccountEmpty($accountInfo){
+		$token = array_get($accountInfo,'token');
+		$getAccount = $this->AccountRepo->GetAccountByToken($token);
+
+		$account = new Transaction;
+		if($getAccount){
+			$account->id = $getAccount[0]->id;
+			$account->token = $getAccount[0]->token;
+		}else{
+			$account->id = 0;
+			$account->token = '';
+		}
+		return $account;
 	}
 
 	// Save to DB : Transaction tour table

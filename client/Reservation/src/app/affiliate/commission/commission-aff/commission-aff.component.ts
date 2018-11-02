@@ -1,15 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from "@angular/router";
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
+import "rxjs/Rx";
+
+import { CommissionAffService } from './commission-aff.service';
 
 @Component({
   selector: 'app-commission-aff',
   templateUrl: './commission-aff.component.html',
-  styleUrls: ['./commission-aff.component.scss']
+  styleUrls: ['./commission-aff.component.scss'],
+  providers: [CommissionAffService]
 })
 export class CommissionAffComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private http: Http,
+    private router: Router,
+    private route: ActivatedRoute,
+    private CommissionAffService: CommissionAffService
+  ) { }
 
-  public summary;
+  public amount;
 
   // Bar chart
   public barChartOptions:any = {
@@ -23,41 +35,46 @@ export class CommissionAffComponent implements OnInit {
   public barChartLegend:boolean;
   public barChartColors:Array<any> = [];
 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
-
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
-
+  // 1. print
   public print():void {
     window.print();
   }
 
-  // active menu
+  // 2. active menu
   public activeMenu(){
     // set storage
     sessionStorage.setItem('menu',JSON.stringify(4));
     sessionStorage.setItem('sub-menu',JSON.stringify(401));
   }
 
+  // 3. get data binding
+  public getCommissionData() {
+    this.CommissionAffService.getCommission()
+                    .subscribe(
+                      data => [,
+                        // sessionStorage.removeItem('chart-data'),
+                        sessionStorage.setItem('commission-chart',JSON.stringify(data))
+                      ],
+                      err => {console.log(err)}
+                    );
+    setTimeout(()=>{
+      let _getData = JSON.parse(sessionStorage.getItem('commission-chart'));
+      this.barChartData = _getData.booked;
+      this.amount = _getData.amount;
+    }, 200);
+  }
+
   ngOnInit() {
     // binding bar data
     this.barChartData = [
-      {data: [3800, 4500, 5600, 5800, 3000, 4600, 5700, 1900, 3090, 4900, 5700, 6300, 3750, 6125, 4150, 5400], label: 'Commission'},
-      // {data: [3800, 4500, 5600, 5800, 3000, 4600, 5700, 0, 4990, 4900, 5700, 6300, 3750, 6125, 4150, 0], label: 'Received'},
-      // {data: [5, 8, 15, 0, 1, 3, 5, 0, 0, 0, 0, 0], label: 'Cancel'}
+      {data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], label: ''}
     ];
-    let sum = 0;
-    for(let i=0;i<this.barChartData[0].data.length;i++){
-      sum += this.barChartData[0].data[i];
-    }
-    this.summary = sum;
+
     this.barChartLabels = ['TC-01','TC-02','TC-03','TC-04','TC-05A','TC-05E','TC-06','TC-07','TC-08','TC-09','TC-10','TC-11','TC-12','TC-S01','TC-S02M','TC-S02A'];
     this.barChartType = 'bar';
     this.barChartLegend = true;
+
     this.activeMenu();
+    this.getCommissionData();
   }
 }
