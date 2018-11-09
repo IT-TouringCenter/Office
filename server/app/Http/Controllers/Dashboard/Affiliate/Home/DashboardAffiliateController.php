@@ -26,28 +26,48 @@ class DashboardAffiliateController extends Controller {
 		}
 	}//end Response function
 
-    // Logout
+    // Dashboard
     public function AffiliateDashboard(Request $request){
-        $dataArr = [];
+        $req  = $request->input();
+        try{
+			$results = \DashboardAffiliateFacade::AffiliateDashboard($req);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
+		}catch(Exception $e){
+			abort(500);
+		}
+    }
 
-        $bookedRes = new Account;
-        $bookedRes->data = [38,45,56,78,30,46,57,49,39,50,37,50];
-        $bookedRes->label = "Booked";
-        $bookedRes->total = "418";
-        array_push($dataArr,$bookedRes);
+    // Dashboard booked
+    public function AffiliateDashboardBooked(Request $request){
+        $req  = $request->input();
+        try{
+			$results = \DashboardAffiliateBookedFacade::AffiliateDashboardBooked($req);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
+		}catch(Exception $e){
+			abort(500);
+		}
+    }
 
-        $travelRes = new Account;
-        $travelRes->data = [28,38,40,19,46,27,40,38,22,25,37,19];
-        $travelRes->label = "Traveled";
-        $travelRes->total = "278";
-        array_push($dataArr,$travelRes);
-
-        $cancelRes = new Account;
-        $cancelRes->data = [5,8,15,0,1,3,5,1,1,0,3,2];
-        $cancelRes->label = "Cancel";
-        $cancelRes->total = "37";
-        array_push($dataArr,$cancelRes);
-
-        return $dataArr;
+    // Dashboard commission
+    public function AffiliateDashboardCommission(Request $request){
+        $req  = $request->input();
+        try{
+			$results = \DashboardAffiliateCommissionFacade::AffiliateDashboardCommission($req);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
+		}catch(Exception $e){
+			abort(500);
+		}
     }
 }

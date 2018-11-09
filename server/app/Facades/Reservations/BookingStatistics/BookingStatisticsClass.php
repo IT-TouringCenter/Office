@@ -9,14 +9,16 @@ use Illuminate\Http\Request;
 use App\transaction as Transaction;
 
 // Repository
+use App\Repositories\Reservations\Accounts\AccountRepository as AccountRepo;
 use App\Repositories\Reservations\TransactionRepository as TransactionRepo;
 use App\Repositories\Reservations\Invoices\InvoiceTourRepository as InvoiceTourRepo;
 
 class BookingStatisticsClass{
 	
-	public function __construct(TransactionRepo $TransactionRepo, InvoiceTourRepo $InvoiceTourRepo){
+	public function __construct(TransactionRepo $TransactionRepo, InvoiceTourRepo $InvoiceTourRepo, AccountRepo $AccountRepo){
         $this->TransactionRepo = $TransactionRepo;
         $this->InvoiceTourRepo = $InvoiceTourRepo;
+        $this->AccountRepo = $AccountRepo;
     }
 
     /* -----------------------------------------------------------------------------------------------------
@@ -111,5 +113,66 @@ class BookingStatisticsClass{
         }else{
             $this->transaction->guestName = '';
         }
+    }
+
+    //=====================================================================
+    // 5. Transaction by account id
+    public function GetBookedByAccountId($accountData){
+        $token = array_get($accountData,'token');
+        $getAccount = $this->AccountRepo->GetAccountByToken($token);
+        $accountId = $getAccount[0]->id;
+        // return $accountId;
+
+        $transaction = $this->TransactionRepo->GetTransactionByAccountId($accountId);
+        if($transaction==null){
+            return null;
+        }
+        $transactionArr = [];
+
+        foreach($transaction as $value){
+            $this->transaction = new Transaction;
+            $TransactionTour = $this->GetTransactionTourById($value->id);
+            $Invoice = $this->GetInvoiceTour($value->id);
+            // $TransactionTourDetail = $this->GetTransactionTourDetailById($TransactionTour[0]->id);
+
+            if($TransactionTour && $this->transaction->bookingId!=''){
+                $tourName = $TransactionTour[0]->tour_code.' : '.$TransactionTour[0]->tour_title;
+                $subTour = substr($tourName,0,25);
+
+                $this->transaction->transactionId = $value->id;
+                $this->transaction->tourName = $subTour.'...';
+                $this->transaction->tourFullname = $tourName;
+                $this->transaction->tourPrivacy = $TransactionTour[0]->tour_privacy;
+                $this->transaction->tourTravel = \DateFormatFacade::SetShortDate($TransactionTour[0]->tour_travel_date);
+                $this->transaction->tourPax = $TransactionTour[0]->pax;
+                $this->transaction->hotel = $TransactionTour[0]->hotel;
+                $this->transaction->hotelRoom = $TransactionTour[0]->hotel_room;
+                $this->transaction->bookDate = \DateFormatFacade::SetShortDate($value->book_date);
+                $this->transaction->bookBy = $value->book_by_name;
+                $this->transaction->noteBy = $value->note_by;
+                $this->transaction->insurance = $value->is_insurance==1?true:false;
+                $this->transaction->price = $value->amount;
+                $this->GetTransactionTourDetailById($TransactionTour[0]->id);
+
+                array_push($transactionArr, $this->transaction);
+            }else{
+                $this->transaction->transactionId = $value->id;
+                $this->transaction->tourName = '';
+                $this->transaction->tourFullname = '';
+                $this->transaction->tourPrivacy = '';
+                $this->transaction->tourTravel = '';
+                $this->transaction->tourPax = '';
+                $this->transaction->hotel = '';
+                $this->transaction->hotelRoom = '';
+                $this->transaction->bookDate = \DateFormatFacade::SetShortDate($value->book_date);
+                $this->transaction->bookBy = $value->book_by_name;
+                $this->transaction->noteBy = $value->note_by;
+                $this->transaction->insurance = $value->is_insurance==1?true:false;
+                $this->transaction->price = $value->amount;
+
+                // array_push($transactionArr, $this->transaction);
+            }
+        }
+        return $transactionArr;
     }
 }

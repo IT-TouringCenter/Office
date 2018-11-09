@@ -98,4 +98,19 @@ class ReservationController extends MyBaseController {
 			abort(500);
 		}
 	}
+
+	// Get booked data by account ID
+	public function GetBookedByAccountId(Request $request){
+		$accountData  = $request->input();
+		try{
+			$results = \ReservationBookingStatisticsFacade::GetBookedByAccountId($accountData);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
+		}catch(Exception $e){
+			abort(500);
+		}
+	}
 }

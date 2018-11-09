@@ -49,6 +49,8 @@ class CreateTransactionToursTable extends Migration {
 			$table->tinyInteger('is_special_request_operator')->default(1);
 			$table->tinyInteger('is_special_tour')->default(0);
 			$table->tinyInteger('is_travel')->default(0);
+			$table->tinyInteger('is_cancel')->default(0);
+			$table->date('cancel_date')->nullable();
 			$table->tinyInteger('is_active')->default(1);
 			$table->string('created_by',50)->default('System');
 			$table->string('updated_by',50)->nullable();

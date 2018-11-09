@@ -291,6 +291,16 @@ class TransactionRepository{
 		return $result;
 	}
 
+	// Get transaction by account id
+	public function GetTransactionByAccountId($accountId){
+		$result = \DB::table('transactions')
+					->where('account_id',1)
+					->where('is_active',1)
+					->orderBy('id','desc')
+					->get();
+		return $result;
+	}
+
 	// Get tour travel time by tour id
 	public function GetTourTravelTimeByTourId($tourId, $tourTravelTime){
 		$result = \DB::table('tour_travel_times')

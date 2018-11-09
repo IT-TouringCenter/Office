@@ -200,6 +200,7 @@ return [
 		'EditReservationFacade' => 'App\Facades\Reservations\Transactions\EditReservationFacade',
 
 		// Commons
+		'DateFacade' => 'App\Facades\Commons\DateFacade',
 		'DateFormatFacade' => 'App\Facades\Commons\DateFormatFacade',
 		'GenerateCodeFacade' => 'App\Facades\Commons\GenerateCodeFacade',
 
@@ -222,7 +223,7 @@ return [
 		'AccountLoginFacade' => 'App\Facades\Accounts\AccountLoginFacade',
 		'AccountLogoutFacade' => 'App\Facades\Accounts\AccountLogoutFacade',
 		'AccountForceLogoutFacade' => 'App\Facades\Accounts\AccountForceLogoutFacade',
-		
+
 		// Affiliate
 		'AffiliateFacade' => 'App\Facades\Affiliates\AffiliateFacade',
 
@@ -232,5 +233,18 @@ return [
 
 		// Payment
 		'PaymentAffiliateCommissionFacade' => 'App\Facades\Payments\PaymentAffiliateCommissionFacade',
+
+		// Dashboard (Affiliate)
+		'DashboardAffiliateFacade' => 'App\Facades\Dashboard\Affiliate\Home\DashboardAffiliateFacade',
+		'DashboardAffiliateBookedFacade' => 'App\Facades\Dashboard\Affiliate\Home\DashboardAffiliateBookedFacade',
+		'DashboardAffiliateCommissionFacade' => 'App\Facades\Dashboard\Affiliate\Home\DashboardAffiliateCommissionFacade',
+
+		'DashboardAffiliateBookedSummaryFacade' => 'App\Facades\Dashboard\Affiliate\Booked\DashboardAffiliateBookedSummaryFacade',
+		'DashboardAffiliateBookedSummaryMonthFacade' => 'App\Facades\Dashboard\Affiliate\Booked\DashboardAffiliateBookedSummaryMonthFacade',
+		'DashboardAffiliateBookedSummaryYearFacade' => 'App\Facades\Dashboard\Affiliate\Booked\DashboardAffiliateBookedSummaryYearFacade',
+		'DashboardAffiliateBookedDaysOfMonthFacade' => 'App\Facades\Dashboard\Affiliate\Booked\DashboardAffiliateBookedDaysOfMonthFacade',
+		'DashboardAffiliateBookedMonthlyFacade' => 'App\Facades\Dashboard\Affiliate\Booked\DashboardAffiliateBookedMonthlyFacade',
+
+		'DashboardAffiliateTraveledFacade' => 'App\Facades\Dashboard\Affiliate\Traveled\DashboardAffiliateTraveledFacade',
 	],
 ];

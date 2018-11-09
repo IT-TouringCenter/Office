@@ -27,7 +27,7 @@ export class BookedDayOfMonthAffComponent implements OnInit {
 
   // default valiable
   public bookedData = {
-    token: "",
+    token: <any>"",
     month: "",
     year: ""
   };
@@ -81,13 +81,23 @@ export class BookedDayOfMonthAffComponent implements OnInit {
     // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/DaysOfMonth';
     let options = new RequestOptions();
 
+    // get token from session
+    let getToken = JSON.parse(sessionStorage.getItem('users'));
+    if(getToken==null || getToken==undefined || getToken==''){
+      this.bookedData.token = 0;
+    }else{
+      this.bookedData.token = getToken.data.token;
+    }
+
     /*==================  Success  ===================*/
-    this.bookedData.token = '1355102035';
     console.log(this.bookedData);
     this.http.post(url, this.bookedData, options)
                     .map(res => res.json())
                     .subscribe(
-                      data => {console.log(data)},
+                      data => [
+                        console.log(data),
+                        sessionStorage.setItem('booked-day-chart',JSON.stringify(data))
+                      ],
                       err => {console.log(err)}
                     );
     // this.BookedDayOfMonthAffService.postBookedDayOfMonth(this.bookedData)
@@ -96,6 +106,11 @@ export class BookedDayOfMonthAffComponent implements OnInit {
     //                   err => {console.log(err)}
     //                 );
     // console.log(this.bookedData);
+    setTimeout(()=>{
+      let _getData = JSON.parse(sessionStorage.getItem('booked-day-chart'));
+      this.barChartData = _getData.booked;
+      this.amount = _getData.amount;
+    }, 2000);
   }
 
   ngOnInit() {

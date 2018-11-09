@@ -26,7 +26,7 @@ export class BookedRsvnComponent implements OnInit {
   public highlightId :number;
 
   // page
-  public routeLink = "['/user/'+this.userId+'/reservations/booked']";
+  // public routeLink = "['/user/'+this.userId+'/reservations/booked']";
 
   public iPage: number[] = [];
   public iPageStart: number = 1;
