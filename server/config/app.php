@@ -246,5 +246,8 @@ return [
 		'DashboardAffiliateBookedMonthlyFacade' => 'App\Facades\Dashboard\Affiliate\Booked\DashboardAffiliateBookedMonthlyFacade',
 
 		'DashboardAffiliateTraveledFacade' => 'App\Facades\Dashboard\Affiliate\Traveled\DashboardAffiliateTraveledFacade',
+		'DashboardAffiliateTraveledDaysOfMonthFacade' => 'App\Facades\Dashboard\Affiliate\Traveled\DashboardAffiliateTraveledDaysOfMonthFacade',
+		'DashboardAffiliateTraveledMonthlyFacade' => 'App\Facades\Dashboard\Affiliate\Traveled\DashboardAffiliateTraveledMonthlyFacade',
+		'DashboardAffiliateTraveledTourFacade' => 'App\Facades\Dashboard\Affiliate\Traveled\DashboardAffiliateTraveledTourFacade'
 	],
 ];

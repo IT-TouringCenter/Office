@@ -21,7 +21,8 @@ class DashboardAffiliateBookedRepository{
     //--------------- Transactions ------------------
     // Get booked data by account id
     public function GetBookedByAccountId($accountId){
-        $result = \DB::table('transactions')
+        $result = \DB::table('transactions as t')
+                    ->join('')
                     ->where('account_id',$accountId)
                     ->where('is_active',1)
                     ->get();

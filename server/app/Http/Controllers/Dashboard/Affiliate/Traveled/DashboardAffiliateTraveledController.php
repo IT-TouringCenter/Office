@@ -26,11 +26,56 @@ class DashboardAffiliateTraveledController extends Controller {
 		}
 	}//end Response function
 
-    // Dashboard
+    // Traveled
     public function AffiliateDashboardTraveled(Request $request){
         $req  = $request->input();
         try{
 			$results = \DashboardAffiliateTraveledFacade::AffiliateDashboardTraveled($req);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
+		}catch(Exception $e){
+			abort(500);
+		}
+	}
+	
+	// Traveled days of month
+    public function AffiliateDashboardTraveledDaysOfMonth(Request $request){
+        $req  = $request->input();
+        try{
+			$results = \DashboardAffiliateTraveledDaysOfMonthFacade::AffiliateDashboardTraveledDaysOfMonth($req);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
+		}catch(Exception $e){
+			abort(500);
+		}
+	}
+	
+	// Traveled monthly
+    public function AffiliateDashboardTraveledMonthly(Request $request){
+        $req  = $request->input();
+        try{
+			$results = \DashboardAffiliateTraveledMonthlyFacade::AffiliateDashboardTraveledMonthly($req);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
+		}catch(Exception $e){
+			abort(500);
+		}
+	}
+	
+	// Traveled tour
+    public function AffiliateDashboardTraveledTour(Request $request){
+        $req  = $request->input();
+        try{
+			$results = \DashboardAffiliateTraveledTourFacade::AffiliateDashboardTraveledTour($req);
 			if($results==null){
 				abort(400);
 			}
