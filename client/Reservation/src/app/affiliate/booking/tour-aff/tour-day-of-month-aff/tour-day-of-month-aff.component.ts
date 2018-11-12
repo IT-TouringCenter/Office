@@ -37,12 +37,22 @@ export class TourDayOfMonthAffComponent implements OnInit {
   public barChartType:string;
   public barChartLegend:boolean;
   public barChartColors:Array<any> = [
-    { backgroundColor: 'rgba(77,83,96,0.2)',
+    {
+      backgroundColor: 'rgba(77,83,96,0.2)',
       borderColor: 'rgba(77,83,96,1)',
       pointBackgroundColor: 'rgba(77,83,96,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)' }
+      pointHoverBorderColor: 'rgba(77,83,96,1)'
+    },
+    {
+      backgroundColor: 'rgba(77,83,96,0.2)',
+      borderColor: 'rgba(77,83,96,0.5)',
+      pointBackgroundColor: 'rgba(77,83,96,0.5)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(77,83,96,0.5)'
+    }
   ];
 
   // 1. print
@@ -78,7 +88,8 @@ export class TourDayOfMonthAffComponent implements OnInit {
   ngOnInit() {
     // binding bar data (day)
     this.barChartData = [
-      {data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], label: ''}
+      {data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: 0},
+      {data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: 0}
     ];
     this.barChartLabels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
     this.barChartType = 'line';

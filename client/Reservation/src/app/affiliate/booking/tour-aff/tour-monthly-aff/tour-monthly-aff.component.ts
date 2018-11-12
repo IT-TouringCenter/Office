@@ -37,12 +37,22 @@ export class TourMonthlyAffComponent implements OnInit {
   public barChartType:string;
   public barChartLegend:boolean;
   public barChartColors:Array<any> = [
-    { backgroundColor: 'rgba(77,83,96,0.2)',
+    {
+      backgroundColor: 'rgba(77,83,96,0.2)',
       borderColor: 'rgba(77,83,96,1)',
       pointBackgroundColor: 'rgba(77,83,96,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)' }
+      pointHoverBorderColor: 'rgba(77,83,96,1)'
+    },
+    {
+      backgroundColor: 'rgba(77,83,96,0.2)',
+      borderColor: 'rgba(77,83,96,0.5)',
+      pointBackgroundColor: 'rgba(77,83,96,0.5)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(77,83,96,0.5)'
+    }
   ];
 
   // 1. print
@@ -78,7 +88,8 @@ export class TourMonthlyAffComponent implements OnInit {
   ngOnInit() {
     // binding bar data (month)
     this.barChartData = [
-      {data: [0,0,0,0,0,0,0,0,0,0,0,0], label: ''}
+      {data: [0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: 0},
+      {data: [0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: 0}
     ];
     this.barChartLabels = this.arrMonth;
     this.barChartType = 'line';

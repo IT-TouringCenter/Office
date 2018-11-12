@@ -32,10 +32,10 @@ class DashboardAffiliateTraveledTourClass{
         // set year
         $this->yearArr = [];
         $this->SetYear($accountId);
-
+        // return $this->yearArr;
         // set booked
         $this->bookedArr = [];
-        $this->SetBooked($accountId,$this->yearArr[0],$tourId);
+        $this->SetBooked($accountId,$this->yearArr,$tourId);
 
         // set amount
         $amount = 0;
@@ -45,7 +45,7 @@ class DashboardAffiliateTraveledTourClass{
 
         $result = new Transaction;
         $result->tour = $this->tour;
-        $result->years = $this->yearArr[0];
+        $result->years = $this->yearArr;
         $result->booked = $this->bookedArr;
         $result->amount = $amount;
 
@@ -62,20 +62,31 @@ class DashboardAffiliateTraveledTourClass{
 
     // 3. Set year
     public function SetYear($accountId){
-        $date = Carbon::now('Asia/Bangkok');
-        $yearNow = date('Y',strtotime($date));
+        // Query check from DB
+        // $date = Carbon::now('Asia/Bangkok');
+        // $yearNow = date('Y',strtotime($date));
 
-        // check year by traveled
-        $checkYear = $this->DashboardAffiliateTraveledRepo->CheckYearByTravel($accountId);
+        // // check year by traveled
+        // $checkYear = $this->DashboardAffiliateTraveledRepo->CheckYearByTravel($accountId);
 
-        // sub
-        $subArr = [];
-        foreach($checkYear as $value){
-            $subYear = substr($value->tour_travel_date,-4);
-            array_push($subArr,$subYear);
+        // // sub
+        // $subArr = [];
+        // foreach($checkYear as $value){
+        //     $subYear = substr($value->tour_travel_date,-4);
+        //     array_push($subArr,$subYear);
+        // }
+
+        // // [2017,2018,2019]
+        // array_push($this->yearArr,array_unique($subArr));
+
+        $yearStart = 2018;
+        $yearNow = date('Y',strtotime(Carbon::now('Asia/Bangkok')));
+
+        $countYear = (intval($yearNow)-$yearStart)+1; // 2019-2018 = 1+1 = 2 year
+        for($i=0;$i<$countYear;$i++){
+            $setYear = $yearStart+$i;
+            array_push($this->yearArr,$setYear);
         }
-
-        array_push($this->yearArr,array_unique($subArr));
     }
 
     // 4. Set booked

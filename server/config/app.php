@@ -248,6 +248,10 @@ return [
 		'DashboardAffiliateTraveledFacade' => 'App\Facades\Dashboard\Affiliate\Traveled\DashboardAffiliateTraveledFacade',
 		'DashboardAffiliateTraveledDaysOfMonthFacade' => 'App\Facades\Dashboard\Affiliate\Traveled\DashboardAffiliateTraveledDaysOfMonthFacade',
 		'DashboardAffiliateTraveledMonthlyFacade' => 'App\Facades\Dashboard\Affiliate\Traveled\DashboardAffiliateTraveledMonthlyFacade',
-		'DashboardAffiliateTraveledTourFacade' => 'App\Facades\Dashboard\Affiliate\Traveled\DashboardAffiliateTraveledTourFacade'
+		'DashboardAffiliateTraveledTourFacade' => 'App\Facades\Dashboard\Affiliate\Traveled\DashboardAffiliateTraveledTourFacade',
+
+		'DashboardAffiliateTourFacade' => 'App\Facades\Dashboard\Affiliate\Tours\DashboardAffiliateTourFacade',
+		'DashboardAffiliateTourDaysOfMonthFacade' => 'App\Facades\Dashboard\Affiliate\Tours\DashboardAffiliateTourDaysOfMonthFacade',
+		'DashboardAffiliateTourMonthlyFacade' => 'App\Facades\Dashboard\Affiliate\Tours\DashboardAffiliateTourMonthlyFacade',
 	],
 ];

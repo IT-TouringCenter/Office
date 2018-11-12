@@ -100,9 +100,9 @@ Route::get('/', 'WelcomeController@index');
 	Route::post('api/Dashboard/Affiliate/Traveled/Monthly', 'Dashboard\Affiliate\Traveled\DashboardAffiliateTraveledController@AffiliateDashboardTraveledMonthly');
 	Route::post('api/Dashboard/Affiliate/Traveled/Tour', 'Dashboard\Affiliate\Traveled\DashboardAffiliateTraveledController@AffiliateDashboardTraveledTour');
 	// Tour
-	Route::post('api/Dashboard/Affiliate/Tour', 'Dashboard\Affiliate\Tours\DashboardAffilaiteTourController@DashboardAffiliateTour');
-	Route::post('api/Dashboard/Affiliate/Tour/DaysOfMonth', 'Dashboard\Affiliate\Tours\DashboardAffilaiteTourController@DashboardAffiliateTourDaysOfMonth');
-	Route::post('api/Dashboard/Affiliate/Tour/Monthly', 'Dashboard\Affiliate\Tours\DashboardAffilaiteTourController@DashboardAffiliateTourMonthly');
+	Route::post('api/Dashboard/Affiliate/Tour', 'Dashboard\Affiliate\Tours\DashboardAffiliateTourController@AffiliateDashboardTour');
+	Route::post('api/Dashboard/Affiliate/Tour/DaysOfMonth', 'Dashboard\Affiliate\Tours\DashboardAffiliateTourController@AffiliateDashboardTourDaysOfMonth');
+	Route::post('api/Dashboard/Affiliate/Tour/Monthly', 'Dashboard\Affiliate\Tours\DashboardAffiliateTourController@AffiliateDashboardTourMonthly');
 	// Commission
 	Route::post('api/Dashboard/Affiliate/Commission/Summary', 'Dashboard\Affiliate\Commission\DashboardAffiliateCommissionController@DashboardAffiliateCommission');
 	Route::post('api/Dashboard/Affiliate/Commission/DaysOfMonth', 'Dashboard\Affiliate\Commission\DashboardAffiliateCommissionController@DashboardAffiliateCommissionDaysOfMonth');

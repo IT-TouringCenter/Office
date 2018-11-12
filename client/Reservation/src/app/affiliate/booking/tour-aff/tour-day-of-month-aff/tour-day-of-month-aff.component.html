@@ -55,12 +55,15 @@
         </div>
       </div>
     </div>
+
+    <!-- Table -->
     <div class="container" style="margin-top: 20px;">
       <div style="margin:auto; width:60% !important;">
         <table style="width:80%; border: solid 1px #cacaca;margin:auto !important;">
           <tr style="background:rgba(77,83,96) !important;">
             <th style="text-align:center;color:white !important;border-right:#cacaca solid 1px;">Day</th>
             <th style="text-align:center;color:white !important;">Booked</th>
+            <th style="text-align:center;color:white !important;">Traveled</th>
           </tr>
           <tr *ngFor="let label of barChartLabels; let i=index">
             <td style="text-align:center; width:50%;border-right:#cacaca solid 1px;"><small>{{label}} {{shortMonthNow}} {{year}}</small></td>
@@ -68,7 +71,7 @@
           </tr>
           <tr style="background: #e4e4e4; border: #cacaca solid 1px;">
             <th style="text-align:center; width:50%;border-right:#cacaca solid 1px;">Total</th>
-            <th style="text-align:center;">{{amount}}</th>
+            <th *ngFor="let data of barChartData;" style="text-align:center;">{{data.total}}</th>
           </tr>
         </table>
       </div>
