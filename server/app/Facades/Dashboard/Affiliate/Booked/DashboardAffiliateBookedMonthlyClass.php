@@ -25,7 +25,11 @@ class DashboardAffiliateBookedMonthlyClass{
 
         // get account id by token
         $getAccount = $this->DashboardAffiliateBookedRepo->GetAccountIdByToken($token);
-        $accountId = $getAccount[0]->id;
+        if($getAccount){
+            $accountId = $getAccount[0]->id;
+        }else{
+            return "null";
+        }
 
         // set date
         $date = new Transaction;

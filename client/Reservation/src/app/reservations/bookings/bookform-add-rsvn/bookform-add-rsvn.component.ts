@@ -40,7 +40,6 @@ export class BookformAddRsvnComponent implements OnInit {
   minDate = new Date(2017, 12, 1);
   maxDate = new Date(2018, 11, 31);
   accountInfo = {
-    id: <any>'',
     token: <any>''
   };
   tourInfo = {
@@ -260,13 +259,12 @@ export class BookformAddRsvnComponent implements OnInit {
     setAccountInfo(){
       let getAccount = sessionStorage.getItem('users');
       if(getAccount==null || getAccount==undefined || getAccount==''){
-        this.accountInfo.id = 0;
         this.accountInfo.token = '';
       }else{
         let account = JSON.parse(getAccount);
-        this.accountInfo.id = account.data.id;
         this.accountInfo.token = account.data.token;
       }
+      this.accountInfo.token = "1652812936";
     }
 
     // Step 1 : Set tour data
@@ -684,7 +682,7 @@ export class BookformAddRsvnComponent implements OnInit {
           "currency_rate": this.currencyRate,
           "issuedBy": "Office"
         };
-        // console.log(JSON.stringify(this.dataSave));
+        console.log(JSON.stringify(this.dataSave));
 
         // Save data booking to API
         this.saveDataBooking(this.dataSave);

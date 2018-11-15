@@ -22,7 +22,11 @@ class DashboardAffiliateBookedClass{
         // Get account id
         $token = array_get($request,'token');
         $getAccount = $this->DashboardAffiliateRepo->GetAccountByToken($token);
-        $accountId = $getAccount[0]->id;
+        if($getAccount){
+            $accountId = $getAccount[0]->id;
+        }else{
+            return "null";
+        }
 
         // Get month
         $month = \DateFacade::MinMonthInYear();

@@ -22,7 +22,11 @@ class DashboardAffiliateCommissionClass{
         // Get account id
         $token = array_get($request,'token');
         $getAccount = $this->DashboardAffiliateRepo->GetAccountByToken($token);
-        $accountId = $getAccount[0]->id;
+        if($getAccount){
+            $accountId = $getAccount[0]->id;
+        }else{
+            return "null";
+        }
 
         // Get month
         $month = \DateFacade::MinMonthInYear();
@@ -53,7 +57,7 @@ class DashboardAffiliateCommissionClass{
         $total = 0;
 
         foreach($month as $value){
-            $_month = date('F',strtotime($value));
+            $_month = date('m',strtotime($value));
             $getCommission = $this->DashboardAffiliateRepo->GetCommissionByMonth($accountId,$_month);
             $commission = 0;
 

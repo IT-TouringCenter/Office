@@ -208,6 +208,7 @@ return [
 		'ReservationBookingStatisticsFacade' => 'App\Facades\Reservations\BookingStatistics\BookingStatisticsFacade',
 		'InvoiceBookingFacade' => 'App\Facades\Reservations\Invoices\InvoiceTourFacade',
 		'BookingFormEditFacade' => 'App\Facades\Reservations\BookingFormEdit\BookingFormEditFacade',
+		'ReservationUpdateTourTraveledFacade' => 'App\Facades\Reservations\Traveleds\UpdateTourTraveledFacade',
 
 		// Online booking
 		//-- Save booking
@@ -253,5 +254,10 @@ return [
 		'DashboardAffiliateTourFacade' => 'App\Facades\Dashboard\Affiliate\Tours\DashboardAffiliateTourFacade',
 		'DashboardAffiliateTourDaysOfMonthFacade' => 'App\Facades\Dashboard\Affiliate\Tours\DashboardAffiliateTourDaysOfMonthFacade',
 		'DashboardAffiliateTourMonthlyFacade' => 'App\Facades\Dashboard\Affiliate\Tours\DashboardAffiliateTourMonthlyFacade',
+
+		'DashboardAffiliateCommissionSummaryFacade' => 'App\Facades\Dashboard\Affiliate\Commission\DashboardAffiliateCommissionFacade',
+		'DashboardAffiliateCommissionDaysOfMonthFacade' => 'App\Facades\Dashboard\Affiliate\Commission\DashboardAffiliateCommissionDaysOfMonthFacade',
+		'DashboardAffiliateCommissionMonthlyFacade' => 'App\Facades\Dashboard\Affiliate\Commission\DashboardAffiliateCommissionMonthlyFacade',
+		'DashboardAffiliateCommissionTourFacade' => 'App\Facades\Dashboard\Affiliate\Commission\DashboardAffiliateCommissionTourFacade',
 	],
 ];

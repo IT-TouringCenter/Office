@@ -31,7 +31,11 @@ class DashboardAffiliateBookedSummaryMonthClass{
 
         // get account id by token
         $getAccount = $this->DashboardAffiliateBookedRepo->GetAccountIdByToken($token);
-        $accountId = $getAccount[0]->id;
+        if($getAccount){
+            $accountId = $getAccount[0]->id;
+        }else{
+            return "null";
+        }
 
         // get tour
         $tourData = $this->DashboardAffiliateBookedRepo->GetTour();

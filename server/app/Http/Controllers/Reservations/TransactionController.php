@@ -28,9 +28,22 @@ class TransactionController extends MyBaseController {
 	// Update booking number
 	public function EditReservation(Request $request){
 		$bookingData = $request->input();
-
 		try{
 			$results = \EditReservationFacade::EditReservation($bookingData);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+		}catch(Exception $e){
+			abort(500);
+		}
+	}
+
+	// Update booking traveled
+	public function UpdateTourTraveled(Request $request){
+		$data = $request->input();
+		try{
+			$results = \ReservationUpdateTourTraveledFacade::UpdateTourTraveled($data);
 			if($results==null){
 				abort(400);
 			}

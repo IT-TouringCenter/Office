@@ -22,7 +22,11 @@ class DashboardAffiliateTourMonthlyClass{
         // get account id
         $token = array_get($request,'token');
         $getAccount = $this->DashboardAffiliateTourRepo->GetAccountByToken($token);
-        $accountId = $getAccount[0]->id;
+        if($getAccount){
+            $accountId = $getAccount[0]->id;
+        }else{
+            return "null";
+        }
 
         // get date
         $year = array_get($request,'year');
@@ -30,7 +34,7 @@ class DashboardAffiliateTourMonthlyClass{
 
         // set date
         $date = new Transaction;
-        $date->getYear = date('Y',strtotime(array_get($request,'year')));
+        $date->getYear = array_get($request,'year');
 
         // check date
         $month = \DateFacade::MonthInYear();

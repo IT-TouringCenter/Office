@@ -34,7 +34,7 @@ export class BookedRsvnComponent implements OnInit {
   public nextPage: number;
   public activePage: number;
   public totalItem: number;
-  public perPage: number = 20;
+  public perPage: number = 25;
   public totalPage: number;
   public maxShowPage: number;
   public useShowPage: number = 5;

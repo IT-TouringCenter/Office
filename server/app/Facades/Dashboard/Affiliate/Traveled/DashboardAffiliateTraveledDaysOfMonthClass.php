@@ -22,7 +22,11 @@ class DashboardAffiliateTraveledDaysOfMonthClass{
         // get account id
         $token = array_get($request,'token');
         $getAccount = $this->DashboardAffiliateTraveledRepo->GetAccountByToken($token);
-        $accountId = $getAccount[0]->id;
+        if($getAccount){
+            $accountId = $getAccount[0]->id;
+        }else{
+            return "null";
+        }
 
         // get date
         $month = array_get($request,'month');
@@ -70,7 +74,7 @@ class DashboardAffiliateTraveledDaysOfMonthClass{
     // 2. get traveled data by day no.
     public function GetTraveledByDays($accountId,$arrDay,$date){
         $result = [];
-        $count = 10;
+        $count = 0;
         $sum = 0;
         $monthEn = array_get($date,'month');
         $month = array_get($date,'getMonth');
@@ -78,7 +82,7 @@ class DashboardAffiliateTraveledDaysOfMonthClass{
 
         // get data from DB
         foreach($arrDay as $value){
-            $date = $_month = str_pad($value, 2, "0", STR_PAD_LEFT).' '.$monthEn.' '.$year;
+            $date = str_pad($value, 2, "0", STR_PAD_LEFT).' '.$monthEn.' '.$year;
             $getBookData = $this->DashboardAffiliateTraveledRepo->GetTraveledByDays($accountId,$date);
             $countBooked = count($getBookData);
 

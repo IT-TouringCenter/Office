@@ -29,7 +29,7 @@
         </tr>
         <!-- Table Body -->
         <tr *ngFor="let booked of _getBookingStatistics | slice:pointStart:pointEnd; let i = index;" [class.table-info]="highlightId==booked.transactionId" class="font-table-12px">
-          <td class="text-center">{{i+1}}</td>
+          <td class="text-center">{{i+1+(perPage*(activePage-1))}}</td>
           <td class="text-center">{{booked.invoiceId}}</td>
           <td title="{{booked.tourFullname}}">{{booked.tourName}}</td>
           <td class="text-center">{{booked.tourPrivacy}}</td>

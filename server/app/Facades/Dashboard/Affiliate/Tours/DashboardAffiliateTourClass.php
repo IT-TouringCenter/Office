@@ -18,11 +18,15 @@ class DashboardAffiliateTourClass{
     }
 
     // 1. Set data tour
-    public function AffiliateDashboardTourMonthly($request){
+    public function AffiliateDashboardTour($request){
         // get account id
         $token = array_get($request,'token');
         $getAccount = $this->DashboardAffiliateTourRepo->GetAccountByToken($token);
-        $accountId = $getAccount[0]->id;
+        if($getAccount){
+            $accountId = $getAccount[0]->id;
+        }else{
+            return "null";
+        }
 
         // set tour
         $this->tour = [];
