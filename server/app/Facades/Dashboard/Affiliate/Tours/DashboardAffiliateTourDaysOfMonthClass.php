@@ -21,7 +21,8 @@ class DashboardAffiliateTourDaysOfMonthClass{
     public function AffiliateDashboardTourDaysOfMonth($request){
         // get account id
         $token = array_get($request,'token');
-        $getAccount = $this->DashboardAffiliateTourRepo->GetAccountByToken($token);
+        $accountType = array_get($request,'type');
+        $getAccount = $this->DashboardAffiliateTourRepo->GetAccountByToken($token,$accountType);
         if($getAccount){
             $accountId = $getAccount[0]->id;
         }else{

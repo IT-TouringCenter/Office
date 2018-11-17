@@ -21,7 +21,8 @@ class DashboardAffiliateCommissionClass{
     public function AffiliateDashboardCommission($request){
         // Get account id
         $token = array_get($request,'token');
-        $getAccount = $this->DashboardAffiliateRepo->GetAccountByToken($token);
+        $accountType = array_get($request,'type');
+        $getAccount = $this->DashboardAffiliateRepo->GetAccountByToken($token,$accountType);
         if($getAccount){
             $accountId = $getAccount[0]->id;
         }else{

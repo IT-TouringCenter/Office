@@ -8,8 +8,9 @@ class DashboardAffiliateCommissionRepository{
     }
 
     //----------------- Account --------------------------------------
-    public function GetAccountByToken($token){
+    public function GetAccountByToken($token,$type){
         $result = \DB::table('accounts')
+                    ->where('account_type_id',$type)
                     ->where('token',$token)
                     ->get();
         return $result;

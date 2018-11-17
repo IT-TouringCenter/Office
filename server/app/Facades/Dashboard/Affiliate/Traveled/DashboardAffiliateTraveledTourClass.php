@@ -21,7 +21,8 @@ class DashboardAffiliateTraveledTourClass{
     public function AffiliateDashboardTraveledTour($request){
         // get account id
         $token = array_get($request,'token');
-        $getAccount = $this->DashboardAffiliateTraveledRepo->GetAccountByToken($token);
+        $accountType = array_get($request,'type');
+        $getAccount = $this->DashboardAffiliateTraveledRepo->GetAccountByToken($token,$accountType);
         if($getAccount){
             $accountId = $getAccount[0]->id;
         }else{

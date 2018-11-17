@@ -26,11 +26,11 @@ class DashboardAffiliateBookedSummaryMonthClass{
         $tourArr = [];
         $bookedArr = [];
         $amount = 0;
-
         $token = array_get($request,'token');
+        $accountType = array_get($request,'type');
 
         // get account id by token
-        $getAccount = $this->DashboardAffiliateBookedRepo->GetAccountIdByToken($token);
+        $getAccount = $this->DashboardAffiliateBookedRepo->GetAccountIdByToken($token,$accountType);
         if($getAccount){
             $accountId = $getAccount[0]->id;
         }else{

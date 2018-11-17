@@ -52,4 +52,18 @@ class TransactionController extends MyBaseController {
 			abort(500);
 		}
 	}
+
+	// Update booking traveled
+	public function AutoUpdateTourTraveled(Request $request){
+		$data = $request->input();
+		try{
+			$results = \ReservationAutoUpdateTourTraveledFacade::AutoUpdateTourTraveled($data);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+		}catch(Exception $e){
+			abort(500);
+		}
+	}
 }

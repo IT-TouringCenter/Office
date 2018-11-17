@@ -9,9 +9,10 @@ class DashboardAffiliateBookedRepository{
 
     //--------------- Accounts ----------------------
     // Get account id by token
-    public function GetAccountIdByToken($token){
+    public function GetAccountIdByToken($token,$type){
         $result = \DB::table('accounts')
                     // ->select('id')
+                    ->where('account_type_id',$type)
                     ->where('token',$token)
                     ->where('is_active',1)
                     ->get();

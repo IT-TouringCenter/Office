@@ -37,6 +37,7 @@ Route::get('/', 'WelcomeController@index');
 	Route::post('api/Reservations/EditReservation', 'Reservations\TransactionController@EditReservation');
 	// Update traveled
 	Route::post('api/Reservations/UpdateTraveled', 'Reservations\TransactionController@UpdateTourTraveled');
+	Route::post('api/Reservations/AutoUpdateTraveled', 'Reservations\TransactionController@AutoUpdateTourTraveled');
 /*----------- Reservation System (End) -------------------------*/
 
 /*----------- Affiliate (Start) --------------------------------*/

@@ -209,6 +209,7 @@ return [
 		'InvoiceBookingFacade' => 'App\Facades\Reservations\Invoices\InvoiceTourFacade',
 		'BookingFormEditFacade' => 'App\Facades\Reservations\BookingFormEdit\BookingFormEditFacade',
 		'ReservationUpdateTourTraveledFacade' => 'App\Facades\Reservations\Traveleds\UpdateTourTraveledFacade',
+		'ReservationAutoUpdateTourTraveledFacade' => 'App\Facades\Reservations\Traveleds\AutoUpdateTourTraveledFacade',
 
 		// Online booking
 		//-- Save booking

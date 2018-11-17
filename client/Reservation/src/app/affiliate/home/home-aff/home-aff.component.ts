@@ -136,14 +136,35 @@ export class HomeAffComponent implements OnInit {
 
   // 4. get data commission
   public getDataCommission(): void{
-    this.HomeAffService.getCommissionData()
-                      .subscribe(
-                        resultArray => [
-                          this.dataCommission = resultArray,
-                          sessionStorage.setItem('commission-data',JSON.stringify(resultArray)),
-                        ],
-                        error => console.log("Error :: " + error)
-                      )
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate';
+    let url = './../../../../assets/json/affiliate/dashboard/dashboard-commission.json';
+
+    // set post data
+    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let postData = {
+      token : _getUserData.data.token,
+      type : _getUserData.data.userType
+    };
+
+    let options = new RequestOptions();
+    this.http.post(url, postData, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      resultArray => [
+                        this.dataCommission = resultArray,
+                        sessionStorage.setItem('commission-data',JSON.stringify(resultArray)),
+                      ],
+                      error => console.log("Error :: " + error)
+                    );
+    // this.HomeAffService.getCommissionData()
+    //                   .subscribe(
+    //                     resultArray => [
+    //                       this.dataCommission = resultArray,
+    //                       sessionStorage.setItem('commission-data',JSON.stringify(resultArray)),
+    //                     ],
+    //                     error => console.log("Error :: " + error)
+    //                   )
     // loop
     // set default commission data
     // set default booked data
