@@ -9,15 +9,14 @@ class TourTraveledRepository{
 
 	}
 
-    // 1. transaction (Update)
-	public function EditTransactionBooking($transactionId,$bookingData){
-    }
-
-    // 2. all update is_travel in transaction_tours
-    public function AllUpdateTourTravel($date){
-        $update = ['is_travel'=>1];
+    // 1. all update is_travel = 1 in transaction_tours
+    public function AllUpdateTourTravel($date,$isTravel,$updateBy){
+        $update = [
+            'is_travel'=>$isTravel,
+            'updated_by'=>$updateBy
+        ];
         $result = \DB::table('transaction_tours')
-                    ->where('tour_travel_date','<','20 December 2018')
+                    ->where('travel_date','<',$date)
                     ->where('is_travel',0)
                     ->where('is_cancel',0)
                     ->where('is_active',1)
@@ -25,26 +24,40 @@ class TourTraveledRepository{
         return $result;
     }
 
-    // 3. all 
-
-    public function Get(){
+    // 2. update is_travel = 1 in transaction_tours by id
+    public function UpdateTourTravelById($transId,$isTravel,$updateBy){
+        $update = [
+            'is_travel'=>$isTravel,
+            'updated_by'=>$updateBy
+        ];
         $result = \DB::table('transaction_tours')
-                    ->select('id','tour_travel_date')
-                    ->where('travel_date','=','0000-00-00')
+                    ->where('id',$transId)
+                    ->where('is_travel',0)
+                    ->where('is_cancel',0)
                     ->where('is_active',1)
-                    ->get();
+                    ->update($update);
         return $result;
     }
 
-    public function Save($id,$date){
-        $update = ["travel_date"=>$date];
-        $result = \DB::table('transaction_tours')
-                    ->where('id',$id)
-                    ->update($update);
-        
-        $result1 = \DB::table('transaction_tour_histories')
-                    ->where('transaction_tour_id',$id)
-                    ->update($update);
-        return $result1;
+    // 3. get account_id
+    public function GetAccountIdByTransactionTourId($transactionTourId){
+        $result = \DB::table('transaction_tours as tt')
+                    ->join('transactions as t','t.id','=','tt.transaction_id')
+                    ->select('t.account_id')
+                    ->where('tt.id',$transactionTourId)
+                    ->where('t.is_active',1)
+                    ->get();
+        return $result[0]->account_id;
+    }
+
+    // 4. get account type
+    public function GetAccountTypeById($accountId){
+        $result = \DB::table('accounts as a')
+                    ->join('account_types as at','at.id','=','a.account_type_id')
+                    ->select('at.type')
+                    ->where('a.id',$accountId)
+                    ->where('a.is_active',1)
+                    ->get();
+        return $result[0]->type;
     }
 }

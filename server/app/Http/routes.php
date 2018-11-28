@@ -13,6 +13,8 @@
 
 Route::get('/', 'WelcomeController@index');
 
+	// Tours
+	Route::get('api/Tours/GetTourData', 'Tours\TourController@GetTour');
 /*----------- Reservation System (Start) -----------------------*/
 // Rerservation Ctrl (Get data)
 	// Account code (agent, hotel)

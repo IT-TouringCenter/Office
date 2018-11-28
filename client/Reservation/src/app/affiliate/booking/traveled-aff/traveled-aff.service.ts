@@ -11,8 +11,8 @@ export class TraveledAffService {
 
   // traveled data
   getTraveled(){
-    // let url = 'http://localhost:9000/api/';
-    // let url = 'http://api.tourinchiangmai.com/api/';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled';
     let url = './../../../../assets/json/affiliate/traveled/traveled-summary.json';
     return this._http.get(url).map(result => result);
   }

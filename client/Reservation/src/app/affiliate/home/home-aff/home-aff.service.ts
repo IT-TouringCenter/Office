@@ -11,24 +11,24 @@ export class HomeAffService {
 
   // dashboard data
   getDashboardData(){
-    // let url = 'http://localhost:9000/api/Account/Request/AccountForgotPassword';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/Request/AccountForgotPassword';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate';
     let url = "./../../../../assets/json/affiliate/dashboard/dashboard.json";
     return this._http.get(url).map(result => result);
   }
 
   // booked data
   getBookedData(){
-    // let url = 'http://localhost:9000/api/Dashboard/Affiliate';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked';
     let url = './../../../../assets/json/affiliate/dashboard/dashboard-booked.json';
     return this._http.get(url).map(result => result);
   }
 
   // commission data
   getCommissionData(){
-    // let url = 'http://localhost:9000/api/Account/Request/AccountForgotPassword';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/Request/AccountForgotPassword';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission';
     let url = './../../../../assets/json/affiliate/dashboard/dashboard-commission.json';
     return this._http.get(url).map(result => result);
   }

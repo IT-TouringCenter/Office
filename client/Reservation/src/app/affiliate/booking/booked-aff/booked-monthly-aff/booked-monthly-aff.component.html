@@ -13,13 +13,13 @@
         <!--  -->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-print" style="text-align: center;margin-bottom:30px;">
           <mat-form-field>
-            <mat-select placeholder="Year">
-              <mat-option *ngFor="let year of arrYear; let i=index;" value="{{i+1}}">
+            <mat-select placeholder="Year" [(ngModel)]="bookedData.year">
+              <mat-option *ngFor="let year of arrYear; let i=index;" value="{{year}}">
                 {{year}}
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <button type="submit" mat-stroked-button>OK</button>
+          <button type="submit" (click)="searchData()" mat-stroked-button>OK</button>
         </div>
         <!--  -->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

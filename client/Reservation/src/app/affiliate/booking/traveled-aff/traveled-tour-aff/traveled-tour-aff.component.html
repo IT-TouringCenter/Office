@@ -11,13 +11,13 @@
       <div style="margin:auto; margin-top:20px;width:80% !important;">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-print" style="text-align: center;margin-bottom:30px;">
           <mat-form-field>
-            <mat-select placeholder="Tour">
-              <mat-option *ngFor="let tour of tours; let i=index;" value="{{i+1}}">
+            <mat-select placeholder="Tour" [(ngModel)]="tourData.tourId">
+              <mat-option *ngFor="let tour of tours; let i=index;" value="{{tour.id}}">
                 {{tour.code}} : {{tour.title}}
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <button type="submit" mat-stroked-button>OK</button>
+          <button type="submit" mat-stroked-button (click)="searchData()">OK</button>
         </div>
       </div>
     </div>

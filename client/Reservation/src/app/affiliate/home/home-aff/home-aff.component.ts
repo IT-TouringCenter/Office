@@ -97,25 +97,57 @@ export class HomeAffComponent implements OnInit {
 
   // 2. get data dashboard
   public getDataDashboard(): void{
-    this.HomeAffService.getDashboardData()
-                      .subscribe(
-                        resultArray => [
-                          this.dataDashboard = resultArray
-                        ],
-                        error => console.log("Error :: " + error)
-                      )
+    let url = 'http://localhost:9000/api/Dashboard/Affiliate';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate';
+    // let url = './../../../../assets/json/affiliate/dashboard/dashboard.json';
+
+    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let postData = {
+      token : _getUserData.data.token,
+      type : _getUserData.data.userType
+    };
+
+    let options = new RequestOptions();
+    this.http.post(url, postData, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      data => [
+                        this.dataDashboard = data,
+                        console.log(data),
+                        sessionStorage.setItem('dashboard-data',JSON.stringify(data)),
+                      ],
+                      err => console.log("Error :: " + err)
+                    );
+    setTimeout(()=>{
+      let _getData = JSON.parse(sessionStorage.getItem('dashboard-data'));
+      console.log(_getData);
+      this.dataDashboard = _getData;
+    },500);
   }
 
   // 3. get data booked statistics
   public getDataBooked(): void{
-    this.HomeAffService.getBookedData()
-                      .subscribe(
-                        resultArray => [
-                          this.dataBooked = resultArray,
-                          sessionStorage.setItem('booking-data',JSON.stringify(resultArray))
-                        ],
-                        error => console.log("Error :: " + error)
-                      )
+    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked';
+    // let url = './../../../../assets/json/affiliate/dashboard/dashboard-booked.json';
+
+    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let postData = {
+      token : _getUserData.data.token,
+      type : _getUserData.data.userType
+    };
+
+    let options = new RequestOptions();
+    this.http.post(url, postData, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      data => [
+                        this.dataBooked = data,
+                        console.log(data),
+                        sessionStorage.setItem('booking-data',JSON.stringify(data)),
+                      ],
+                      err => console.log("Error :: " + err)
+                    );
 
     // set default booked data
     let _data = {data: [0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: ''};
@@ -131,16 +163,15 @@ export class HomeAffComponent implements OnInit {
     setTimeout(()=>{
       let _getData = JSON.parse(sessionStorage.getItem('booking-data'));
       this.barChartData = _getData.bookedStatistics;
-    },200);
+    },500);
   }
 
   // 4. get data commission
   public getDataCommission(): void{
-    // let url = 'http://localhost:9000/api/Dashboard/Affiliate';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate';
-    let url = './../../../../assets/json/affiliate/dashboard/dashboard-commission.json';
+    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission';
+    // let url = './../../../../assets/json/affiliate/dashboard/dashboard-commission.json';
 
-    // set post data
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
     let postData = {
       token : _getUserData.data.token,
@@ -151,28 +182,21 @@ export class HomeAffComponent implements OnInit {
     this.http.post(url, postData, options)
                     .map(res => res.json())
                     .subscribe(
-                      resultArray => [
-                        this.dataCommission = resultArray,
-                        sessionStorage.setItem('commission-data',JSON.stringify(resultArray)),
+                      data => [
+                        this.dataCommission = data,
+                        sessionStorage.setItem('commission-data',JSON.stringify(data)),
                       ],
-                      error => console.log("Error :: " + error)
+                      err => console.log("Error :: " + err)
                     );
-    // this.HomeAffService.getCommissionData()
-    //                   .subscribe(
-    //                     resultArray => [
-    //                       this.dataCommission = resultArray,
-    //                       sessionStorage.setItem('commission-data',JSON.stringify(resultArray)),
-    //                     ],
-    //                     error => console.log("Error :: " + error)
-    //                   )
+
     // loop
     // set default commission data
-    // set default booked data
     let _data = {data: [0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: ''};
     let arrData = <any>[];
-    for(let i=0; i<4; i++){
-      arrData.push(_data);
-    }
+    // for(let i=0; i<4; i++){
+    //   arrData.push(_data);
+    // }
+    arrData.push(_data);
     this.lineChartData = arrData;
     // this.lineChartData = [{data: [0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: ''},{data: [0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: ''},{data: [0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: ''},{data: [0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: ''}];
     this.lineChartLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -182,7 +206,7 @@ export class HomeAffComponent implements OnInit {
     setTimeout(()=>{
       let _getData = JSON.parse(sessionStorage.getItem('commission-data'));
       this.lineChartData = _getData.commission;
-    },200);
+    },500);
   }
 
   ngOnInit() {

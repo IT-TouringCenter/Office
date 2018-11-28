@@ -49,6 +49,7 @@ class BookingStatisticsClass{
                 $this->transaction->transactionId = $value->id;
                 $this->transaction->tourName = $subTour.'...';
                 $this->transaction->tourFullname = $tourName;
+                $this->transaction->transactionTourId = $TransactionTour[0]->id;
                 $this->transaction->tourPrivacy = $TransactionTour[0]->tour_privacy;
                 $this->transaction->tourTravel = $TransactionTour[0]->tour_travel_date;
                 $this->transaction->tourPax = $TransactionTour[0]->pax;

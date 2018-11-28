@@ -24,6 +24,15 @@ export class TourDayOfMonthAffComponent implements OnInit {
   public tours = [];
   public amount = [];
 
+  // default valiable
+  public bookedData = {
+    token: <any>"",
+    type: <any>"",
+    tourId: <any>"",
+    month: <any>"",
+    year: <any>""
+  };
+
   public arrMonth = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   public arrYear = ['2018','2019','2020'];
 
@@ -83,6 +92,40 @@ export class TourDayOfMonthAffComponent implements OnInit {
       this.tours = _getData.tours;
       this.amount = _getData.amount;
     }, 200);
+  }
+
+  // 4. search data
+  public searchData(){
+    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/DaysOfMonth';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/DaysOfMonth';
+    let options = new RequestOptions();
+
+    // get token from session
+    let getToken = JSON.parse(sessionStorage.getItem('users'));
+    if(getToken==null || getToken==undefined || getToken==''){
+      this.bookedData.token = 0;
+      this.bookedData.type = 0;
+    }else{
+      this.bookedData.token = getToken.data.token;
+      this.bookedData.type = getToken.data.userType;
+    }
+
+    /*==================  Success  ===================*/
+    console.log(this.bookedData);
+    this.http.post(url, this.bookedData, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      data => [
+                        console.log(data),
+                        sessionStorage.setItem('tour-day-chart',JSON.stringify(data))
+                      ],
+                      err => {console.log(err)}
+                    );
+    setTimeout(()=>{
+      let _getData = JSON.parse(sessionStorage.getItem('tour-day-chart'));
+      this.barChartData = _getData.booked;
+      this.amount = _getData.amount;
+    }, 1500);
   }
 
   ngOnInit() {

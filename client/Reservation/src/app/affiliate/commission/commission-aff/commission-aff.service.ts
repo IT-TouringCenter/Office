@@ -11,8 +11,8 @@ export class CommissionAffService {
 
   // commission data
   getCommission(){
-    // let url = 'http://localhost:9000/api/';
-    // let url = 'http://api.tourinchiangmai.com/api/';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission/Summary';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/Summary';
     let url = './../../../../assets/json/affiliate/commission/commission.json';
     return this._http.get(url).map(result => result);
   }

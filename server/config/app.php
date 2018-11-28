@@ -228,8 +228,10 @@ return [
 
 		// Affiliate
 		'AffiliateFacade' => 'App\Facades\Affiliates\AffiliateFacade',
+		'AffiliateCommissionFacade' => 'App\Facades\Affiliates\Commission\AffiliateCommissionFacade',
 
 		// Tour
+		'TourFacade' => 'App\Facades\Tours\TourFacade',
 		'TourCommissionFacade' => 'App\Facades\Tours\TourCommissionFacade',
 		'TourTraveledFacade' => 'App\Facades\Tours\TourTraveledFacade',
 

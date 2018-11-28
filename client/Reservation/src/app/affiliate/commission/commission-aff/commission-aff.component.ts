@@ -49,14 +49,25 @@ export class CommissionAffComponent implements OnInit {
 
   // 3. get data binding
   public getCommissionData() {
-    this.CommissionAffService.getCommission()
+    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission/Summary';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/Summary';
+    // let url = './../../../../assets/json/affiliate/commission/commission.json';
+
+    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let postData = {
+      token : _getUserData.data.token,
+      type : _getUserData.data.userType
+    };
+    let options = new RequestOptions();
+    this.http.post(url, postData, options)
+                    .map(res => res.json())
                     .subscribe(
-                      data => [,
-                        // sessionStorage.removeItem('chart-data'),
-                        sessionStorage.setItem('commission-chart',JSON.stringify(data))
+                      data => [
+                        sessionStorage.setItem('commission-chart',JSON.stringify(data)),
                       ],
-                      err => {console.log(err)}
+                      err => console.log("Error :: " + err)
                     );
+
     setTimeout(()=>{
       let _getData = JSON.parse(sessionStorage.getItem('commission-chart'));
       this.barChartData = _getData.booked;

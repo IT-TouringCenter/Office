@@ -52,12 +52,23 @@ export class BookedAffComponent implements OnInit {
   // 3. switch button
   // 3.1 get all booked data
   public allBooked():void {
-    this.BookedAffService.getAllBook()
+    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/Summary';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/Summary';
+    // let url = './../../../../assets/json/affiliate/booked/booked-summary-all.json';
+
+    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let postData = {
+      token : _getUserData.data.token,
+      type : _getUserData.data.userType
+    };
+    let options = new RequestOptions();
+    this.http.post(url, postData, options)
+                    .map(res => res.json())
                     .subscribe(
                       data => [
-                        sessionStorage.setItem('booked-sum-all',JSON.stringify(data))
+                        sessionStorage.setItem('booked-sum-all',JSON.stringify(data)),
                       ],
-                      err => {console.log(err)}
+                      err => console.log("Error :: " + err)
                     );
     setTimeout(()=>{
       let _getData = JSON.parse(sessionStorage.getItem('booked-sum-all'));
@@ -68,12 +79,23 @@ export class BookedAffComponent implements OnInit {
 
   // 3.2 get this month booked data
   public monthBooked():void {
-    this.BookedAffService.getMonthBook()
+    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/Summary/Month';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/Summary/Month';
+    // let url = './../../../../assets/json/affiliate/booked/booked-summary-month.json';
+
+    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let postData = {
+      token : _getUserData.data.token,
+      type : _getUserData.data.userType
+    };
+    let options = new RequestOptions();
+    this.http.post(url, postData, options)
+                    .map(res => res.json())
                     .subscribe(
                       data => [
-                        sessionStorage.setItem('booked-sum-month',JSON.stringify(data))
+                        sessionStorage.setItem('booked-sum-month',JSON.stringify(data)),
                       ],
-                      err => {console.log(err)}
+                      err => console.log("Error :: " + err)
                     );
     setTimeout(()=>{
       let _getData = JSON.parse(sessionStorage.getItem('booked-sum-month'));
@@ -84,16 +106,26 @@ export class BookedAffComponent implements OnInit {
 
   // 3.3 get this year booked data
   public yearBooked():void {
-    this.BookedAffService.getYearBook()
+    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/Summary/Year';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/Summary/Year';
+    // let url = './../../../../assets/json/affiliate/booked/booked-summary-year.json';
+
+    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let postData = {
+      token : _getUserData.data.token,
+      type : _getUserData.data.userType
+    };
+    let options = new RequestOptions();
+    this.http.post(url, postData, options)
+                    .map(res => res.json())
                     .subscribe(
                       data => [
-                        // sessionStorage.removeItem('chart-data'),
-                        sessionStorage.setItem('booked-chart',JSON.stringify(data))
+                        sessionStorage.setItem('booked-sum-year',JSON.stringify(data)),
                       ],
-                      err => {console.log(err)}
+                      err => console.log("Error :: " + err)
                     );
     setTimeout(()=>{
-      let _getData = JSON.parse(sessionStorage.getItem('booked-chart'));
+      let _getData = JSON.parse(sessionStorage.getItem('booked-sum-year'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
     }, 200);

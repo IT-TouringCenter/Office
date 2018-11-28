@@ -11,8 +11,8 @@ export class TourAffService {
 
   // all book data
   getTour(){
-    // let url = 'http://localhost:9000/api/';
-    // let url = 'http://api.tourinchiangmai.com/api/';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Tour';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Tour';
     let url = './../../../../assets/json/affiliate/tour/tour-summary.json';
     return this._http.get(url).map(result => result);
   }

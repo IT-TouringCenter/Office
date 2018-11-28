@@ -10,6 +10,19 @@ use Illuminate\Support\Facades\Redirect;
 
 class TourController extends MyBaseController {
 
+	// Get tour
+	public function GetTour(){
+		try{
+			$results = \TourFacade::GetTour();
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+		}catch(Exception $e){
+			abort(500);
+		}
+	}
+
 	// Update tour travel
 	public function UpdateTourTraveled(Request $request){
 		$data = $request->input();

@@ -22,8 +22,16 @@ export class BookedMonthlyAffComponent implements OnInit {
   ) { }
 
   public arrMonth = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  public arrYear = ['2018','2019','2020'];
+  // public arrYear = ['2018','2019','2020'];
+  public arrYear = <any>[];
   public amount;
+
+  // default valiable
+  public bookedData = {
+    token: <any>"",
+    type: <any>"",
+    year: <any>""
+  };
 
   // Bar chart
   public barChartOptions:any = {
@@ -39,6 +47,19 @@ export class BookedMonthlyAffComponent implements OnInit {
     { backgroundColor: '#0f4675'}
   ];
 
+  // 
+  public setDefaultYear(){
+    // set year
+    let getYear = new Date();
+    let yearStart = 2017;
+    let yearNow = getYear.getFullYear();
+    let yearDif = yearNow - yearStart;
+    for(let i=0;i<=yearDif;i++){
+      let newYear = yearStart+i;
+      this.arrYear.push(newYear.toString());
+    }
+  }
+
   // 1. print
   public print():void {
     window.print();
@@ -53,10 +74,37 @@ export class BookedMonthlyAffComponent implements OnInit {
 
   // 3. get data binding
   public getBookedMonthlyData():void {
-    this.BookedMonthlyAffService.getBookedMonthly()
+    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/Monthly';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/Monthly';
+    let options = new RequestOptions();
+
+    // set time
+    let getDate = new Date();
+    let getYear = getDate.getFullYear();
+
+    for(let i=0;i<this.arrYear.length;i++){
+      if(getYear == this.arrYear[i]){
+        this.bookedData.year = this.arrYear[i];
+      }
+    }
+
+    // get token from session
+    let getToken = JSON.parse(sessionStorage.getItem('users'));
+    if(getToken==null || getToken==undefined || getToken==''){
+      this.bookedData.token = 0;
+      this.bookedData.type = 0;
+    }else{
+      this.bookedData.token = getToken.data.token;
+      this.bookedData.type = getToken.data.userType;
+    }
+
+    /*==================  Success  ===================*/
+    console.log(this.bookedData);
+    this.http.post(url, this.bookedData, options)
+                    .map(res => res.json())
                     .subscribe(
                       data => [
-                        // sessionStorage.removeItem('chart-data'),
+                        console.log(data),
                         sessionStorage.setItem('booked-monthly-chart',JSON.stringify(data))
                       ],
                       err => {console.log(err)}
@@ -65,10 +113,45 @@ export class BookedMonthlyAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('booked-monthly-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 200);
+    }, 1500);
+  }
+
+  // 4. search data
+  public searchData(){
+    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/Monthly';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/Monthly';
+    let options = new RequestOptions();
+
+    // get token from session
+    let getToken = JSON.parse(sessionStorage.getItem('users'));
+    if(getToken==null || getToken==undefined || getToken==''){
+      this.bookedData.token = 0;
+      this.bookedData.type = 0;
+    }else{
+      this.bookedData.token = getToken.data.token;
+      this.bookedData.type = getToken.data.userType;
+    }
+
+    /*==================  Success  ===================*/
+    console.log(this.bookedData);
+    this.http.post(url, this.bookedData, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      data => [
+                        console.log(data),
+                        sessionStorage.setItem('booked-monthly-chart',JSON.stringify(data))
+                      ],
+                      err => {console.log(err)}
+                    );
+    setTimeout(()=>{
+      let _getData = JSON.parse(sessionStorage.getItem('booked-monthly-chart'));
+      this.barChartData = _getData.booked;
+      this.amount = _getData.amount;
+    }, 1500);
   }
 
   ngOnInit() {
+    this.setDefaultYear();
     // set default binding bar data
     this.barChartData = [
       {data: [0,0,0,0,0,0,0,0,0,0,0,0], label: ''}
