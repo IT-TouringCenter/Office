@@ -28,4 +28,24 @@ class DateClass{
         $month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
         return $month[$index];
     }
+
+    // Month (min) by index
+    public function GetMinMonthByIndex($index){
+        $month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+        return $month[$index];
+    }
+
+    // Get index by month
+    public function GetIndexByMonth($param){
+        $month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+        $count = 0;
+        $index = 0;
+        foreach($month as $value){
+            if($param==$value){
+                $index = $count;
+            }
+            $count++;
+        }
+        return $index;
+    }
 }

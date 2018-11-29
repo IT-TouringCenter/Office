@@ -77,7 +77,7 @@ export class TraveledAffComponent implements OnInit {
       this.barChartData = _getData.booked;
       this.tours = _getData.tours;
       this.amount = _getData.amount;
-    }, 200);
+    }, 500);
   }
 
   ngOnInit() {

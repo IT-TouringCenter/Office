@@ -34,7 +34,8 @@ class DashboardAffiliateBookedMonthlyClass{
 
         // set date
         $date = new Transaction;
-        $date->getYear = date('Y',strtotime(array_get($request,'year')));
+        // $date->getYear = date('Y',strtotime(array_get($request,'year')));
+        $date->getYear = array_get($request,'year');
 
         // check date
         $monthInYear = 12;

@@ -25,7 +25,7 @@ export class TraveledTourAffComponent implements OnInit {
   public amount;
 
   // default valiable
-  public tourData = {
+  public travelData = {
     token: <any>"",
     type: <any>"",
     tourId: <any>"1"
@@ -62,8 +62,8 @@ export class TraveledTourAffComponent implements OnInit {
 
   // get tour
   public getTour(){
-    let url = 'http://localhost:9000/api/Tours/GetTourData';
-    // let url = 'http://api.tourinchiangmai.com/api/Tours/GetTourData';
+    let url = 'http://localhost:9000/api/Tours/GettravelData';
+    // let url = 'http://api.tourinchiangmai.com/api/Tours/GettravelData';
     this.http.get(url)
                     .map(res => res.json())
                     .subscribe(
@@ -74,7 +74,7 @@ export class TraveledTourAffComponent implements OnInit {
                       ],
                       err => {console.log(err)}
                     );
-    console.log(this.tourData.tourId);
+    console.log(this.travelData.tourId);
   }
 
   // 1. print
@@ -90,7 +90,7 @@ export class TraveledTourAffComponent implements OnInit {
   }
 
   // 3. get data binding
-  public getTraveledTourData(){
+  public getTraveledtravelData(){
     let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled/Tour';
     // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled/Tour';
     let options = new RequestOptions();
@@ -98,16 +98,16 @@ export class TraveledTourAffComponent implements OnInit {
     // get token from session
     let getToken = JSON.parse(sessionStorage.getItem('users'));
     if(getToken==null || getToken==undefined || getToken==''){
-      this.tourData.token = 0;
-      this.tourData.type = 0;
+      this.travelData.token = 0;
+      this.travelData.type = 0;
     }else{
-      this.tourData.token = getToken.data.token;
-      this.tourData.type = getToken.data.userType;
+      this.travelData.token = getToken.data.token;
+      this.travelData.type = getToken.data.userType;
     }
 
     /*==================  Success  ===================*/
-    console.log(this.tourData);
-    this.http.post(url, this.tourData, options)
+    console.log(this.travelData);
+    this.http.post(url, this.travelData, options)
                     .map(res => res.json())
                     .subscribe(
                       data => [
@@ -138,7 +138,7 @@ export class TraveledTourAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('traveled-tour-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    },500);
+    }, 500);
   }
 
   // 3. get data binding
@@ -150,16 +150,16 @@ export class TraveledTourAffComponent implements OnInit {
     // get token from session
     let getToken = JSON.parse(sessionStorage.getItem('users'));
     if(getToken==null || getToken==undefined || getToken==''){
-      this.tourData.token = 0;
-      this.tourData.type = 0;
+      this.travelData.token = 0;
+      this.travelData.type = 0;
     }else{
-      this.tourData.token = getToken.data.token;
-      this.tourData.type = getToken.data.userType;
+      this.travelData.token = getToken.data.token;
+      this.travelData.type = getToken.data.userType;
     }
 
     /*==================  Success  ===================*/
-    console.log(this.tourData);
-    this.http.post(url, this.tourData, options)
+    console.log(this.travelData);
+    this.http.post(url, this.travelData, options)
                     .map(res => res.json())
                     .subscribe(
                       data => [
@@ -173,7 +173,7 @@ export class TraveledTourAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('traveled-tour-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    },500);
+    }, 500);
   }
 
   ngOnInit() {
@@ -181,7 +181,7 @@ export class TraveledTourAffComponent implements OnInit {
     this.getTour();
     // get data
     this.activeMenu();
-    this.getTraveledTourData();
+    this.getTraveledtravelData();
   }
 
 }

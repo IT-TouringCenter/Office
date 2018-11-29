@@ -27,6 +27,12 @@ export class CommissionTourAffComponent implements OnInit {
   public tours = [];
   public amount = [];
 
+  // default valiable
+  public commissionData = {
+    token: <any>"",
+    type: <any>""
+  };
+
   // Bar chart (all)
   public barChartOptions:any = {
     scaleShowVerticalLines: false,
@@ -54,10 +60,30 @@ export class CommissionTourAffComponent implements OnInit {
 
   // 3. get data binding
   public getCommissionTourData() {
-    this.CommissionTourAffService.getCommissionTour()
+    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission/Tour';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/Tour';
+    let options = new RequestOptions();
+
+    // set time
+    let getDate = new Date();
+    let getYear = getDate.getFullYear();
+
+    // get token from session
+    let getToken = JSON.parse(sessionStorage.getItem('users'));
+    if(getToken==null || getToken==undefined || getToken==''){
+      this.commissionData.token = 0;
+      this.commissionData.type = 0;
+    }else{
+      this.commissionData.token = getToken.data.token;
+      this.commissionData.type = getToken.data.userType;
+    }
+
+    /*==================  Success  ===================*/
+    console.log(this.commissionData);
+    this.http.post(url, this.commissionData, options)
+                    .map(res => res.json())
                     .subscribe(
                       data => [
-                        // sessionStorage.removeItem('chart-data'),
                         sessionStorage.setItem('commission-tour-chart',JSON.stringify(data))
                       ],
                       err => {console.log(err)}
@@ -66,7 +92,7 @@ export class CommissionTourAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('commission-tour-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 200);
+    }, 500);
   }
 
   ngOnInit() {

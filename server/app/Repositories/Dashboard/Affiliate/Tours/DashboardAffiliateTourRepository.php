@@ -25,9 +25,10 @@ class DashboardAffiliateTourRepository{
     }
 
     //----------------- Transaction ----------------------------------
-    public function GetBookedByTourId($tourId){
+    public function GetBookedByTourId($tourId,$accountId){
         $result = \DB::table('transaction_tours as tt')
                     ->join('transactions as t','t.id','=','tt.transaction_id')
+                    ->where('t.account_id',$accountId)
                     ->where('tt.tour_id',$tourId)
                     ->where('t.is_active',1)
                     ->where('tt.is_active',1)

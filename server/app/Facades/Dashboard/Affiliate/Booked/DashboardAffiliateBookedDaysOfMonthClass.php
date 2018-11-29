@@ -33,11 +33,14 @@ class DashboardAffiliateBookedDaysOfMonthClass{
         }
 
         // set date
+        $indexMonth = \DateFacade::GetIndexByMonth(array_get($request,'month'));
+        $numberMonth = str_pad(($indexMonth+1),2,'0',STR_PAD_LEFT);
+
         $date = new Transaction;
-        $date->getMonth = date('m',strtotime(array_get($request,'month')));
-        $date->getYear = date('Y',strtotime(array_get($request,'year')));
-        $date->month = date('F',strtotime(array_get($request,'month')));
-        $date->minMonth = date('M',strtotime(array_get($request,'month')));
+        $date->getMonth = $numberMonth;
+        $date->getYear = array_get($request,'year');
+        $date->month = \DateFacade::GetMonthByIndex($indexMonth);
+        $date->minMonth = \DateFacade::GetMinMonthByIndex($indexMonth);
 
         // check date
         $dayInMonth = cal_days_in_month(CAL_GREGORIAN,$date->getMonth,$date->getYear);

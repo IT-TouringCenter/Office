@@ -35,7 +35,7 @@ class DashboardAffiliateTourClass{
 
         // set booked
         $this->bookedArr = [];
-        $this->GetBookedByTour($this->tour);
+        $this->GetBookedByTour($this->tour,$accountId);
 
         // amount
         $amount = 0;
@@ -61,11 +61,11 @@ class DashboardAffiliateTourClass{
     }
 
     // 3. Set booked
-    public function GetBookedByTour($tour){
+    public function GetBookedByTour($tour,$accountId){
         $bookedArr = [];
         $total = 0;
         foreach($this->getTour as $value){
-            $getBooked = $this->DashboardAffiliateTourRepo->GetBookedByTourId($value->id);
+            $getBooked = $this->DashboardAffiliateTourRepo->GetBookedByTourId($value->id,$accountId);
             $countBooked = count($getBooked);
 
             array_push($bookedArr,$countBooked);

@@ -35,11 +35,14 @@ class DashboardAffiliateTourDaysOfMonthClass{
         $date = new Transaction;
 
         // set date
+        $indexMonth = \DateFacade::GetIndexByMonth(array_get($request,'month'));
+        $numberMonth = str_pad(($indexMonth+1),2,'0',STR_PAD_LEFT);
+
         $date = new Transaction;
-        $date->getMonth = date('m',strtotime(array_get($request,'month')));
-        $date->getYear = date('Y',strtotime(array_get($request,'year')));
-        $date->month = date('F',strtotime(array_get($request,'month')));
-        $date->minMonth = date('M',strtotime(array_get($request,'month')));
+        $date->getMonth = $numberMonth;
+        $date->getYear = array_get($request,'year');
+        $date->month = \DateFacade::GetMonthByIndex($indexMonth);
+        $date->minMonth = \DateFacade::GetMinMonthByIndex($indexMonth);
 
         // check date
         $arrDays = [];
@@ -94,7 +97,7 @@ class DashboardAffiliateTourDaysOfMonthClass{
 
         $res = new Transaction;
         $res->data = $result;
-        $res->label = 'Booked : '.$monthEn.' '.$year;
+        $res->label = 'Booked';
         $res->total = $sum;
 
         array_push($this->bookedData,$res);
@@ -121,7 +124,7 @@ class DashboardAffiliateTourDaysOfMonthClass{
 
         $res = new Transaction;
         $res->data = $result;
-        $res->label = 'Traveled : '.$monthEn.' '.$year;
+        $res->label = 'Traveled';
         $res->total = $sum;
         
         array_push($this->bookedData,$res);

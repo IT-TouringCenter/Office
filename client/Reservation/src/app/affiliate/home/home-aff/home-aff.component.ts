@@ -122,7 +122,7 @@ export class HomeAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('dashboard-data'));
       console.log(_getData);
       this.dataDashboard = _getData;
-    },500);
+    }, 500);
   }
 
   // 3. get data booked statistics
@@ -163,7 +163,7 @@ export class HomeAffComponent implements OnInit {
     setTimeout(()=>{
       let _getData = JSON.parse(sessionStorage.getItem('booking-data'));
       this.barChartData = _getData.bookedStatistics;
-    },500);
+    }, 500);
   }
 
   // 4. get data commission
@@ -206,12 +206,10 @@ export class HomeAffComponent implements OnInit {
     setTimeout(()=>{
       let _getData = JSON.parse(sessionStorage.getItem('commission-data'));
       this.lineChartData = _getData.commission;
-    },500);
+    }, 500);
   }
 
   ngOnInit() {
-    sessionStorage.removeItem('chart-data'),
-
     // active menu
     this.activeMenu();
 
@@ -219,8 +217,6 @@ export class HomeAffComponent implements OnInit {
     this.getDataDashboard();
     this.getDataBooked();
     this.getDataCommission();
-
-    // }
   }
 
 }

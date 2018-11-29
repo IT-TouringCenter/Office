@@ -21,11 +21,20 @@ export class TourMonthlyAffComponent implements OnInit {
     private TourMonthlyAffService: TourMonthlyAffService
   ) { }
 
-  public tours = [];
+  public tours = <any>[];
   public amount = [];
 
-  public arrMonth = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  public arrYear = ['2018','2019','2020'];
+  // default valiable
+  public tourData = {
+    token: <any>"",
+    type: <any>"",
+    tourId: <any>"1",
+    year: <any>""
+  };
+
+  public arrMonth = <any>['January','February','March','April','May','June','July','August','September','October','November','December'];
+  // public arrYear = ['2018','2019','2020'];
+  public arrYear = <any>[];
 
   // Bar chart (month)
   public barChartOptions:any = {
@@ -55,6 +64,34 @@ export class TourMonthlyAffComponent implements OnInit {
     }
   ];
 
+  // 
+  public setDefaultYear(){
+    // set year
+    let getYear = new Date();
+    let yearStart = 2018;
+    let yearNow = getYear.getFullYear();
+    let yearDif = yearNow - yearStart;
+    for(let i=0;i<=yearDif;i++){
+      let newYear = yearStart+i;
+      this.arrYear.push(newYear.toString());
+    }
+    console.log(this.arrYear);
+  }
+
+  // get tour
+  public getTour(){
+    let url = 'http://localhost:9000/api/Tours/GetTourData';
+    // let url = 'http://api.tourinchiangmai.com/api/Tours/GetTourData';
+    this.http.get(url)
+                    .map(res => res.json())
+                    .subscribe(
+                      data => [
+                        this.tours = data
+                      ],
+                      err => {console.log(err)}
+                    );
+  }
+
   // 1. print
   public print():void {
     window.print();
@@ -69,10 +106,35 @@ export class TourMonthlyAffComponent implements OnInit {
 
   // 3. get data binding
   public getTourMonthlyData() {
-    this.TourMonthlyAffService.getTourMonthly()
+    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Tour/Monthly';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Tour/Monthly';
+    let options = new RequestOptions();
+
+    // set time
+    let getDate = new Date();
+    let getYear = getDate.getFullYear();
+
+    for(let i=0;i<this.arrYear.length;i++){
+      if(getYear == this.arrYear[i]){
+        this.tourData.year = this.arrYear[i];
+      }
+    }
+
+    // get token from session
+    let getToken = JSON.parse(sessionStorage.getItem('users'));
+    if(getToken==null || getToken==undefined || getToken==''){
+      this.tourData.token = 0;
+      this.tourData.type = 0;
+    }else{
+      this.tourData.token = getToken.data.token;
+      this.tourData.type = getToken.data.userType;
+    }
+    /*==================  Success  ===================*/
+    console.log(this.tourData);
+    this.http.post(url, this.tourData, options)
+                    .map(res => res.json())
                     .subscribe(
                       data => [
-                        // sessionStorage.removeItem('chart-data'),
                         sessionStorage.setItem('tour-monthly-chart',JSON.stringify(data))
                       ],
                       err => {console.log(err)}
@@ -80,9 +142,41 @@ export class TourMonthlyAffComponent implements OnInit {
     setTimeout(()=>{
       let _getData = JSON.parse(sessionStorage.getItem('tour-monthly-chart'));
       this.barChartData = _getData.booked;
-      this.tours = _getData.tours;
       this.amount = _getData.amount;
-    }, 200);
+    }, 500);
+  }
+
+  // 4. search data
+  public searchData(){
+    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Tour/Monthly';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Tour/Monthly';
+    let options = new RequestOptions();
+
+    // get token from session
+    let getToken = JSON.parse(sessionStorage.getItem('users'));
+    if(getToken==null || getToken==undefined || getToken==''){
+      this.tourData.token = 0;
+      this.tourData.type = 0;
+    }else{
+      this.tourData.token = getToken.data.token;
+      this.tourData.type = getToken.data.userType;
+    }
+
+    /*==================  Success  ===================*/
+    console.log(this.tourData);
+    this.http.post(url, this.tourData, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      data => [
+                        sessionStorage.setItem('tour-monthly-chart',JSON.stringify(data))
+                      ],
+                      err => {console.log(err)}
+                    );
+    setTimeout(()=>{
+      let _getData = JSON.parse(sessionStorage.getItem('tour-monthly-chart'));
+      this.barChartData = _getData.booked;
+      this.amount = _getData.amount;
+    }, 500);
   }
 
   ngOnInit() {
@@ -95,6 +189,8 @@ export class TourMonthlyAffComponent implements OnInit {
     this.barChartType = 'line';
     this.barChartLegend = true;
 
+    this.getTour();
+    this.setDefaultYear();
     this.activeMenu();
     this.getTourMonthlyData();
   }

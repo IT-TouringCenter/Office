@@ -21,10 +21,19 @@ export class CommissionDayOfMonthAffComponent implements OnInit {
     private CommissionDayOfMonthAffService: CommissionDayOfMonthAffService
   ) { }
 
-  public arrMonth = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  public arrYear = ['2018','2019','2020'];
-
   public amount;
+
+  // default valiable
+  public commissionData = {
+    token: <any>"",
+    type: <any>"",
+    month: <any>"",
+    year: <any>""
+  };
+
+  public arrMonth = <any>['January','February','March','April','May','June','July','August','September','October','November','December'];
+  // public arrYear = ['2018','2019','2020'];
+  public arrYear = <any>[];
 
   // Bar chart
   public barChartOptions:any = {
@@ -40,6 +49,20 @@ export class CommissionDayOfMonthAffComponent implements OnInit {
     // { backgroundColor: '#0f4675'}
   ];
 
+  // 
+  public setDefaultYear(){
+    // set year
+    let getYear = new Date();
+    let yearStart = 2018;
+    let yearNow = getYear.getFullYear();
+    let yearDif = yearNow - yearStart;
+    for(let i=0;i<=yearDif;i++){
+      let newYear = yearStart+i;
+      this.arrYear.push(newYear.toString());
+    }
+    console.log(this.arrYear);
+  }
+
   // 1. print
   public print():void {
     window.print();
@@ -54,10 +77,37 @@ export class CommissionDayOfMonthAffComponent implements OnInit {
 
   // 3. get data binding
   public getCommissionDayOfMonthData() {
-    this.CommissionDayOfMonthAffService.getCommissionDayOfMonth()
+    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission/DaysOfMonth';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/DaysOfMonth';
+    let options = new RequestOptions();
+
+    // set time
+    let getDate = new Date();
+    this.commissionData.month = this.arrMonth[getDate.getMonth()];
+    let getYear = getDate.getFullYear();
+
+    for(let i=0;i<this.arrYear.length;i++){
+      if(getYear == this.arrYear[i]){
+        this.commissionData.year = this.arrYear[i];
+      }
+    }
+
+    // get token from session
+    let getToken = JSON.parse(sessionStorage.getItem('users'));
+    if(getToken==null || getToken==undefined || getToken==''){
+      this.commissionData.token = 0;
+      this.commissionData.type = 0;
+    }else{
+      this.commissionData.token = getToken.data.token;
+      this.commissionData.type = getToken.data.userType;
+    }
+
+    /*==================  Success  ===================*/
+    console.log(this.commissionData);
+    this.http.post(url, this.commissionData, options)
+                    .map(res => res.json())
                     .subscribe(
                       data => [
-                        // sessionStorage.removeItem('chart-data'),
                         sessionStorage.setItem('commission-day-chart',JSON.stringify(data))
                       ],
                       err => {console.log(err)}
@@ -66,7 +116,40 @@ export class CommissionDayOfMonthAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('commission-day-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 200);
+    }, 500);
+  }
+
+  // 4. search data
+  public searchData(){
+    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission/DaysOfMonth';
+    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/DaysOfMonth';
+    let options = new RequestOptions();
+
+    // get token from session
+    let getToken = JSON.parse(sessionStorage.getItem('users'));
+    if(getToken==null || getToken==undefined || getToken==''){
+      this.commissionData.token = 0;
+      this.commissionData.type = 0;
+    }else{
+      this.commissionData.token = getToken.data.token;
+      this.commissionData.type = getToken.data.userType;
+    }
+
+    /*==================  Success  ===================*/
+    console.log(this.commissionData);
+    this.http.post(url, this.commissionData, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      data => [
+                        sessionStorage.setItem('commission-day-chart',JSON.stringify(data))
+                      ],
+                      err => {console.log(err)}
+                    );
+    setTimeout(()=>{
+      let _getData = JSON.parse(sessionStorage.getItem('commission-day-chart'));
+      this.barChartData = _getData.booked;
+      this.amount = _getData.amount;
+    }, 500);
   }
 
   ngOnInit() {
@@ -78,6 +161,7 @@ export class CommissionDayOfMonthAffComponent implements OnInit {
     this.barChartType = 'line';
     this.barChartLegend = true;
 
+    this.setDefaultYear();
     this.activeMenu();
     this.getCommissionDayOfMonthData();
   }

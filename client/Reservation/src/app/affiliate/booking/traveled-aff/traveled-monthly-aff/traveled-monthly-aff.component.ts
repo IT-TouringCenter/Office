@@ -127,7 +127,7 @@ export class TraveledMonthlyAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('traveled-monthly-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    },200);
+    }, 500);
   }
 
   // 4. search data
@@ -161,7 +161,7 @@ export class TraveledMonthlyAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('traveled-monthly-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 1500);
+    }, 500);
   }
 
   ngOnInit() {
