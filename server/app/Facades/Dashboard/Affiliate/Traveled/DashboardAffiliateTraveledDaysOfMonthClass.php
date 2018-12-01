@@ -51,7 +51,7 @@ class DashboardAffiliateTraveledDaysOfMonthClass{
         for($i=1;$i<=$dayInMonth;$i++){
             array_push($arrDays,$i);
         }
-        
+
         // get data
         $bookedData = [];
         $this->res = new Transaction;

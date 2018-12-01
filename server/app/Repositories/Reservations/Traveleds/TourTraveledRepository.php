@@ -9,7 +9,19 @@ class TourTraveledRepository{
 
 	}
 
-    // 1. all update is_travel = 1 in transaction_tours
+    // 1. get transaction tour id by travel date
+    public function GetTransactionIdByTravel($dateNow){
+        $result = \DB::table('transaction_tours')
+                        ->select('id')
+                        ->where('travel_date','<',$dateNow)
+                        ->where('is_travel','!=',1)
+                        ->where('is_cancel',0)
+                        ->where('is_active',1)
+                        ->get();
+        return $result;
+    }
+
+    // 2. all update is_travel = 1 in transaction_tours
     public function AllUpdateTourTravel($date,$isTravel,$updateBy){
         $update = [
             'is_travel'=>$isTravel,
@@ -24,7 +36,7 @@ class TourTraveledRepository{
         return $result;
     }
 
-    // 2. update is_travel = 1 in transaction_tours by id
+    // 3. update is_travel = 1 in transaction_tours by id
     public function UpdateTourTravelById($transId,$isTravel,$updateBy){
         $update = [
             'is_travel'=>$isTravel,
@@ -39,7 +51,7 @@ class TourTraveledRepository{
         return $result;
     }
 
-    // 3. get account_id
+    // 4. get account_id
     public function GetAccountIdByTransactionTourId($transactionTourId){
         $result = \DB::table('transaction_tours as tt')
                     ->join('transactions as t','t.id','=','tt.transaction_id')
@@ -50,7 +62,7 @@ class TourTraveledRepository{
         return $result[0]->account_id;
     }
 
-    // 4. get account type
+    // 5. get account type
     public function GetAccountTypeById($accountId){
         $result = \DB::table('accounts as a')
                     ->join('account_types as at','at.id','=','a.account_type_id')

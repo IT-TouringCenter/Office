@@ -9,8 +9,8 @@ class TourTraveledRepository{
 
 	public function __construct(TransactionTour $TransactionTour){
         $this->TransactionTour = $TransactionTour;
-	}
-
+    }
+    
     // Get value to check before updating
     public function GetTransactionTour($data){
         $result = \DB::table('transaction_tours')

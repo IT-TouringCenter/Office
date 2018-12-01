@@ -22,6 +22,8 @@ export class TourDayOfMonthAffComponent implements OnInit {
   ) { }
 
   public tours = <any>[];
+  public arrMonth = <any>['January','February','March','April','May','June','July','August','September','October','November','December'];
+  public arrYear = <any>[];
   public amount = [];
 
   // default valiable
@@ -32,10 +34,6 @@ export class TourDayOfMonthAffComponent implements OnInit {
     month: <any>"",
     year: <any>""
   };
-
-  public arrMonth = <any>['January','February','March','April','May','June','July','August','September','October','November','December'];
-  // public arrYear = ['2018','2019','2020'];
-  public arrYear = <any>[];
 
   // Bar chart (day)
   public barChartOptions:any = {
@@ -77,6 +75,41 @@ export class TourDayOfMonthAffComponent implements OnInit {
       this.arrYear.push(newYear.toString());
     }
     console.log(this.arrYear);
+
+    // set days in month
+    let monthNow = getYear.getMonth();
+    let daysInMonth = new Date(yearNow, monthNow+1, 0).getDate();
+
+    this.setDefaultChart(daysInMonth);
+  }
+
+  // 
+  public setDefaultChart(daysInMonth){
+    // set days in month
+    let daysArr = <any>[];
+    for(let i=0;i<daysInMonth;i++){
+      daysArr.push(0);
+    }
+
+    // set default binding bar data
+    this.barChartData = [
+      {data: daysArr, label: '', total: 0},
+      {data: daysArr, label: '', total: 0}
+    ];
+
+    let daysDataArr = <any>[];
+    for(let j=0;j<daysInMonth;j++){
+      let number = j+1;
+      daysDataArr.push(number.toString());
+    }
+
+    // this.barChartLabels = <any>['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
+    this.barChartLabels = daysDataArr;
+    // console.log(daysDataArr);
+    // console.log('-----------------------');
+    // console.log(this.barChartLabels);
+    this.barChartType = 'line';
+    this.barChartLegend = true;
   }
 
   // get tour
@@ -177,21 +210,18 @@ export class TourDayOfMonthAffComponent implements OnInit {
                     );
     setTimeout(()=>{
       let _getData = JSON.parse(sessionStorage.getItem('tour-day-chart'));
+
+      // set default data
+      let daysInMonth = _getData.days.length;
+      this.setDefaultChart(daysInMonth);
+      
       this.barChartData = _getData.booked;
+      this.barChartLabels = _getData.days;
       this.amount = _getData.amount;
     }, 500);
   }
 
   ngOnInit() {
-    // binding bar data (day)
-    this.barChartData = [
-      {data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: 0},
-      {data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], label: '', total: 0}
-    ];
-    this.barChartLabels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
-    this.barChartType = 'line';
-    this.barChartLegend = true;
-
     this.getTour();
     this.setDefaultYear();
     this.activeMenu();

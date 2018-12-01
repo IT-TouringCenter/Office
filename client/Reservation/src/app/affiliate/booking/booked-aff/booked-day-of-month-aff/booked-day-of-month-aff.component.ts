@@ -21,7 +21,6 @@ export class BookedDayOfMonthAffComponent implements OnInit {
     private BookedDayOfMonthAffService: BookedDayOfMonthAffService
   ) { }
 
-  public daysInMonth = <any>0;
   public arrMonth = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   public arrYear = <any>[];
   public amount;
@@ -67,7 +66,7 @@ export class BookedDayOfMonthAffComponent implements OnInit {
     this.setDefaultChart(daysInMonth);
   }
 
-  //
+  // 
   public setDefaultChart(daysInMonth){
     // set days in month
     let daysArr = <any>[];
@@ -87,10 +86,10 @@ export class BookedDayOfMonthAffComponent implements OnInit {
     }
 
     // this.barChartLabels = <any>['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
-    console.log(daysDataArr);
-    console.log('-----------------------');
-    console.log(this.barChartLabels);
     this.barChartLabels = daysDataArr;
+    // console.log(daysDataArr);
+    // console.log('-----------------------');
+    // console.log(this.barChartLabels);
     this.barChartType = 'bar';
     this.barChartLegend = true;
   }
@@ -182,12 +181,6 @@ export class BookedDayOfMonthAffComponent implements OnInit {
     
     setTimeout(()=>{
       let _getData = JSON.parse(sessionStorage.getItem('booked-day-chart'));
-
-      // this.barChartData = [
-      //   {data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], label: ''}
-      // ];
-
-      // this.barChartLabels = <any>['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
 
       // set default data
       let daysInMonth = _getData.days.length;

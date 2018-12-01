@@ -82,7 +82,7 @@ class DashboardAffiliateBookedDaysOfMonthClass{
 
         // get data from DB
         foreach($arrDay as $value){
-            $date = $year.'-'.$month.'-'.$value;
+            $date = $year.'-'.$month.'-'.str_pad(($value),2,'0',STR_PAD_LEFT);
             $getBookData = $this->DashboardAffiliateBookedRepo->GetBookedByBookDate($accountId,$date);
             $countBooked = count($getBookData);
 

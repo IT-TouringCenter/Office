@@ -21,6 +21,8 @@ export class CommissionDayOfMonthAffComponent implements OnInit {
     private CommissionDayOfMonthAffService: CommissionDayOfMonthAffService
   ) { }
 
+  public arrMonth = <any>['January','February','March','April','May','June','July','August','September','October','November','December'];
+  public arrYear = <any>[];
   public amount;
 
   // default valiable
@@ -30,10 +32,6 @@ export class CommissionDayOfMonthAffComponent implements OnInit {
     month: <any>"",
     year: <any>""
   };
-
-  public arrMonth = <any>['January','February','March','April','May','June','July','August','September','October','November','December'];
-  // public arrYear = ['2018','2019','2020'];
-  public arrYear = <any>[];
 
   // Bar chart
   public barChartOptions:any = {
@@ -61,6 +59,40 @@ export class CommissionDayOfMonthAffComponent implements OnInit {
       this.arrYear.push(newYear.toString());
     }
     console.log(this.arrYear);
+
+    // set days in month
+    let monthNow = getYear.getMonth();
+    let daysInMonth = new Date(yearNow, monthNow+1, 0).getDate();
+
+    this.setDefaultChart(daysInMonth);
+  }
+
+  // 
+  public setDefaultChart(daysInMonth){
+    // set days in month
+    let daysArr = <any>[];
+    for(let i=0;i<daysInMonth;i++){
+      daysArr.push(0);
+    }
+
+    // set default binding bar data
+    this.barChartData = [
+      {data: daysArr, label: '', total: 0}
+    ];
+
+    let daysDataArr = <any>[];
+    for(let j=0;j<daysInMonth;j++){
+      let number = j+1;
+      daysDataArr.push(number.toString());
+    }
+
+    // this.barChartLabels = <any>['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
+    this.barChartLabels = daysDataArr;
+    // console.log(daysDataArr);
+    // console.log('-----------------------');
+    // console.log(this.barChartLabels);
+    this.barChartType = 'bar';
+    this.barChartLegend = true;
   }
 
   // 1. print

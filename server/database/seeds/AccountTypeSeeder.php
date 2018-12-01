@@ -12,10 +12,12 @@ class AccountTypeSeeder extends Seeder{
 		account_type::create(["type"=>"Admin"]);
 		account_type::create(["type"=>"Manager"]);
 		account_type::create(["type"=>"Reservation"]);
+		account_type::create(["type"=>"Senior reservation"]);
 		account_type::create(["type"=>"Sale"]);
+		account_type::create(["type"=>"Online marketing"]);
 		account_type::create(["type"=>"Accounting"]);
-		account_type::create(["type"=>"programer"]);
-		account_type::create(["type"=>"intern"]);
+		account_type::create(["type"=>"Programer"]);
+		account_type::create(["type"=>"Intern"]);
 	}
 }
 ?>

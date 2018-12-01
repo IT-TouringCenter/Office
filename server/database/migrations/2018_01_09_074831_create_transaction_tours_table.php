@@ -22,6 +22,7 @@ class CreateTransactionToursTable extends Migration {
 			$table->string('tour_privacy');
 			$table->string('tour_travel_time');
 			$table->string('tour_travel_date',100);
+			$table->date('travel_date');
 			$table->tinyInteger('rate_two_pax')->default();
 			$table->integer('pax');
 			$table->integer('adult_pax');
