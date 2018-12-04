@@ -85,6 +85,7 @@ Route::get('/', 'WelcomeController@index');
 	Route::post('api/Account/AccountForceLogout', 'Accounts\AccountForceLogoutController@AccountForceLogout');
 	// session login
 	Route::post('api/Account/AccountSessionLogin', 'Accounts\AccountLoginController@AccountSessionLogin');
+	Route::post('api/Account/AccountSessionLoginReturnType', 'Accounts\AccountLoginController@AccountSessionLoginReturnType');
 	Route::post('api/Account/CheckAccountLoginExpired', 'Accounts\AccountLoginController@CheckAccountLoginExpired');
 /*----------- Account (End) ------------------------------------*/
 

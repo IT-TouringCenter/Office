@@ -29,10 +29,8 @@ export class SessionLoginComponent implements OnInit {
   checkStorage(){
     let sessionData = JSON.parse(sessionStorage.getItem('users'));
     if(sessionData){
-      // console.log('1111111');
       let checkLogin = this.checkLogin(sessionData);
     }else{
-      // console.log('0000000');
       this.checkLogout();
       this.router.navigate(['user/login']);
     }
@@ -64,10 +62,8 @@ export class SessionLoginComponent implements OnInit {
   // 3. Check login status
   checkLoginStatus(data, sessionData){
     if(data.status==false){
-      // console.log('-----------');
       this.logout(sessionData);
     }else{
-      // console.log('-+++++++++-');
       this.router.navigate(['user']);
     }
     return data;
@@ -103,10 +99,6 @@ export class SessionLoginComponent implements OnInit {
     // console.log(data.status);
     sessionStorage.removeItem('users');
     this.router.navigate(['user/login']);
-    // if(data.status==true){
-    //   sessionStorage.removeItem('users');
-    //   this.router.navigate(['user/login']);
-    // }
     return;
   }
 
@@ -124,18 +116,12 @@ export class SessionLoginComponent implements OnInit {
                     .subscribe(
                       data => [
                         this.clearSession(data)
-                        // this.checkLogoutBySession(data)
                       ],
                       err => [
                         console.log(err)
                       ]
                     );
   }
-
-  // 6. Check logout by session
-  // checkLogoutBySession(data){
-
-  // }
 
   ngOnInit() {
     this.checkStorage();

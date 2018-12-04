@@ -11,13 +11,18 @@ class AccountLoginRepository{
 
 	/*
 		1. Check account
-		2. Check login (active)
-		3. Save login history
-		4. Get account data
-		5. Get login data
-		6. Force logout
-		7. Get login last id
-		8. Update login history
+		2. Check account (active)
+		3. Check login (active)
+		4. Save login history
+		5. Get account data
+		6. Get login data
+		7. Force logout
+		8. Get login last id
+		9. Update login history
+		10. Get account by token
+		11. Get account login by token
+		12. Auto logout all active
+		13. Get account type
 	*/
 
 	// 1. Check account
@@ -125,7 +130,7 @@ class AccountLoginRepository{
 		return $result;
 	}
 
-	// 11. Auto logout all active
+	// 12. Auto logout all active
 	public function AutoLogout($dateTimeNow){
 		$data = [
 			'logout_datetime'=>$dateTimeNow,
@@ -135,6 +140,19 @@ class AccountLoginRepository{
 						->where('logout_expired','<',$dateTimeNow)
 						->where('is_active',1)
 						->update($data);		
+		return $result;
+	}
+
+	// 13. Get account type
+	public function GetAccountType($token,$accountTypeId){
+		$result = \DB::table('accounts as a')
+						->select('at.type')
+						->join('account_types as at','at.id','=','a.account_type_id')
+						->where('a.token',$token)
+						->where('a.account_type_id',$accountTypeId)
+						->where('a.is_active',1)
+						->where('at.is_active',1)
+						->get();
 		return $result;
 	}
 }

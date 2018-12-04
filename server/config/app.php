@@ -225,6 +225,7 @@ return [
 		'AccountLoginFacade' => 'App\Facades\Accounts\AccountLoginFacade',
 		'AccountLogoutFacade' => 'App\Facades\Accounts\AccountLogoutFacade',
 		'AccountForceLogoutFacade' => 'App\Facades\Accounts\AccountForceLogoutFacade',
+		'AccountLoginReturnTypeFacade' => 'App\Facades\Accounts\AccountLoginReturnTypeFacade',
 
 		// Affiliate
 		'AffiliateFacade' => 'App\Facades\Affiliates\AffiliateFacade',

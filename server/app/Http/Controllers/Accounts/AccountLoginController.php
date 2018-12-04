@@ -72,4 +72,20 @@ class AccountLoginController extends Controller {
         }
     }
 
+    // 4. Check account login & return type
+    public function AccountSessionLoginReturnType(Request $request){
+        $accountData = $request->input();
+        $token = array_get($accountData,'token');
+        $accountType = array_get($accountData,'type');
+        try{
+            $results = \AccountLoginReturnTypeFacade::GetAccountByTokenReturnType($token,$accountType);
+            if($results==null){
+                abort(400);
+            }
+            return $results;
+        }catch(Exception $e){
+            abort(500);
+        }
+    }
+
 }
