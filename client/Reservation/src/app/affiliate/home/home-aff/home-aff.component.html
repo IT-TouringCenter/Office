@@ -1,5 +1,6 @@
 <!-- check user -->
 <!-- <app-session-login></app-session-login> -->
+<app-permission-user></app-permission-user>
 <!-- Menu bar -->
 <app-menu-bar-aff></app-menu-bar-aff>
 <!-- Side bar -->
@@ -56,12 +57,12 @@
       <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
         <div class="panel panel-content-block-3">
           <div class="panel-body panel-content-3">
-            <div class="panel-content-left-3">
+            <div class="panel-content-left-3" style="width: 35% !important;">
               <i class="fa fa-usd fa-5x" aria-hidden="true" style="padding-top: 10px;"></i>
             </div>
-            <div class="panel-content-right-3">
+            <div class="panel-content-right-3" style="width: 65% !important;">
               <p style="font-size: 22px; margin-bottom: 0;">Commission</p>
-              <p style="font-size: 38px; margin-bottom: 0;">{{dataDashboard.commission.amount}}฿</p>
+              <p style="font-size: 38px; margin-bottom: 0; padding-top: 3px;">{{dataDashboard.commission.amount}}฿</p>
             </div>
           </div>
           <a href="/#/user/affiliate/commission">

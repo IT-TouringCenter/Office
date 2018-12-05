@@ -68,6 +68,7 @@ import { TraveledDayOfMonthAffComponent } from './affiliate/booking/traveled-aff
 import { TraveledMonthlyAffComponent } from './affiliate/booking/traveled-aff/traveled-monthly-aff/traveled-monthly-aff.component';
 import { TraveledTourAffComponent } from './affiliate/booking/traveled-aff/traveled-tour-aff/traveled-tour-aff.component';
 import { BookedTableAffComponent } from './affiliate/booking/booked-aff/booked-table-aff/booked-table-aff.component';
+import { PermissionUserComponent } from './users/permission/permission-user/permission-user.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +122,8 @@ import { BookedTableAffComponent } from './affiliate/booking/booked-aff/booked-t
     TraveledDayOfMonthAffComponent,
     TraveledMonthlyAffComponent,
     TraveledTourAffComponent,
-    BookedTableAffComponent
+    BookedTableAffComponent,
+    PermissionUserComponent
   ],
   imports: [
     BrowserModule,
