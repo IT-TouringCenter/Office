@@ -49,37 +49,6 @@ export class BookedRsvnComponent implements OnInit {
   ) { }
 
   //------------------ Start Page ------------------------
-  changePage(page:number){
-    this.activePage = page;
-    let link = '/user/reservations/booked';
-    this.router.navigate([link], {queryParams:{page:page}});
-    // this.router.navigate([link], {queryParams:{page:page}});
-  }
-
-  pagination(){
-    if(this.activePage > this.useShowPage){
-      if(this.activePage+2 <= this.totalPage){
-        this.iPageStart = this.activePage-2;
-        this.maxShowPage = this.activePage+2;
-      }else{
-        if(this.activePage <= this.totalPage){
-          this.iPageStart = (this.totalPage+1)-this.useShowPage;
-          this.maxShowPage = (this.iPageStart-1)+this.useShowPage;
-        }
-      }
-      this.iPage = [];
-      for(let i=this.iPageStart; i<=this.maxShowPage; i++){
-        this.iPage.push(i);
-      }
-    }else{
-      this.iPageStart = 1;
-      this.iPage = [];
-      for(let i=this.iPageStart; i<=this.useShowPage; i++){
-        this.iPage.push(i);
-      }
-    }
-  }
-
   PagePagination(){
     this.activePage = 1;
     this.nextPage = 2;
@@ -115,6 +84,37 @@ export class BookedRsvnComponent implements OnInit {
     }
   }
 
+  changePage(page:number){
+    this.activePage = page;
+    let link = '/user/reservations/booked';
+    this.router.navigate([link], {queryParams:{page:page}});
+    // this.router.navigate([link], {queryParams:{page:page}});
+  }
+
+  pagination(){
+    if(this.activePage > this.useShowPage){
+      if(this.activePage+2 <= this.totalPage){
+        this.iPageStart = this.activePage-2;
+        this.maxShowPage = this.activePage+2;
+      }else{
+        if(this.activePage <= this.totalPage){
+          this.iPageStart = (this.totalPage+1)-this.useShowPage;
+          this.maxShowPage = (this.iPageStart-1)+this.useShowPage;
+        }
+      }
+      this.iPage = [];
+      for(let i=this.iPageStart; i<=this.maxShowPage; i++){
+        this.iPage.push(i);
+      }
+    }else{
+      this.iPageStart = 1;
+      this.iPage = [];
+      for(let i=this.iPageStart; i<=this.useShowPage; i++){
+        this.iPage.push(i);
+      }
+    }
+  }
+
   //------------------ End Page ------------------------
 
   // JSON booked stat from API
@@ -132,14 +132,11 @@ export class BookedRsvnComponent implements OnInit {
 
   // Length data
   lengthDataFromGet(){
-    let getDataArr = [];
-    this._getBookingStatistics;
     let count = 0;
     for(var tour in this._getBookingStatistics){
       count++;
     }
     this.totalItem = count;
-    // console.log("Length : "+count);
   }
 
   ngOnInit() {

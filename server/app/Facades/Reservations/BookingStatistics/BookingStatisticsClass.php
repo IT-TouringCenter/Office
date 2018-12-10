@@ -120,13 +120,18 @@ class BookingStatisticsClass{
     // 5. Transaction by account id
     public function GetBookedByAccountId($accountData){
         $token = array_get($accountData,'token');
-        $getAccount = $this->AccountRepo->GetAccountByToken($token);
-        $accountId = $getAccount[0]->id;
-        // return $accountId;
+        $typeId = array_get($accountData,'type');
+        $getAccount = $this->AccountRepo->GetAccountByTokenAndType($token,$typeId);
+
+        if($getAccount){
+            $accountId = $getAccount[0]->id;
+        }else{
+            return 'null';
+        }
 
         $transaction = $this->TransactionRepo->GetTransactionByAccountId($accountId);
         if($transaction==null){
-            return null;
+            return 'null';
         }
         $transactionArr = [];
 

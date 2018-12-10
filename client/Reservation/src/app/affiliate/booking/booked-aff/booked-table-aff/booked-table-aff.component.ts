@@ -17,7 +17,6 @@ import { BookedTableAffInterface } from './booked-table-aff-interface';
 })
 export class BookedTableAffComponent implements OnInit {
 
-  userId = '1084873764';
   public activeSideNav = 'bookedstatistics';
 
   // interface
@@ -35,7 +34,7 @@ export class BookedTableAffComponent implements OnInit {
   public nextPage: number;
   public activePage: number;
   public totalItem: number;
-  public perPage: number = 20;
+  public perPage: number = 25;
   public totalPage: number;
   public maxShowPage: number;
   public useShowPage: number = 5;
@@ -63,21 +62,15 @@ export class BookedTableAffComponent implements OnInit {
 
   // JSON booked stat from API
   getInvoiceFromData(): void{
-    this.BookedTableAffService.getBookedData()
-      .subscribe(
-        resultArray => [
-          this._getBooked = resultArray,
-          this.lengthDataFromGet(),
-          this.PagePagination()
-        ],
-        error => console.log("Error :: " + error)
-      )
-
     let url = "http://localhost:9000/api/reservations/GetBookedByAccountId";
     // let url = "http://api.tourinchiangmai.com/api/reservations/GetBookedByAccountId";
+
+    // set data to save
+    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
     let dataSave = {
-      "token" : "1652812936"
-    }
+      token : _getUserData.data.token,
+      type : _getUserData.data.userType
+    };
 
     let options = new RequestOptions();
     /*==================  Success  ===================*/
@@ -85,66 +78,30 @@ export class BookedTableAffComponent implements OnInit {
                     .map(res => res.json())
                     .subscribe(
                       data => [
-                        // console.log(data),
                         this.getBooked = data,
                         sessionStorage.setItem('booked-table',JSON.stringify(data))
                       ],
-                      // data => {this.router.navigate([link])},
                       err => {console.log(err)}
                     );
     /*==================  Success  ===================*/
     setTimeout(()=>{
       this.getBooked = JSON.parse(sessionStorage.getItem('booked-table'));
-      console.log('=============');
-      console.log(this.getBooked);
-      console.log('=============');
+      this.lengthDataFromGet(this.getBooked);
+      this.PagePagination();
     }, 500);
   }
 
   // Length data
-  lengthDataFromGet(){
-    let getDataArr = [];
-    this._getBooked;
+  lengthDataFromGet(getBooked){
     let count = 0;
-    for(var tour in this._getBooked){
+    for(var tour in getBooked){
       count++;
     }
     this.totalItem = count;
-    // console.log("Length : "+count);
+
   }
 
   //------------------ Start Page ------------------------
-  changePage(page:number){
-    this.activePage = page;
-    let link = '/user/affiliate/booked/table';
-    this.router.navigate([link], {queryParams:{page:page}});
-    // this.router.navigate([link], {queryParams:{page:page}});
-  }
-
-  pagination(){
-    if(this.activePage > this.useShowPage){
-      if(this.activePage+2 <= this.totalPage){
-        this.iPageStart = this.activePage-2;
-        this.maxShowPage = this.activePage+2;
-      }else{
-        if(this.activePage <= this.totalPage){
-          this.iPageStart = (this.totalPage+1)-this.useShowPage;
-          this.maxShowPage = (this.iPageStart-1)+this.useShowPage;
-        }
-      }
-      this.iPage = [];
-      for(let i=this.iPageStart; i<=this.maxShowPage; i++){
-        this.iPage.push(i);
-      }
-    }else{
-      this.iPageStart = 1;
-      this.iPage = [];
-      for(let i=this.iPageStart; i<=this.useShowPage; i++){
-        this.iPage.push(i);
-      }
-    }
-  }
-
   PagePagination(){
     this.activePage = 1;
     this.nextPage = 2;
@@ -177,6 +134,37 @@ export class BookedTableAffComponent implements OnInit {
     let params = this.route.snapshot.paramMap;
     if(params.has('transactionId')){
       this.highlightId = +params.get('transactionId');
+    }
+  }
+
+  changePage(page:number){
+    this.activePage = page;
+    let link = '/user/affiliate/booked/table';
+    this.router.navigate([link], {queryParams:{page:page}});
+    // this.router.navigate([link], {queryParams:{page:page}});
+  }
+
+  pagination(){
+    if(this.activePage > this.useShowPage){
+      if(this.activePage+2 <= this.totalPage){
+        this.iPageStart = this.activePage-2;
+        this.maxShowPage = this.activePage+2;
+      }else{
+        if(this.activePage <= this.totalPage){
+          this.iPageStart = (this.totalPage+1)-this.useShowPage;
+          this.maxShowPage = (this.iPageStart-1)+this.useShowPage;
+        }
+      }
+      this.iPage = [];
+      for(let i=this.iPageStart; i<=this.maxShowPage; i++){
+        this.iPage.push(i);
+      }
+    }else{
+      this.iPageStart = 1;
+      this.iPage = [];
+      for(let i=this.iPageStart; i<=this.useShowPage; i++){
+        this.iPage.push(i);
+      }
     }
   }
 
