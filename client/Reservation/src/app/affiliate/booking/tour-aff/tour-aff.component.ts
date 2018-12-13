@@ -69,8 +69,8 @@ export class TourAffComponent implements OnInit {
 
   // 3. get data binding
   public getTourData() {
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Tour';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Tour';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Tour';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Tour';
     // let url = './../../../../assets/json/affiliate/tour/tour-summary.json';
 
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
@@ -92,7 +92,7 @@ export class TourAffComponent implements OnInit {
       this.barChartData = _getData.booked;
       this.tours = _getData.tours;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   ngOnInit() {

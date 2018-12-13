@@ -258,13 +258,13 @@ export class BookformAddRsvnComponent implements OnInit {
     /*======== Data to Save ========*/
     setAccountInfo(){
       let getAccount = sessionStorage.getItem('users');
+      console.log(getAccount);
       if(getAccount==null || getAccount==undefined || getAccount==''){
         this.accountInfo.token = '';
       }else{
         let account = JSON.parse(getAccount);
         this.accountInfo.token = account.data.token;
       }
-      this.accountInfo.token = "1652812936";
     }
 
     // Step 1 : Set tour data
@@ -691,8 +691,8 @@ export class BookformAddRsvnComponent implements OnInit {
     // Save to data service
     saveDataBooking(dataSave) {
 
-      let url = 'http://localhost:9000/api/Reservations/ReservationSaveBookingData';
-      // let url = 'http://api.tourinchiangmai.com/api/Reservations/ReservationSaveBookingData';
+      // let url = 'http://localhost:9000/api/Reservations/ReservationSaveBookingData';
+      let url = 'http://api.tourinchiangmai.com/api/Reservations/ReservationSaveBookingData';
 
       let options = new RequestOptions();
       let link = '/user/reservations/booked';

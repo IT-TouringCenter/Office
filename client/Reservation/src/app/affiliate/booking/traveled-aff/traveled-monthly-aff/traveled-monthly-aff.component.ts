@@ -76,8 +76,8 @@ export class TraveledMonthlyAffComponent implements OnInit {
 
   // 3. get data binding
   public getTraveledMonthlyData(){
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled/Monthly';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled/Monthly';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled/Monthly';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled/Monthly';
     let options = new RequestOptions();
 
     // set time
@@ -127,13 +127,13 @@ export class TraveledMonthlyAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('traveled-monthly-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   // 4. search data
   public searchData(){
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled/Monthly';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled/Monthly';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled/Monthly';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled/Monthly';
     let options = new RequestOptions();
 
     // get token from session
@@ -161,7 +161,7 @@ export class TraveledMonthlyAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('traveled-monthly-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   ngOnInit() {

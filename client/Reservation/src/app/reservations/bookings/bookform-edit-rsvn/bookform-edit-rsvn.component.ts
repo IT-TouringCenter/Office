@@ -312,6 +312,9 @@ export class BookformEditRsvnComponent implements OnInit {
     ------------------------------- */
     setAccountInfo(){
       let getAccount = sessionStorage.getItem('users');
+      console.log('-------------');
+      console.log(getAccount);
+      console.log('-------------');
       if(getAccount==null || getAccount==undefined || getAccount==''){
         this.accountInfo.id = 0;
         this.accountInfo.token = '';
@@ -555,6 +558,9 @@ export class BookformEditRsvnComponent implements OnInit {
 
     // Step 4 : Set data format
     dataToSave(params){
+      // Set user
+      this.setAccountInfo();
+
       // Set Date format
       let _date = new Date(this.tourInfo.tourTravelDateSelect); // edit only
       let _month = _date.getMonth();
@@ -734,11 +740,11 @@ export class BookformEditRsvnComponent implements OnInit {
     saveDataBooking(dataSave,params) {
       let url = '';
       if(params==2){
-        url = 'http://localhost:9000/api/Reservations/ReservationSaveBookingData';
-        // url = 'http://api.tourinchiangmai.com/api/Reservations/ReservationSaveBookingData';
+        // url = 'http://localhost:9000/api/Reservations/ReservationSaveBookingData';
+        url = 'http://api.tourinchiangmai.com/api/Reservations/ReservationSaveBookingData';
       }else if(params==1){
-        url = 'http://localhost:9000/api/Reservations/EditReservation';
-        // url = 'http://api.tourinchiangmai.com/api/Reservations/EditReservation';
+        // url = 'http://localhost:9000/api/Reservations/EditReservation';
+        url = 'http://api.tourinchiangmai.com/api/Reservations/EditReservation';
       }
 
       let options = new RequestOptions();

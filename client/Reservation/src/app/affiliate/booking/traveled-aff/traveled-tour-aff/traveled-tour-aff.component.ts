@@ -62,8 +62,8 @@ export class TraveledTourAffComponent implements OnInit {
 
   // get tour
   public getTour(){
-    let url = 'http://localhost:9000/api/Tours/GettravelData';
-    // let url = 'http://api.tourinchiangmai.com/api/Tours/GettravelData';
+    // let url = 'http://localhost:9000/api/Tours/GettravelData';
+    let url = 'http://api.tourinchiangmai.com/api/Tours/GettravelData';
     this.http.get(url)
                     .map(res => res.json())
                     .subscribe(
@@ -91,8 +91,8 @@ export class TraveledTourAffComponent implements OnInit {
 
   // 3. get data binding
   public getTraveledtravelData(){
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled/Tour';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled/Tour';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled/Tour';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled/Tour';
     let options = new RequestOptions();
 
     // get token from session
@@ -138,13 +138,13 @@ export class TraveledTourAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('traveled-tour-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   // 3. get data binding
   public searchData(){
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled/Tour';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled/Tour';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled/Tour';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled/Tour';
     let options = new RequestOptions();
 
     // get token from session
@@ -173,7 +173,7 @@ export class TraveledTourAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('traveled-tour-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   ngOnInit() {

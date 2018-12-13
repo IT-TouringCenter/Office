@@ -29,8 +29,8 @@ export class LoginUserComponent implements OnInit {
 
   // 1. Login
   login(){
-    let url = 'http://localhost:9000/api/Account/AccountLogin';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/AccountLogin';
+    // let url = 'http://localhost:9000/api/Account/AccountLogin';
+    let url = 'http://api.tourinchiangmai.com/api/Account/AccountLogin';
 
       let options = new RequestOptions();
       let dataSave = {

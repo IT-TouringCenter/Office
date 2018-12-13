@@ -80,8 +80,8 @@ export class TourMonthlyAffComponent implements OnInit {
 
   // get tour
   public getTour(){
-    let url = 'http://localhost:9000/api/Tours/GetTourData';
-    // let url = 'http://api.tourinchiangmai.com/api/Tours/GetTourData';
+    // let url = 'http://localhost:9000/api/Tours/GetTourData';
+    let url = 'http://api.tourinchiangmai.com/api/Tours/GetTourData';
     this.http.get(url)
                     .map(res => res.json())
                     .subscribe(
@@ -106,8 +106,8 @@ export class TourMonthlyAffComponent implements OnInit {
 
   // 3. get data binding
   public getTourMonthlyData() {
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Tour/Monthly';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Tour/Monthly';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Tour/Monthly';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Tour/Monthly';
     let options = new RequestOptions();
 
     // set time
@@ -143,13 +143,13 @@ export class TourMonthlyAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('tour-monthly-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   // 4. search data
   public searchData(){
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Tour/Monthly';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Tour/Monthly';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Tour/Monthly';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Tour/Monthly';
     let options = new RequestOptions();
 
     // get token from session
@@ -176,7 +176,7 @@ export class TourMonthlyAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('tour-monthly-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   ngOnInit() {

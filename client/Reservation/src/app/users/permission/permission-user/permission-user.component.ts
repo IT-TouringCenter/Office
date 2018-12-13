@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from "@angular/router";
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
 import "rxjs/Rx";
 
@@ -16,8 +15,7 @@ export class PermissionUserComponent implements OnInit {
 
   constructor(
     private http: Http,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) { }
 
   // get user storage
@@ -39,8 +37,8 @@ export class PermissionUserComponent implements OnInit {
     let token = getUser.data.token;
     let type = getUser.data.userType;
 
-    let url = 'http://localhost:9000/api/Account/AccountSessionLoginReturnType';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/AccountSessionLoginReturnType';
+    // let url = 'http://localhost:9000/api/Account/AccountSessionLoginReturnType';
+    let url = 'http://api.tourinchiangmai.com/api/Account/AccountSessionLoginReturnType';
 
     let checkLogin = {
       token: token,
@@ -48,27 +46,32 @@ export class PermissionUserComponent implements OnInit {
     }
 
     let options = new RequestOptions();
-    this.http.post(url, checkLogin, options)
+    return this.http.post(url, checkLogin, options)
                     .map(res => res.json())
                     .subscribe(
                       data => [
-                        sessionStorage.setItem('login',JSON.stringify(data)),
+                        // sessionStorage.setItem('login',JSON.stringify(data)),
+                        console.log(data.status),
+                        this.setUserLogin(data)
                       ],
                       err => [
                         console.log(err)
                       ]
                     );
-    setTimeout(()=>{
-      let _getData = JSON.parse(sessionStorage.getItem('login'));
+  }
 
-      if(_getData==null || _getData==undefined || _getData==""){
-        return;
-      }
-      this.userAccount = _getData;
-      this.userType = _getData.data[0].type;
+  // set user login
+  setUserLogin(userData){
+    if(userData==null || userData==undefined || userData==""){
+      this.router.navigate(['user/logout']);
+    }else if(userData.status==false){
+      this.router.navigate(['user/logout']);
+    }
 
-      this.checkPermission(this.userType);
-    }, 500);
+    this.userAccount = userData;
+    this.userType = userData.data[0].type;
+
+    this.checkPermission(this.userType);
   }
 
   // check user type (permission)
@@ -80,7 +83,7 @@ export class PermissionUserComponent implements OnInit {
       case "admin" : this.router.navigate(['user']); break;
       case "Manager" : this.router.navigate(['user']); break;
       case "Senior reservation" : this.router.navigate(['user/reservations']); break;
-      case "Reservation" : this.router.navigate(['user/login/reservations']); break;
+      case "Reservation" : this.router.navigate(['user/reservations']); break;
       case "Sale" : this.router.navigate(['user/login']); break;
       case "Online marketing" : this.router.navigate(['user/login']); break;
       case "Accounting" : this.router.navigate(['user/login']); break;

@@ -54,8 +54,8 @@ export class TraveledAffComponent implements OnInit {
 
   // 3. get data binding
   public getTraveledData() {
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled';
     // let url = './../../../../assets/json/affiliate/traveled/traveled-summary.json';
 
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
@@ -77,7 +77,7 @@ export class TraveledAffComponent implements OnInit {
       this.barChartData = _getData.booked;
       this.tours = _getData.tours;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   ngOnInit() {

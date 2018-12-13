@@ -8,6 +8,15 @@ class AccountRepository{
     }
 
 	// Get account by token
+	public function GetAccountByToken($token){
+		$result = \DB::table('accounts')
+						->where('token',$token)
+						->where('is_active',1)
+						->get();
+		return $result;
+    }
+
+	// Get account by token & type
 	public function GetAccountByTokenAndType($token,$typeId){
 		$result = \DB::table('accounts')
                     ->where('is_active',1)

@@ -52,8 +52,8 @@ export class BookformEditRsvnService {
 
   // get booking form edit
   getBookingFormEdit(): Observable<BookformEditRsvnInterface.RootObject>{
-    this._getBookingFromEdit = "http://localhost:9000/api/Reservations/GetBookingFormEdit/"+this.transactionId;
-    // this._getBookingFromEdit = "http://api.tourinchiangmai.com/api/Reservations/GetBookingFormEdit/"+this.transactionId;
+    // this._getBookingFromEdit = "http://localhost:9000/api/Reservations/GetBookingFormEdit/"+this.transactionId;
+    this._getBookingFromEdit = "http://api.tourinchiangmai.com/api/Reservations/GetBookingFormEdit/"+this.transactionId;
     return this.http
       .get(this._getBookingFromEdit)
       .map((response: Response) => {

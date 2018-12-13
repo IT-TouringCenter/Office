@@ -52,8 +52,8 @@ export class BookedAffComponent implements OnInit {
   // 3. switch button
   // 3.1 get all booked data
   public allBooked():void {
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/Summary';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/Summary';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/Summary';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/Summary';
     // let url = './../../../../assets/json/affiliate/booked/booked-summary-all.json';
 
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
@@ -74,13 +74,13 @@ export class BookedAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('booked-sum-all'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   // 3.2 get this month booked data
   public monthBooked():void {
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/Summary/Month';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/Summary/Month';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/Summary/Month';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/Summary/Month';
     // let url = './../../../../assets/json/affiliate/booked/booked-summary-month.json';
 
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
@@ -101,13 +101,13 @@ export class BookedAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('booked-sum-month'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   // 3.3 get this year booked data
   public yearBooked():void {
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/Summary/Year';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/Summary/Year';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/Summary/Year';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/Summary/Year';
     // let url = './../../../../assets/json/affiliate/booked/booked-summary-year.json';
 
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
@@ -128,7 +128,7 @@ export class BookedAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('booked-sum-year'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   ngOnInit() {

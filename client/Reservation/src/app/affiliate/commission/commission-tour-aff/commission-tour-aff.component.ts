@@ -60,8 +60,8 @@ export class CommissionTourAffComponent implements OnInit {
 
   // 3. get data binding
   public getCommissionTourData() {
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission/Tour';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/Tour';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission/Tour';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/Tour';
     let options = new RequestOptions();
 
     // set time
@@ -92,7 +92,7 @@ export class CommissionTourAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('commission-tour-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   ngOnInit() {

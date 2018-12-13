@@ -69,8 +69,8 @@ export class RegisterConfirmUserComponent implements OnInit {
 
   // 3. Confirm register (Save)
   confirmRegister(){
-    let url = 'http://localhost:9000/api/Account/Register/AccountRegisterConfirm';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/Register/AccountRegisterConfirm';
+    // let url = 'http://localhost:9000/api/Account/Register/AccountRegisterConfirm';
+    let url = 'http://api.tourinchiangmai.com/api/Account/Register/AccountRegisterConfirm';
 
     let options = new RequestOptions();
     let dataSave = {
@@ -103,8 +103,8 @@ export class RegisterConfirmUserComponent implements OnInit {
 
   // 5. Send confirm code again
   sendConfirmCodeAgain(){
-    let url = 'http://localhost:9000/api/Account/Register/AccountRegisterConfirmCodeAgain';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/Register/AccountRegisterConfirmCodeAgain';
+    // let url = 'http://localhost:9000/api/Account/Register/AccountRegisterConfirmCodeAgain';
+    let url = 'http://api.tourinchiangmai.com/api/Account/Register/AccountRegisterConfirmCodeAgain';
 
     let options = new RequestOptions();
     let dataSave = {

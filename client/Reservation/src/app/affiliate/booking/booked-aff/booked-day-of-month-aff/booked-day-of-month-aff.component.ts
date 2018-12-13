@@ -108,8 +108,8 @@ export class BookedDayOfMonthAffComponent implements OnInit {
 
   // 3. get data binding
   public getBookedDayOfMonthData():void {
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/DaysOfMonth';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/DaysOfMonth';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/DaysOfMonth';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/DaysOfMonth';
     let options = new RequestOptions();
 
     // set time
@@ -153,8 +153,8 @@ export class BookedDayOfMonthAffComponent implements OnInit {
 
   // 4. search data
   public searchData(){
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/DaysOfMonth';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/DaysOfMonth';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/DaysOfMonth';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/DaysOfMonth';
     let options = new RequestOptions();
 
     // get token from session

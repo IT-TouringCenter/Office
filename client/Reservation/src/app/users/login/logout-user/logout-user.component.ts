@@ -29,8 +29,8 @@ export class LogoutUserComponent implements OnInit {
     let data = JSON.parse(sessionData);
 
     // Call API
-    let url = 'http://localhost:9000/api/Account/AccountLogout';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/AccountLogout';
+    // let url = 'http://localhost:9000/api/Account/AccountLogout';
+    let url = 'http://api.tourinchiangmai.com/api/Account/AccountLogout';
 
       let options = new RequestOptions();
       let dataLogout = {
@@ -53,6 +53,7 @@ export class LogoutUserComponent implements OnInit {
   // 2. Clear session
   clearSession(data){
     sessionStorage.removeItem('users');
+    sessionStorage.removeItem('login');
     this.router.navigate(['user/login']);
   }
 

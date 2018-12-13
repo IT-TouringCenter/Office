@@ -22,8 +22,8 @@ export class ForceLogoutUserService {
 
   // get booking form edit
   getAccountData(): Observable<ForceLogoutUserInterface.RootObject>{
-    this._getAccountData = "http://localhost:9000/api/Account/GetAccountForceLogout/"+this.accountToken;
-    // this._getAccountData = "http://api.tourinchiangmai.com/api/Account/GetAccountForceLogout/"+this.accountToken;
+    // this._getAccountData = "http://localhost:9000/api/Account/GetAccountForceLogout/"+this.accountToken;
+    this._getAccountData = "http://api.tourinchiangmai.com/api/Account/GetAccountForceLogout/"+this.accountToken;
     return this.http
       .get(this._getAccountData)
       .map((response: Response) => {

@@ -49,8 +49,8 @@ export class CommissionAffComponent implements OnInit {
 
   // 3. get data binding
   public getCommissionData() {
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission/Summary';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/Summary';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission/Summary';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/Summary';
     // let url = './../../../../assets/json/affiliate/commission/commission.json';
 
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
@@ -72,7 +72,7 @@ export class CommissionAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('commission-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   ngOnInit() {

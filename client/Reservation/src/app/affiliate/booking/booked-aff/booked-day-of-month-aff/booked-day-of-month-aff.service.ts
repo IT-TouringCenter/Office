@@ -22,8 +22,8 @@ export class BookedDayOfMonthAffService {
   // search book day of month
   postBookedDayOfMonth(data){
     let options = new RequestOptions();
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/DaysOfMonth';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/DaysOfMonth';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/DaysOfMonth';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/DaysOfMonth';
     return this._http.post(url, data).map(result => result);
   }
 }

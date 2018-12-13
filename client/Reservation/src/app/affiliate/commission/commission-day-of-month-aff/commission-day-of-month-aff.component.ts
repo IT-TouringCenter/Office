@@ -109,8 +109,8 @@ export class CommissionDayOfMonthAffComponent implements OnInit {
 
   // 3. get data binding
   public getCommissionDayOfMonthData() {
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission/DaysOfMonth';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/DaysOfMonth';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission/DaysOfMonth';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/DaysOfMonth';
     let options = new RequestOptions();
 
     // set time
@@ -148,13 +148,13 @@ export class CommissionDayOfMonthAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('commission-day-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   // 4. search data
   public searchData(){
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission/DaysOfMonth';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/DaysOfMonth';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission/DaysOfMonth';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/DaysOfMonth';
     let options = new RequestOptions();
 
     // get token from session
@@ -181,7 +181,7 @@ export class CommissionDayOfMonthAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('commission-day-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   ngOnInit() {

@@ -109,8 +109,8 @@ export class TraveledDayOfMonthAffComponent implements OnInit {
 
   // 3. get data binding
   public getTraveledDayOfMonthData(){
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled/DaysOfMonth';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled/DaysOfMonth';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled/DaysOfMonth';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled/DaysOfMonth';
     let options = new RequestOptions();
 
     // set time
@@ -150,13 +150,13 @@ export class TraveledDayOfMonthAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('traveled-day-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   // 4. search data
   public searchData(){
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled/DaysOfMonth';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled/DaysOfMonth';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled/DaysOfMonth';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled/DaysOfMonth';
     let options = new RequestOptions();
 
     // get token from session
@@ -184,7 +184,7 @@ export class TraveledDayOfMonthAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('traveled-day-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   ngOnInit() {

@@ -97,8 +97,8 @@ export class HomeAffComponent implements OnInit {
 
   // 2. get data dashboard
   public getDataDashboard(): void{
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate';
     // let url = './../../../../assets/json/affiliate/dashboard/dashboard.json';
 
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
@@ -122,13 +122,13 @@ export class HomeAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('dashboard-data'));
       console.log(_getData);
       this.dataDashboard = _getData;
-    }, 500);
+    }, 1000);
   }
 
   // 3. get data booked statistics
   public getDataBooked(): void{
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked';
     // let url = './../../../../assets/json/affiliate/dashboard/dashboard-booked.json';
 
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
@@ -163,13 +163,13 @@ export class HomeAffComponent implements OnInit {
     setTimeout(()=>{
       let _getData = JSON.parse(sessionStorage.getItem('booking-data'));
       this.barChartData = _getData.bookedStatistics;
-    }, 500);
+    }, 1000);
   }
 
   // 4. get data commission
   public getDataCommission(): void{
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission';
     // let url = './../../../../assets/json/affiliate/dashboard/dashboard-commission.json';
 
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
@@ -206,7 +206,7 @@ export class HomeAffComponent implements OnInit {
     setTimeout(()=>{
       let _getData = JSON.parse(sessionStorage.getItem('commission-data'));
       this.lineChartData = _getData.commission;
-    }, 500);
+    }, 1000);
   }
 
   ngOnInit() {

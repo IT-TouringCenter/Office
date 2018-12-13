@@ -80,8 +80,9 @@ class TransactionClass{
 	// Check account empty
 	public function CheckAccountEmpty($accountInfo){
 		$token = array_get($accountInfo,'token');
+		// return $token;
 		$getAccount = $this->AccountRepo->GetAccountByToken($token);
-
+		// return $getAccount;
 		$account = new Transaction;
 		if($getAccount){
 			$account->id = $getAccount[0]->id;

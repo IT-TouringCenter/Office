@@ -76,8 +76,8 @@ export class CommissionMonthlyAffComponent implements OnInit {
 
   // 3. get data binding
   public getCommissionMonthlyData() {
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission/Monthly';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/Monthly';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission/Monthly';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/Monthly';
     let options = new RequestOptions();
 
     // set time
@@ -114,13 +114,13 @@ export class CommissionMonthlyAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('commission-monthly-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   // 4. search data
   public searchData(){
-    let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission/Monthly';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/Monthly';
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Commission/Monthly';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/Monthly';
     let options = new RequestOptions();
 
     // get token from session
@@ -147,7 +147,7 @@ export class CommissionMonthlyAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('commission-monthly-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 500);
+    }, 1000);
   }
 
   ngOnInit() {

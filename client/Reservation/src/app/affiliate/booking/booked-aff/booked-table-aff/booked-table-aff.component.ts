@@ -62,8 +62,8 @@ export class BookedTableAffComponent implements OnInit {
 
   // JSON booked stat from API
   getInvoiceFromData(): void{
-    let url = "http://localhost:9000/api/reservations/GetBookedByAccountId";
-    // let url = "http://api.tourinchiangmai.com/api/reservations/GetBookedByAccountId";
+    // let url = "http://localhost:9000/api/reservations/GetBookedByAccountId";
+    let url = "http://api.tourinchiangmai.com/api/reservations/GetBookedByAccountId";
 
     // set data to save
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
@@ -88,7 +88,7 @@ export class BookedTableAffComponent implements OnInit {
       this.getBooked = JSON.parse(sessionStorage.getItem('booked-table'));
       this.lengthDataFromGet(this.getBooked);
       this.PagePagination();
-    }, 500);
+    }, 1000);
   }
 
   // Length data

@@ -16,8 +16,8 @@ export class BookedTableAffService {
 
   // get data booking
   getBookedData(): Observable<BookedTableAffInterface>{
-    this._getBooked = "http://localhost:9000/api/reservations/GetBookedByAccountId";
-    // this._getBooked = "http://api.tourinchiangmai.com/api/reservations/GetBookedByAccountId";
+    // this._getBooked = "http://localhost:9000/api/reservations/GetBookedByAccountId";
+    this._getBooked = "http://api.tourinchiangmai.com/api/reservations/GetBookedByAccountId";
 
     return this.http
       .get(this._getBooked)

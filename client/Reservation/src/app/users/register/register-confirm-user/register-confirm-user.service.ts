@@ -22,8 +22,8 @@ export class RegisterConfirmUserService {
 
   // get booking form edit
   getAccountData(): Observable<RegisterConfirmUserInterface.RootObject>{
-    this._getAccountData = "http://localhost:9000/api/Account/Register/GetAccountRegisterConfirm/"+this.accountToken;
-    // this._getAccountData = "http://api.tourinchiangmai.com/api/Account/Register/GetAccountRegisterConfirm/"+this.accountToken;
+    // this._getAccountData = "http://localhost:9000/api/Account/Register/GetAccountRegisterConfirm/"+this.accountToken;
+    this._getAccountData = "http://api.tourinchiangmai.com/api/Account/Register/GetAccountRegisterConfirm/"+this.accountToken;
     return this.http
       .get(this._getAccountData)
       .map((response: Response) => {
