@@ -23,7 +23,6 @@ export class PermissionUserComponent implements OnInit {
     let getUser = JSON.parse(sessionStorage.getItem('users'));
 
     if(getUser==null || getUser==undefined || getUser==''){
-      console.log('none');
       this.router.navigate(['user/login']);
       return;
     }
@@ -51,7 +50,6 @@ export class PermissionUserComponent implements OnInit {
                     .subscribe(
                       data => [
                         // sessionStorage.setItem('login',JSON.stringify(data)),
-                        console.log(data.status),
                         this.setUserLogin(data)
                       ],
                       err => [

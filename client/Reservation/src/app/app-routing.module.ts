@@ -74,6 +74,7 @@ const routes: Routes = [
     path: 'user/reservations/invoice/:transactionId',
     component: InvoiceRsvnComponent
   },
+
   // Login
   {
     path: 'user',
@@ -119,6 +120,7 @@ const routes: Routes = [
     path: 'user/forgot-password',
     component: ForgotPasswordUserComponent
   },
+
   // Affiliate
   {
     path: 'user/affiliate',

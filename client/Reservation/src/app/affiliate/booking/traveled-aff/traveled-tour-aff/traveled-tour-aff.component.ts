@@ -62,19 +62,24 @@ export class TraveledTourAffComponent implements OnInit {
 
   // get tour
   public getTour(){
-    // let url = 'http://localhost:9000/api/Tours/GettravelData';
-    let url = 'http://api.tourinchiangmai.com/api/Tours/GettravelData';
+    // let url = 'http://localhost:9000/api/Tours/GetTourData';
+    let url = 'http://api.tourinchiangmai.com/api/Tours/GetTourData';
     this.http.get(url)
                     .map(res => res.json())
                     .subscribe(
                       data => [
                         console.log(data),
                         this.tours = data,
-                        // sessionStorage.setItem('traveled-tour-chart',JSON.stringify(data))
+                        // sessionStorage.setItem('traveled-tour',JSON.stringify(data))
                       ],
                       err => {console.log(err)}
                     );
     console.log(this.travelData.tourId);
+    // setTimeout(()=>{
+    //   let _getData = JSON.parse(sessionStorage.getItem('traveled-tour-chart'));
+    //   this.barChartData = _getData.booked;
+    //   this.amount = _getData.amount;
+    // }, 500);
   }
 
   // 1. print
@@ -138,7 +143,7 @@ export class TraveledTourAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('traveled-tour-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 1000);
+    }, 500);
   }
 
   // 3. get data binding
@@ -173,7 +178,7 @@ export class TraveledTourAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('traveled-tour-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 1000);
+    }, 500);
   }
 
   ngOnInit() {

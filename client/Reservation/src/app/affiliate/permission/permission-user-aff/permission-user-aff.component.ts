@@ -23,7 +23,6 @@ export class PermissionUserAffComponent implements OnInit {
     let getUser = JSON.parse(sessionStorage.getItem('users'));
 
     if(getUser==null || getUser==undefined || getUser==''){
-      console.log('none');
       this.router.navigate(['user/login']);
       return;
     }
@@ -50,8 +49,7 @@ export class PermissionUserAffComponent implements OnInit {
                     .map(res => res.json())
                     .subscribe(
                       data => [
-                        // sessionStorage.setItem('login',JSON.stringify(data)),
-                        console.log(data.status),
+                        sessionStorage.setItem('login',JSON.stringify(data)),
                         this.setUserLogin(data)
                       ],
                       err => [
@@ -71,14 +69,18 @@ export class PermissionUserAffComponent implements OnInit {
     this.userAccount = userData;
     this.userType = userData.data[0].type;
 
-    this.checkPermission(this.userType);
+    // condition init permission
+    let getLogin = JSON.parse(sessionStorage.getItem('login'));
+    if(getLogin.data[0].type=="Affiliate"){
+      console.log('Condition affiliate.');
+      this.checkPermission(this.userType);
+    }
+    
   }
 
   // check user type (permission)
   checkPermission(userType){
-    if(userType=="Affiliate"){
-      
-    }else{
+    if(userType!=="Affiliate"){
       this.router.navigate(['user/logout']);
     }
   }

@@ -43,7 +43,7 @@ class DashboardAffiliateClass{
 
         $booked = new Transaction;
         $booked->id = 0;
-        $booked->amount = count($getBooked);
+        $booked->amount = number_format(count($getBooked));
 
         $this->data->booked = $booked;
     }
@@ -54,7 +54,7 @@ class DashboardAffiliateClass{
 
         $traveled = new Transaction;
         $traveled->id = 0;
-        $traveled->amount = count($getTraveled);
+        $traveled->amount = number_format(count($getTraveled));
 
         $this->data->traveled = $traveled;
     }
@@ -65,7 +65,7 @@ class DashboardAffiliateClass{
 
         $commission = new Transaction;
         $commission->id = 0;
-        $commission->amount = $getCommission[0]->commission_amount;
+        $commission->amount = number_format($getCommission[0]->commission_amount);
 
         $this->data->commission = $commission;
     }

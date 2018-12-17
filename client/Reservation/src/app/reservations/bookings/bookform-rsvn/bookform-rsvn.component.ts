@@ -15,8 +15,6 @@ import { BookformRsvnInterface } from './bookform-rsvn-interface';
 })
 export class BookformRsvnComponent implements OnInit {
 
-  userId = '1084873764';
-
   _getBookingForm: BookformRsvnInterface.RootObject;
   public paymentCollectColor = '';
 

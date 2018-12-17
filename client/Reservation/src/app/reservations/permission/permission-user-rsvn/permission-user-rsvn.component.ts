@@ -23,7 +23,6 @@ export class PermissionUserRsvnComponent implements OnInit {
     let getUser = JSON.parse(sessionStorage.getItem('users'));
 
     if(getUser==null || getUser==undefined || getUser==''){
-      console.log('none');
       this.router.navigate(['user/login']);
       return;
     }
@@ -50,8 +49,7 @@ export class PermissionUserRsvnComponent implements OnInit {
                     .map(res => res.json())
                     .subscribe(
                       data => [
-                        // sessionStorage.setItem('login',JSON.stringify(data)),
-                        console.log(data.status),
+                        sessionStorage.setItem('login',JSON.stringify(data)),
                         this.setUserLogin(data)
                       ],
                       err => [
@@ -71,14 +69,21 @@ export class PermissionUserRsvnComponent implements OnInit {
     this.userAccount = userData;
     this.userType = userData.data[0].type;
 
-    this.checkPermission(this.userType);
+    // condition init permission
+    let getLogin = JSON.parse(sessionStorage.getItem('login'));
+    if(getLogin.data[0].type=="Reservation"){
+      console.log('Condition reservation.');
+      this.checkPermission(this.userType);
+    }else if(getLogin.data[0].type=="Senior reservation"){
+      console.log('Condition senior reservation.');
+      this.checkPermission(this.userType);
+    }
+
   }
 
   // check user type (permission)
   checkPermission(userType){
-    if(userType=="Reservation" || userType=="Senior reservation"){
-      
-    }else{
+    if(userType!=="Reservation" && userType!=="Senior reservation"){
       this.router.navigate(['user/logout']);
     }
   }

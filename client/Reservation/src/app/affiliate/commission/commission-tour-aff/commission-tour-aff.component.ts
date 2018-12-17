@@ -92,7 +92,7 @@ export class CommissionTourAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('commission-tour-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 1000);
+    }, 500);
   }
 
   ngOnInit() {

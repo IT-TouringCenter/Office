@@ -100,7 +100,7 @@ export class ResetPasswordUserComponent implements OnInit {
     // Call API
     if(this.data.isMismatch==false){
       // let url = 'http://localhost:9000/api/Account/Setting/AccountResetPassword';
-      let url = 'http://api.tourinchiangmai.com/Account/Setting/AccountResetPassword';
+      let url = 'http://api.tourinchiangmai.com/api/Account/Setting/AccountResetPassword';
 
       let options = new RequestOptions();
       let accountData = {

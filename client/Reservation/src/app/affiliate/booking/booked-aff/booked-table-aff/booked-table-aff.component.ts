@@ -88,7 +88,7 @@ export class BookedTableAffComponent implements OnInit {
       this.getBooked = JSON.parse(sessionStorage.getItem('booked-table'));
       this.lengthDataFromGet(this.getBooked);
       this.PagePagination();
-    }, 1000);
+    }, 500);
   }
 
   // Length data

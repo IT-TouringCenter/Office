@@ -92,7 +92,7 @@ export class TourAffComponent implements OnInit {
       this.barChartData = _getData.booked;
       this.tours = _getData.tours;
       this.amount = _getData.amount;
-    }, 1000);
+    }, 500);
   }
 
   ngOnInit() {

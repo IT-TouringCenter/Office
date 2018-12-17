@@ -62,7 +62,7 @@ Route::get('/', 'WelcomeController@index');
 /*----------- Tour (End) ---------------------------------------*/
 
 /*----------- Account (Start) ----------------------------------*/
-	Route::post('api/Account/GetAccountByToken', 'Accounts\Accountcontroller@GetAccountByToken');
+	Route::post('api/Account/GetAccountByToken', 'Accounts\AccountController@GetAccountByToken');
 	// Register
 	Route::post('api/Account/Register/CheckEmailRepeat', 'Accounts\Register\AccountRegisterController@CheckEmailRepeat');
 	Route::post('api/Account/Register/AccountRegister', 'Accounts\Register\AccountRegisterController@AccountRegister');

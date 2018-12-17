@@ -148,7 +148,7 @@ export class BookedDayOfMonthAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('booked-day-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 1000);
+    }, 500);
   }
 
   // 4. search data

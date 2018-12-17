@@ -150,7 +150,7 @@ export class TraveledDayOfMonthAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('traveled-day-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 1000);
+    }, 500);
   }
 
   // 4. search data
@@ -184,7 +184,7 @@ export class TraveledDayOfMonthAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('traveled-day-chart'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 1000);
+    }, 500);
   }
 
   ngOnInit() {

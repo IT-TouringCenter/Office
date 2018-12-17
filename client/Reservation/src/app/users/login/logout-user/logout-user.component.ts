@@ -52,8 +52,9 @@ export class LogoutUserComponent implements OnInit {
 
   // 2. Clear session
   clearSession(data){
-    sessionStorage.removeItem('users');
-    sessionStorage.removeItem('login');
+    // sessionStorage.removeItem('users');
+    // sessionStorage.removeItem('login');
+    sessionStorage.clear();
     this.router.navigate(['user/login']);
   }
 

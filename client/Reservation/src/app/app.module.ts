@@ -14,6 +14,7 @@ import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MatSelectSearchComponent } from './material/mat-select-search/mat-select-search.component';
+
 // Reservations
 import { HomeRsvnComponent } from './reservations/home-rsvn/home-rsvn.component';
 import { BookedRsvnComponent } from './reservations/bookings/booked-rsvn/booked-rsvn.component';
@@ -71,6 +72,15 @@ import { BookedTableAffComponent } from './affiliate/booking/booked-aff/booked-t
 import { PermissionUserComponent } from './users/permission/permission-user/permission-user.component';
 import { PermissionUserRsvnComponent } from './reservations/permission/permission-user-rsvn/permission-user-rsvn.component';
 import { PermissionUserAffComponent } from './affiliate/permission/permission-user-aff/permission-user-aff.component';
+import { ManageUserActiveAdminComponent } from './admin/manage-user/manage-user-active-admin/manage-user-active-admin.component';
+import { ManageUserAddAdminComponent } from './admin/manage-user/manage-user-add-admin/manage-user-add-admin.component';
+import { ManageUserDeleteAdminComponent } from './admin/manage-user/manage-user-delete-admin/manage-user-delete-admin.component';
+import { ManageUserEditAdminComponent } from './admin/manage-user/manage-user-edit-admin/manage-user-edit-admin.component';
+import { HomeAdminComponent } from './admin/home/home-admin/home-admin.component';
+import { HeaderAdminComponent } from './admin/commons/header-admin/header-admin.component';
+import { MenuBarAdminComponent } from './admin/commons/header-admin/menu-bar-admin/menu-bar-admin.component';
+import { MenuSidebarAdminComponent } from './admin/commons/header-admin/menu-sidebar-admin/menu-sidebar-admin.component';
+import { PermissionAdminComponent } from './admin/permission/permission-admin/permission-admin.component';
 
 @NgModule({
   declarations: [
@@ -126,8 +136,17 @@ import { PermissionUserAffComponent } from './affiliate/permission/permission-us
     TraveledTourAffComponent,
     BookedTableAffComponent,
     PermissionUserComponent,
+    PermissionUserAffComponent,
     PermissionUserRsvnComponent,
-    PermissionUserAffComponent
+    ManageUserActiveAdminComponent,
+    ManageUserAddAdminComponent,
+    ManageUserDeleteAdminComponent,
+    ManageUserEditAdminComponent,
+    HomeAdminComponent,
+    HeaderAdminComponent,
+    MenuBarAdminComponent,
+    MenuSidebarAdminComponent,
+    PermissionAdminComponent
   ],
   imports: [
     BrowserModule,

@@ -74,7 +74,7 @@ export class BookedAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('booked-sum-all'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 1000);
+    }, 500);
   }
 
   // 3.2 get this month booked data
@@ -101,7 +101,7 @@ export class BookedAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('booked-sum-month'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 1000);
+    }, 500);
   }
 
   // 3.3 get this year booked data
@@ -128,7 +128,7 @@ export class BookedAffComponent implements OnInit {
       let _getData = JSON.parse(sessionStorage.getItem('booked-sum-year'));
       this.barChartData = _getData.booked;
       this.amount = _getData.amount;
-    }, 1000);
+    }, 500);
   }
 
   ngOnInit() {
