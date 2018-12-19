@@ -50,11 +50,11 @@
           </tr>
           <tr *ngFor="let label of barChartLabels; let i=index">
             <td style="text-align:center; width:50%;border-right:#cacaca solid 1px;"><small>{{label}}</small></td>
-            <td *ngFor="let data of barChartData" style="text-align:center;"><small>{{data.data[i]}}</small></td>
+            <td *ngFor="let data of barChartData" style="text-align:center;"><small>{{data.data[i] | number}}</small></td>
           </tr>
           <tr style="background: #e4e4e4; border: #cacaca solid 1px;">
             <th style="text-align:center; width:50%;border-right:#cacaca solid 1px;">Total</th>
-            <th style="text-align:center;">{{amount}}</th>
+            <th style="text-align:center;">{{amount | number}}</th>
           </tr>
         </table>
       </div>

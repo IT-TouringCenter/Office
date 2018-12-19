@@ -75,8 +75,8 @@ export class PermissionUserComponent implements OnInit {
   // check user type (permission)
   checkPermission(userType){
     switch(userType){
-      case "User" : this.router.navigate(['user']); break;
-      case "Member" : this.router.navigate(['user']); break;
+      case "User" : this.router.navigate(['http://tour-in-chiangmai.com']); break;
+      case "Member" : this.router.navigate(['http://tour-in-chiangmai.com']); break;
       case "Affiliate" : this.router.navigate(['user/affiliate']); break;
       case "admin" : this.router.navigate(['user']); break;
       case "Manager" : this.router.navigate(['user']); break;

@@ -87,7 +87,7 @@ class DashboardAffiliateTourMonthlyClass{
 
         $res = new Transaction;
         $res->data = $result;
-        $res->label = 'Booked : '.$year;
+        $res->label = 'Booked';
         $res->total = $sum;
 
         array_push($this->bookedData,$res);
@@ -115,7 +115,7 @@ class DashboardAffiliateTourMonthlyClass{
 
         $res = new Transaction;
         $res->data = $result;
-        $res->label = 'Traveled : '.$year;
+        $res->label = 'Traveled';
         $res->total = $sum;
         
         array_push($this->bookedData,$res);

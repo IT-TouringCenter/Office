@@ -70,15 +70,7 @@ export class PermissionUserRsvnComponent implements OnInit {
     this.userType = userData.data[0].type;
 
     // condition init permission
-    let getLogin = JSON.parse(sessionStorage.getItem('login'));
-    if(getLogin.data[0].type=="Reservation"){
-      console.log('Condition reservation.');
-      this.checkPermission(this.userType);
-    }else if(getLogin.data[0].type=="Senior reservation"){
-      console.log('Condition senior reservation.');
-      this.checkPermission(this.userType);
-    }
-
+    this.checkPermission(this.userType);
   }
 
   // check user type (permission)

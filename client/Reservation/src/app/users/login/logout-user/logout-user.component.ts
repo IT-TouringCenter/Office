@@ -26,6 +26,11 @@ export class LogoutUserComponent implements OnInit {
   logout(){
     // Get session
     let sessionData = sessionStorage.getItem('users');
+
+    if(sessionData==null || sessionData==undefined || sessionData==""){
+      this.clearSession(0);
+    }
+
     let data = JSON.parse(sessionData);
 
     // Call API
@@ -45,7 +50,8 @@ export class LogoutUserComponent implements OnInit {
                           this.clearSession(data)
                         ],
                         err => [
-                          console.log(err)
+                          console.log(err),
+                          this.clearSession(0)
                         ]
                       );
   }

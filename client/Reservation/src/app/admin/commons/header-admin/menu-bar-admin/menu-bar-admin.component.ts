@@ -9,7 +9,17 @@ export class MenuBarAdminComponent implements OnInit {
 
   constructor() { }
 
+  // none active menu
+  nonActiveMenu(){
+    sessionStorage.setItem('menu',JSON.stringify(0));
+  }
+
+  toggleSidebar(){
+    
+  }
+
   ngOnInit() {
+    
   }
 
 }

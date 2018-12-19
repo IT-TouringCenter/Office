@@ -50,6 +50,7 @@ import { CheckLogoutUserComponent } from './users/logout/check-logout-user/check
 import { ChartsModule } from 'ng2-charts';
 
 // Affiliate
+import { TemplateComponent } from './template/template/template.component';
 import { HomeAffComponent } from './affiliate/home/home-aff/home-aff.component';
 import { BookedAffComponent } from './affiliate/booking/booked-aff/booked-aff.component';
 import { CommissionAffComponent } from './affiliate/commission/commission-aff/commission-aff.component';
@@ -81,6 +82,7 @@ import { HeaderAdminComponent } from './admin/commons/header-admin/header-admin.
 import { MenuBarAdminComponent } from './admin/commons/header-admin/menu-bar-admin/menu-bar-admin.component';
 import { MenuSidebarAdminComponent } from './admin/commons/header-admin/menu-sidebar-admin/menu-sidebar-admin.component';
 import { PermissionAdminComponent } from './admin/permission/permission-admin/permission-admin.component';
+import { ManageUserAdminComponent } from './admin/manage-user/manage-user-admin/manage-user-admin.component';
 
 @NgModule({
   declarations: [
@@ -146,7 +148,9 @@ import { PermissionAdminComponent } from './admin/permission/permission-admin/pe
     HeaderAdminComponent,
     MenuBarAdminComponent,
     MenuSidebarAdminComponent,
-    PermissionAdminComponent
+    PermissionAdminComponent,
+    TemplateComponent,
+    ManageUserAdminComponent,
   ],
   imports: [
     BrowserModule,

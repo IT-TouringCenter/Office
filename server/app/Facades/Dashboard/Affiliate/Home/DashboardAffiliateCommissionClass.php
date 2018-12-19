@@ -72,7 +72,7 @@ class DashboardAffiliateCommissionClass{
 
         $booked = new Transaction;
         $booked->data = $commissionArr;
-        $booked->label = "Booked";
+        $booked->label = "Commission";
         $booked->total = $total;
 
         array_push($this->commission,$booked);

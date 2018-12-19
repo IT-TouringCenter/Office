@@ -88,7 +88,6 @@ class DashboardAffiliateRepository{
                     ->where('acd.travel_date','like','%-'.$month.'-%')
                     ->where('acd.is_travel',1)
                     ->where('acd.is_active',1)
-                    // ->where('tt.tour_travel_date','like','% '.$month.' %')
                     ->where('tt.is_travel',1)
                     ->where('tt.is_cancel',0)
                     ->where('tt.is_active',1)

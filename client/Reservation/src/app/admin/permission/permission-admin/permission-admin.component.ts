@@ -70,12 +70,8 @@ export class PermissionAdminComponent implements OnInit {
     this.userType = userData.data[0].type;
 
     // condition init permission
-    let getLogin = JSON.parse(sessionStorage.getItem('login'));
-    if(getLogin.data[0].type=="Admin"){
-      console.log('Condition admin.');
-      this.checkPermission(this.userType);
-    }
-
+    this.checkPermission(this.userType);
+  
   }
 
   // check user type (permission)

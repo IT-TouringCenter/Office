@@ -1,3 +1,14 @@
-<p>
-  menu-bar-admin works!
-</p>
+<header class="header black-bg" id="header-block">
+  <div class="sidebar-toggle-box">
+    <div class="fa fa-bars tooltips" (click)="toggleSidebar()" data-placement="right"></div>
+  </div>
+  <a href="/#/user/admin" (click)="nonActiveMenu()" class="logo"><b>Touring Center</b></a>
+
+  <div id="top_menu" class="pull-right">
+    <div class="nav top-menu">
+      <ul class="nav top-menu">
+        <li><a class="logout" href="/#/user/logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</header>

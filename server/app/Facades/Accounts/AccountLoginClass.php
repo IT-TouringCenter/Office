@@ -242,7 +242,7 @@ class AccountLoginClass{
                         <p class='row-space' style='padding: 10px 0 10px 0; line-height: 2;'>ขณะนี้บัญชี ".array_get($data,'username')." มีการลงชื่อเข้าใช้งานระบบในเวลา ".array_get($login,'loginDateTime')." โปรดตรวจสอบให้แน่ชัดว่าคุณลงชื่อเข้าใช้งานจริง หากไม่ใช่ให้ทำการลงชื่อออกโดยการใช้โค้ด <u>".array_get($login,'logoutCode')."</u> นี้ในการอ้างอิงเพื่อยุติการใช้งานโดยทันที</p>
                         <p class='text-center color-red row-space' style='text-align: center; padding: 10px 0 10px 0; color: red;'>** โค้ดนี้จะมีอายุการใช้งานได้ถึง ".$logoutCodeExpired." **</p>
                         <p class='row-space text-center' style='text-align: center; padding: 10px 0 10px 0;'>
-                            <a href='http://tour-in-chiangmai.com' style='min-width: 100px; cursor: pointer; color: white; text-decoration: none;'>
+                            <a href='http://dev.tourinchiangmai.com/#/user/force-logout/".array_get($data,'token')."' style='min-width: 100px; cursor: pointer; color: white; text-decoration: none;'>
                                 <span style='padding: 8px 20px; font-size: 15px; background: #bb2727; border: solid 1px #980000; border-radius: 2px;'>Force Logout</span>
                             </a>
                         </p>

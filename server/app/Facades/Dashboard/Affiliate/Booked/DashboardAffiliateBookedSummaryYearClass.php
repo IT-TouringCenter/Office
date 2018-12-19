@@ -67,8 +67,10 @@ class DashboardAffiliateBookedSummaryYearClass{
 
         foreach($tourData as $value){
             $getBooked = $this->DashboardAffiliateBookedRepo->GetBookedThisYear($accountId,$value->id,$dateNow);
-            array_push($bookedArr,count($getBooked));
-            $total += count($getBooked);
+            $countBooked = count($getBooked);
+
+            array_push($bookedArr, $countBooked);
+            $total += $countBooked;
         }
 
         $booked = new Transaction;

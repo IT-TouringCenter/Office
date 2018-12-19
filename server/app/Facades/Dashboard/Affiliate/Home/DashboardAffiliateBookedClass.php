@@ -63,7 +63,7 @@ class DashboardAffiliateBookedClass{
             $getBooked = $this->DashboardAffiliateRepo->GetBookedByMonth($accountId,$_month);
             $count = count($getBooked);
             
-            array_push($bookedArr,count($getBooked));
+            array_push($bookedArr,$count);
             $total += $count;
         }
 

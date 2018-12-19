@@ -43,12 +43,20 @@ import { CommissionAffComponent } from './affiliate/commission/commission-aff/co
 import { CommissionDayOfMonthAffComponent } from './affiliate/commission/commission-day-of-month-aff/commission-day-of-month-aff.component';
 import { CommissionMonthlyAffComponent } from './affiliate/commission/commission-monthly-aff/commission-monthly-aff.component';
 import { CommissionTourAffComponent } from './affiliate/commission/commission-tour-aff/commission-tour-aff.component';
+// Admin
+import { HomeAdminComponent } from './admin/home/home-admin/home-admin.component';
+import { ManageUserAdminComponent } from './admin/manage-user/manage-user-admin/manage-user-admin.component';
+import { ManageUserAddAdminComponent } from './admin/manage-user/manage-user-add-admin/manage-user-add-admin.component';
+import { ManageUserEditAdminComponent } from './admin/manage-user/manage-user-edit-admin/manage-user-edit-admin.component';
+import { ManageUserDeleteAdminComponent } from './admin/manage-user/manage-user-delete-admin/manage-user-delete-admin.component';
+import { ManageUserActiveAdminComponent } from './admin/manage-user/manage-user-active-admin/manage-user-active-admin.component';
 
 const routes: Routes = [
   {
     path: '',
     component: TemplateTcWebsiteComponent
   },
+
   // Reservations
   {
     path: 'user/reservations',
@@ -185,7 +193,34 @@ const routes: Routes = [
   {
     path: 'user/affiliate/commission/tour',
     component: CommissionTourAffComponent
+  },
+
+  // Admin
+  {
+    path: 'user/admin',
+    component: HomeAdminComponent
+  },
+  {
+    path: 'user/admin/manage-user',
+    component: ManageUserAdminComponent
+  },
+  {
+    path: 'user/admin/manage-user/add',
+    component: ManageUserAddAdminComponent
+  },
+  {
+    path: 'user/admin/manage-user/edit/:userId',
+    component: ManageUserEditAdminComponent
+  },
+  {
+    path: 'user/admin/manage-user/delete/:userId',
+    component: ManageUserDeleteAdminComponent
+  },
+  {
+    path: 'user/admin/manage-user/active/:userId',
+    component: ManageUserActiveAdminComponent
   }
+
 ];
 
 @NgModule({

@@ -172,7 +172,7 @@ class AccountResetPasswordClass{
                         <p class='row-space' style='padding: 10px 0 10px 0; line-height: 2;'>การเปลี่ยนรหัสผ่านใหม่ของคุณสำเร็จเรียบร้อยแล้ว</p>
                         <p class='row-space' style='padding: 0 0 10px 0;'>รหัสผ่านใหม่ของคุณคือ : ".$passwordHidden."</p>
                         <p class='row-space text-center' style='text-align: center; padding: 10px 0 10px 0;'>
-                            <a href='http://tour-in-chiangmai.com' style='min-width: 100px; cursor: pointer; color: white; text-decoration: none;'>
+                            <a href='http://dev.tourinchiangmai.com/#/user/login' style='min-width: 100px; cursor: pointer; color: white; text-decoration: none;'>
                                 <span style='padding: 8px 20px; font-size: 15px; background: #2762bb; border: solid 1px #3c66ff; border-radius: 2px;'>Login</span>
                             </a>
                         </p>

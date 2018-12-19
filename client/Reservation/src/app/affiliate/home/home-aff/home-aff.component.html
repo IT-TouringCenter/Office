@@ -22,7 +22,7 @@
             </div>
             <div class="panel-content-right-1">
               <p style="font-size: 22px; margin-bottom: 0;">Booked</p>
-              <p style="font-size: 45px; margin-bottom: 0;">{{dataDashboard.booked.amount}}</p>
+              <p style="font-size: 45px; margin-bottom: 0;">{{dataDashboard.booked.amount | number}}</p>
             </div>
           </div>
           <a href="/#/user/affiliate/booked">
@@ -42,7 +42,7 @@
             </div>
             <div class="panel-content-right-2">
               <p style="font-size: 22px; margin-bottom: 0;">Traveling</p>
-              <p style="font-size: 45px; margin-bottom: 0;">{{dataDashboard.traveled.amount}}</p>
+              <p style="font-size: 45px; margin-bottom: 0;">{{dataDashboard.traveled.amount | number}}</p>
             </div>
           </div>
           <a href="/#/user/affiliate/booked/traveled">
@@ -62,7 +62,7 @@
             </div>
             <div class="panel-content-right-3" style="width: 65% !important;">
               <p style="font-size: 22px; margin-bottom: 0;">Commission</p>
-              <p style="font-size: 38px; margin-bottom: 0; padding-top: 3px;">{{dataDashboard.commission.amount}}฿</p>
+              <p style="font-size: 38px; margin-bottom: 0; padding-top: 3px;">{{dataDashboard.commission.amount | number}}฿</p>
             </div>
           </div>
           <a href="/#/user/affiliate/commission">

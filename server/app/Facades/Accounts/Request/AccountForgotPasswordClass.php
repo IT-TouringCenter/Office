@@ -159,7 +159,7 @@ class AccountForgotPasswordClass{
                         <p class='row-space' style='padding: 10px 0 10px 0; line-height: 2;'>กรุณานำโค้ด <u>".$requestCode."</u> เพื่อใช้ในการอ้างอิงการตั้งรหัสผ่านใหม่ ผ่านทางหน้าเว็บไซต์หรือลิงค์ด้านล่างนี้</p>
                         <p class='text-center row-space' style='text-align: center; padding: 0 0 10px 0; color: red;'>** เพื่อความปลอดภัยของข้อมูลบัญชี โค้ดนี้จะมีอายุการใช้งานได้ถึง ".$requestCodeExpired." **</p>
                         <p class='row-space text-center' style='text-align: center; padding: 10px 0 10px 0;'>
-                            <a href='http://tour-in-chiangmai.com?user=".$userId."&id=".$token."' style='min-width: 100px; cursor: pointer; color: white; text-decoration: none;'>
+                            <a href='http://dev.tourinchiangmai.com/#/user/reset-password/".$token."' style='min-width: 100px; cursor: pointer; color: white; text-decoration: none;'>
                                 <span style='padding: 8px 20px; font-size: 15px; background: #e08b33; border: solid 1px #bf7c17; border-radius: 2px;'>Reset Password</span>
                             </a>
                         </p>

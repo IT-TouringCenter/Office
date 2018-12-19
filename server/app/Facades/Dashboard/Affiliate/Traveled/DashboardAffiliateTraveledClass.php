@@ -66,8 +66,10 @@ class DashboardAffiliateTraveledClass{
 
         foreach($tourArr as $value){
             $getTraveled = $this->DashboardAffiliateTraveledRepo->GetTourTraveled($accountId,$value->id);
-            array_push($traveledArr,count($getTraveled));
-            $total += count($getTraveled);
+            $countTravel = count($getTraveled);
+
+            array_push($traveledArr,$countTravel);
+            $total += $countTravel;
         }
 
         $traveled = new Transaction;

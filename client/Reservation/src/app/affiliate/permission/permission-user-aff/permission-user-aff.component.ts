@@ -70,11 +70,7 @@ export class PermissionUserAffComponent implements OnInit {
     this.userType = userData.data[0].type;
 
     // condition init permission
-    let getLogin = JSON.parse(sessionStorage.getItem('login'));
-    if(getLogin.data[0].type=="Affiliate"){
-      console.log('Condition affiliate.');
-      this.checkPermission(this.userType);
-    }
+    this.checkPermission(this.userType);
     
   }
 

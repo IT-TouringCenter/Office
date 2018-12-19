@@ -185,7 +185,7 @@ class AccountRegisterClass{
                         <p class='row-space' style='padding: 10px 0 10px 0;'>รอการยืนยันการสมัครสมาชิก กรุณานำโค้ด <u>".array_get($data,'activeCode')."</u> เพื่อใช้ในการยืนยันการสมัครบนหน้าเว็บหรือคลิกที่ปุ่ม Confirm ด้านล่าง เพื่อยืนยันการสมัครและเริ่มต้นใช้งานทันที</p>
                         <p class='text-center color-red row-space' style='text-align: center; padding: 10px 0 10px 0; color: red;'>** โค้ดนี้จะมีอายุการใช้งานได้ถึง ".$activeExpired." **</p>
                         <p class='row-space text-center' style='text-align: center; padding: 10px 0 10px 0;'>
-                            <a href='http://tour-in-chiangmai.com?user=".$userId."&id=".array_get($data,'token')."' class='btn' style='min-width: 100px; cursor: pointer; color: white; text-decoration: none;'>
+                            <a href='http://dev.tourinchiangmai.com/#/user/register-confirm/".array_get($data,'token')."' class='btn' style='min-width: 100px; cursor: pointer; color: white; text-decoration: none;'>
                                 <span style='padding: 8px 20px; font-size: 15px; background: #2762bb; border: solid 1px #3c66ff; border-radius: 2px;'>Confirm</span>
                             </a>
                         </p>
