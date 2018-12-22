@@ -28,6 +28,7 @@ class AccountController extends Controller {
     /*
         1. Get account login by token
         2. Get account by token
+        3. Get account type
     */
 
     // 1. Get account login by token
@@ -53,6 +54,19 @@ class AccountController extends Controller {
         $token = array_get($accountData,'token');
         try{
             $results = \AccountFacade::GetAccountByToken($token);
+            if($results==null){
+                abort(400);
+            }
+            return $results;
+        }catch(Exception $e){
+            abort(500);
+        }
+    }
+
+    // 3. Get account type
+    public function GetAccountType(){
+        try{
+            $results = \AccountTypeFacade::GetAccountType();
             if($results==null){
                 abort(400);
             }

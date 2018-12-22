@@ -17,7 +17,7 @@ class GenerateCodeClass{
         1. Encode
         2. Decode
         3. Generate token
-        3.1 Check token repeat
+            3.1 Check token repeat
         4. Active code
         5. OTP
         6. Code 5 char

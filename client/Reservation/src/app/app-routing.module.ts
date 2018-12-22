@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
 
 // component
-import { HomeComponent } from './home/home.component';
 // Reservations
 import { HomeRsvnComponent } from './reservations/home-rsvn/home-rsvn.component';
 import { BookedRsvnComponent } from './reservations/bookings/booked-rsvn/booked-rsvn.component';
@@ -11,8 +10,6 @@ import { BookformRsvnComponent } from './reservations/bookings/bookform-rsvn/boo
 import { BookformAddRsvnComponent } from './reservations/bookings/bookform-add-rsvn/bookform-add-rsvn.component';
 import { BookformEditRsvnComponent } from './reservations/bookings/bookform-edit-rsvn/bookform-edit-rsvn.component';
 import { InvoiceRsvnComponent } from './reservations/invoices/invoice-rsvn/invoice-rsvn.component';
-import { TemplateRsvnComponent } from './reservations/templates/template-rsvn/template-rsvn.component';
-import { AppComponent } from './app.component';
 import { TemplateTcWebsiteComponent } from './websites/templates/template-tc-website/template-tc-website.component';
 // Users
 import { HomeUserComponent } from './users/home-user/home-user.component';
@@ -45,11 +42,11 @@ import { CommissionMonthlyAffComponent } from './affiliate/commission/commission
 import { CommissionTourAffComponent } from './affiliate/commission/commission-tour-aff/commission-tour-aff.component';
 // Admin
 import { HomeAdminComponent } from './admin/home/home-admin/home-admin.component';
-import { ManageUserAdminComponent } from './admin/manage-user/manage-user-admin/manage-user-admin.component';
-import { ManageUserAddAdminComponent } from './admin/manage-user/manage-user-add-admin/manage-user-add-admin.component';
-import { ManageUserEditAdminComponent } from './admin/manage-user/manage-user-edit-admin/manage-user-edit-admin.component';
-import { ManageUserDeleteAdminComponent } from './admin/manage-user/manage-user-delete-admin/manage-user-delete-admin.component';
-import { ManageUserActiveAdminComponent } from './admin/manage-user/manage-user-active-admin/manage-user-active-admin.component';
+import { UserManageAdminComponent } from './admin/user-manage/user-manage-admin/user-manage-admin.component';
+import { UserManageAddAdminComponent } from './admin/user-manage/user-manage-add-admin/user-manage-add-admin.component';
+import { UserManageDeleteAdminComponent } from './admin/user-manage/user-manage-delete-admin/user-manage-delete-admin.component';
+import { UserManageEditAdminComponent } from './admin/user-manage/user-manage-edit-admin/user-manage-edit-admin.component';
+import { UserManageActiveAdminComponent } from './admin/user-manage/user-manage-active-admin/user-manage-active-admin.component';
 
 const routes: Routes = [
   {
@@ -201,26 +198,25 @@ const routes: Routes = [
     component: HomeAdminComponent
   },
   {
-    path: 'user/admin/manage-user',
-    component: ManageUserAdminComponent
+    path: 'user/admin/user-manage',
+    component: UserManageAdminComponent
   },
   {
-    path: 'user/admin/manage-user/add',
-    component: ManageUserAddAdminComponent
+    path: 'user/admin/user-manage/add',
+    component: UserManageAddAdminComponent
   },
   {
-    path: 'user/admin/manage-user/edit/:userId',
-    component: ManageUserEditAdminComponent
+    path: 'user/admin/user-manage/edit/:userId',
+    component: UserManageEditAdminComponent
   },
   {
-    path: 'user/admin/manage-user/delete/:userId',
-    component: ManageUserDeleteAdminComponent
+    path: 'user/admin/user-manage/delete/:userId',
+    component: UserManageDeleteAdminComponent
   },
   {
-    path: 'user/admin/manage-user/active/:userId',
-    component: ManageUserActiveAdminComponent
+    path: 'user/admin/user-manage/active/:userId',
+    component: UserManageActiveAdminComponent
   }
-
 ];
 
 @NgModule({

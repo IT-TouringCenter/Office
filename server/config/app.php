@@ -226,6 +226,7 @@ return [
 		'AccountLogoutFacade' => 'App\Facades\Accounts\AccountLogoutFacade',
 		'AccountForceLogoutFacade' => 'App\Facades\Accounts\AccountForceLogoutFacade',
 		'AccountLoginReturnTypeFacade' => 'App\Facades\Accounts\AccountLoginReturnTypeFacade',
+		'AccountTypeFacade' => 'App\Facades\Accounts\AccountTypeFacade',
 
 		// Affiliate
 		'AffiliateFacade' => 'App\Facades\Affiliates\AffiliateFacade',
@@ -263,5 +264,9 @@ return [
 		'DashboardAffiliateCommissionDaysOfMonthFacade' => 'App\Facades\Dashboard\Affiliate\Commission\DashboardAffiliateCommissionDaysOfMonthFacade',
 		'DashboardAffiliateCommissionMonthlyFacade' => 'App\Facades\Dashboard\Affiliate\Commission\DashboardAffiliateCommissionMonthlyFacade',
 		'DashboardAffiliateCommissionTourFacade' => 'App\Facades\Dashboard\Affiliate\Commission\DashboardAffiliateCommissionTourFacade',
+
+		// Dashboard (Admin)
+		'AdminUserManagementFacade' => 'App\Facades\Dashboard\Admin\Users\AdminUserManagementFacade',
+		'AdminUserManagementAddFacade' => 'App\Facades\Dashboard\Admin\Users\Add\AdminUserManagementAddFacade',
 	],
 ];

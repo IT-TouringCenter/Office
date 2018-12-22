@@ -3,7 +3,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -73,16 +72,16 @@ import { BookedTableAffComponent } from './affiliate/booking/booked-aff/booked-t
 import { PermissionUserComponent } from './users/permission/permission-user/permission-user.component';
 import { PermissionUserRsvnComponent } from './reservations/permission/permission-user-rsvn/permission-user-rsvn.component';
 import { PermissionUserAffComponent } from './affiliate/permission/permission-user-aff/permission-user-aff.component';
-import { ManageUserActiveAdminComponent } from './admin/manage-user/manage-user-active-admin/manage-user-active-admin.component';
-import { ManageUserAddAdminComponent } from './admin/manage-user/manage-user-add-admin/manage-user-add-admin.component';
-import { ManageUserDeleteAdminComponent } from './admin/manage-user/manage-user-delete-admin/manage-user-delete-admin.component';
-import { ManageUserEditAdminComponent } from './admin/manage-user/manage-user-edit-admin/manage-user-edit-admin.component';
 import { HomeAdminComponent } from './admin/home/home-admin/home-admin.component';
 import { HeaderAdminComponent } from './admin/commons/header-admin/header-admin.component';
 import { MenuBarAdminComponent } from './admin/commons/header-admin/menu-bar-admin/menu-bar-admin.component';
 import { MenuSidebarAdminComponent } from './admin/commons/header-admin/menu-sidebar-admin/menu-sidebar-admin.component';
 import { PermissionAdminComponent } from './admin/permission/permission-admin/permission-admin.component';
-import { ManageUserAdminComponent } from './admin/manage-user/manage-user-admin/manage-user-admin.component';
+import { UserManageActiveAdminComponent } from './admin/user-manage/user-manage-active-admin/user-manage-active-admin.component';
+import { UserManageAddAdminComponent } from './admin/user-manage/user-manage-add-admin/user-manage-add-admin.component';
+import { UserManageAdminComponent } from './admin/user-manage/user-manage-admin/user-manage-admin.component';
+import { UserManageDeleteAdminComponent } from './admin/user-manage/user-manage-delete-admin/user-manage-delete-admin.component';
+import { UserManageEditAdminComponent } from './admin/user-manage/user-manage-edit-admin/user-manage-edit-admin.component';
 
 @NgModule({
   declarations: [
@@ -140,17 +139,17 @@ import { ManageUserAdminComponent } from './admin/manage-user/manage-user-admin/
     PermissionUserComponent,
     PermissionUserAffComponent,
     PermissionUserRsvnComponent,
-    ManageUserActiveAdminComponent,
-    ManageUserAddAdminComponent,
-    ManageUserDeleteAdminComponent,
-    ManageUserEditAdminComponent,
     HomeAdminComponent,
     HeaderAdminComponent,
     MenuBarAdminComponent,
     MenuSidebarAdminComponent,
     PermissionAdminComponent,
     TemplateComponent,
-    ManageUserAdminComponent,
+    UserManageActiveAdminComponent,
+    UserManageAddAdminComponent,
+    UserManageAdminComponent,
+    UserManageDeleteAdminComponent,
+    UserManageEditAdminComponent,
   ],
   imports: [
     BrowserModule,

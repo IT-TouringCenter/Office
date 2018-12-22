@@ -76,7 +76,7 @@ export class PermissionAdminComponent implements OnInit {
 
   // check user type (permission)
   checkPermission(userType){
-    if(userType!=="admin"){
+    if(userType!=="Admin"){
       this.router.navigate(['user/logout']);
     }
   }

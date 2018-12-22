@@ -1,0 +1,82 @@
+<!-- Check permission -->
+<app-permission-admin></app-permission-admin>
+
+<!-- Menu bar -->
+<app-menu-bar-admin></app-menu-bar-admin>
+<!-- Side bar -->
+<app-menu-sidebar-admin></app-menu-sidebar-admin>
+
+<!-- Content -->
+<section id="main-content" class="panel-block-1">
+  <section class="wrapper">
+    <!-- Graf -->
+    <div class="container">
+      <h3 class="dashboard-header">User &nbsp;management</h3>
+      <!-- <hr style="width: 100px; text-align: center; border: #651e1e 1px solid; margin-bottom: 30px;"> -->
+      <div style="margin:auto; margin-top:20px;width:80% !important;">
+        <table class="table table-bordered table-hover">
+          <!-- Table Header -->
+          <tr class="font-table-13px">
+            <th class="text-center bg-damask text-light">No.</th>
+            <th class="text-center bg-damask text-light">Type</th>
+            <th class="text-center bg-damask text-light">Username</th>
+            <th class="text-center bg-damask text-light">Fullname</th>
+            <th class="text-center bg-damask text-light">Email</th>
+            <th class="text-center bg-damask text-light">Status</th>
+            <th class="text-center bg-dark-gray text-light">Edit</th>
+            <th class="text-center bg-dark-gray text-light">Delete</th>
+          </tr>
+          <!-- Table Body -->
+          <tr *ngFor="let user of getUser | slice:pointStart:pointEnd; let i = index;" [class.table-info]="highlightId==user.userId" class="font-table-12px">
+            <td class="text-center">{{i+1+(perPage*(activePage-1))}}</td>
+            <td class="text-center">{{user.type}}</td>
+            <td class="text-center">{{user.username}}</td>
+            <td class="text-center">{{user.fullname}}</td>
+            <td class="text-center">{{user.email}}</td>
+            <td class="text-center">{{user.status}}</td>
+            <td class="text-center">
+              <a href="/#/user/admin/user-manage/edit/{{user.userId}}" target="_blank">
+                <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 15px;"></i>
+              </a>
+            </td>
+            <td class="text-center">
+              <a href="/#/user/admin/user-manage/delete/{{user.userId}}" target="_blank">
+                <i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i>
+              </a>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Page -->
+        <div class="text-center">
+          <nav aria-label="Page navigation">
+            <p style="margin:0 !important; color:#3e3e3e;"><small>Page : {{activePage}} of {{totalPage}}</small></p>
+            <ul class="pagination text-center">
+              <li class="page-item">
+                <a class="page-link" [routerLink]="['/#/user/admin/user-manage']" [queryParams]="{page: 1}"> First</a>
+              </li>
+              <li class="page-item disabled" [class.disabled]="activePage==1">
+                <a class="page-link" [routerLink]="['/#/user/admin/user-manage']" [queryParams]="{page: prevPage}"> Previous</a>
+              </li>
+              <li class="page-item" *ngFor="let i of iPage" [class.active]="activePage==i">
+                <a class="page-link" [routerLink]="['/#/user/admin/user-manage']" [queryParams]="{page: i}">{{i}}</a>
+              </li>
+              <li class="page-item" [class.disabled]="activePage==totalPage">
+                <a class="page-link" [routerLink]="['/#/user/admin/user-manage']" [queryParams]="{page: nextPage}"> Next</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" [routerLink]="['/#/user/admin/user-manage']" [queryParams]="{page: totalPage}"> Last</a>
+              </li>
+              <!-- <li class="page-item">
+                <span class="block-search-page">
+                  Page : <input matInput #pageInput type="number" (input)="changePage(pageInput.value)" min="1" max="{{totalPage}}" value="{{activePage}}" class="input-search-page"> of {{totalPage}}
+                </span>
+              </li> -->
+            </ul>
+          </nav>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</section>

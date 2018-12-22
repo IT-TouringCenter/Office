@@ -17,8 +17,6 @@ import { BookedTableAffInterface } from './booked-table-aff-interface';
 })
 export class BookedTableAffComponent implements OnInit {
 
-  public activeSideNav = 'bookedstatistics';
-
   // interface
   _getBooked: BookedTableAffInterface;
 

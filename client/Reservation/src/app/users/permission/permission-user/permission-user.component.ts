@@ -78,7 +78,7 @@ export class PermissionUserComponent implements OnInit {
       case "User" : this.router.navigate(['http://tour-in-chiangmai.com']); break;
       case "Member" : this.router.navigate(['http://tour-in-chiangmai.com']); break;
       case "Affiliate" : this.router.navigate(['user/affiliate']); break;
-      case "admin" : this.router.navigate(['user']); break;
+      case "Admin" : this.router.navigate(['user/admin']); break;
       case "Manager" : this.router.navigate(['user']); break;
       case "Senior reservation" : this.router.navigate(['user/reservations']); break;
       case "Reservation" : this.router.navigate(['user/reservations']); break;
