@@ -34,7 +34,7 @@ class AdminUserManagementAddClass{
         if(!empty($checkAccount)){
             $return = new Account;
             $return->status = false;
-            $return->message = 'Account is empty';
+            $return->message = 'This account repeat.';
 
             return $return;
         }

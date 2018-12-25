@@ -51,8 +51,8 @@ export class UserManageAdminComponent implements OnInit {
 
   // JSON booked stat from API
   getUserData(): void{
-    // let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement";
-    let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement";
+    let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement";
+    // let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement";
 
     // set data to save
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));

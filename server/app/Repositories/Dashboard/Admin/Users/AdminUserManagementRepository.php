@@ -13,6 +13,7 @@ class AdminUserManagementRepository{
         $result = \DB::table('accounts')
                     ->where('account_type_id',$type)            
                     ->where('token',$token)
+                    ->where('is_delete',0)
                     ->where('is_active',1)
                     ->get();
         return $result;

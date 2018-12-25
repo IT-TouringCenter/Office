@@ -1,7 +1,57 @@
 <!-- Check permission -->
-<!-- <app-permission-admin></app-permission-admin> -->
+<app-permission-admin></app-permission-admin>
 
 <!-- Menu bar -->
 <app-menu-bar-admin></app-menu-bar-admin>
 <!-- Side bar -->
 <app-menu-sidebar-admin></app-menu-sidebar-admin>
+
+<!-- Content -->
+<section id="main-content" class="panel-block-1">
+    <section class="wrapper">
+        <!-- Graf -->
+        <div class="container">
+            <h3 class="dashboard-header">Edit user <i class="fa fa-pencil-square" aria-hidden="true"></i></h3>
+            <div class="block-content">
+                <table style="width:60%; margin:auto;">
+                    <tr style="height: 50px;">
+                        <th>Username</th>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Email" [(ngModel)]="editUser.username" disabled>
+                        </td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <th>Fullname</th>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Fullname" [(ngModel)]="editUser.fullname">
+                        </td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <th>Type</th>
+                        <td>
+                            <select class="form-control" [(ngModel)]="editUser.userType" >
+                                <!-- <option value="0" disabled selected>Please select user type</option> -->
+                                <option *ngFor="let type of userType" value="{{type.id}}">{{type.type}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <th>Email</th>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Email" [(ngModel)]="editUser.email">
+                        </td>
+                    </tr>
+                </table>
+                <!-- Button login -->
+                <div style="text-align: center; margin-top: 30px;">
+                    <button type="submit" mat-raised-button class="register-btn" (click)="editRegister()">
+                        <span><b>Edit</b></span>
+                    </button>
+                    <button type="submit" mat-raised-button (click)="close()">
+                        <span><b>Close</b></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

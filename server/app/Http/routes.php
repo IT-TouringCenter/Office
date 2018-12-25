@@ -120,8 +120,11 @@ Route::get('/', 'WelcomeController@index');
 	Route::post('api/Dashboard/Admin/UserManagement', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagement');
 	Route::post('api/Dashboard/Admin/UserManagement/Add', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagementAdd');
 	Route::post('api/Dashboard/Admin/UserManagement/Edit', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagementEdit');
+	Route::post('api/Dashboard/Admin/UserManagement/Edit/Save', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagementEditSave');
 	Route::post('api/Dashboard/Admin/UserManagement/Delete', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagementDelete');
+	Route::post('api/Dashboard/Admin/UserManagement/Delete/Save', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagementDeleteSave');
 	Route::post('api/Dashboard/Admin/UserManagement/Active', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagementActive');
+	Route::post('api/Dashboard/Admin/UserManagement/Active/Save', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagementActiveSave');
 	Route::post('api/Dashboard/Admin/UserManagement/ResetPassword', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagementResetPassword');
 /*----------- Dashboard (End) ----------------------------------*/
 

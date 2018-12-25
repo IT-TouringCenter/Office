@@ -268,5 +268,11 @@ return [
 		// Dashboard (Admin)
 		'AdminUserManagementFacade' => 'App\Facades\Dashboard\Admin\Users\AdminUserManagementFacade',
 		'AdminUserManagementAddFacade' => 'App\Facades\Dashboard\Admin\Users\Add\AdminUserManagementAddFacade',
+		'AdminUserManagementEditFacade' => 'App\Facades\Dashboard\Admin\Users\Edit\AdminUserManagementEditFacade',
+		'AdminUserManagementEditSaveFacade' => 'App\Facades\Dashboard\Admin\Users\Edit\AdminUserManagementEditSaveFacade',
+		'AdminUserManagementDeleteFacade' => 'App\Facades\Dashboard\Admin\Users\Delete\AdminUserManagementDeleteFacade',
+		'AdminUserManagementDeleteSaveFacade' => 'App\Facades\Dashboard\Admin\Users\Delete\AdminUserManagementDeleteSaveFacade',
+		'AdminUserManagementActiveFacade' => 'App\Facades\Dashboard\Admin\Users\Active\AdminUserManagementActiveFacade',
+		'AdminUserManagementActiveSaveFacade' => 'App\Facades\Dashboard\Admin\Users\Active\AdminUserManagementActiveSaveFacade',
 	],
 ];

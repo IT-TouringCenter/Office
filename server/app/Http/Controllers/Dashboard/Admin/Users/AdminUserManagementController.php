@@ -26,6 +26,7 @@ class AdminUserManagementController extends Controller {
 		}
 	}//end Response function
 
+	//-------------------- Table- ------------------------------------------//
 	// User management : table
     public function AdminUserManagement(Request $request){
 		$req  = $request->input();
@@ -42,6 +43,7 @@ class AdminUserManagementController extends Controller {
 
 	}
 
+	//-------------------- Add ---------------------------------------------//
 	// User management : add
     public function AdminUserManagementAdd(Request $request){
 		$req  = $request->input();
@@ -58,4 +60,97 @@ class AdminUserManagementController extends Controller {
 
 	}
 
+	//-------------------- Edit --------------------------------------------//
+	// User management : edit
+    public function AdminUserManagementEdit(Request $request){
+		$req  = $request->input();
+        try{
+			$results = \AdminUserManagementEditFacade::AdminUserManagementEdit($req);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
+		}catch(Exception $e){
+			abort(500);
+		}
+
+	}
+
+	// User management : edit (save)
+	public function AdminUserManagementEditSave(Request $request){
+		$req  = $request->input();
+        try{
+			$results = \AdminUserManagementEditSaveFacade::AdminUserManagementEditSave($req);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
+		}catch(Exception $e){
+			abort(500);
+		}
+	}
+
+	//-------------------- Delete ------------------------------------------//
+	// User management : delete
+	public function AdminUserManagementDelete(Request $request){
+		$req  = $request->input();
+        try{
+			$results = \AdminUserManagementDeleteFacade::AdminUserManagementDelete($req);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
+		}catch(Exception $e){
+			abort(500);
+		}
+	}
+
+	// User management : delete (save)
+	public function AdminUserManagementDeleteSave(Request $request){
+		$req  = $request->input();
+        try{
+			$results = \AdminUserManagementDeleteSaveFacade::AdminUserManagementDeleteSave($req);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
+		}catch(Exception $e){
+			abort(500);
+		}
+	}
+
+	//-------------------- Active ------------------------------------------//
+	// User management : active
+	public function AdminUserManagementActive(Request $request){
+		$req  = $request->input();
+        try{
+			$results = \AdminUserManagementActiveFacade::AdminUserManagementActive($req);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
+		}catch(Exception $e){
+			abort(500);
+		}
+	}
+
+	// User management : active (save)
+	public function AdminUserManagementActiveSave(Request $request){
+		$req  = $request->input();
+        try{
+			$results = \AdminUserManagementActiveSaveFacade::AdminUserManagementActiveSave($req);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
+		}catch(Exception $e){
+			abort(500);
+		}
+	}
 }

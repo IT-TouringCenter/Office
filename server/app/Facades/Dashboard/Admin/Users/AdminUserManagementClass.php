@@ -37,6 +37,7 @@ class AdminUserManagementClass{
         foreach($getAccountData as $value){
             $user = new Account;
             $user->userId = $value->id;
+            $user->token = $value->token;
             $user->type = $value->type;
             $user->username = $value->username;
             $user->fullname = $value->fullname;

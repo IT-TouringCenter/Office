@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, FormControl, Validators } from '@angular/forms';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/observable';
+import { Http, RequestOptions } from '@angular/http';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-manage-add-admin',
@@ -26,8 +23,7 @@ export class UserManageAddAdminComponent implements OnInit {
 
   constructor(
     private http: Http,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) { }
 
   // 1. print
@@ -46,7 +42,8 @@ export class UserManageAddAdminComponent implements OnInit {
                     .subscribe(
                       data => [
                         console.log(data),
-                        this.accountType = data
+                        this.accountType = data,
+                        this.addUser.accountType = 0
                       ],
                       err => {console.log(err)}
                     );

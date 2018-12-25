@@ -11,31 +11,31 @@
     <section class="wrapper">
         <!-- Graf -->
         <div class="container">
-            <h3 class="dashboard-header">Add &nbsp;user <i class="fa fa-plus-circle" aria-hidden="true"></i></h3>
+            <h3 class="dashboard-header">Add user <i class="fa fa-plus-circle" aria-hidden="true"></i></h3>
             <div class="block-content">
                 <table style="width:60%; margin:auto;">
                     <tr style="height: 50px;">
-                        <!-- <th>Username</th> -->
+                        <th>Username <span style="color: red;">*</span></th>
                         <td>
                             <input type="text" class="form-control" placeholder="Email" [(ngModel)]="addUser.username">
                         </td>
                     </tr>
                     <tr style="height: 50px;">
-                        <!-- <th>Password</th> -->
+                        <th>Password <span style="color: red;">*</span></th>
                         <td>
                             <input type="password" class="form-control" placeholder="Password" [(ngModel)]="addUser.password">
                         </td>
                     </tr>
                     <tr style="height: 50px;">
-                        <!-- <th>Fullname</th> -->
+                        <th>Fullname <span style="color: red;">*</span></th>
                         <td>
                             <input type="text" class="form-control" placeholder="Fullname" [(ngModel)]="addUser.fullname">
                         </td>
                     </tr>
                     <tr style="height: 50px;">
-                        <!-- <th>User type</th> -->
+                        <th>Type <span style="color: red;">*</span></th>
                         <td>
-                            <select class="form-control" [(ngModel)]="addUser.accountType">
+                            <select class="form-control" [(ngModel)]="addUser.accountType" >
                                 <option value="0" disabled selected>Please select user type</option>
                                 <option *ngFor="let type of accountType" value="{{type.id}}">{{type.type}}</option>
                             </select>
