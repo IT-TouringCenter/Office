@@ -33,8 +33,8 @@ export class UserManageEditAdminComponent implements OnInit {
 
   // 1. get account type
   getAccountType(){
-    let url = "http://localhost:9000/api/Account/GetAccountType";
-    // let url = "http://api.tourinchiangmai.com/api/Account/GetAccountType";
+    // let url = "http://localhost:9000/api/Account/GetAccountType";
+    let url = "http://api.tourinchiangmai.com/api/Account/GetAccountType";
 
     /*==================  Success  ===================*/
     this.http.get(url)
@@ -51,8 +51,8 @@ export class UserManageEditAdminComponent implements OnInit {
 
   // 2. get user data
   getUserData(){
-    let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement/Edit";
-    // let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Edit";
+    // let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement/Edit";
+    let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Edit";
 
     let _token = {
       token: this.token
@@ -91,8 +91,8 @@ export class UserManageEditAdminComponent implements OnInit {
     this.editUser.accountName = getAccount.data.name;
     this.editUser.userToken = this.token;
 
-    let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement/Edit/Save";
-    // let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Edit/Save";
+    // let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement/Edit/Save";
+    let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Edit/Save";
 
     let options = new RequestOptions();
     /*==================  Success  ===================*/

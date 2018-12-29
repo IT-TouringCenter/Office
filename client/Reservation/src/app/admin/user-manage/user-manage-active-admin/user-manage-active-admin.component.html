@@ -29,10 +29,8 @@
                     <td class="text-center td-data">{{user.username}}</td>
                     <td class="text-center td-data">{{user.fullname}}</td>
                     <td class="text-center td-data">
-                        <p *ngIf="user.status=='Active'" data-toggle="modal" data-target="#myModal" (click)="openDialog(user.token)" class="dialog-popup dialog-active">{{user.status}}</p>
-                        <p *ngIf="user.status=='Non active'" data-toggle="modal" data-target="#myModal" (click)="openDialog(user.token)" class="dialog-popup dialog-non-active">{{user.status}}</p>
-                        
-                        <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+                        <p *ngIf="user.status=='Active'" data-toggle="modal" data-target="#dialogActive" (click)="openDialog(user.token)" class="dialog-popup dialog-active">{{user.status}}</p>
+                        <p *ngIf="user.status=='Non active'" data-toggle="modal" data-target="#dialogActive" (click)="openDialog(user.token)" class="dialog-popup dialog-non-active">{{user.status}}</p>
                     </td>
                     </tr>
                 </table>
@@ -68,7 +66,7 @@
             </div>
 
             <!-- modals -->
-            <div id="myModal" class="modal fade" role="dialog">
+            <div id="dialogActive" class="modal fade" role="dialog">
                 <div class="modal-dialog">
                     <!-- Modal content-->
                     <div class="modal-content">

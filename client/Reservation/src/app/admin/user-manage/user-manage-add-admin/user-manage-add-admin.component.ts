@@ -31,10 +31,17 @@ export class UserManageAddAdminComponent implements OnInit {
     window.print();
   }
 
-  // 2. get account type
+  // 2. active menu
+  public activeMenu(){
+    // set storage
+    sessionStorage.setItem('menu',JSON.stringify(1));
+    sessionStorage.setItem('sub-menu',JSON.stringify(102));
+  }
+
+  // 3. get account type
   getAccountType(){
-    let url = "http://localhost:9000/api/Account/GetAccountType";
-    // let url = "http://api.tourinchiangmai.com/api/Account/GetAccountType";
+    // let url = "http://localhost:9000/api/Account/GetAccountType";
+    let url = "http://api.tourinchiangmai.com/api/Account/GetAccountType";
 
     /*==================  Success  ===================*/
     this.http.get(url)
@@ -50,7 +57,7 @@ export class UserManageAddAdminComponent implements OnInit {
     /*==================  Success  ===================*/
   }
 
-  // 3. register
+  // 4. register
   register(){
     // set account
     let getAccount = JSON.parse(sessionStorage.getItem('users'));
@@ -58,8 +65,8 @@ export class UserManageAddAdminComponent implements OnInit {
     this.addUser.accountName = getAccount.data.name;
     this.addUser.email = this.addUser.username;
     
-    let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement/Add";
-    // let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Add";
+    // let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement/Add";
+    let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Add";
 
     let options = new RequestOptions();
     /*==================  Success  ===================*/
@@ -78,7 +85,7 @@ export class UserManageAddAdminComponent implements OnInit {
     }, 500);
   }
 
-  // 4. alert register
+  // 5. alert register
   checkRegister(data){
     if(data.status==true){
       alert(data.message);

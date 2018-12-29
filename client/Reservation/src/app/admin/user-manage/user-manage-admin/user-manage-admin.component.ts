@@ -48,8 +48,8 @@ export class UserManageAdminComponent implements OnInit {
 
   // JSON booked stat from API
   getUserData(): void{
-    let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement";
-    // let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement";
+    // let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement";
+    let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement";
 
     // set data to save
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
@@ -64,19 +64,22 @@ export class UserManageAdminComponent implements OnInit {
                     .map(res => res.json())
                     .subscribe(
                       data => [
-                        this.getUser = data
+                        this.lengthDataFromGet(data),
+                        this.PagePagination()
                       ],
                       err => {console.log(err)}
                     );
     /*==================  Success  ===================*/
     setTimeout(()=>{
-      this.lengthDataFromGet(this.getUser);
-      this.PagePagination();
+      // this.lengthDataFromGet(this.getUser);
+      // this.PagePagination();
     }, 500);
   }
 
   // Length data
   lengthDataFromGet(getUser){
+    this.getUser = getUser;
+
     let count = 0;
     for(var tour in getUser){
       count++;
@@ -151,7 +154,6 @@ export class UserManageAdminComponent implements OnInit {
       }
     }
   }
-
   //------------------ End Page ------------------------
 
   ngOnInit() {

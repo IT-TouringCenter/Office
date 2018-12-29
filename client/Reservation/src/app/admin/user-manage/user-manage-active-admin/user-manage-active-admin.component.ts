@@ -73,13 +73,13 @@ export class UserManageActiveAdminComponent implements OnInit {
   public activeMenu(){
     // set storage
     sessionStorage.setItem('menu',JSON.stringify(1));
-    sessionStorage.setItem('sub-menu',JSON.stringify(101));
+    sessionStorage.setItem('sub-menu',JSON.stringify(103));
   }
 
   // JSON booked stat from API
-  getUserData(): void{
-    let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement/Active";
-    // let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Active";
+  getUserData(){
+    // let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement/Active";
+    let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Active";
 
     // set data to save
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
@@ -93,16 +93,16 @@ export class UserManageActiveAdminComponent implements OnInit {
                     .map(res => res.json())
                     .subscribe(
                       data => [
-                        // this.getUser = data,
                         this.pushActiveData(data),
-                        // console.log(this.getUser)
+                        this.lengthDataFromGet(data),
+                        this.PagePagination()
                       ],
                       err => {console.log(err)}
                     );
     /*==================  Success  ===================*/
     setTimeout(()=>{
-      this.lengthDataFromGet(this.getUser);
-      this.PagePagination();
+      // this.lengthDataFromGet(this.getUser);
+      // this.PagePagination();
     }, 500);
   }
 
@@ -125,8 +125,8 @@ export class UserManageActiveAdminComponent implements OnInit {
     this.userActive.accountToken = getAccount.data.token;
     this.userActive.accountName = getAccount.data.name;
 
-    let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement/Active/Save";
-    // let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Active/Save";
+    // let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement/Active/Save";
+    let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Active/Save";
 
     let options = new RequestOptions();
     /*==================  Success  ===================*/
@@ -134,16 +134,50 @@ export class UserManageActiveAdminComponent implements OnInit {
                     .map(res => res.json())
                     .subscribe(
                       data => [
-                        console.log(data),
-                        alert("Complete."),
-                        window.location.reload()
+                        // console.log(data),
+                        this.checkActived(data)
+                        // alert("Complete."),
+                        // window.location.reload()
+                        // this.getUserData()
                       ],
                       err => [
-                        alert("Please change the value."),
+                        // alert("Please change the value."),
                         console.log(err)
                       ]
                     );
     /*==================  Success  ===================*/
+  }
+
+  checkActived(data){
+    if(data.status==true){
+      alert("Complete.");
+      // this.getUserData();
+      //
+      // let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement/Active";
+      let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Active";
+
+      // set data to save
+      let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+      let dataSave = {
+        token : _getUserData.data.token
+      };
+
+      let options = new RequestOptions();
+      /*==================  Success  ===================*/
+      this.http.post(url, dataSave, options)
+                      .map(res => res.json())
+                      .subscribe(
+                        data => [
+                          // this.getUser = data,
+                          this.pushActiveData(data),
+                          // console.log(this.getUser)
+                        ],
+                        err => {console.log(err)}
+                      );
+/*==================  Success  ===================*/
+    }else{
+      alert("Please change the value.");
+    }
   }
 
   //------------------ Dialog ----------------------------
@@ -158,31 +192,20 @@ export class UserManageActiveAdminComponent implements OnInit {
       }
     }
     // console.log('-----------------');
-    console.log(this.getUser);
+    // console.log(this.getUser);
 
-  }
-
-  // 
-  save(){
-    // set data for save
-    let getAccount = JSON.parse(sessionStorage.getItem('users'));
-    this.userActive.accountToken = getAccount.data.token;
-    this.userActive.accountName = getAccount.data.name;
-
-    console.log('----------------------');
-    console.log(this.userActive);
-    console.log('----------------------');
-    // this.userActive
   }
 
   //------------------ Start Page ------------------------
   lengthDataFromGet(getUser){
+    this.getUser = getUser;
+
     let count = 0;
-    for(var tour in getUser){
+    for(var tour in getUser.data){
       count++;
     }
     this.totalItem = count;
-
+    // console.log(this.totalItem);
   }
 
   PagePagination(){

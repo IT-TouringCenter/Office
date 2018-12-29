@@ -42,8 +42,8 @@ export class UserManageDeleteAdminComponent implements OnInit {
 
   // 
   getUserData(){
-    let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement/Delete";
-    // let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Delete";
+    // let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement/Delete";
+    let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Delete";
 
     let options = new RequestOptions();
     /*==================  Success  ===================*/
@@ -62,8 +62,8 @@ export class UserManageDeleteAdminComponent implements OnInit {
   // 
   deleteUser(){
     if(confirm('Are you sure you want to delete the user?')){
-      let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement/Delete/Save";
-      // let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Delete/Save";
+      // let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement/Delete/Save";
+      let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Delete/Save";
 
       let options = new RequestOptions();
       /*==================  Success  ===================*/

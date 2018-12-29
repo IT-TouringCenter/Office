@@ -11,25 +11,23 @@
               </a>
           </li>
           <!-- Manage user -->
+          <!-- <li class="sub-menu">
+              <a class="sidebar-active" href="/#/user/admin/user-manage" [ngClass]="{'active':id==1}" (click)="addClass(id=1);addSubClass(subId=1)">
+                  <span>User management</span>
+                  <i class="fa fa-user fa-5x" aria-hidden="true"></i>
+              </a>
+          </li> -->
           <li class="sub-menu">
               <a class="sidebar-active" href="/#/user/admin/user-manage" [ngClass]="{'active':id==1}" (click)="addClass(id=1);addSubClass(subId=1)">
                   <span>User management</span>
                   <i class="fa fa-user fa-5x" aria-hidden="true"></i>
               </a>
-          </li>
-          <!-- <li class="sub-menu">
-              <a class="sidebar-active" href="/#/user/admin/manage-user" [ngClass]="{'active':id==1}" (click)="addClass(id=1)">
-                  <span>Booked</span>
-                  <i class="fa fa-bar-chart" aria-hidden="true"></i>
-              </a>
               <ul class="sub" [ngStyle]="{'display':id==1?'block':'none'}">
-                  <li><a href="/#/user/admin/manage-user" [ngClass]="{'sub-active':subId===101}" (click)="addClass(id=1);addSubClass(subId=101)">Manage</a></li>
-                  <li><a href="/#/user/admin/manage-user/add" [ngClass]="{'sub-active':subId===102}" (click)="addClass(id=1);addSubClass(subId=102)">Add</a></li>
-                  <li><a href="/#/user/admin/manage-user/edit" [ngClass]="{'sub-active':subId===103}" (click)="addSubClass(subId=103)">Edit</a></li>
-                  <li><a href="/#/user/admin/manage-user/delete" [ngClass]="{'sub-active':subId===104}" (click)="addSubClass(subId=104)">Delete</a></li>
-                  <li><a href="/#/user/admin/manage-user/active" [ngClass]="{'sub-active':subId===105}" (click)="addSubClass(subId=105)">Active</a></li>
+                  <li><a href="/#/user/admin/user-manage" [ngClass]="{'sub-active':subId===101}" (click)="addClass(id=1);addSubClass(subId=101)">Manage</a></li>
+                  <li><a href="/#/user/admin/user-manage/add" [ngClass]="{'sub-active':subId===102}" (click)="addClass(id=1);addSubClass(subId=102)">Add</a></li>
+                  <li><a href="/#/user/admin/user-manage/active" [ngClass]="{'sub-active':subId===103}" (click)="addClass(id=1);addSubClass(subId=103)">Active</a></li>
               </ul>
-          </li> -->
+          </li>
       </ul>
   </div>
 </aside>
