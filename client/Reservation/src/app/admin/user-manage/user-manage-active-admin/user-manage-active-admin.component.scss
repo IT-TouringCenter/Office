@@ -1,0 +1,97 @@
+.dashboard-header{
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 35px;
+    padding: 15px;
+    font-weight: 600 !important;
+    width: 100%;
+    margin: auto;
+    font-size: 26px;
+}
+.register-btn{
+    background: #6d0000;
+    color: white;
+}
+.block-content{
+    margin: auto;
+    margin-top: 25px;
+    width: 50% !important;
+    padding: 25px 0;
+    // background: #ffc4c4;
+    border-radius: 5px;
+}
+.panel-block-1{
+    padding-top: 40px;
+}
+@media print{
+    .no-print{
+        display: none;
+    }
+}
+.table-valign-mid{
+    vertical-align: middle;
+}
+.booked-header-block{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.font-table-13px{
+    font-size: 13px !important;
+}
+.font-table-12px{
+    font-size: 12px !important;
+}
+.font-table-1-5em{
+    font-size: 1.5em !important;
+}
+.bg-damask{
+    background: #651e1e !important
+}
+.bg-dark-gray{
+    background: #4e4e4e !important;
+}
+.book-link-doc:hover{
+    color: #651e1e !important;
+}
+.table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th{
+    background-color:rgb(255, 205, 205);
+}
+.doc-background{
+    background: #f1f1f1;
+}
+.td-data{
+    vertical-align: middle;
+}
+.td-select{
+    padding: 0;
+    height: 25px !important;
+    font-size: 12px !important;
+}
+.dialog-active{
+    color: green;
+    font-weight: 600;
+}
+.dialog-non-active{
+    color: red;
+    font-weight: 600;
+}
+.dialog-popup:hover{
+    cursor: pointer;
+    color: blue;
+    font-weight: 600;
+}
+
+// bootstrap
+.form-control{
+    height: 35px;
+}
+
+// page
+.block-search-page{
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+    color: black !important;
+}
+.input-search-page{
+    margin-top: 0px !important;
+}

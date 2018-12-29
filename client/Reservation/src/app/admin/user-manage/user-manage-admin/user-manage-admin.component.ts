@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, FormControl, Validators } from '@angular/forms';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/observable';
+import { Http, RequestOptions } from '@angular/http';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-manage-admin',

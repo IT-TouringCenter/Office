@@ -214,7 +214,7 @@ const routes: Routes = [
     component: UserManageDeleteAdminComponent
   },
   {
-    path: 'user/admin/user-manage/active/:userId',
+    path: 'user/admin/user-manage/active',
     component: UserManageActiveAdminComponent
   }
 ];

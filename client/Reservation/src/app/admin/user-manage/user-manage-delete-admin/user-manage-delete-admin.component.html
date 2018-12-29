@@ -13,7 +13,15 @@
         <div class="container">
             <h3 class="dashboard-header">Delete user <i class="fa fa-minus-circle" aria-hidden="true"></i></h3>
             <div class="block-content">
-                <input type="text" class="form-control" placeholder="Email" [(ngModel)]="deleteUser.username" disabled>
+                <input type="text" class="form-control" placeholder="Email" [(ngModel)]="deleteUser.username" value="{{username}}" style="text-align:center; font-size: 15px; height: 40px;" disabled>
+                <!-- <p [(ngModel)]="deleteUser.username">{{username}}</p> -->
+            </div>
+
+            <!-- Button login -->
+            <div style="text-align: center; margin-top: 30px;">
+                <button type="submit" mat-raised-button class="register-btn" (click)="deleteUser()">
+                    <span><b>Delete</b></span>
+                </button>
             </div>
         </div>
     </section>

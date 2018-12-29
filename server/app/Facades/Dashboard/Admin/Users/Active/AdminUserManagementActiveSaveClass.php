@@ -45,9 +45,9 @@ class AdminUserManagementActiveSaveClass{
             "updated_at"=>$dateNow
         ];
 
-        $deleteAccount = $this->AdminUserManagementActiveRepo->ActiveAccountById($accountId,$dataUpdate);
+        $activeAccount = $this->AdminUserManagementActiveRepo->ActiveAccountById($accountId,$dataUpdate);
 
-        if($deleteAccount){
+        if($activeAccount){
             $result->status = true;
             $result->message = "OK";
         }else{
