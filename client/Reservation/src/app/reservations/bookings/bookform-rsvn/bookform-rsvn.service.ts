@@ -23,8 +23,8 @@ export class BookformRsvnService {
 
   // get data booking
   getBookingFormData(): Observable<BookformRsvnInterface.RootObject>{
-    this._getBookingData = "http://localhost:9000/api/Reservations/GetBookingFormData/"+this.transactionId;
-    // this._getBookingData = "http://api.tourinchiangmai.com/api/Reservations/GetBookingFormData/"+this.transactionId;
+    // this._getBookingData = "http://localhost:9000/api/Reservations/GetBookingFormData/"+this.transactionId;
+    this._getBookingData = "http://api.tourinchiangmai.com/api/Reservations/GetBookingFormData/"+this.transactionId;
 
     return this.http
       .get(this._getBookingData)

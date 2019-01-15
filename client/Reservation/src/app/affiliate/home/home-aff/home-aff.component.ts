@@ -21,7 +21,7 @@ export class HomeAffComponent implements OnInit {
     private HomeAffService: HomeAffService
   ) { }
 
-  dataDashboard = null;
+  dataDashboard = <any>null;
   dataBooked = null;
   dataCommission = null;
 
@@ -92,7 +92,6 @@ export class HomeAffComponent implements OnInit {
     // set storage
     sessionStorage.setItem('menu',JSON.stringify(0));
     sessionStorage.setItem('sub-menu',JSON.stringify(0));
-    console.log('Active menu OK!');
   }
 
   // 2. get data dashboard
@@ -113,16 +112,24 @@ export class HomeAffComponent implements OnInit {
                     .subscribe(
                       data => [
                         this.dataDashboard = data,
-                        console.log(data),
                         sessionStorage.setItem('dashboard-data',JSON.stringify(data)),
+                        console.log('Set dashboard'),
+                        this.setDataDashboard()
                       ],
                       err => console.log("Error :: " + err)
                     );
-    setTimeout(()=>{
-      let _getData = JSON.parse(sessionStorage.getItem('dashboard-data'));
-      console.log(_getData);
-      this.dataDashboard = _getData;
-    }, 500);
+    // setTimeout(()=>{
+    //   let _getData = JSON.parse(sessionStorage.getItem('dashboard-data'));
+    //   console.log('Get dashboard');
+    //   this.dataDashboard = _getData;
+    // }, 1000);
+  }
+
+  // 2.1 set data dashboard
+  public setDataDashboard(){
+    let _getData = JSON.parse(sessionStorage.getItem('dashboard-data'));
+    console.log('Get dashboard');
+    this.dataDashboard = _getData;
   }
 
   // 3. get data booked statistics
@@ -143,8 +150,9 @@ export class HomeAffComponent implements OnInit {
                     .subscribe(
                       data => [
                         this.dataBooked = data,
-                        console.log(data),
                         sessionStorage.setItem('booking-data',JSON.stringify(data)),
+                        console.log('Set booked'),
+                        this.setDataBooked()
                       ],
                       err => console.log("Error :: " + err)
                     );
@@ -160,10 +168,18 @@ export class HomeAffComponent implements OnInit {
     this.barChartType = 'bar';
     this.barChartLegend = true;
 
-    setTimeout(()=>{
-      let _getData = JSON.parse(sessionStorage.getItem('booking-data'));
-      this.barChartData = _getData.bookedStatistics;
-    }, 500);
+    // setTimeout(()=>{
+    //   let _getData = JSON.parse(sessionStorage.getItem('booking-data'));
+    //   console.log('Get booked');
+    //   this.barChartData = _getData.bookedStatistics;
+    // }, 1000);
+  }
+
+  // 3.1 set data booked
+  public setDataBooked(){
+    let _getData = JSON.parse(sessionStorage.getItem('booking-data'));
+    console.log('Get booked');
+    this.barChartData = _getData.bookedStatistics;
   }
 
   // 4. get data commission
@@ -185,6 +201,8 @@ export class HomeAffComponent implements OnInit {
                       data => [
                         this.dataCommission = data,
                         sessionStorage.setItem('commission-data',JSON.stringify(data)),
+                        console.log('Set commission'),
+                        this.SetDataCommission()
                       ],
                       err => console.log("Error :: " + err)
                     );
@@ -203,10 +221,18 @@ export class HomeAffComponent implements OnInit {
     this.lineChartType = 'line';
     this.lineChartLegend = true;
 
-    setTimeout(()=>{
-      let _getData = JSON.parse(sessionStorage.getItem('commission-data'));
-      this.lineChartData = _getData.commission;
-    }, 500);
+    // setTimeout(()=>{
+    //   let _getData = JSON.parse(sessionStorage.getItem('commission-data'));
+    //   console.log('Get commission');
+    //   this.lineChartData = _getData.commission;
+    // }, 1000);
+  }
+
+  // 4.1 Set data commission
+  public SetDataCommission(){
+    let _getData = JSON.parse(sessionStorage.getItem('commission-data'));
+    console.log('Get commission');
+    this.lineChartData = _getData.commission;
   }
 
   ngOnInit() {
@@ -217,6 +243,10 @@ export class HomeAffComponent implements OnInit {
     this.getDataDashboard();
     this.getDataBooked();
     this.getDataCommission();
+
+    // set data
+    // this.setDataBooked();
+    // this.SetDataCommission();
   }
 
 }

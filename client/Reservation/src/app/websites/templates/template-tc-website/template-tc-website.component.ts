@@ -10,6 +10,7 @@ export class TemplateTcWebsiteComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    window.location.href="/#/user";
   }
 
 }

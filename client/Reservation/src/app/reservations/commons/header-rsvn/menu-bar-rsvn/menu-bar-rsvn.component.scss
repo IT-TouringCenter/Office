@@ -9,3 +9,68 @@
         margin-top: 15px;
     }
 }
+// 
+@media screen and (max-width: 768px) {
+    .tooltips {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+    #sidebar{
+        display: none;
+        max-width: 220px !important;
+        height: 100% !important;
+        position: fixed !important;
+    }
+    #nav-accordion{
+        display: none;
+    }
+}
+@media screen and (min-width: 769px) {
+    .tooltips {
+        float: none;
+        display: none;
+        text-align: left;
+    }
+    #sidebar{
+        display: block !important;
+        max-width: 220px !important;
+        height: 100% !important;
+        position: fixed !important;
+    }
+    #nav-accordion{
+        display: block !important;
+    }
+}
+//////////////
+.menu-toggle-display{
+    display: block;
+}
+.active{
+    font-weight: 600 !important;
+}
+.sub-active{
+    font-weight: 600 !important;
+    color: white !important;
+    background: transparent !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
