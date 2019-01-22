@@ -49,14 +49,20 @@ export class BookedAffComponent implements OnInit {
     sessionStorage.setItem('sub-menu',JSON.stringify(102));
   }
 
-  // 3. switch button
-  // 3.1 get all booked data
+  // switch button
+  // 3. get all booked data
   public allBooked():void {
     // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/Summary';
     let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/Summary';
     // let url = './../../../../assets/json/affiliate/booked/booked-summary-all.json';
 
+    // get user
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    if(_getUserData==null || _getUserData==undefined || _getUserData==''){
+      alert('Session expired!');
+      this.router.navigate(['user/logout']);
+    }
+
     let postData = {
       token : _getUserData.data.token,
       type : _getUserData.data.userType
@@ -67,17 +73,25 @@ export class BookedAffComponent implements OnInit {
                     .subscribe(
                       data => [
                         sessionStorage.setItem('booked-sum-all',JSON.stringify(data)),
+                        this.setAllBooked()
                       ],
                       err => console.log("Error :: " + err)
                     );
-    setTimeout(()=>{
-      let _getData = JSON.parse(sessionStorage.getItem('booked-sum-all'));
-      this.barChartData = _getData.booked;
-      this.amount = _getData.amount;
-    }, 500);
+    // setTimeout(()=>{
+    //   let _getData = JSON.parse(sessionStorage.getItem('booked-sum-all'));
+    //   this.barChartData = _getData.booked;
+    //   this.amount = _getData.amount;
+    // }, 500);
   }
 
-  // 3.2 get this month booked data
+  // 3.1 set all booked data
+  public setAllBooked():void {
+    let _getData = JSON.parse(sessionStorage.getItem('booked-sum-all'));
+    this.barChartData = _getData.booked;
+    this.amount = _getData.amount;
+  }
+
+  // 4. get this month booked data
   public monthBooked():void {
     // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/Summary/Month';
     let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/Summary/Month';
@@ -94,17 +108,25 @@ export class BookedAffComponent implements OnInit {
                     .subscribe(
                       data => [
                         sessionStorage.setItem('booked-sum-month',JSON.stringify(data)),
+                        this.setMonthBooked()
                       ],
                       err => console.log("Error :: " + err)
                     );
-    setTimeout(()=>{
-      let _getData = JSON.parse(sessionStorage.getItem('booked-sum-month'));
-      this.barChartData = _getData.booked;
-      this.amount = _getData.amount;
-    }, 500);
+    // setTimeout(()=>{
+    //   let _getData = JSON.parse(sessionStorage.getItem('booked-sum-month'));
+    //   this.barChartData = _getData.booked;
+    //   this.amount = _getData.amount;
+    // }, 500);
   }
 
-  // 3.3 get this year booked data
+  // 4.1 get this month booked data
+  public setMonthBooked():void {
+    let _getData = JSON.parse(sessionStorage.getItem('booked-sum-month'));
+    this.barChartData = _getData.booked;
+    this.amount = _getData.amount;
+  }
+
+  // 5. get this year booked data
   public yearBooked():void {
     // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Booked/Summary/Year';
     let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/Summary/Year';
@@ -121,14 +143,22 @@ export class BookedAffComponent implements OnInit {
                     .subscribe(
                       data => [
                         sessionStorage.setItem('booked-sum-year',JSON.stringify(data)),
+                        this.setYearBooked()
                       ],
                       err => console.log("Error :: " + err)
                     );
-    setTimeout(()=>{
-      let _getData = JSON.parse(sessionStorage.getItem('booked-sum-year'));
-      this.barChartData = _getData.booked;
-      this.amount = _getData.amount;
-    }, 500);
+    // setTimeout(()=>{
+    //   let _getData = JSON.parse(sessionStorage.getItem('booked-sum-year'));
+    //   this.barChartData = _getData.booked;
+    //   this.amount = _getData.amount;
+    // }, 500);
+  }
+
+  // 5.1 set this year booked data
+  public setYearBooked(): void {
+    let _getData = JSON.parse(sessionStorage.getItem('booked-sum-year'));
+    this.barChartData = _getData.booked;
+    this.amount = _getData.amount;
   }
 
   ngOnInit() {

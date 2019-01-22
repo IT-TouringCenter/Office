@@ -101,6 +101,11 @@ export class HomeAffComponent implements OnInit {
     // let url = './../../../../assets/json/affiliate/dashboard/dashboard.json';
 
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    if(_getUserData==null || _getUserData==undefined || _getUserData==''){
+      alert('Session expired!');
+      this.router.navigate(['user/logout']);
+    }
+
     let postData = {
       token : _getUserData.data.token,
       type : _getUserData.data.userType

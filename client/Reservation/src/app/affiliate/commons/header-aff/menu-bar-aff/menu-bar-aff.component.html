@@ -1,6 +1,7 @@
 <header class="header black-bg" id="header-block">
     <div class="sidebar-toggle-box">
-        <div class="fa fa-bars tooltips" (click)="toggleSidebar()" data-placement="right"></div>
+        <div class="fa fa-bars tooltips" (click)="toggleSidebar()" data-placement="right" *ngIf="iconMenu==0"></div>
+        <div class="fa fa-times tooltips closs-tooltips" (click)="toggleSidebar()" data-placement="right" *ngIf="iconMenu==1"></div>
     </div>
     <a href="/#/user/affiliate" (click)="nonActiveMenu()" class="logo"><b>Touring Center</b></a>
 
@@ -33,7 +34,7 @@
                 </a>
                 <ul class="sub" [ngStyle]="{'display':id==1?'block':'none'}">
                     <li><a href="/#/user/affiliate/booked/table" [ngClass]="{'sub-active':subId===101}" (click)="addClass(id=1);addSubClass(subId=101)">Table</a></li>
-                    <li><a href="/#/user/affiliate/booked" [ngClass]="{'sub-active':subId===102}" (click)="addClass(id=1);addSubClass(subId=102)">Summary</a></li>
+                    <li><a href="/#/user/affiliate/booked" [ngClass]="{'sub-active':subId===102}" (click)="addSubClass(subId=102)">Summary</a></li>
                     <li><a href="/#/user/affiliate/booked/days-of-month" [ngClass]="{'sub-active':subId===103}" (click)="addSubClass(subId=103)">Days of month</a></li>
                     <li><a href="/#/user/affiliate/booked/monthly" [ngClass]="{'sub-active':subId===104}" (click)="addSubClass(subId=104)">Monthly</a></li>
                 </ul>
@@ -73,7 +74,7 @@
                     <li><a href="/#/user/affiliate/commission" [ngClass]="{'sub-active':subId===401}" (click)="addClass(id=4);addSubClass(subId=401)">Summary</a></li>
                     <li><a href="/#/user/affiliate/commission/days-of-month" [ngClass]="{'sub-active':subId===402}" (click)="addSubClass(subId=402)">Days of month</a></li>
                     <li><a href="/#/user/affiliate/commission/monthly" [ngClass]="{'sub-active':subId===403}" (click)="addSubClass(subId=403)">Monthly</a></li>
-                    <li><a href="/#/user/affiliate/commission/tour" [ngClass]="{'sub-active':subId===404}" (click)="addSubClass(subId=404)">Tour</a></li>
+                    <!-- <li><a href="/#/user/affiliate/commission/tour" [ngClass]="{'sub-active':subId===404}" (click)="addSubClass(subId=404)">Tour</a></li> -->
                 </ul>
             </li>
         </ul>

@@ -54,6 +54,11 @@ export class CommissionAffComponent implements OnInit {
     // let url = './../../../../assets/json/affiliate/commission/commission.json';
 
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    if(_getUserData==null || _getUserData==undefined || _getUserData==''){
+      alert('Session expired!');
+      this.router.navigate(['user/logout']);
+    }
+
     let postData = {
       token : _getUserData.data.token,
       type : _getUserData.data.userType
@@ -64,15 +69,23 @@ export class CommissionAffComponent implements OnInit {
                     .subscribe(
                       data => [
                         sessionStorage.setItem('commission-chart',JSON.stringify(data)),
+                        this.setDataBinding()
                       ],
                       err => console.log("Error :: " + err)
                     );
 
-    setTimeout(()=>{
-      let _getData = JSON.parse(sessionStorage.getItem('commission-chart'));
-      this.barChartData = _getData.booked;
-      this.amount = _getData.amount;
-    }, 500);
+    // setTimeout(()=>{
+    //   let _getData = JSON.parse(sessionStorage.getItem('commission-chart'));
+    //   this.barChartData = _getData.booked;
+    //   this.amount = _getData.amount;
+    // }, 500);
+  }
+
+  // 3.1 set data binding
+  public setDataBinding(){
+    let _getData = JSON.parse(sessionStorage.getItem('commission-chart'));
+    this.barChartData = _getData.booked;
+    this.amount = _getData.amount;
   }
 
   ngOnInit() {

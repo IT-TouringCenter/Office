@@ -74,6 +74,11 @@ export class TourAffComponent implements OnInit {
     // let url = './../../../../assets/json/affiliate/tour/tour-summary.json';
 
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    if(_getUserData==null || _getUserData==undefined || _getUserData==''){
+      alert('Session expired!');
+      this.router.navigate(['user/logout']);
+    }
+
     let postData = {
       token : _getUserData.data.token,
       type : _getUserData.data.userType
@@ -87,12 +92,20 @@ export class TourAffComponent implements OnInit {
                       ],
                       err => console.log("Error :: " + err)
                     );
-    setTimeout(()=>{
-      let _getData = JSON.parse(sessionStorage.getItem('tour-chart'));
-      this.barChartData = _getData.booked;
-      this.tours = _getData.tours;
-      this.amount = _getData.amount;
-    }, 500);
+    // setTimeout(()=>{
+    //   let _getData = JSON.parse(sessionStorage.getItem('tour-chart'));
+    //   this.barChartData = _getData.booked;
+    //   this.tours = _getData.tours;
+    //   this.amount = _getData.amount;
+    // }, 500);
+  }
+
+  // 3.1 set data binding
+  public setDataBinding(){
+    let _getData = JSON.parse(sessionStorage.getItem('tour-chart'));
+    this.barChartData = _getData.booked;
+    this.tours = _getData.tours;
+    this.amount = _getData.amount;
   }
 
   ngOnInit() {

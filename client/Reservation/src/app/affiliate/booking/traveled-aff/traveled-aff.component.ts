@@ -59,6 +59,11 @@ export class TraveledAffComponent implements OnInit {
     // let url = './../../../../assets/json/affiliate/traveled/traveled-summary.json';
 
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    if(_getUserData==null || _getUserData==undefined || _getUserData==''){
+      alert('Session expired!');
+      this.router.navigate(['user/logout']);
+    }
+
     let postData = {
       token : _getUserData.data.token,
       type : _getUserData.data.userType
@@ -69,15 +74,24 @@ export class TraveledAffComponent implements OnInit {
                     .subscribe(
                       data => [
                         sessionStorage.setItem('traveled-chart',JSON.stringify(data)),
+                        this.setTraveledData()
                       ],
                       err => console.log("Error :: " + err)
                     );
-    setTimeout(()=>{
-      let _getData = JSON.parse(sessionStorage.getItem('traveled-chart'));
-      this.barChartData = _getData.booked;
-      this.tours = _getData.tours;
-      this.amount = _getData.amount;
-    }, 500);
+    // setTimeout(()=>{
+    //   let _getData = JSON.parse(sessionStorage.getItem('traveled-chart'));
+    //   this.barChartData = _getData.booked;
+    //   this.tours = _getData.tours;
+    //   this.amount = _getData.amount;
+    // }, 500);
+  }
+
+  // 3.1 set data binding
+  public setTraveledData(){
+    let _getData = JSON.parse(sessionStorage.getItem('traveled-chart'));
+    this.barChartData = _getData.booked;
+    this.tours = _getData.tours;
+    this.amount = _getData.amount;
   }
 
   ngOnInit() {

@@ -21,12 +21,12 @@
 
       <!-- Username -->
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 login-field-block">
-        <input type="text" class="form-control login-field" placeholder="email" [(ngModel)]="data.username">
+        <input type="text" id="form-input1" class="form-control login-field" placeholder="email" [(ngModel)]="data.username">
       </div>
 
       <!-- Password -->
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 login-field-block">
-        <input type="password" class="form-control login-field" placeholder="password" [(ngModel)]="data.password">
+        <input type="password" id="form-input2" class="form-control login-field" placeholder="password" [(ngModel)]="data.password">
       </div>
 
       <!-- Forgot password -->
@@ -40,7 +40,7 @@
 
       <!-- Button login -->
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 login-btn-block">
-        <button type="submit" mat-raised-button class="login-btn" (click)="login()">
+        <button type="submit" mat-raised-button id="login-btn" class="login-btn" (click)="login()">
           <span><b>Login</b></span>
         </button>
         <!-- <input type="submit" mat-raised-button class="login-btn" (click)="login()" value="Login"> -->

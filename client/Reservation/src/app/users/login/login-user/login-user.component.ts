@@ -70,7 +70,29 @@ export class LoginUserComponent implements OnInit {
     }
   }
 
+  // key press enter
+  keyPressEnter(){
+    // username
+    var input1 = document.getElementById("form-input1");
+    input1.addEventListener("keyup", function(event) {
+      event.preventDefault();
+      if (event.keyCode === 13) {
+        document.getElementById("login-btn").click();
+      }
+    });
+
+    // password
+    var input2 = document.getElementById("form-input2");
+    input2.addEventListener("keyup", function(event) {
+      event.preventDefault();
+      if (event.keyCode === 13) {
+        document.getElementById("login-btn").click();
+      }
+    });
+  }
+
   ngOnInit() {
+    this.keyPressEnter();
   }
 
 }

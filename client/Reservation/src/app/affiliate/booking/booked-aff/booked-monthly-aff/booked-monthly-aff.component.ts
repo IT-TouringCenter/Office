@@ -91,6 +91,8 @@ export class BookedMonthlyAffComponent implements OnInit {
     // get token from session
     let getToken = JSON.parse(sessionStorage.getItem('users'));
     if(getToken==null || getToken==undefined || getToken==''){
+      alert('Session expired!');
+      this.router.navigate(['user/logout']);
       this.bookedData.token = 0;
       this.bookedData.type = 0;
     }else{
@@ -105,15 +107,23 @@ export class BookedMonthlyAffComponent implements OnInit {
                     .subscribe(
                       data => [
                         console.log(data),
-                        sessionStorage.setItem('booked-monthly-chart',JSON.stringify(data))
+                        sessionStorage.setItem('booked-monthly-chart',JSON.stringify(data)),
+                        this.setDataBinding()
                       ],
                       err => {console.log(err)}
                     );
-    setTimeout(()=>{
-      let _getData = JSON.parse(sessionStorage.getItem('booked-monthly-chart'));
-      this.barChartData = _getData.booked;
-      this.amount = _getData.amount;
-    }, 500);
+    // setTimeout(()=>{
+    //   let _getData = JSON.parse(sessionStorage.getItem('booked-monthly-chart'));
+    //   this.barChartData = _getData.booked;
+    //   this.amount = _getData.amount;
+    // }, 500);
+  }
+
+  // 3.1 set data binding
+  public setDataBinding(){
+    let _getData = JSON.parse(sessionStorage.getItem('booked-monthly-chart'));
+    this.barChartData = _getData.booked;
+    this.amount = _getData.amount;
   }
 
   // 4. search data
@@ -139,15 +149,23 @@ export class BookedMonthlyAffComponent implements OnInit {
                     .subscribe(
                       data => [
                         console.log(data),
-                        sessionStorage.setItem('booked-monthly-chart',JSON.stringify(data))
+                        sessionStorage.setItem('booked-monthly-chart',JSON.stringify(data)),
+                        this.setDataSearch()
                       ],
                       err => {console.log(err)}
                     );
-    setTimeout(()=>{
-      let _getData = JSON.parse(sessionStorage.getItem('booked-monthly-chart'));
-      this.barChartData = _getData.booked;
-      this.amount = _getData.amount;
-    }, 500);
+    // setTimeout(()=>{
+    //   let _getData = JSON.parse(sessionStorage.getItem('booked-monthly-chart'));
+    //   this.barChartData = _getData.booked;
+    //   this.amount = _getData.amount;
+    // }, 500);
+  }
+
+  // 4.1 set data search
+  public setDataSearch(){
+    let _getData = JSON.parse(sessionStorage.getItem('booked-monthly-chart'));
+    this.barChartData = _getData.booked;
+    this.amount = _getData.amount;
   }
 
   ngOnInit() {

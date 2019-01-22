@@ -65,6 +65,11 @@ export class BookedTableAffComponent implements OnInit {
 
     // set data to save
     let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    if(_getUserData==null || _getUserData==undefined || _getUserData==''){
+      alert('Session expired!');
+      this.router.navigate(['user/logout']);
+    }
+
     let dataSave = {
       token : _getUserData.data.token,
       type : _getUserData.data.userType
@@ -77,16 +82,24 @@ export class BookedTableAffComponent implements OnInit {
                     .subscribe(
                       data => [
                         this.getBooked = data,
-                        sessionStorage.setItem('booked-table',JSON.stringify(data))
+                        sessionStorage.setItem('booked-table',JSON.stringify(data)),
+                        this.setInvoiceFromData()
                       ],
                       err => {console.log(err)}
                     );
     /*==================  Success  ===================*/
-    setTimeout(()=>{
-      this.getBooked = JSON.parse(sessionStorage.getItem('booked-table'));
-      this.lengthDataFromGet(this.getBooked);
-      this.PagePagination();
-    }, 500);
+    // setTimeout(()=>{
+    //   this.getBooked = JSON.parse(sessionStorage.getItem('booked-table'));
+    //   this.lengthDataFromGet(this.getBooked);
+    //   this.PagePagination();
+    // }, 500);
+  }
+
+  // 
+  public setInvoiceFromData(){
+    this.getBooked = JSON.parse(sessionStorage.getItem('booked-table'));
+    this.lengthDataFromGet(this.getBooked);
+    this.PagePagination();
   }
 
   // Length data

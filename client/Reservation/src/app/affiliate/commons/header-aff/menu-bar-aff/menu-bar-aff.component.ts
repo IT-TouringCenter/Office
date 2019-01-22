@@ -11,6 +11,8 @@ export class MenuBarAffComponent implements OnInit {
   subId = 0;
   bookedId = 0;
 
+  iconMenu = 0;
+
   constructor() { }
 
   // Menu
@@ -63,9 +65,13 @@ export class MenuBarAffComponent implements OnInit {
       sidebar.style.height = "100%";
       sidebar.style.position = "fixed";
       sidebarMenu.style.display = "block";
+
+      this.iconMenu = 1;
     } else {
       sidebar.style.display = "none";
       sidebarMenu.style.display = "none";
+
+      this.iconMenu = 0;
     }
   }
 
