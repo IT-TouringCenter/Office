@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-bar-rsvn',
@@ -11,7 +12,9 @@ export class MenuBarRsvnComponent implements OnInit {
   subId = 0;
   bookedId = 0;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   // Menu
   addClass(id: number) {
@@ -66,6 +69,16 @@ export class MenuBarRsvnComponent implements OnInit {
     } else {
       sidebar.style.display = "none";
       sidebarMenu.style.display = "none";
+    }
+  }
+
+  //
+  logout(){
+    let logout = confirm("Are you sure!!");
+    if(logout!=true){
+      return;
+    }else{
+      this.router.navigate(['user/logout']);
     }
   }
 

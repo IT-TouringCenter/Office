@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-bar-aff',
@@ -13,7 +14,9 @@ export class MenuBarAffComponent implements OnInit {
 
   iconMenu = 0;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   // Menu
   addClass(id: number) {
@@ -72,6 +75,16 @@ export class MenuBarAffComponent implements OnInit {
       sidebarMenu.style.display = "none";
 
       this.iconMenu = 0;
+    }
+  }
+
+  //
+  logout(){
+    let logout = confirm("Are you sure!!");
+    if(logout!=true){
+      return;
+    }else{
+      this.router.navigate(['user/logout']);
     }
   }
 

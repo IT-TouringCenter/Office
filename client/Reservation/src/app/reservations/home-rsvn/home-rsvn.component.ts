@@ -9,7 +9,21 @@ export class HomeRsvnComponent implements OnInit {
 
   constructor() { }
 
+  // 1. print
+  public print():void {
+    window.print();
+  }
+
+  // 2. active menu
+  public activeMenu(){
+    // set storage
+    sessionStorage.setItem('menu',JSON.stringify(0));
+    sessionStorage.setItem('sub-menu',JSON.stringify(0));
+  }
+
   ngOnInit() {
+    // active menu
+    this.activeMenu();
   }
 
 }

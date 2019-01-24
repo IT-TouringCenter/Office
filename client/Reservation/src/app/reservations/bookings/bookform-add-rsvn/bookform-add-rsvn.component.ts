@@ -220,498 +220,513 @@ export class BookformAddRsvnComponent implements OnInit {
   // Active sidenav
   public activeSideNav = 'addbooking';
 
-    constructor(
-      private BookformAddRsvnService: BookformAddRsvnService,
-      // private dataService: DataService,
-      // private currencyService: CurrencyService,
-      private http: Http,
-      private router: Router
-    ) { }
+  constructor(
+    private BookformAddRsvnService: BookformAddRsvnService,
+    // private dataService: DataService,
+    // private currencyService: CurrencyService,
+    private http: Http,
+    private router: Router
+  ) { }
 
-    // JSON booking data
-    getBookingData(): void {
-      this.BookformAddRsvnService.getBookingData()
-        .subscribe(
-          resultArray => this._getBookingDataArr = resultArray,
-          error => console.log("Error :: " + error)
-        )
+  // 1. print
+  public print():void {
+    window.print();
+  }
+
+  // 2. active menu
+  public activeMenu(){
+    // set storage
+    sessionStorage.setItem('menu',JSON.stringify(2));
+    sessionStorage.setItem('sub-menu',JSON.stringify(201));
+  }
+
+  // JSON booking data
+  getBookingData(): void {
+    this.BookformAddRsvnService.getBookingData()
+      .subscribe(
+        resultArray => this._getBookingDataArr = resultArray,
+        error => console.log("Error :: " + error)
+      )
+  }
+
+  // JSON account code data
+  getAccountCode(): void {
+    this.BookformAddRsvnService.getAccountCode()
+      .subscribe(
+        resultArray => this._getAccountCodeArr = resultArray,
+        error => console.log("Error :: " + error)
+      )
+  }
+
+  // JSON currency
+  // getCurrency(): void{
+  //   this.currencyService.getInvoiceData()
+  //     .subscribe(
+  //       resultArray => this._getCurrencyInterface = resultArray,
+  //       error => console.log("Error :: " + error)
+  //     )
+  // }
+
+  /*======== Data to Save ========*/
+  setAccountInfo(){
+    let getAccount = sessionStorage.getItem('users');
+    console.log(getAccount);
+    if(getAccount==null || getAccount==undefined || getAccount==''){
+      this.accountInfo.token = '';
+    }else{
+      let account = JSON.parse(getAccount);
+      this.accountInfo.token = account.data.token;
+    }
+  }
+
+  // Step 1 : Set tour data
+  setTourData(){
+    let tourArr = [];
+    let tourId = this.tourInfo.tourData.id;
+    let dataBook = this._getBookingDataArr;
+    let count = 0;
+
+    tourArr.push(this._getBookingDataArr);
+
+    for(var tour in tourArr[0]){
+      if(dataBook[count].id==tourId){
+        // Set tour travel time
+        this.travelTimeArr = dataBook[count].times;
+        // Set tour privacy
+        this.tourPrivacyArr = dataBook[count].privacies;
+        // Set index tour
+        this.indexTour = count;
+      }
+      count++;
     }
 
-    // JSON account code data
-    getAccountCode(): void {
-      this.BookformAddRsvnService.getAccountCode()
-        .subscribe(
-          resultArray => this._getAccountCodeArr = resultArray,
-          error => console.log("Error :: " + error)
-        )
+    if(tourId=='3' || tourId=='8' || tourId=='11' || tourId=='12'){
+      this.activeSingleRiding = true;
+    }else{
+      this.activeSingleRiding = false;
+    }
+  }
+
+  // Step 2 : Set guest data
+  setGuestData(pax){
+    this.guestArr = [];
+    for(let i=0; i<pax; i++){
+      this.guestArr.push(i+1);
+    }
+    // Set tour pax
+    this.tourInfo.tourPax = pax;
+  }
+
+  // Set Price
+  setPrice(){
+    // Set privacy by [tour id]
+    let count1 = 0;
+    for(var data in this._getBookingDataArr){
+      if(this._getBookingDataArr[count1].id==this.tourInfo.tourData.id){
+        this._getTourPrivacy = this._getBookingDataArr[count1].privacies;
+      }
+      count1++;
     }
 
-    // JSON currency
-    // getCurrency(): void{
-    //   this.currencyService.getInvoiceData()
-    //     .subscribe(
-    //       resultArray => this._getCurrencyInterface = resultArray,
-    //       error => console.log("Error :: " + error)
-    //     )
-    // }
-
-    /*======== Data to Save ========*/
-    setAccountInfo(){
-      let getAccount = sessionStorage.getItem('users');
-      console.log(getAccount);
-      if(getAccount==null || getAccount==undefined || getAccount==''){
-        this.accountInfo.token = '';
-      }else{
-        let account = JSON.parse(getAccount);
-        this.accountInfo.token = account.data.token;
+    // Set pax by [tour id & privacy]
+    let count2 = 0;
+    for(var data in this._getTourPrivacy){
+      if(this._getTourPrivacy[count2].privacy==this.tourInfo.tourPrivacy){
+        this._getTourPax = this._getTourPrivacy[count2].paxs;
       }
+      count2++;
     }
 
-    // Step 1 : Set tour data
-    setTourData(){
-      let tourArr = [];
-      let tourId = this.tourInfo.tourData.id;
-      let dataBook = this._getBookingDataArr;
-      let count = 0;
-
-      tourArr.push(this._getBookingDataArr);
-
-      for(var tour in tourArr[0]){
-        if(dataBook[count].id==tourId){
-          // Set tour travel time
-          this.travelTimeArr = dataBook[count].times;
-          // Set tour privacy
-          this.tourPrivacyArr = dataBook[count].privacies;
-          // Set index tour
-          this.indexTour = count;
-        }
-        count++;
+    // Set tour type price by [tour paxs]
+    let count3 = 0;
+    // No select ages & fill guest data
+    if(this.tourInfo.adultPax==undefined || this.tourInfo.adultPax==null || this.tourInfo.adultPax==0){
+      if(this.tourInfo.tourPax>=1){
+        this.tourInfo.adultPax = this.tourInfo.tourPax;
       }
-
-      if(tourId=='3' || tourId=='8' || tourId=='11' || tourId=='12'){
-        this.activeSingleRiding = true;
-      }else{
-        this.activeSingleRiding = false;
+    }else{
+      this.tourInfo.adultPax = this.tourInfo.adultPax;
+    }
+    for(var data in this._getTourPax){
+      if(this._getTourPax[count3].min<=this.tourInfo.tourPax && this.tourInfo.tourPax<=this._getTourPax[count3].max){
+        this._getTourTypePrice = this._getTourPax[count3].tourPrices;
       }
+      count3++;
     }
 
-    // Step 2 : Set guest data
-    setGuestData(pax){
-      this.guestArr = [];
-      for(let i=0; i<pax; i++){
-        this.guestArr.push(i+1);
+    // Set tour price by [tour type price]
+    let count4 = 0;
+    for(var data in this._getTourTypePrice){
+      if(this._getTourTypePrice[count4].type==this.paymentInfo.tourPrice){
+        this._getTourPrice = this._getTourTypePrice[count4].prices;
       }
-      // Set tour pax
-      this.tourInfo.tourPax = pax;
+      count4++;
     }
 
-    // Set Price
-    setPrice(){
-      // Set privacy by [tour id]
-      let count1 = 0;
-      for(var data in this._getBookingDataArr){
-        if(this._getBookingDataArr[count1].id==this.tourInfo.tourData.id){
-          this._getTourPrivacy = this._getBookingDataArr[count1].privacies;
-        }
-        count1++;
-      }
+    // Set tour price summary
+    // set pax
+    let adultNo = this.tourInfo.adultPax;
+    let childNo = this.tourInfo.childPax;
+    let infantNo = this.tourInfo.infantPax;
+    let totalPax = adultNo + childNo;
 
-      // Set pax by [tour id & privacy]
-      let count2 = 0;
-      for(var data in this._getTourPrivacy){
-        if(this._getTourPrivacy[count2].privacy==this.tourInfo.tourPrivacy){
-          this._getTourPax = this._getTourPrivacy[count2].paxs;
-        }
-        count2++;
-      }
+    // set price
+    if(this.rateTwoPax==true){
+      this.tourInfo.rateTwoPax = 1;
+      this.specialChargePrice = this._getTourPrice[0].adultPrice;
+    }else{
+      this.tourInfo.rateTwoPax = 0;
+      this.specialChargePrice = 0;
+    }
 
-      // Set tour type price by [tour paxs]
-      let count3 = 0;
-      // No select ages & fill guest data
-      if(this.tourInfo.adultPax==undefined || this.tourInfo.adultPax==null || this.tourInfo.adultPax==0){
-        if(this.tourInfo.tourPax>=1){
-          this.tourInfo.adultPax = this.tourInfo.tourPax;
-        }
-      }else{
-        this.tourInfo.adultPax = this.tourInfo.adultPax;
-      }
-      for(var data in this._getTourPax){
-        if(this._getTourPax[count3].min<=this.tourInfo.tourPax && this.tourInfo.tourPax<=this._getTourPax[count3].max){
-          this._getTourTypePrice = this._getTourPax[count3].tourPrices;
-        }
-        count3++;
-      }
+    if(this.tourInfo.tourPax>1){
+      this.tourInfo.rateTwoPax = 0;
+    }
 
-      // Set tour price by [tour type price]
-      let count4 = 0;
-      for(var data in this._getTourTypePrice){
-        if(this._getTourTypePrice[count4].type==this.paymentInfo.tourPrice){
-          this._getTourPrice = this._getTourTypePrice[count4].prices;
-        }
-        count4++;
-      }
+    this.summary.adultSellPrice = this._getTourPrice[0].adultSellPrice;
+    this.summary.childSellPrice = this._getTourPrice[0].childSellPrice;
+    this.summary.adultPrice = this._getTourPrice[0].adultPrice;
+    this.summary.childPrice = this._getTourPrice[0].childPrice;
 
-      // Set tour price summary
-      // set pax
-      let adultNo = this.tourInfo.adultPax;
-      let childNo = this.tourInfo.childPax;
-      let infantNo = this.tourInfo.infantPax;
-      let totalPax = adultNo + childNo;
+    // set deposit price
+    if(this.summary.deposit==null || this.summary.deposit==undefined){
+      this.summary.deposit = 0;
+    }
 
-      // set price
-      if(this.rateTwoPax==true){
-        this.tourInfo.rateTwoPax = 1;
-        this.specialChargePrice = this._getTourPrice[0].adultPrice;
-      }else{
-        this.tourInfo.rateTwoPax = 0;
-        this.specialChargePrice = 0;
-      }
+    // set commission
+    let getCommittionAdult = this._getTourPrice[0].commissionAdult>0?this._getTourPrice[0].commissionAdult:0;
+    let getCommittionChild = this._getTourPrice[0].commissionChild>0?this._getTourPrice[0].commissionChild:0;
+    let commissionAdult = getCommittionAdult * adultNo;
+    let commissionChild = getCommittionChild * childNo;
 
-      if(this.tourInfo.tourPax>1){
-        this.tourInfo.rateTwoPax = 0;
-      }
+    // set total price
+    this.summary.totalAdultPrice = this.summary.adultPrice * adultNo;
+    this.summary.totalChildPrice = this.summary.childPrice * childNo;
+    let totalTourPrice = this.summary.totalAdultPrice + this.summary.totalChildPrice;
 
-      this.summary.adultSellPrice = this._getTourPrice[0].adultSellPrice;
-      this.summary.childSellPrice = this._getTourPrice[0].childSellPrice;
-      this.summary.adultPrice = this._getTourPrice[0].adultPrice;
-      this.summary.childPrice = this._getTourPrice[0].childPrice;
-
-      // set deposit price
-      if(this.summary.deposit==null || this.summary.deposit==undefined){
-        this.summary.deposit = 0;
-      }
-
-      // set commission
-      let getCommittionAdult = this._getTourPrice[0].commissionAdult>0?this._getTourPrice[0].commissionAdult:0;
-      let getCommittionChild = this._getTourPrice[0].commissionChild>0?this._getTourPrice[0].commissionChild:0;
-      let commissionAdult = getCommittionAdult * adultNo;
-      let commissionChild = getCommittionChild * childNo;
-
+    // set discount
+    if(this.summary.discount==null || this.summary.discount==undefined){
+      this.summary.discount=0;
+    }
+    let checkDiscount = this.paymentInfo.tourPrice;
+    let subDiscount = 0;
+    // console.log('check discount : '+checkDiscount.includes("Discount"));
+    if(checkDiscount.includes("Discount")==true){
+      subDiscount = parseInt(this.paymentInfo.tourPrice.substring(11,9));
+      // set total price
+      this.summary.totalAdultPrice = this.summary.adultSellPrice * adultNo;
+      this.summary.totalChildPrice = this.summary.childSellPrice * childNo;
+      totalTourPrice = this.summary.totalAdultPrice + this.summary.totalChildPrice;
+      this.realPriceAdult = this.summary.adultSellPrice;
+      this.realPriceChild = this.summary.childSellPrice;
+    }else{
+      subDiscount = 0;
       // set total price
       this.summary.totalAdultPrice = this.summary.adultPrice * adultNo;
       this.summary.totalChildPrice = this.summary.childPrice * childNo;
-      let totalTourPrice = this.summary.totalAdultPrice + this.summary.totalChildPrice;
+      totalTourPrice = this.summary.totalAdultPrice + this.summary.totalChildPrice;
+      this.realPriceAdult = this.summary.adultPrice;
+      this.realPriceChild = this.summary.childPrice;
+    }
 
-      // set discount
-      if(this.summary.discount==null || this.summary.discount==undefined){
-        this.summary.discount=0;
-      }
-      let checkDiscount = this.paymentInfo.tourPrice;
-      let subDiscount = 0;
-      // console.log('check discount : '+checkDiscount.includes("Discount"));
-      if(checkDiscount.includes("Discount")==true){
-        subDiscount = parseInt(this.paymentInfo.tourPrice.substring(11,9));
-        // set total price
-        this.summary.totalAdultPrice = this.summary.adultSellPrice * adultNo;
-        this.summary.totalChildPrice = this.summary.childSellPrice * childNo;
-        totalTourPrice = this.summary.totalAdultPrice + this.summary.totalChildPrice;
-        this.realPriceAdult = this.summary.adultSellPrice;
-        this.realPriceChild = this.summary.childSellPrice;
-      }else{
-        subDiscount = 0;
-        // set total price
-        this.summary.totalAdultPrice = this.summary.adultPrice * adultNo;
-        this.summary.totalChildPrice = this.summary.childPrice * childNo;
-        totalTourPrice = this.summary.totalAdultPrice + this.summary.totalChildPrice;
-        this.realPriceAdult = this.summary.adultPrice;
-        this.realPriceChild = this.summary.childPrice;
-      }
+    let discountPercent = subDiscount;
+    this.summary.discount = subDiscount;
+    this.summary.discountPrice = totalTourPrice * (discountPercent/100);
+    // console.log((this.realPriceAdult + this.realPriceChild)+' x '+ (discountPercent/100)+' = '+this.summary.discountPrice);
 
-      let discountPercent = subDiscount;
-      this.summary.discount = subDiscount;
-      this.summary.discountPrice = totalTourPrice * (discountPercent/100);
-      // console.log((this.realPriceAdult + this.realPriceChild)+' x '+ (discountPercent/100)+' = '+this.summary.discountPrice);
+    // set single riding
+    if(this.singleRidingPax==0){
+      this.summary.singleRidingPax=1;
+    }else{
+      this.summary.singleRidingPax=this.singleRidingPax;
+    }
 
-      // set single riding
-      if(this.singleRidingPax==0){
-        this.summary.singleRidingPax=1;
-      }else{
-        this.summary.singleRidingPax=this.singleRidingPax;
-      }
-
-      if(totalPax%2!=0){ // normal case % 2
-        this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding);
-        if(this.isSingleRiding==true){
-          if(this.summary.singleRidingPax!=null || this.summary.singleRidingPax!=undefined){
-            this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding) * this.summary.singleRidingPax;
-          }else{
-            this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding);
-          }
+    if(totalPax%2!=0){ // normal case % 2
+      this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding);
+      if(this.isSingleRiding==true){
+        if(this.summary.singleRidingPax!=null || this.summary.singleRidingPax!=undefined){
+          this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding) * this.summary.singleRidingPax;
         }else{
-          this.summary.singleRidingPax = 1;
           this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding);
         }
       }else{
+        this.summary.singleRidingPax = 1;
+        this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding);
+      }
+    }else{
+      this.summary.singleRiding = 0;
+      if(this.isSingleRiding==true){
+        if(this.summary.singleRidingPax!=null || this.summary.singleRidingPax!=undefined){
+          this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding) * this.summary.singleRidingPax;
+        }else{
+          this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding);
+        }
+      }else{
+        this.summary.singleRidingPax = 0;
         this.summary.singleRiding = 0;
-        if(this.isSingleRiding==true){
-          if(this.summary.singleRidingPax!=null || this.summary.singleRidingPax!=undefined){
-            this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding) * this.summary.singleRidingPax;
-          }else{
-            this.summary.singleRiding = parseInt(this._getTourPrice[0].singleRiding);
-          }
-        }else{
-          this.summary.singleRidingPax = 0;
-          this.summary.singleRiding = 0;
-        }
       }
-
-      // set special request price
-      if(this.specialRequestPrice==null || this.specialRequestPrice==undefined){
-        this.specialRequestPrice = 0;
-      }
-
-      // set total price
-      // set special request operator
-      // '+'==1 | '-'==2 | none==0
-      if(this.specialRequestOperator=='+'){
-        this.isSpecialRequestOperator=1;
-        this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice + this.specialRequestPrice + this.specialChargePrice - this.summary.deposit;
-      }else if(this.specialRequestOperator=='-'){
-        this.isSpecialRequestOperator=2;
-        this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice - this.specialRequestPrice + this.specialChargePrice - this.summary.deposit;
-      }else{
-        this.isSpecialRequestOperator=0;
-        this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice + this.specialRequestPrice + this.specialChargePrice - this.summary.deposit;
-      }
-
-      // this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice + this.specialRequestPrice + this.specialChargePrice - this.summary.deposit;
-
-      // set service charge 3%
-      if(this.service.isServiceCharge==true){
-        this.summary.serviceCharge = this.summary.totalPrice * 0.03;
-      }else{
-        this.summary.serviceCharge = 0;
-      }
-
-      this.summary.amount = this.summary.totalPrice + this.summary.serviceCharge;
-
-      // set commission
-      if(this.commission.isCommission==true){
-        this.commission.commission = commissionAdult + commissionChild;
-      }else{
-        this.commission.commission = 0;
-      }
-
-      // converse currency
-      if(this.currency=='USDTHB'){
-        this.realPriceAdult = this.realPriceAdult / this.currencyRate;
-        this.realPriceChild = this.realPriceChild / this.currencyRate;
-        this.summary.totalAdultPrice = this.summary.totalAdultPrice / this.currencyRate;
-        this.summary.totalChildPrice = this.summary.totalChildPrice / this.currencyRate;
-        this.summary.singleRiding = this.summary.singleRiding / this.currencyRate;
-        this.summary.serviceCharge = this.summary.serviceCharge / this.currencyRate;
-        this.summary.deposit = this.summary.deposit / this.currencyRate;
-        this.summary.discountPrice = this.summary.discountPrice / this.currencyRate;
-        this.summary.totalPrice = this.summary.totalPrice / this.currencyRate;
-        this.summary.amount = this.summary.amount / this.currencyRate;
-      }
-
-    }// End Function Set Price
-
-    dataToSave(){
-      // Set account
-      this.setAccountInfo();
-  
-      // Set Date format
-      let _date = new Date(this.tourInfo.tourTravelDate);
-      let _month = _date.getMonth();
-      this.tourInfo.tourTravelDate = _date.getDate()+' '+this.fullMonth[_month]+' '+_date.getFullYear();
-
-      // Set Hotel Other
-      if(this.hotel.hotelName=='Other'){
-        this._hotelName = this.hotel.hotelOther;
-      }else{
-        this._hotelName = this.hotel.hotelName;
-      }
-
-      // Set Book by
-      let countAcc = 0;
-      for(var acc in this._getAccountCodeArr){
-        if(this._getAccountCodeArr[countAcc].hotel==this.bookBy.accountName){
-          this.bookByAcc = this._getAccountCodeArr[countAcc].code;
-        }
-        countAcc++;
-      }
-      if(this.bookBy.accountName=='Other'){
-        this._bookByAcc = this.bookBy.accountNameOther;
-        this._bookByAccCode = '';
-      }else{
-        this._bookByAcc = this.bookBy.accountName;
-        this._bookByAccCode = this.bookByAcc;
-      }
-
-      // Set Book by position
-      if(this.bookBy.position=='Other'){
-        this._bookByPosition = this.bookBy.positionOther;
-      }else{
-        this._bookByPosition = this.bookBy.position;
-      }
-
-      // Set note by
-      if(this.noteBy.name=='Other'){
-        this._noteBy = this.noteBy.other;
-      }else{
-        this._noteBy = this.noteBy.name;
-      }
-
-      // Set GYG Code
-      if(this.bookBy.otaCode==null || this.bookBy.otaCode==undefined){
-        this.bookBy.otaCode='';
-      }
-
-      // Set guest data
-      let _pax = this.tourInfo.tourPax;
-      let _guestName = this.guestName;
-      let _guestAges = this.guestAges;
-      let countAdult = 0;
-      let countChild = 0;
-      let countInfant = 0;
-      this.guestData = [];
-
-      for(var i=0; i<_pax; i++){
-        let guestName = '';
-        let guestAges = 0;
-
-        if(_guestName[i]=='' || _guestName[i]==undefined || _guestName[i]==null){
-          guestName = '';
-        }else{
-          guestName = _guestName[i];
-        }
-
-        if(_guestAges[i]=='' || _guestAges[i]==undefined || _guestAges[i]==null){
-          guestAges = 1;
-        }else{
-          guestAges = _guestAges[i];
-        }
-
-        let _guestData = {
-          name:guestName,
-          isAges:guestAges
-        };
-
-        this.guestData.push(_guestData);
-
-        if(_guestAges[i]==1){
-          countAdult++;
-          this.tourInfo.adultPax = countAdult;
-        }else if(_guestAges[i]==2){
-          countChild++;
-          this.tourInfo.childPax = countChild;
-        }else if(_guestAges[i]==3){
-          countInfant++;
-          this.tourInfo.infantPax = countInfant;
-        }else{
-          countAdult++;
-          this.tourInfo.adultPax = countAdult;
-        }
-      } // end for
-
-      // Set price
-      this.setPrice();
-
-      this.dataSave = 
-        {
-          "accountInfo": this.accountInfo,
-          "bookingInfo": {
-            "tourId": this.tourInfo.tourData.id,
-            "tourCode": this.tourInfo.tourData.code,
-            "tourName": this.tourInfo.tourData.title,
-            "tourPrivacy": this.tourInfo.tourPrivacy,
-            "travelTime": this.tourInfo.tourTime,
-            "travelDate": this.tourInfo.tourTravelDate,
-            "rateTwoPax": this.tourInfo.rateTwoPax,
-            "pax": this.tourInfo.tourPax,
-            "adultPax": countAdult,
-            "childPax": countChild,
-            "infantPax": countInfant,
-            "isServiceCharge": this.service.isServiceCharge
-          },
-          "hotelInfo": {
-            "name": this._hotelName,
-            "room": this.hotel.hotelRoom
-          },
-          "guestInfo": this.guestData,
-          "paymentInfo": {
-            "tourPrice": this.paymentInfo.tourPrice,
-            "paymentCollect": this.paymentInfo.paymentCollect
-          },
-          "bookBy": {
-            "name": this.bookBy.name,
-            "position": this._bookByPosition,
-            "code": this._bookByAccCode,
-            "hotel": this._bookByAcc,
-            "tel": this.bookBy.tel,
-            "otaCode":this.bookBy.otaCode
-          },
-          "insurance": {
-            "isInsurance": this.insurance.isInsurance,
-            "insuranceReason": this.insurance.isInsurance==false?'':this.insurance.insuranceReason
-          },
-          "commission":{
-            "isCommission": this.commission.isCommission,
-            "amount": this.commission.commission
-          },
-          "noteBy": {
-            "name": this._noteBy
-          },
-          "summary": {
-            "adultPrice": this.realPriceAdult,
-            "childPrice": this.realPriceChild,
-            "totalAdultPrice": this.summary.totalAdultPrice,
-            "totalChildPrice": this.summary.totalChildPrice,
-            "singleRidingPax": this.summary.singleRidingPax,
-            "singleRiding": this.summary.singleRiding,
-            "serviceCharge": this.summary.serviceCharge,
-            "deposit": this.summary.deposit,
-            "discount": this.summary.discount + '%',
-            "discountPrice": this.summary.discountPrice,
-            "totalPrice": this.summary.totalPrice,
-            "amount": this.summary.amount
-          },
-          "specialChargePrice": this.specialChargePrice,
-          "specialRequestOperator": this.isSpecialRequestOperator,
-          "specialRequest": this.specialRequest,
-          "specialRequestPrice": this.specialRequestPrice,
-          "invoiceRef":{
-            "id":"",
-            "number":""
-          },
-          "isRevised":0,
-          "isSpecialTour":0,
-          "currency": this.currency,
-          "currency_rate": this.currencyRate,
-          "issuedBy": "Office"
-        };
-        console.log(JSON.stringify(this.dataSave));
-
-        // Save data booking to API
-        this.saveDataBooking(this.dataSave);
-    } // End Function Set Data To Save
-
-    // Save to data service
-    saveDataBooking(dataSave) {
-
-      // let url = 'http://localhost:9000/api/Reservations/ReservationSaveBookingData';
-      let url = 'http://api.tourinchiangmai.com/api/Reservations/ReservationSaveBookingData';
-
-      let options = new RequestOptions();
-      let link = '/user/reservations/booked';
-      /*==================  Success  ===================*/
-      return this.http.post(url, dataSave, options)
-                      .map(res => res.json())
-                      .subscribe(
-                        // data => {console.log('*-*'+data)},
-                        data => {this.router.navigate([link])},
-                        err => {console.log(err)}
-                      );
-      /*==================  Success  ===================*/
     }
 
-    private handleError(error: Response){
-      return Observable.throw(error.statusText);
+    // set special request price
+    if(this.specialRequestPrice==null || this.specialRequestPrice==undefined){
+      this.specialRequestPrice = 0;
     }
+
+    // set total price
+    // set special request operator
+    // '+'==1 | '-'==2 | none==0
+    if(this.specialRequestOperator=='+'){
+      this.isSpecialRequestOperator=1;
+      this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice + this.specialRequestPrice + this.specialChargePrice - this.summary.deposit;
+    }else if(this.specialRequestOperator=='-'){
+      this.isSpecialRequestOperator=2;
+      this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice - this.specialRequestPrice + this.specialChargePrice - this.summary.deposit;
+    }else{
+      this.isSpecialRequestOperator=0;
+      this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice + this.specialRequestPrice + this.specialChargePrice - this.summary.deposit;
+    }
+
+    // this.summary.totalPrice = totalTourPrice + this.summary.singleRiding - this.summary.discountPrice + this.specialRequestPrice + this.specialChargePrice - this.summary.deposit;
+
+    // set service charge 3%
+    if(this.service.isServiceCharge==true){
+      this.summary.serviceCharge = this.summary.totalPrice * 0.03;
+    }else{
+      this.summary.serviceCharge = 0;
+    }
+
+    this.summary.amount = this.summary.totalPrice + this.summary.serviceCharge;
+
+    // set commission
+    if(this.commission.isCommission==true){
+      this.commission.commission = commissionAdult + commissionChild;
+    }else{
+      this.commission.commission = 0;
+    }
+
+    // converse currency
+    if(this.currency=='USDTHB'){
+      this.realPriceAdult = this.realPriceAdult / this.currencyRate;
+      this.realPriceChild = this.realPriceChild / this.currencyRate;
+      this.summary.totalAdultPrice = this.summary.totalAdultPrice / this.currencyRate;
+      this.summary.totalChildPrice = this.summary.totalChildPrice / this.currencyRate;
+      this.summary.singleRiding = this.summary.singleRiding / this.currencyRate;
+      this.summary.serviceCharge = this.summary.serviceCharge / this.currencyRate;
+      this.summary.deposit = this.summary.deposit / this.currencyRate;
+      this.summary.discountPrice = this.summary.discountPrice / this.currencyRate;
+      this.summary.totalPrice = this.summary.totalPrice / this.currencyRate;
+      this.summary.amount = this.summary.amount / this.currencyRate;
+    }
+
+  }// End Function Set Price
+
+  dataToSave(){
+    // Set account
+    this.setAccountInfo();
+
+    // Set Date format
+    let _date = new Date(this.tourInfo.tourTravelDate);
+    let _month = _date.getMonth();
+    this.tourInfo.tourTravelDate = _date.getDate()+' '+this.fullMonth[_month]+' '+_date.getFullYear();
+
+    // Set Hotel Other
+    if(this.hotel.hotelName=='Other'){
+      this._hotelName = this.hotel.hotelOther;
+    }else{
+      this._hotelName = this.hotel.hotelName;
+    }
+
+    // Set Book by
+    let countAcc = 0;
+    for(var acc in this._getAccountCodeArr){
+      if(this._getAccountCodeArr[countAcc].hotel==this.bookBy.accountName){
+        this.bookByAcc = this._getAccountCodeArr[countAcc].code;
+      }
+      countAcc++;
+    }
+    if(this.bookBy.accountName=='Other'){
+      this._bookByAcc = this.bookBy.accountNameOther;
+      this._bookByAccCode = '';
+    }else{
+      this._bookByAcc = this.bookBy.accountName;
+      this._bookByAccCode = this.bookByAcc;
+    }
+
+    // Set Book by position
+    if(this.bookBy.position=='Other'){
+      this._bookByPosition = this.bookBy.positionOther;
+    }else{
+      this._bookByPosition = this.bookBy.position;
+    }
+
+    // Set note by
+    if(this.noteBy.name=='Other'){
+      this._noteBy = this.noteBy.other;
+    }else{
+      this._noteBy = this.noteBy.name;
+    }
+
+    // Set GYG Code
+    if(this.bookBy.otaCode==null || this.bookBy.otaCode==undefined){
+      this.bookBy.otaCode='';
+    }
+
+    // Set guest data
+    let _pax = this.tourInfo.tourPax;
+    let _guestName = this.guestName;
+    let _guestAges = this.guestAges;
+    let countAdult = 0;
+    let countChild = 0;
+    let countInfant = 0;
+    this.guestData = [];
+
+    for(var i=0; i<_pax; i++){
+      let guestName = '';
+      let guestAges = 0;
+
+      if(_guestName[i]=='' || _guestName[i]==undefined || _guestName[i]==null){
+        guestName = '';
+      }else{
+        guestName = _guestName[i];
+      }
+
+      if(_guestAges[i]=='' || _guestAges[i]==undefined || _guestAges[i]==null){
+        guestAges = 1;
+      }else{
+        guestAges = _guestAges[i];
+      }
+
+      let _guestData = {
+        name:guestName,
+        isAges:guestAges
+      };
+
+      this.guestData.push(_guestData);
+
+      if(_guestAges[i]==1){
+        countAdult++;
+        this.tourInfo.adultPax = countAdult;
+      }else if(_guestAges[i]==2){
+        countChild++;
+        this.tourInfo.childPax = countChild;
+      }else if(_guestAges[i]==3){
+        countInfant++;
+        this.tourInfo.infantPax = countInfant;
+      }else{
+        countAdult++;
+        this.tourInfo.adultPax = countAdult;
+      }
+    } // end for
+
+    // Set price
+    this.setPrice();
+
+    this.dataSave = 
+      {
+        "accountInfo": this.accountInfo,
+        "bookingInfo": {
+          "tourId": this.tourInfo.tourData.id,
+          "tourCode": this.tourInfo.tourData.code,
+          "tourName": this.tourInfo.tourData.title,
+          "tourPrivacy": this.tourInfo.tourPrivacy,
+          "travelTime": this.tourInfo.tourTime,
+          "travelDate": this.tourInfo.tourTravelDate,
+          "rateTwoPax": this.tourInfo.rateTwoPax,
+          "pax": this.tourInfo.tourPax,
+          "adultPax": countAdult,
+          "childPax": countChild,
+          "infantPax": countInfant,
+          "isServiceCharge": this.service.isServiceCharge
+        },
+        "hotelInfo": {
+          "name": this._hotelName,
+          "room": this.hotel.hotelRoom
+        },
+        "guestInfo": this.guestData,
+        "paymentInfo": {
+          "tourPrice": this.paymentInfo.tourPrice,
+          "paymentCollect": this.paymentInfo.paymentCollect
+        },
+        "bookBy": {
+          "name": this.bookBy.name,
+          "position": this._bookByPosition,
+          "code": this._bookByAccCode,
+          "hotel": this._bookByAcc,
+          "tel": this.bookBy.tel,
+          "otaCode":this.bookBy.otaCode
+        },
+        "insurance": {
+          "isInsurance": this.insurance.isInsurance,
+          "insuranceReason": this.insurance.isInsurance==false?'':this.insurance.insuranceReason
+        },
+        "commission":{
+          "isCommission": this.commission.isCommission,
+          "amount": this.commission.commission
+        },
+        "noteBy": {
+          "name": this._noteBy
+        },
+        "summary": {
+          "adultPrice": this.realPriceAdult,
+          "childPrice": this.realPriceChild,
+          "totalAdultPrice": this.summary.totalAdultPrice,
+          "totalChildPrice": this.summary.totalChildPrice,
+          "singleRidingPax": this.summary.singleRidingPax,
+          "singleRiding": this.summary.singleRiding,
+          "serviceCharge": this.summary.serviceCharge,
+          "deposit": this.summary.deposit,
+          "discount": this.summary.discount + '%',
+          "discountPrice": this.summary.discountPrice,
+          "totalPrice": this.summary.totalPrice,
+          "amount": this.summary.amount
+        },
+        "specialChargePrice": this.specialChargePrice,
+        "specialRequestOperator": this.isSpecialRequestOperator,
+        "specialRequest": this.specialRequest,
+        "specialRequestPrice": this.specialRequestPrice,
+        "invoiceRef":{
+          "id":"",
+          "number":""
+        },
+        "isRevised":0,
+        "isSpecialTour":0,
+        "currency": this.currency,
+        "currency_rate": this.currencyRate,
+        "issuedBy": "Office"
+      };
+      console.log(JSON.stringify(this.dataSave));
+
+      // Save data booking to API
+      this.saveDataBooking(this.dataSave);
+  } // End Function Set Data To Save
+
+  // Save to data service
+  saveDataBooking(dataSave) {
+
+    // let url = 'http://localhost:9000/api/Reservations/ReservationSaveBookingData';
+    let url = 'http://api.tourinchiangmai.com/api/Reservations/ReservationSaveBookingData';
+
+    let options = new RequestOptions();
+    let link = '/user/reservations/booked';
+    /*==================  Success  ===================*/
+    return this.http.post(url, dataSave, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      // data => {console.log('*-*'+data)},
+                      data => {this.router.navigate([link])},
+                      err => {console.log(err)}
+                    );
+    /*==================  Success  ===================*/
+  }
+
+  private handleError(error: Response){
+    return Observable.throw(error.statusText);
+  }
 
   ngOnInit() {
+    // active menu
+    this.activeMenu();
+
     this.getBookingData();
     this.getAccountCode();
     // this.getCurrency();

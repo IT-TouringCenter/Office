@@ -48,6 +48,18 @@ export class BookedRsvnComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
+  // 1. print
+  public print():void {
+    window.print();
+  }
+
+  // 2. active menu
+  public activeMenu(){
+    // set storage
+    sessionStorage.setItem('menu',JSON.stringify(1));
+    sessionStorage.setItem('sub-menu',JSON.stringify(101));
+  }
+
   //------------------ Start Page ------------------------
   PagePagination(){
     this.activePage = 1;
@@ -140,6 +152,7 @@ export class BookedRsvnComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.activeMenu();
     this.getInvoiceFromData();
   }
 }

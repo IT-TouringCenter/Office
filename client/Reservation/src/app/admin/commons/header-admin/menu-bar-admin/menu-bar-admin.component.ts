@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-bar-admin',
@@ -11,7 +12,9 @@ export class MenuBarAdminComponent implements OnInit {
   subId = 0;
   bookedId = 0;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   // Menu
   addClass(id: number) {
@@ -69,10 +72,19 @@ export class MenuBarAdminComponent implements OnInit {
     }
   }
 
+  //
+  logout(){
+    let logout = confirm("Are you sure!!");
+    if(logout!=true){
+      return;
+    }else{
+      this.router.navigate(['user/logout']);
+    }
+  }
+
   ngOnInit() {
     this.activeMenu();
     this.activeSubMenu();
   }
-
 
 }
