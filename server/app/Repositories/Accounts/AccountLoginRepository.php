@@ -155,4 +155,14 @@ class AccountLoginRepository{
 						->get();
 		return $result;
 	}
+
+	// 14. Check login expried
+	public function CheckLoginExpired($token, $date){
+		$result = \DB::table('login_histories')
+						->where('token',$token)
+						->where('logout_expired','>',$date)
+						->where('is_active',1)
+						->get();
+		return $result;
+	}
 }

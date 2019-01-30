@@ -323,7 +323,8 @@ export class BookformEditRsvnComponent implements OnInit {
     5. Save to API
   ------------------------------- */
   setAccountInfo(){
-    let getAccount = sessionStorage.getItem('users');
+    // let getAccount = sessionStorage.getItem('users');
+    let getAccount = localStorage.getItem('users');
     console.log('-------------');
     console.log(getAccount);
     console.log('-------------');

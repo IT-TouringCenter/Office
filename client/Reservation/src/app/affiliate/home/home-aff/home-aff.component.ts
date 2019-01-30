@@ -100,7 +100,8 @@ export class HomeAffComponent implements OnInit {
     let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate';
     // let url = './../../../../assets/json/affiliate/dashboard/dashboard.json';
 
-    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    // let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let _getUserData = JSON.parse(localStorage.getItem('users'));
     if(_getUserData==null || _getUserData==undefined || _getUserData==''){
       alert('Session expired!');
       this.router.navigate(['user/logout']);
@@ -143,7 +144,8 @@ export class HomeAffComponent implements OnInit {
     let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked';
     // let url = './../../../../assets/json/affiliate/dashboard/dashboard-booked.json';
 
-    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    // let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let _getUserData = JSON.parse(localStorage.getItem('users'));
     let postData = {
       token : _getUserData.data.token,
       type : _getUserData.data.userType
@@ -193,7 +195,8 @@ export class HomeAffComponent implements OnInit {
     let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission';
     // let url = './../../../../assets/json/affiliate/dashboard/dashboard-commission.json';
 
-    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    // let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let _getUserData = JSON.parse(localStorage.getItem('users'));
     let postData = {
       token : _getUserData.data.token,
       type : _getUserData.data.userType

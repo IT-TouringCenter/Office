@@ -89,7 +89,8 @@ export class BookedMonthlyAffComponent implements OnInit {
     }
 
     // get token from session
-    let getToken = JSON.parse(sessionStorage.getItem('users'));
+    // let getToken = JSON.parse(sessionStorage.getItem('users'));
+    let getToken = JSON.parse(localStorage.getItem('users'));
     if(getToken==null || getToken==undefined || getToken==''){
       alert('Session expired!');
       this.router.navigate(['user/logout']);
@@ -133,7 +134,8 @@ export class BookedMonthlyAffComponent implements OnInit {
     let options = new RequestOptions();
 
     // get token from session
-    let getToken = JSON.parse(sessionStorage.getItem('users'));
+    // let getToken = JSON.parse(sessionStorage.getItem('users'));
+    let getToken = JSON.parse(localStorage.getItem('users'));
     if(getToken==null || getToken==undefined || getToken==''){
       this.bookedData.token = 0;
       this.bookedData.type = 0;

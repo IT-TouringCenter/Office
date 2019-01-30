@@ -269,7 +269,8 @@ export class BookformAddRsvnComponent implements OnInit {
 
   /*======== Data to Save ========*/
   setAccountInfo(){
-    let getAccount = sessionStorage.getItem('users');
+    // let getAccount = sessionStorage.getItem('users');
+    let getAccount = localStorage.getItem('users');
     console.log(getAccount);
     if(getAccount==null || getAccount==undefined || getAccount==''){
       this.accountInfo.token = '';

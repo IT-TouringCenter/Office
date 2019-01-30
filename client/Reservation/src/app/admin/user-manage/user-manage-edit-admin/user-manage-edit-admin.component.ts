@@ -87,7 +87,8 @@ export class UserManageEditAdminComponent implements OnInit {
   // 2. register
   editRegister(){
     // set account
-    let getAccount = JSON.parse(sessionStorage.getItem('users'));
+    // let getAccount = JSON.parse(sessionStorage.getItem('users'));
+    let getAccount = JSON.parse(localStorage.getItem('users'));
     this.editUser.accountName = getAccount.data.name;
     this.editUser.userToken = this.token;
 

@@ -91,7 +91,8 @@ export class TraveledMonthlyAffComponent implements OnInit {
     }
 
     // get token from session
-    let getToken = JSON.parse(sessionStorage.getItem('users'));
+    // let getToken = JSON.parse(sessionStorage.getItem('users'));
+    let getToken = JSON.parse(localStorage.getItem('users'));
     if(getToken==null || getToken==undefined || getToken==''){
       alert('Session expired!');
       this.router.navigate(['user/logout']);
@@ -147,7 +148,8 @@ export class TraveledMonthlyAffComponent implements OnInit {
     let options = new RequestOptions();
 
     // get token from session
-    let getToken = JSON.parse(sessionStorage.getItem('users'));
+    // let getToken = JSON.parse(sessionStorage.getItem('users'));
+    let getToken = JSON.parse(localStorage.getItem('users'));
     if(getToken==null || getToken==undefined || getToken==''){
       this.travelData.token = 0;
       this.travelData.type = 0;

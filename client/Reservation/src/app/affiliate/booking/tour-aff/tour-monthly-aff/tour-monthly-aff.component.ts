@@ -121,7 +121,8 @@ export class TourMonthlyAffComponent implements OnInit {
     }
 
     // get token from session
-    let getToken = JSON.parse(sessionStorage.getItem('users'));
+    // let getToken = JSON.parse(sessionStorage.getItem('users'));
+    let getToken = JSON.parse(localStorage.getItem('users'));
     if(getToken==null || getToken==undefined || getToken==''){
       alert('Session expired!');
       this.router.navigate(['user/logout']);
@@ -163,7 +164,8 @@ export class TourMonthlyAffComponent implements OnInit {
     let options = new RequestOptions();
 
     // get token from session
-    let getToken = JSON.parse(sessionStorage.getItem('users'));
+    // let getToken = JSON.parse(sessionStorage.getItem('users'));
+    let getToken = JSON.parse(localStorage.getItem('users'));
     if(getToken==null || getToken==undefined || getToken==''){
       this.tourData.token = 0;
       this.tourData.type = 0;

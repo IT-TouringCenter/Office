@@ -53,7 +53,8 @@ export class CommissionAffComponent implements OnInit {
     let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Commission/Summary';
     // let url = './../../../../assets/json/affiliate/commission/commission.json';
 
-    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    // let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let _getUserData = JSON.parse(localStorage.getItem('users'));
     if(_getUserData==null || _getUserData==undefined || _getUserData==''){
       alert('Session expired!');
       this.router.navigate(['user/logout']);

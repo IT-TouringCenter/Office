@@ -57,7 +57,8 @@ export class BookedAffComponent implements OnInit {
     // let url = './../../../../assets/json/affiliate/booked/booked-summary-all.json';
 
     // get user
-    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    // let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let _getUserData = JSON.parse(localStorage.getItem('users'));
     if(_getUserData==null || _getUserData==undefined || _getUserData==''){
       alert('Session expired!');
       this.router.navigate(['user/logout']);
@@ -97,7 +98,8 @@ export class BookedAffComponent implements OnInit {
     let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/Summary/Month';
     // let url = './../../../../assets/json/affiliate/booked/booked-summary-month.json';
 
-    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    // let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let _getUserData = JSON.parse(localStorage.getItem('users'));
     let postData = {
       token : _getUserData.data.token,
       type : _getUserData.data.userType
@@ -132,7 +134,8 @@ export class BookedAffComponent implements OnInit {
     let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Booked/Summary/Year';
     // let url = './../../../../assets/json/affiliate/booked/booked-summary-year.json';
 
-    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    // let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let _getUserData = JSON.parse(localStorage.getItem('users'));
     let postData = {
       token : _getUserData.data.token,
       type : _getUserData.data.userType

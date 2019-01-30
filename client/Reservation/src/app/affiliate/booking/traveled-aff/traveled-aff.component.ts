@@ -58,7 +58,8 @@ export class TraveledAffComponent implements OnInit {
     let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled';
     // let url = './../../../../assets/json/affiliate/traveled/traveled-summary.json';
 
-    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    // let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let _getUserData = JSON.parse(localStorage.getItem('users'));
     if(_getUserData==null || _getUserData==undefined || _getUserData==''){
       alert('Session expired!');
       this.router.navigate(['user/logout']);

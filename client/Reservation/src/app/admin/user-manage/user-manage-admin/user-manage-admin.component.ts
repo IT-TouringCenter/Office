@@ -52,7 +52,8 @@ export class UserManageAdminComponent implements OnInit {
     let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement";
 
     // set data to save
-    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    // let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let _getUserData = JSON.parse(localStorage.getItem('users'));
     let dataSave = {
       token : _getUserData.data.token,
       type : _getUserData.data.userType

@@ -20,7 +20,8 @@ export class PermissionAdminComponent implements OnInit {
 
   // get user storage
   getUserStorage(){
-    let getUser = JSON.parse(sessionStorage.getItem('users'));
+    // let getUser = JSON.parse(sessionStorage.getItem('users'));
+    let getUser = JSON.parse(localStorage.getItem('users'));
 
     if(getUser==null || getUser==undefined || getUser==''){
       this.router.navigate(['user/login']);

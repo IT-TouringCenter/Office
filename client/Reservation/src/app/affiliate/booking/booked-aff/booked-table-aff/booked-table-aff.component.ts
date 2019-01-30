@@ -64,7 +64,8 @@ export class BookedTableAffComponent implements OnInit {
     let url = "http://api.tourinchiangmai.com/api/reservations/GetBookedByAccountId";
 
     // set data to save
-    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    // let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let _getUserData = JSON.parse(localStorage.getItem('users'));
     if(_getUserData==null || _getUserData==undefined || _getUserData==''){
       alert('Session expired!');
       this.router.navigate(['user/logout']);

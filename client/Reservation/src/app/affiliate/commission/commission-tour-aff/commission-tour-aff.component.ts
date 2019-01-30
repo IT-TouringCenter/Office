@@ -69,7 +69,8 @@ export class CommissionTourAffComponent implements OnInit {
     let getYear = getDate.getFullYear();
 
     // get token from session
-    let getToken = JSON.parse(sessionStorage.getItem('users'));
+    // let getToken = JSON.parse(sessionStorage.getItem('users'));
+    let getToken = JSON.parse(localStorage.getItem('users'));
     if(getToken==null || getToken==undefined || getToken==''){
       alert('Session expired!');
       this.router.navigate(['user/logout']);

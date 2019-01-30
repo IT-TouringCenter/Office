@@ -60,7 +60,8 @@ export class UserManageAddAdminComponent implements OnInit {
   // 4. register
   register(){
     // set account
-    let getAccount = JSON.parse(sessionStorage.getItem('users'));
+    // let getAccount = JSON.parse(sessionStorage.getItem('users'));
+    let getAccount = JSON.parse(localStorage.getItem('users'));
     this.addUser.account = getAccount.data.username;
     this.addUser.accountName = getAccount.data.name;
     this.addUser.email = this.addUser.username;

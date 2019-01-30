@@ -57,7 +57,8 @@ export class LoginUserComponent implements OnInit {
     // console.log(data);
     if(data.status==true){
       alert(data.message);
-      sessionStorage.setItem('users',JSON.stringify(data));
+      // sessionStorage.setItem('users',JSON.stringify(data));
+      localStorage.setItem('users',JSON.stringify(data));
       this.router.navigate(['user']);
     }else if(data.status==false && data.notify=='Sign out not found'){
       alert(data.message);

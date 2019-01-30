@@ -27,7 +27,8 @@ export class SessionLoginComponent implements OnInit {
 
   // 1. Check session storage
   checkStorage(){
-    let sessionData = JSON.parse(sessionStorage.getItem('users'));
+    // let sessionData = JSON.parse(sessionStorage.getItem('users'));
+    let sessionData = JSON.parse(localStorage.getItem('users'));
     if(sessionData){
       let checkLogin = this.checkLogin(sessionData);
     }else{
@@ -97,7 +98,8 @@ export class SessionLoginComponent implements OnInit {
   // 4. Clear session
   clearSession(data){
     // console.log(data.status);
-    sessionStorage.removeItem('users');
+    // sessionStorage.removeItem('users');
+    localStorage.removeItem('users');
     this.router.navigate(['user/login']);
     return;
   }

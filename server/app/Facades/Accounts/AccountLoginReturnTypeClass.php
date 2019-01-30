@@ -28,7 +28,17 @@ class AccountLoginReturnTypeClass{
         // check login
         $getLogin = $this->AccountLoginRepo->GetAccountLoginByToken($token);
         if($getLogin){
-            $this->GetAccountType($token,$accountType);
+            // check login expired
+            $checkLoginExpired = $this->CheckLoginExpired($token);
+            
+            if($checkLoginExpired==true){
+                $this->GetAccountType($token,$accountType);
+            }else{
+                $this->account->status = false;
+                $this->account->message = "Login expired.";
+                $this->account->data = [];
+            }
+            
         }else{
             $this->account->status = false;
             $this->account->message = "Please login.";
@@ -38,7 +48,19 @@ class AccountLoginReturnTypeClass{
         return $this->account;
     }
 
-    // 2. 
+    // 2. check login expired
+    public function CheckLoginExpired($token){
+        $dateNow = Carbon::now('Asia/Bangkok');
+        $loginExpired = $this->AccountLoginRepo->CheckLoginExpired($token,$dateNow);
+
+        if($loginExpired){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    // 3. 
     public function GetAccountType($token,$accountType){
         // get account
 

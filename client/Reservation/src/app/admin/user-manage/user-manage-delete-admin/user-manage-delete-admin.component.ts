@@ -32,7 +32,8 @@ export class UserManageDeleteAdminComponent implements OnInit {
   // 
   getAccountStorage(){
     // get account data
-    let getAccount = JSON.parse(sessionStorage.getItem('users'));
+    // let getAccount = JSON.parse(sessionStorage.getItem('users'));
+    let getAccount = JSON.parse(localStorage.getItem('users'));
 
     this.deleteUserData.accountToken = getAccount.data.token;
     this.deleteUserData.accountName = getAccount.data.name;

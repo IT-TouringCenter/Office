@@ -20,7 +20,8 @@ export class PermissionUserAffComponent implements OnInit {
 
   // get user storage
   getUserStorage(){
-    let getUser = sessionStorage.getItem('users');
+    // let getUser = sessionStorage.getItem('users');
+    let getUser = localStorage.getItem('users');
 
     if(getUser==null || getUser==undefined || getUser==''){
       alert('Session expired!');
@@ -51,7 +52,7 @@ export class PermissionUserAffComponent implements OnInit {
                     .map(res => res.json())
                     .subscribe(
                       data => [
-                        sessionStorage.setItem('login',JSON.stringify(data)),
+                        // sessionStorage.setItem('login',JSON.stringify(data)),
                         this.setUserLogin(data)
                       ],
                       err => [
@@ -84,7 +85,6 @@ export class PermissionUserAffComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('--------------------+++');
     this.getUserStorage();
   }
 

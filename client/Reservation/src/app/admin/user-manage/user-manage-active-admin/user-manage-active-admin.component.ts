@@ -82,7 +82,8 @@ export class UserManageActiveAdminComponent implements OnInit {
     let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Active";
 
     // set data to save
-    let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    // let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+    let _getUserData = JSON.parse(localStorage.getItem('users'));
     let dataSave = {
       token : _getUserData.data.token
     };
@@ -121,7 +122,8 @@ export class UserManageActiveAdminComponent implements OnInit {
   // Save active
   saveActive(){
     // set data for save
-    let getAccount = JSON.parse(sessionStorage.getItem('users'));
+    // let getAccount = JSON.parse(sessionStorage.getItem('users'));
+    let getAccount = JSON.parse(localStorage.getItem('users'));
     this.userActive.accountToken = getAccount.data.token;
     this.userActive.accountName = getAccount.data.name;
 
@@ -157,7 +159,8 @@ export class UserManageActiveAdminComponent implements OnInit {
       let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Active";
 
       // set data to save
-      let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+      // let _getUserData = JSON.parse(sessionStorage.getItem('users'));
+      let _getUserData = JSON.parse(localStorage.getItem('users'));
       let dataSave = {
         token : _getUserData.data.token
       };
