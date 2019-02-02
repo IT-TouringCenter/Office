@@ -31,9 +31,9 @@ class AccountRegisterConfirmRepository{
 		}
 	}
 
-	// 2. Active account table
+	// 2. Active account table : type = 2 (member)
 	public function ActiveAccount($accoutId,$dateNow){
-		$update = ['is_active'=>1];
+		$update = ['account_type_id'=>2,'is_active'=>1];
 		$result = \DB::table('accounts')
 						->where('id',$accoutId)
 						->where('active_expired','>',$dateNow)

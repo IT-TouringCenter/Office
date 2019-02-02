@@ -2,16 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-menu-bar-admin',
-  templateUrl: './menu-bar-admin.component.html',
-  styleUrls: ['./menu-bar-admin.component.scss']
+  selector: 'app-menu-bar-member',
+  templateUrl: './menu-bar-member.component.html',
+  styleUrls: ['./menu-bar-member.component.scss']
 })
-export class MenuBarAdminComponent implements OnInit {
-
+export class MenuBarMemberComponent implements OnInit {
   user = "";
   id = 0;
   subId = 0;
   bookedId = 0;
+
+  iconMenu = 0;
 
   constructor(
     private router: Router,
@@ -77,9 +78,13 @@ export class MenuBarAdminComponent implements OnInit {
       sidebar.style.height = "100%";
       sidebar.style.position = "fixed";
       sidebarMenu.style.display = "block";
+
+      this.iconMenu = 1;
     } else {
       sidebar.style.display = "none";
       sidebarMenu.style.display = "none";
+
+      this.iconMenu = 0;
     }
   }
 

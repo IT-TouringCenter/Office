@@ -82,6 +82,17 @@ import { UserManageAddAdminComponent } from './admin/user-manage/user-manage-add
 import { UserManageAdminComponent } from './admin/user-manage/user-manage-admin/user-manage-admin.component';
 import { UserManageDeleteAdminComponent } from './admin/user-manage/user-manage-delete-admin/user-manage-delete-admin.component';
 import { UserManageEditAdminComponent } from './admin/user-manage/user-manage-edit-admin/user-manage-edit-admin.component';
+import { MenuBarMemberComponent } from './member/commons/menu-bar-member/menu-bar-member.component';
+import { HomeMemberComponent } from './member/home/home-member/home-member.component';
+import { RequestAffMemberComponent } from './member/request/affiliate/request-aff-member/request-aff-member.component';
+import { HowtoAffMemberComponent } from './member/request/affiliate/request-aff-member/howto-aff-member/howto-aff-member.component';
+import { ConfirmAffMemberComponent } from './member/request/affiliate/request-aff-member/confirm-aff-member/confirm-aff-member.component';
+import { BankAffMemberComponent } from './member/request/affiliate/request-aff-member/bank-aff-member/bank-aff-member.component';
+import { ProfileAffMemberComponent } from './member/request/affiliate/request-aff-member/profile-aff-member/profile-aff-member.component';
+import { PolicyAffMemberComponent } from './member/request/affiliate/request-aff-member/howto-aff-member/policy-aff-member/policy-aff-member.component';
+import { ApprovalAffMemberComponent } from './member/request/affiliate/request-aff-member/approval-aff-member/approval-aff-member.component';
+import { PermissionMemberComponent } from './member/permission/permission-member/permission-member.component';
+import { UserRequestComponent } from './admin/user-request/user-request.component';
 
 @NgModule({
   declarations: [
@@ -150,6 +161,17 @@ import { UserManageEditAdminComponent } from './admin/user-manage/user-manage-ed
     UserManageAdminComponent,
     UserManageDeleteAdminComponent,
     UserManageEditAdminComponent,
+    MenuBarMemberComponent,
+    HomeMemberComponent,
+    RequestAffMemberComponent,
+    HowtoAffMemberComponent,
+    ConfirmAffMemberComponent,
+    BankAffMemberComponent,
+    ProfileAffMemberComponent,
+    PolicyAffMemberComponent,
+    ApprovalAffMemberComponent,
+    PermissionMemberComponent,
+    UserRequestComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,14 +3,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
 
 // component
-// Reservations
-import { HomeRsvnComponent } from './reservations/home-rsvn/home-rsvn.component';
-import { BookedRsvnComponent } from './reservations/bookings/booked-rsvn/booked-rsvn.component';
-import { BookformRsvnComponent } from './reservations/bookings/bookform-rsvn/bookform-rsvn.component';
-import { BookformAddRsvnComponent } from './reservations/bookings/bookform-add-rsvn/bookform-add-rsvn.component';
-import { BookformEditRsvnComponent } from './reservations/bookings/bookform-edit-rsvn/bookform-edit-rsvn.component';
-import { InvoiceRsvnComponent } from './reservations/invoices/invoice-rsvn/invoice-rsvn.component';
-import { TemplateTcWebsiteComponent } from './websites/templates/template-tc-website/template-tc-website.component';
 // Users
 import { HomeUserComponent } from './users/home-user/home-user.component';
 import { ChangePasswordUserComponent } from './users/change-password-user/change-password-user.component';
@@ -23,6 +15,14 @@ import { RegisterUserComponent } from './users/register/register-user/register-u
 import { RegisterConfirmUserComponent } from './users/register/register-confirm-user/register-confirm-user.component';
 import { ProfileUserComponent } from './users/profiles/profile-user/profile-user.component';
 import { ProfileEditUserComponent } from './users/profiles/profile-edit-user/profile-edit-user.component';
+// Reservations
+import { HomeRsvnComponent } from './reservations/home-rsvn/home-rsvn.component';
+import { BookedRsvnComponent } from './reservations/bookings/booked-rsvn/booked-rsvn.component';
+import { BookformRsvnComponent } from './reservations/bookings/bookform-rsvn/bookform-rsvn.component';
+import { BookformAddRsvnComponent } from './reservations/bookings/bookform-add-rsvn/bookform-add-rsvn.component';
+import { BookformEditRsvnComponent } from './reservations/bookings/bookform-edit-rsvn/bookform-edit-rsvn.component';
+import { InvoiceRsvnComponent } from './reservations/invoices/invoice-rsvn/invoice-rsvn.component';
+import { TemplateTcWebsiteComponent } from './websites/templates/template-tc-website/template-tc-website.component';
 // Affiliate
 import { HomeAffComponent } from './affiliate/home/home-aff/home-aff.component';
 import { BookedAffComponent } from './affiliate/booking/booked-aff/booked-aff.component';
@@ -47,39 +47,20 @@ import { UserManageAddAdminComponent } from './admin/user-manage/user-manage-add
 import { UserManageDeleteAdminComponent } from './admin/user-manage/user-manage-delete-admin/user-manage-delete-admin.component';
 import { UserManageEditAdminComponent } from './admin/user-manage/user-manage-edit-admin/user-manage-edit-admin.component';
 import { UserManageActiveAdminComponent } from './admin/user-manage/user-manage-active-admin/user-manage-active-admin.component';
+import { UserRequestComponent } from './admin/user-request/user-request.component';
+// Member
+import { HomeMemberComponent } from './member/home/home-member/home-member.component';
+import { HowtoAffMemberComponent } from './member/request/affiliate/request-aff-member/howto-aff-member/howto-aff-member.component';
+import { ProfileAffMemberComponent } from './member/request/affiliate/request-aff-member/profile-aff-member/profile-aff-member.component'
+import { BankAffMemberComponent } from './member/request/affiliate/request-aff-member/bank-aff-member/bank-aff-member.component';
+import { ConfirmAffMemberComponent } from './member/request/affiliate/request-aff-member/confirm-aff-member/confirm-aff-member.component';
+import { ApprovalAffMemberComponent } from './member/request/affiliate/request-aff-member/approval-aff-member/approval-aff-member.component';
 
 const routes: Routes = [
   {
     path: '',
     component: TemplateTcWebsiteComponent
   },
-
-  // Reservations
-  {
-    path: 'user/reservations',
-    component: HomeRsvnComponent
-  },
-  {
-    path: 'user/reservations/booked',
-    component: BookedRsvnComponent
-  },
-  {
-    path: 'user/reservations/book-form-add',
-    component: BookformAddRsvnComponent
-  },
-  {
-    path: 'user/reservations/book-form-edit/:transactionId',
-    component: BookformEditRsvnComponent
-  },
-  {
-    path: 'user/reservations/book-form/:transactionId',
-    component: BookformRsvnComponent
-  },
-  {
-    path: 'user/reservations/invoice/:transactionId',
-    component: InvoiceRsvnComponent
-  },
-
   // Login
   {
     path: 'user',
@@ -125,7 +106,31 @@ const routes: Routes = [
     path: 'user/forgot-password',
     component: ForgotPasswordUserComponent
   },
-
+  // Reservations
+  {
+    path: 'user/reservations',
+    component: HomeRsvnComponent
+  },
+  {
+    path: 'user/reservations/booked',
+    component: BookedRsvnComponent
+  },
+  {
+    path: 'user/reservations/book-form-add',
+    component: BookformAddRsvnComponent
+  },
+  {
+    path: 'user/reservations/book-form-edit/:transactionId',
+    component: BookformEditRsvnComponent
+  },
+  {
+    path: 'user/reservations/book-form/:transactionId',
+    component: BookformRsvnComponent
+  },
+  {
+    path: 'user/reservations/invoice/:transactionId',
+    component: InvoiceRsvnComponent
+  },
   // Affiliate
   {
     path: 'user/affiliate',
@@ -191,7 +196,6 @@ const routes: Routes = [
     path: 'user/affiliate/commission/tour',
     component: CommissionTourAffComponent
   },
-
   // Admin
   {
     path: 'user/admin',
@@ -216,7 +220,36 @@ const routes: Routes = [
   {
     path: 'user/admin/user-manage/active',
     component: UserManageActiveAdminComponent
-  }
+  },
+  {
+    path: 'user/admin/user-request',
+    component: UserRequestComponent
+  },
+  // Member
+  {
+    path: 'user/member',
+    component: HomeMemberComponent
+  },
+  {
+    path: 'user/member/request/affiliate/howto',
+    component: HowtoAffMemberComponent
+  },
+  {
+    path: 'user/member/request/affiliate/1',
+    component: ProfileAffMemberComponent
+  },
+  {
+    path: 'user/member/request/affiliate/2',
+    component: BankAffMemberComponent
+  },
+  {
+    path: 'user/member/request/affiliate/3',
+    component: ConfirmAffMemberComponent
+  },
+  {
+    path: 'user/member/request/affiliate/approval',
+    component: ApprovalAffMemberComponent
+  },
 ];
 
 @NgModule({

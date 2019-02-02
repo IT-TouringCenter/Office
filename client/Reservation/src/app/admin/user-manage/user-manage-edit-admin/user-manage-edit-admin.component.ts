@@ -125,8 +125,8 @@ export class UserManageEditAdminComponent implements OnInit {
 
   // close window
   close(){
-    if(confirm("Are you sure? for close windows.")){
-      window.close();
+    if(confirm("Are you sure? data not recorded.")){
+      this.router.navigate(['user/admin/user-manage']);
     }else{
 
     }

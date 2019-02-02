@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class MenuBarRsvnComponent implements OnInit {
 
+  user = "";
   id = 0;
   subId = 0;
   bookedId = 0;
@@ -15,6 +16,16 @@ export class MenuBarRsvnComponent implements OnInit {
   constructor(
     private router: Router,
   ) { }
+
+  // Get user
+  getUser(){
+    let getUser = JSON.parse(localStorage.getItem('users'));
+    if(getUser==null || getUser==undefined || getUser==''){
+      this.user = "";
+    }else{
+      this.user = getUser.data.name;
+    }
+  }
 
   // Menu
   addClass(id: number) {
@@ -83,6 +94,7 @@ export class MenuBarRsvnComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getUser();
     this.activeMenu();
     this.activeSubMenu();
   }

@@ -1,0 +1,38 @@
+<header class="header black-bg" id="header-block">
+  <div class="sidebar-toggle-box">
+    <div class="fa fa-bars tooltips" (click)="toggleSidebar()" data-placement="right" *ngIf="iconMenu==0"></div>
+    <div class="fa fa-times tooltips closs-tooltips" (click)="toggleSidebar()" data-placement="right" *ngIf="iconMenu==1"></div>
+  </div>
+  <a href="/#/user/member" (click)="nonActiveMenu()" class="logo"><b>Touring Center</b></a>
+
+  <div id="top_menu" class="pull-right">
+    <div class="nav top-menu">
+      
+      <ul class="nav top-menu">
+        <!-- <li style="color: white; float: left;">
+          <i class="fa fa-user" aria-hidden="true"></i><span> {{user}}</span>
+        </li> -->
+        <li style="float: right;">
+          <a class="logout" (click)="logout()" style="cursor: pointer;">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<aside id="sidebar-block">
+  <div id="sidebar"  class="nav-collapse" style="overflow-y: auto; direction: rtl;">
+    <ul class="sidebar-menu" id="nav-accordion">
+      <p class="centered"><img src="./assets/images/logo/logo-daytrip-join.jpg" class="img-circle" width="100"></p>
+      <h5 class="centered" style="margin-top: 20px; margin-bottom: 25px;">Member</h5>
+      <!-- Dashboard -->
+      <li class="sub-menu">
+        <a class="sidebar-active" href="/#/user/member" [ngClass]="{'active':id==0}" (click)="addClass(id=0);addSubClass(subId=0)">
+          <span>Dashboard</span>
+          <i class="fa fa-area-chart fa-5x" aria-hidden="true"></i>
+        </a>
+      </li>  
+    </ul>
+  </div>
+
+</aside>

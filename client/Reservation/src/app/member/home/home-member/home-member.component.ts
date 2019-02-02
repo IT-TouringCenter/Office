@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-home-admin',
-  templateUrl: './home-admin.component.html',
-  styleUrls: ['./home-admin.component.scss']
+  selector: 'app-home-member',
+  templateUrl: './home-member.component.html',
+  styleUrls: ['./home-member.component.scss']
 })
-export class HomeAdminComponent implements OnInit {
+export class HomeMemberComponent implements OnInit {
 
   constructor() { }
 
@@ -15,7 +15,7 @@ export class HomeAdminComponent implements OnInit {
     sessionStorage.setItem('menu',JSON.stringify(0));
     sessionStorage.setItem('sub-menu',JSON.stringify(0));
   }
-
+  
   ngOnInit() {
     this.activeMenu();
   }

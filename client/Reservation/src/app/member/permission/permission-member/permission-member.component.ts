@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import "rxjs/Rx";
 
 @Component({
-  selector: 'app-permission-user',
-  templateUrl: './permission-user.component.html',
-  styleUrls: ['./permission-user.component.scss']
+  selector: 'app-permission-member',
+  templateUrl: './permission-member.component.html',
+  styleUrls: ['./permission-member.component.scss']
 })
-export class PermissionUserComponent implements OnInit {
+export class PermissionMemberComponent implements OnInit {
 
   userAccount = <any>[];
   userType = <any>"";
@@ -20,15 +20,17 @@ export class PermissionUserComponent implements OnInit {
 
   // get user storage
   getUserStorage(){
-    // let getUser = JSON.parse(sessionStorage.getItem('users'));
-    let getUser = JSON.parse(localStorage.getItem('users'));
+    // let getUser = sessionStorage.getItem('users');
+    let getUser = localStorage.getItem('users');
 
     if(getUser==null || getUser==undefined || getUser==''){
-      this.router.navigate(['user/login']);
+      alert('Session expired!');
+      this.router.navigate(['user/logout']);
       return;
     }
+    let user = JSON.parse(getUser);
 
-    let checkUserLogin = this.checkUserLogin(getUser);
+    let checkUserLogin = this.checkUserLogin(user);
     return checkUserLogin;
   }
 
@@ -70,23 +72,15 @@ export class PermissionUserComponent implements OnInit {
     this.userAccount = userData;
     this.userType = userData.data[0].type;
 
+    // condition init permission
     this.checkPermission(this.userType);
+    
   }
 
   // check user type (permission)
   checkPermission(userType){
-    switch(userType){
-      case "User" : this.router.navigate(['user']); break;
-      case "Member" : this.router.navigate(['user/member']); break;
-      case "Affiliate" : this.router.navigate(['user/affiliate']); break;
-      case "Admin" : this.router.navigate(['user/admin']); break;
-      case "Manager" : this.router.navigate(['user']); break;
-      case "Senior reservation" : this.router.navigate(['user/reservations']); break;
-      case "Reservation" : this.router.navigate(['user/reservations']); break;
-      case "Sale" : this.router.navigate(['user']); break;
-      case "Online marketing" : this.router.navigate(['user']); break;
-      case "Accounting" : this.router.navigate(['user']); break;
-      case "Programmer" : this.router.navigate(['user']); break;
+    if(userType!=="Member"){
+      this.router.navigate(['user/logout']);
     }
   }
 
