@@ -91,6 +91,10 @@ Route::get('/', 'WelcomeController@index');
 	Route::get('api/Account/GetAccountType', 'Accounts\AccountController@GetAccountType');
 /*----------- Account (End) ------------------------------------*/
 
+/*----------- Bank (Start) -------------------------------------*/
+	Route::get('api/Bank/GetBankData', 'Bank\BankController@GetBankData');
+/*----------- Bank (End) ---------------------------------------*/
+
 /*----------- Dashboard (Start) --------------------------------*/
 	// Dashboard
 	Route::post('api/Dashboard/Affiliate', 'Dashboard\Affiliate\Home\DashboardAffiliateController@AffiliateDashboard');
@@ -126,7 +130,9 @@ Route::get('/', 'WelcomeController@index');
 	Route::post('api/Dashboard/Admin/UserManagement/Active', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagementActive');
 	Route::post('api/Dashboard/Admin/UserManagement/Active/Save', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagementActiveSave');
 	Route::post('api/Dashboard/Admin/UserManagement/ResetPassword', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagementResetPassword');
-/*----------- Dashboard (End) ----------------------------------*/
+	// Member
+	Route::post('api/Dashboard/Member/GetAccountProfile', 'Dashboard\Member\Account\MemberAccountProfileController@GetAccountProfile');
+	/*----------- Dashboard (End) ----------------------------------*/
 
 // Test Email
 	Route::get('api/TestMail', 'TestMailController@TestMail');

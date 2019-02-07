@@ -13,6 +13,7 @@ export class MenuBarMemberComponent implements OnInit {
   bookedId = 0;
 
   iconMenu = 0;
+  request = true;
 
   constructor(
     private router: Router,

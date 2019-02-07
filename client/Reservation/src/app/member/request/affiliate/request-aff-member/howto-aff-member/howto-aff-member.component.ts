@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-howto-aff-member',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HowtoAffMemberComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
+
+  // 1. active menu
+  public activeMenu(){
+    // set storage
+    sessionStorage.setItem('menu',JSON.stringify(999));
+    sessionStorage.setItem('sub-menu',JSON.stringify(999));
+  }
+
+  // 2. join now
+  joinNow(){
+    this.router.navigate(['user/member/request/affiliate/step1']);
+  }
 
   ngOnInit() {
+    this.activeMenu();
   }
 
 }

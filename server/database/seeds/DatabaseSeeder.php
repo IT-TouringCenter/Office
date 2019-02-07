@@ -94,5 +94,8 @@ class DatabaseSeeder extends Seeder {
 
 		//- Affiliate
 		$this->call(TourCommissionPriceRateSeeder::class);
+
+		//- Bank
+		$this->call(BankSeeder::class);
 	}
 }

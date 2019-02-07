@@ -1,4 +1,4 @@
-.dashboard-header{
+.block-header{
     text-align: center;
     margin-top: 0px;
     margin-bottom: 35px;
@@ -23,7 +23,9 @@
 .content-header{
     font-weight: 600;
 }
-
+.content-paragraph{
+    text-indent: 40px;
+}
 .panel-block-1{
     padding-top: 40px;
 }
@@ -32,9 +34,43 @@
         display: none;
     }
 }
-
+.join-btn{
+    text-align: right;
+    color: blue;
+    cursor: pointer;
+}
+.join-btn:hover{
+    color: #50009b;
+    cursor: pointer;
+}
+.affiliate-condition-link, .affiliate-policy-link{
+    // font-weight: 600;
+    cursor: pointer;
+}
+.affiliate-condition-link:hover, .affiliate-policy-link:hover{
+    // font-weight: 600;
+    // border-bottom: 1px solid;
+    cursor: pointer;
+}
 
 // bootstrap
 .form-control{
     height: 35px;
+}
+.modal-header{
+    padding: 0 10px !important;
+    background: #fff !important;
+    border-bottom: 0px !important;
+}
+.modal-footer{
+    border-top: 0px !important;
+}
+.close{
+    opacity: 0.7 !important;
+}
+.close:hover{
+    opacity: 1 !important;
+}
+.btn-default{
+    padding: 5px 10px !important;
 }

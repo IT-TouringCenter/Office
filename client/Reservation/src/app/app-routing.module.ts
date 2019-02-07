@@ -50,9 +50,12 @@ import { UserManageActiveAdminComponent } from './admin/user-manage/user-manage-
 import { UserRequestComponent } from './admin/user-request/user-request.component';
 // Member
 import { HomeMemberComponent } from './member/home/home-member/home-member.component';
+import { RequestMemberComponent } from './member/request/request-member/request-member.component';
+import { RequestAffMemberComponent } from './member/request/affiliate/request-aff-member/request-aff-member.component';
 import { HowtoAffMemberComponent } from './member/request/affiliate/request-aff-member/howto-aff-member/howto-aff-member.component';
 import { ProfileAffMemberComponent } from './member/request/affiliate/request-aff-member/profile-aff-member/profile-aff-member.component'
 import { BankAffMemberComponent } from './member/request/affiliate/request-aff-member/bank-aff-member/bank-aff-member.component';
+import { AdsChannelAffMemberComponent } from './member/request/affiliate/request-aff-member/ads-channel-aff-member/ads-channel-aff-member.component';
 import { ConfirmAffMemberComponent } from './member/request/affiliate/request-aff-member/confirm-aff-member/confirm-aff-member.component';
 import { ApprovalAffMemberComponent } from './member/request/affiliate/request-aff-member/approval-aff-member/approval-aff-member.component';
 
@@ -231,19 +234,31 @@ const routes: Routes = [
     component: HomeMemberComponent
   },
   {
+    path: 'user/member/request',
+    component: RequestMemberComponent
+  },
+  {
+    path: 'user/member/request/affiliate',
+    component: RequestAffMemberComponent
+  },
+  {
     path: 'user/member/request/affiliate/howto',
     component: HowtoAffMemberComponent
   },
   {
-    path: 'user/member/request/affiliate/1',
+    path: 'user/member/request/affiliate/step1',
     component: ProfileAffMemberComponent
   },
   {
-    path: 'user/member/request/affiliate/2',
+    path: 'user/member/request/affiliate/step2',
     component: BankAffMemberComponent
   },
   {
-    path: 'user/member/request/affiliate/3',
+    path: 'user/member/request/affiliate/step3',
+    component: AdsChannelAffMemberComponent
+  },
+  {
+    path: 'user/member/request/affiliate/step4',
     component: ConfirmAffMemberComponent
   },
   {

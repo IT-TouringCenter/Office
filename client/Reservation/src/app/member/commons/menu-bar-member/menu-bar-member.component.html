@@ -31,8 +31,14 @@
           <span>Dashboard</span>
           <i class="fa fa-area-chart fa-5x" aria-hidden="true"></i>
         </a>
-      </li>  
+      </li>
+      <!-- Request -->
+      <li class="sub-menu">
+        <a class="sidebar-active" href="/#/user/member/request/affiliate/howto" [ngClass]="{'active':id==999}" (click)="addClass(id=999);addSubClass(subId=999)">
+          <span>Request</span>
+          <i class="fa fa-area-chart fa-5x" aria-hidden="true"></i>
+        </a>
+      </li>
     </ul>
   </div>
-
 </aside>

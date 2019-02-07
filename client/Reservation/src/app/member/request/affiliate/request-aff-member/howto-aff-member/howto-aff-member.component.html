@@ -9,19 +9,19 @@
   <section class="wrapper">
     <!-- Graf -->
     <div class="container">
-      <h3 class="dashboard-header">How to register affiliate</h3>
+      <h3 class="block-header">How to register affiliate</h3>
       <div style="margin:auto; margin-top:30px;width:80% !important;">
         
         <!-- Affiliate program -->
         <div class="content-block">
           <h4 class="content-header">Touring Center Affiliate Program?</h4>
-          <p>ทัวร์ริ่ง เซนเตอร์ ได้จัดหาตัวเลือกที่นำมาซึ่งรายได้ของคุณ โดยเราจะมีลิงค์และแบนเนอร์ให้คุณตามโปรแกรมหลากหลายโปรแกรม คุณจะได้รับค่าคอมมิชชั่นจากการขาย (หลังการเดินทาง) สูงสุดถึง 10% จากการจองและจ่ายเงินผ่านช่องทางของคุณ</p>
+          <p class="content-paragraph">ทัวร์ริ่ง เซนเตอร์ ได้จัดหาตัวเลือกที่นำมาซึ่งรายได้ของคุณ โดยเราจะมีลิงค์และแบนเนอร์ให้คุณตามโปรแกรมหลากหลายโปรแกรม คุณจะได้รับค่าคอมมิชชั่นจากการขาย (หลังการเดินทาง) สูงสุดถึง 10% จากการจองและจ่ายเงินผ่านช่องทางของคุณ</p>
         </div>
 
         <!-- Cookies -->
         <div class="content-block">
           <h4 class="content-header">การเก็บคุ้กกี้</h4>
-          <p>หลังจากที่ลูกค้าคลิกสื่อโฆษณาของคุณ แต่ยังไม่ได้ทำการจองทัวร์ เรายังเก็บคุ้กกี้ให้คุณนานถึง 30 วัน เพื่อให้คุณได้รับผลประโยชน์สูงสุด</p>
+          <p class="content-paragraph">หลังจากที่ลูกค้าคลิกสื่อโฆษณาของคุณเข้ามายังเว็บไซต์ แต่ยังไม่ได้ทำการจองทัวร์หรือทำการจองยังไม่เสร็จสมบูรณ์ เรายังเก็บคุ้กกี้ให้คุณเป็นระยะเวลานานถึง 30 วัน (หลังจากที่ลูกค้าคลิกเข้ามา) เพื่อให้คุณได้รับผลประโยชน์สูงสุด</p>
         </div>
 
         <!-- Work in affiliate program -->
@@ -42,14 +42,64 @@
         <div class="content-block">
           <h4 class="content-header">วิธีการเข้าร่วมกับเรา</h4>
           <ul>
-            <li>- คลิกที่ลิงค์นี้ Join Touring Center Affiliate</li>
-            <li>- อ่านเงื่อนไขการเข้าร่วมกับเราและยอมรับเงื่อนไข</li>
+            <li>- อ่านเงื่อนไข ข้อตกลงและนโนบายความเป็นส่วนตัว</li>
             <li>- กรอกข้อมูลประวัติส่วนตัวของท่าน</li>
             <li>- กรอกข้อมูลบัญชีธนาคารของท่าน</li>
             <li>- กรอกข้อมูลช่องทางในการโปรโมทของท่าน (เว็บไซต์, แฟนเพจ,...)</li>
             <li>- ตรวจสอบข้อมูล อ่านเงื่อนไขและยอมรับเงื่อนไขอีกครั้ง</li>
+            <li>- รอการอนุมัติการสมัครไม่เกิน 7 วัน</li>
           </ul>
         </div>
+
+        <!-- condition & policy -->
+        <div class="content-block">
+          <h4 class="content-header">การเข้าร่วมกับเรา</h4>
+          <ul>
+            <li>- อ่าน <span data-toggle="modal" data-target="#affiliate-condition-modal" class="affiliate-condition-link"><u>ข้อตกลงและเงื่อนไข</u></span></li>
+            <li>- อ่าน <span data-toggle="modal" data-target="#affiliate-policy-modal" class="affiliate-policy-link"><u>นโยบายความเป็นส่วนตัว</u></span></li>
+          </ul>
+
+          <!-- modal condition -->
+          <div id="affiliate-condition-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <p>ข้อตกลงและเงื่อนไข</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- modal policy -->
+          <div id="affiliate-policy-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <p>นโยบายความเป็นส่วนตัว</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- -->
+
+        <!-- Join -->
+        <div class="join-btn">
+          <a (click)="joinNow()">เข้าร่วมกับเรา</a>
+        </div>
+
       </div>
     </div>
   </section>

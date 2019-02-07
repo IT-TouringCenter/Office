@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-bank-aff-member',
-  templateUrl: './bank-aff-member.component.html',
-  styleUrls: ['./bank-aff-member.component.scss']
+  selector: 'app-ads-channel-aff-member',
+  templateUrl: './ads-channel-aff-member.component.html',
+  styleUrls: ['./ads-channel-aff-member.component.scss']
 })
-export class BankAffMemberComponent implements OnInit {
+export class AdsChannelAffMemberComponent implements OnInit {
 
   constructor(
     private router: Router
@@ -21,12 +21,12 @@ export class BankAffMemberComponent implements OnInit {
 
   // 2. window back
   public windowBack(){
-    this.router.navigate(['user/member/request/affiliate/step1']);
+    this.router.navigate(['user/member/request/affiliate/step2']);
   }
 
   // 3. window next
   public windowNext(){
-    this.router.navigate(['user/member/request/affiliate/step3']);
+    this.router.navigate(['user/member/request/affiliate/step4']);
   }
 
   ngOnInit() {

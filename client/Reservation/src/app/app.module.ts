@@ -89,10 +89,11 @@ import { HowtoAffMemberComponent } from './member/request/affiliate/request-aff-
 import { ConfirmAffMemberComponent } from './member/request/affiliate/request-aff-member/confirm-aff-member/confirm-aff-member.component';
 import { BankAffMemberComponent } from './member/request/affiliate/request-aff-member/bank-aff-member/bank-aff-member.component';
 import { ProfileAffMemberComponent } from './member/request/affiliate/request-aff-member/profile-aff-member/profile-aff-member.component';
-import { PolicyAffMemberComponent } from './member/request/affiliate/request-aff-member/howto-aff-member/policy-aff-member/policy-aff-member.component';
 import { ApprovalAffMemberComponent } from './member/request/affiliate/request-aff-member/approval-aff-member/approval-aff-member.component';
 import { PermissionMemberComponent } from './member/permission/permission-member/permission-member.component';
 import { UserRequestComponent } from './admin/user-request/user-request.component';
+import { RequestMemberComponent } from './member/request/request-member/request-member.component';
+import { AdsChannelAffMemberComponent } from './member/request/affiliate/request-aff-member/ads-channel-aff-member/ads-channel-aff-member.component';
 
 @NgModule({
   declarations: [
@@ -168,10 +169,11 @@ import { UserRequestComponent } from './admin/user-request/user-request.componen
     ConfirmAffMemberComponent,
     BankAffMemberComponent,
     ProfileAffMemberComponent,
-    PolicyAffMemberComponent,
     ApprovalAffMemberComponent,
     PermissionMemberComponent,
     UserRequestComponent,
+    RequestMemberComponent,
+    AdsChannelAffMemberComponent,
   ],
   imports: [
     BrowserModule,

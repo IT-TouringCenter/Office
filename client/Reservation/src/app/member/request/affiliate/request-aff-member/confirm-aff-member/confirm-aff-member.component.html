@@ -1,3 +1,113 @@
-<p>
-  confirm-aff-member works!
-</p>
+<!-- Check permission -->
+<app-permission-member></app-permission-member>
+
+<!-- Menu bar -->
+<app-menu-bar-member></app-menu-bar-member>
+
+<!-- Content -->
+<section id="main-content" class="panel-block-1">
+  <section class="wrapper">
+
+    <!-- Form block -->
+    <div class="container content-block">
+      <h3 class="block-header">ขั้นตอนที่ 4 : <span class="sub-header">ตรวจสอบและยืนยันการขอเข้าร่วม Affiliate</span></h3>
+      <div class="content-main-block">
+
+        <!-- Personal -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content-block">
+          <h4><u>ข้อมูลส่วนตัว</u></h4>
+          <table class="table-block">
+            <tr>
+              <th>ชื่อ-นามสกุล</th>
+              <td>: </td>
+            </tr>
+            <tr>
+              <th>วัน/เดือน/ปีเกิด</th>
+              <td>: </td>
+            </tr>
+            <tr>
+              <th>เบอร์โทรศัพท์</th>
+              <td>: </td>
+            </tr>
+            <tr>
+              <th>อีเมล</th>
+              <td>: </td>
+            </tr>
+            <tr>
+              <th>สัญชาติ</th>
+              <td>: </td>
+            </tr>
+            <tr>
+              <th>ที่อยู่</th>
+              <td>: </td>
+            </tr>
+            <tr>
+              <th>เลขประจำตัวประชาชน</th>
+              <td>: </td>
+            </tr>
+            <tr>
+              <th>รูปถ่าย</th>
+              <td>: </td>
+            </tr>
+            <tr>
+              <th>สำเนาบัตรประชาชน</th>
+              <td>: </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Bank -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content-block">
+          <h4><u>ข้อมูลบัญชีธนาคาร</u></h4>
+          <table class="table-block">
+            <tr>
+              <th>ธนาคาร</th>
+              <td>: </td>
+            </tr>
+            <tr>
+              <th>ชื่อบัญชี</th>
+              <td>: </td>
+            </tr>
+            <tr>
+              <th>หมายเลขบัญชี</th>
+              <td>: </td>
+            </tr>
+            <tr>
+              <th>สำเนาสมุดบัญชี</th>
+              <td>: </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- URL -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content-block">
+          <h4><u>ช่องทางการโฆษณา</u></h4>
+          <table class="table-block">
+            <tr>
+              <th>ช่องทางโฆษนา</th>
+              <td>: </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Term, Condition, Policy -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content-block">
+          
+        </div>
+
+      </div>
+    </div>
+
+    <!-- back & next -->
+    <div class="container">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <p (click)="windowBack()" class="link-back link-page"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</p>
+        </div>
+        <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <p (click)="windowNext()" class="link-next link-page">Next <i class="fa fa-arrow-right" aria-hidden="true"></i></p>
+        </div> -->
+      </div>
+    </div>
+  </section>
+</section>

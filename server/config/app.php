@@ -274,5 +274,12 @@ return [
 		'AdminUserManagementDeleteSaveFacade' => 'App\Facades\Dashboard\Admin\Users\Delete\AdminUserManagementDeleteSaveFacade',
 		'AdminUserManagementActiveFacade' => 'App\Facades\Dashboard\Admin\Users\Active\AdminUserManagementActiveFacade',
 		'AdminUserManagementActiveSaveFacade' => 'App\Facades\Dashboard\Admin\Users\Active\AdminUserManagementActiveSaveFacade',
+
+		// Dashboard (Member)
+		'MemberAccountProfile' => 'App\Facades\Dashboard\Member\Account\MemberAccountProfileFacade',
+
+		// Banks
+		'BankFacade' => 'App\Facades\Bank\BankFacade',
+
 	],
 ];
