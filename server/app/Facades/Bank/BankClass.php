@@ -28,6 +28,7 @@ class BankClass{
         
         foreach($getBank as $value){
             $bank = new Bank;
+            $bank->id = $value->id;
             $bank->bankTH = $value->bank_th;
             $bank->bankEN = $value->bank_en;
             $bank->tel = $value->tel;

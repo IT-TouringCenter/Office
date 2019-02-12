@@ -41,8 +41,8 @@ export class ResetPasswordUserComponent implements OnInit {
   // 1. Get account data by token
   getAccountData(){
     // Call API
-    // let url = 'http://localhost:9000/api/Account/GetAccountByToken';
-    let url = 'http://api.tourinchiangmai.com/api/Account/GetAccountByToken';
+    let url = 'http://localhost:9000/api/Account/GetAccountByToken';
+    // let url = 'http://api.tourinchiangmai.com/api/Account/GetAccountByToken';
 
     let options = new RequestOptions();
     let accountData = {
@@ -99,8 +99,8 @@ export class ResetPasswordUserComponent implements OnInit {
 
     // Call API
     if(this.data.isMismatch==false){
-      // let url = 'http://localhost:9000/api/Account/Setting/AccountResetPassword';
-      let url = 'http://api.tourinchiangmai.com/api/Account/Setting/AccountResetPassword';
+      let url = 'http://localhost:9000/api/Account/Setting/AccountResetPassword';
+      // let url = 'http://api.tourinchiangmai.com/api/Account/Setting/AccountResetPassword';
 
       let options = new RequestOptions();
       let accountData = {
@@ -125,8 +125,8 @@ export class ResetPasswordUserComponent implements OnInit {
 
   // 5. Send reset code again
   sendResetCodeAgain(){
-    // let url = 'http://localhost:9000/api/Account/Request/AccountForgotPassword';
-    let url = 'http://api.tourinchiangmai.com/api/Account/Request/AccountForgotPassword';
+    let url = 'http://localhost:9000/api/Account/Request/AccountForgotPassword';
+    // let url = 'http://api.tourinchiangmai.com/api/Account/Request/AccountForgotPassword';
 
     let options = new RequestOptions();
     let dataSave = {

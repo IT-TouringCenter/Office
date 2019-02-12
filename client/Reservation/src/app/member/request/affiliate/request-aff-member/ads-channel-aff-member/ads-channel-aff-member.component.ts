@@ -8,6 +8,11 @@ import { Router } from '@angular/router';
 })
 export class AdsChannelAffMemberComponent implements OnInit {
 
+  // variable
+  public channelData = {
+    url: <any>''
+  };
+
   constructor(
     private router: Router
   ) { }
@@ -26,11 +31,39 @@ export class AdsChannelAffMemberComponent implements OnInit {
 
   // 3. window next
   public windowNext(){
-    this.router.navigate(['user/member/request/affiliate/step4']);
+    let setData = this.setDataToStorage(this.channelData);
+
+    if(setData==true){
+      this.router.navigate(['user/member/request/affiliate/step4']);
+    }
+  }
+
+  // Logic
+  // 4. binding data
+  public bindingData(){
+    // get storage
+    let getSession = JSON.parse(sessionStorage.getItem('set-channel'));
+    if(getSession){
+      this.channelData.url = getSession.url;
+    }
+  }
+
+
+  // . set data to sessionStorage
+  public setDataToStorage(data){
+    sessionStorage.setItem('set-channel',JSON.stringify(data));
+    let getData = sessionStorage.getItem('set-channel');
+
+    if(getData){
+      return true;
+    }else{
+      return false;
+    }
   }
 
   ngOnInit() {
     this.activeMenu();
+    this.bindingData();
   }
 
 }

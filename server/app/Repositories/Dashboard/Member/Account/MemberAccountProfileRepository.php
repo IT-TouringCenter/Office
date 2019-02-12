@@ -21,7 +21,7 @@ class MemberAccountProfileRepository{
     // 2. Get account profile by account_id
     public function GetAccountProfileByAccountId($accountId){
         $result = \DB::table('account_profiles as ap')
-                        ->select('a.email','a.tel','ap.fullname','ap.birth','ap.id_number','ap.address','ap.nationality','ap.picture')
+                        ->select('a.email','a.tel','ap.fullname','ap.birth','ap.id_number','ap.address','ap.nationality','ap.picture','ap.copy_id_card')
                         ->join('accounts as a','a.id','=','ap.account_id')
                         ->where('a.id',$accountId)
                         ->where('ap.account_id',$accountId)

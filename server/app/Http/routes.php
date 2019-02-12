@@ -132,6 +132,7 @@ Route::get('/', 'WelcomeController@index');
 	Route::post('api/Dashboard/Admin/UserManagement/ResetPassword', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagementResetPassword');
 	// Member
 	Route::post('api/Dashboard/Member/GetAccountProfile', 'Dashboard\Member\Account\MemberAccountProfileController@GetAccountProfile');
+	Route::post('api/Dashboard/Member/RequestJoinAffiliate', 'Dashboard\Member\Request\MemberRequestJoinAffiliateController@RequestJoinAffiliate');
 	/*----------- Dashboard (End) ----------------------------------*/
 
 // Test Email

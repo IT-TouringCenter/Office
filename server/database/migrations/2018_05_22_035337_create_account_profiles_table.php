@@ -26,6 +26,7 @@ class CreateAccountProfilesTable extends Migration {
 			$table->string('postcode')->nullable();
 			$table->string('nationality')->nullable();
 			$table->string('picture')->nullable();
+			$table->string('copy_id_card')->nullable();
 			$table->text('url')->nullable();
 			$table->tinyInteger('is_active')->default(1);
 			$table->string('created_by',50)->default('System');

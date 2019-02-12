@@ -53,8 +53,8 @@ export class RegisterUserComponent implements OnInit {
     let data = {
       email: this.registerData.email
     };
-    // let url = 'http://localhost:9000/api/Account/Register/CheckEmailRepeat';
-    let url = 'http://api.tourinchiangmai.com/api/Account/Register/CheckEmailRepeat';
+    let url = 'http://localhost:9000/api/Account/Register/CheckEmailRepeat';
+    // let url = 'http://api.tourinchiangmai.com/api/Account/Register/CheckEmailRepeat';
 
     // Call to API
     this.http.post(url, data, options)
@@ -117,8 +117,8 @@ export class RegisterUserComponent implements OnInit {
         "fullname": this.registerData.fullname,
         "birth": this.registerData.birth
       };
-      // let url = 'http://localhost:9000/api/Account/Register/AccountRegister';
-      let url = 'http://api.tourinchiangmai.com/api/Account/Register/AccountRegister';
+      let url = 'http://localhost:9000/api/Account/Register/AccountRegister';
+      // let url = 'http://api.tourinchiangmai.com/api/Account/Register/AccountRegister';
 
       // Call to API
       this.http.post(url, data, options)

@@ -57,6 +57,7 @@ class MemberAccountProfileClass{
                 $profile->address = $value->address;
                 $profile->nationality = $value->nationality;
                 $profile->picture = $value->picture;
+                $profile->copyIdCard = $value->copy_id_card;
 
                 array_push($profileArr,$profile);
             }

@@ -16,6 +16,7 @@ class CreateAccountBookBanksTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('account_id');
+			$table->integer('bank_id');
 			$table->string('account_name')->nullable();
 			$table->string('account_no')->nullable();
 			$table->string('bank')->nullable();

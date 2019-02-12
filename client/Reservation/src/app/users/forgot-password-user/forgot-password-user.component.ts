@@ -33,8 +33,8 @@ export class ForgotPasswordUserComponent implements OnInit {
 
   // 1. Submit
   submit(){
-    // let url = 'http://localhost:9000/api/Account/Request/AccountForgotPassword';
-    let url = 'http://api.tourinchiangmai.com/api/Account/Request/AccountForgotPassword';
+    let url = 'http://localhost:9000/api/Account/Request/AccountForgotPassword';
+    // let url = 'http://api.tourinchiangmai.com/api/Account/Request/AccountForgotPassword';
 
     let options = new RequestOptions();
     let dataSave = {

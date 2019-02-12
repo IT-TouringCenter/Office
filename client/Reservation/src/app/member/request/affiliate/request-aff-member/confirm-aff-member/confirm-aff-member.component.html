@@ -19,40 +19,40 @@
           <table class="table-block">
             <tr>
               <th>ชื่อ-นามสกุล</th>
-              <td>: </td>
+              <td>: {{memberData.personalInfo.fullname}}</td>
             </tr>
             <tr>
               <th>วัน/เดือน/ปีเกิด</th>
-              <td>: </td>
+              <td>: {{memberData.personalInfo.birth}}</td>
             </tr>
             <tr>
               <th>เบอร์โทรศัพท์</th>
-              <td>: </td>
+              <td>: {{memberData.personalInfo.tel}}</td>
             </tr>
             <tr>
               <th>อีเมล</th>
-              <td>: </td>
+              <td>: {{memberData.personalInfo.email}}</td>
             </tr>
             <tr>
               <th>สัญชาติ</th>
-              <td>: </td>
+              <td>: {{memberData.personalInfo.nationality}}</td>
             </tr>
             <tr>
               <th>ที่อยู่</th>
-              <td>: </td>
+              <td>: {{memberData.personalInfo.address}}</td>
             </tr>
             <tr>
               <th>เลขประจำตัวประชาชน</th>
-              <td>: </td>
+              <td>: {{memberData.personalInfo.idNumber}}</td>
             </tr>
-            <tr>
+            <!-- <tr>
               <th>รูปถ่าย</th>
-              <td>: </td>
+              <td>: {{memberData.personalInfo.profilePicture}}</td>
             </tr>
             <tr>
               <th>สำเนาบัตรประชาชน</th>
-              <td>: </td>
-            </tr>
+              <td>: {{memberData.personalInfo.copyIdCard}}</td>
+            </tr> -->
           </table>
         </div>
 
@@ -62,20 +62,20 @@
           <table class="table-block">
             <tr>
               <th>ธนาคาร</th>
-              <td>: </td>
+              <td>: {{memberData.bankInfo.bank.bankTH}}</td>
             </tr>
             <tr>
               <th>ชื่อบัญชี</th>
-              <td>: </td>
+              <td>: {{memberData.bankInfo.accountName}}</td>
             </tr>
             <tr>
               <th>หมายเลขบัญชี</th>
-              <td>: </td>
+              <td>: {{memberData.bankInfo.accountNo}}</td>
             </tr>
-            <tr>
+            <!-- <tr>
               <th>สำเนาสมุดบัญชี</th>
-              <td>: </td>
-            </tr>
+              <td>: {{memberData.bankInfo.copyBook}}</td>
+            </tr> -->
           </table>
         </div>
 
@@ -84,17 +84,44 @@
           <h4><u>ช่องทางการโฆษณา</u></h4>
           <table class="table-block">
             <tr>
-              <th>ช่องทางโฆษนา</th>
-              <td>: </td>
+              <th>ช่องทางโฆษณา</th>
+              <td>: {{memberData.adsInfo.url}}</td>
             </tr>
           </table>
         </div>
 
         <!-- Term, Condition, Policy -->
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content-block">
-          
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 policy-block">
+          <p>
+            <mat-checkbox [(ngModel)]="agree" (change)="agrees()"></mat-checkbox> 
+            โปรด
+            <span class="read-policy" data-toggle="modal" data-target="#policy-modal"><b>อ่าน</b></span>
+            แล้วยอมรับเงื่อนไขและข้อตกลงของเรา
+          </p>
         </div>
 
+        <!-- Join button -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 join-block">
+          <button mat-raised-button color="warn" [disabled]="agree==false" (click)="submitJoinAffiliate()">ยืนยันการขอเข้าร่วม Affiliate</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Modal popup term & condition & policy -->
+    <div id="policy-modal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>ข้อตกลงและเงื่อนไข</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -104,9 +131,6 @@
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
           <p (click)="windowBack()" class="link-back link-page"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</p>
         </div>
-        <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-          <p (click)="windowNext()" class="link-next link-page">Next <i class="fa fa-arrow-right" aria-hidden="true"></i></p>
-        </div> -->
       </div>
     </div>
   </section>

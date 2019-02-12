@@ -39,8 +39,8 @@ export class PermissionMemberComponent implements OnInit {
     let token = getUser.data.token;
     let type = getUser.data.userType;
 
-    // let url = 'http://localhost:9000/api/Account/AccountSessionLoginReturnType';
-    let url = 'http://api.tourinchiangmai.com/api/Account/AccountSessionLoginReturnType';
+    let url = 'http://localhost:9000/api/Account/AccountSessionLoginReturnType';
+    // let url = 'http://api.tourinchiangmai.com/api/Account/AccountSessionLoginReturnType';
 
     let checkLogin = {
       token: token,

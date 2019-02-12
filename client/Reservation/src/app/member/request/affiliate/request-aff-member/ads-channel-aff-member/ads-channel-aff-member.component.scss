@@ -27,6 +27,9 @@
 .content-block{
     margin-bottom: 20px;
 }
+.content-block mat-form-field{
+    width: 100% !important;
+}
 .content-header{
     font-weight: 600;
 }
