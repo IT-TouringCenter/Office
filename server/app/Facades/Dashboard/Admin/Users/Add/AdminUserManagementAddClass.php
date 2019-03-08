@@ -15,6 +15,7 @@ class AdminUserManagementAddClass{
 
 	public function __construct(AdminUserManagementAddRepo $AdminUserManagementAddRepo){
         $this->AdminUserManagementAddRepo = $AdminUserManagementAddRepo;
+        $this->dateNow = Carbon::now('Asia/Bangkok');
     }
 
     /*
@@ -27,12 +28,13 @@ class AdminUserManagementAddClass{
     */
 
     public function AdminUserManagementAdd($data){
+        $return = new Account;
+
         // Check username repeat
         $username = array_get($data,'username');
         $checkAccount = $this->AdminUserManagementAddRepo->CheckAccountRepeat($username);
 
         if(!empty($checkAccount)){
-            $return = new Account;
             $return->status = false;
             $return->message = 'This account repeat.';
 
@@ -76,13 +78,27 @@ class AdminUserManagementAddClass{
             return "Failed!! can't save account.";
         }
 
-        $return = new Account;
-        if($insertAccountProfile){
-            $return->status = true;
-            $return->message = 'OK';
-        }else{
+        if(empty($insertAccountProfile)){
             $return->status = false;
             $return->message = 'Failed!! can\'t save account profile.';
+            return $return;
+        }
+
+        // Check account type
+        $checkAccountType = $this->CreateRecordAffiliate($accountId, array_get($dataSave,'account_type_id'));
+        // return $checkAccountType;
+        if($checkAccountType=="Affiliate"){
+            $return->status = true;
+            $return->message = "Affiliate OK";
+        }else if($checkAccountType=="Affiliate commission error"){
+            $return->status = false;
+            $return->message = "Add affiliate commission error";
+        }else if($checkAccountType=="Affiliate error"){
+            $return->status = false;
+            $return->message = "Add affiliate error";
+        }else{
+            $return->status = true;
+            $return->message = "OK";
         }
 
         return $return;
@@ -99,6 +115,57 @@ class AdminUserManagementAddClass{
 
         $result = $this->AdminUserManagementAddRepo->InsertAccountProfile($setData);
         return $result;
+    }
+
+    // Create record into affiliates table
+    public function CreateRecordAffiliate($accountId, $accountTypeId){
+        $comRate = 0;
+        $checkAccountType = $this->AdminUserManagementAddRepo->CheckAccountType($accountId, $accountTypeId);
+
+        if(empty($checkAccountType)){
+            return false;    
+        }
+        $accountType = $checkAccountType[0]->type;
+        if($accountType=="Affiliate"){
+            $comRate = 10;
+        }else if("Affiliate intern"){
+            $comRate = 5;
+        }else{
+            return false;
+        }
+
+        // create affiliate_commissions
+        $affiliateCommission = [
+            "account_id"=>$accountId,
+            "created_at"=>$this->dateNow
+        ];
+        $insertAffiliateCommission = $this->AdminUserManagementAddRepo->InsertAffiliateCommission($affiliateCommission);
+        if(empty($insertAffiliateCommission)){
+            return "Affiliate commission error";
+        }
+
+        // create affiliate_commission_tour_rates
+        // get tour id
+        $insertCount = 0;
+        $getTour = $this->AdminUserManagementAddRepo->GetTour();
+        foreach($getTour as $value){
+            $affiliateCommissionTourRate = [
+                "account_id"=>$accountId,
+                "tour_id"=>$value->id,
+                "min_pax"=>1,
+                "max_pax"=>20,
+                "price_rate"=>$comRate,
+                "created_at"=>$this->dateNow
+            ];
+            $insertAffiliateCommissionTourRate = $this->AdminUserManagementAddRepo->InsertAffiliateCommissionTourRate($affiliateCommissionTourRate);
+            $insertCount++;
+        }
+
+        if($insertCount > 0){
+            return "Affiliate";
+        }else{
+            return "Affiliate error";
+        }
     }
 
 }

@@ -1,6 +1,9 @@
 <!-- Check permission -->
 <app-permission-member></app-permission-member>
 
+<!-- Check request affiliate -->
+<!-- <app-check-request-affiliate-member></app-check-request-affiliate-member> -->
+
 <!-- Menu bar -->
 <app-menu-bar-member></app-menu-bar-member>
 
@@ -9,9 +12,9 @@
   <section class="wrapper">
     <!-- Graf -->
     <div class="container">
-      <h3 class="block-header">How to register affiliate</h3>
+      <h3 class="block-header">เข้าร่วมเป็น Affiliate กับเรา</h3>
       <div style="margin:auto; margin-top:30px;width:80% !important;">
-        
+
         <!-- Affiliate program -->
         <div class="content-block">
           <h4 class="content-header">Touring Center Affiliate Program?</h4>
@@ -47,13 +50,13 @@
             <li>- กรอกข้อมูลบัญชีธนาคารของท่าน</li>
             <li>- กรอกข้อมูลช่องทางในการโปรโมทของท่าน (เว็บไซต์, แฟนเพจ,...)</li>
             <li>- ตรวจสอบข้อมูล อ่านเงื่อนไขและยอมรับเงื่อนไขอีกครั้ง</li>
-            <li>- รอการอนุมัติการสมัครไม่เกิน 7 วัน</li>
+            <li>- รอการอนุมัติการสมัครภายใน 7 วัน</li>
           </ul>
         </div>
 
         <!-- condition & policy -->
         <div class="content-block">
-          <h4 class="content-header">การเข้าร่วมกับเรา</h4>
+          <h4 class="content-header">ข้อตกลง เงื่อนไขและนโยบายความเป็นส่วนตัว</h4>
           <ul>
             <li>- อ่าน <span data-toggle="modal" data-target="#affiliate-condition-modal" class="affiliate-condition-link"><u>ข้อตกลงและเงื่อนไข</u></span></li>
             <li>- อ่าน <span data-toggle="modal" data-target="#affiliate-policy-modal" class="affiliate-policy-link"><u>นโยบายความเป็นส่วนตัว</u></span></li>
@@ -96,8 +99,9 @@
         <!-- -->
 
         <!-- Join -->
-        <div class="join-btn">
-          <a (click)="joinNow()">เข้าร่วมกับเรา</a>
+        <div class="join-btn-block">
+          <a class="join-btn" (click)="joinNow()" *ngIf="requestAffiliate!=true">เข้าร่วมกับเรา</a>
+          <!-- <a (click)="joinNow()" id="joinNow">เข้าร่วมกับเรา</a> -->
         </div>
 
       </div>

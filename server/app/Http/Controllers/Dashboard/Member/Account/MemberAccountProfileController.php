@@ -14,7 +14,7 @@ class MemberAccountProfileController extends MyBaseController {
 	public function GetAccountProfile(Request $request){
 		$data  = $request->input();
 		try{
-			$results = \MemberAccountProfile::GetAccountProfile($data);
+			$results = \MemberAccountProfileFacade::GetAccountProfile($data);
 			if($results==null){
 				abort(400);
 			}

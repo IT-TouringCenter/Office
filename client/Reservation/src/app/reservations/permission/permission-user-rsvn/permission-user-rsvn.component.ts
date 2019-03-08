@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
-import "rxjs/Rx";
+import { Observable } from "rxjs/Rx";
 
 @Component({
   selector: 'app-permission-user-rsvn',
@@ -35,6 +35,7 @@ export class PermissionUserRsvnComponent implements OnInit {
   // check user login
   checkUserLogin(getUser){
     let token = getUser.data.token;
+    let tokenLogin = getUser.data.tokenLogin;
     let type = getUser.data.userType;
 
     // let url = 'http://localhost:9000/api/Account/AccountSessionLoginReturnType';
@@ -42,6 +43,7 @@ export class PermissionUserRsvnComponent implements OnInit {
 
     let checkLogin = {
       token: token,
+      tokenLogin: tokenLogin,
       type: type
     }
 
@@ -62,8 +64,10 @@ export class PermissionUserRsvnComponent implements OnInit {
   // set user login
   setUserLogin(userData){
     if(userData==null || userData==undefined || userData==""){
+      alert('Session expired, please login again.');
       this.router.navigate(['user/logout']);
     }else if(userData.status==false){
+      alert('Session expired, please login again.');
       this.router.navigate(['user/logout']);
     }
 
@@ -83,6 +87,10 @@ export class PermissionUserRsvnComponent implements OnInit {
 
   ngOnInit() {
     this.getUserStorage();
+    // run every time
+    Observable.interval(1000*30).subscribe(x => {
+      this.getUserStorage();
+    });
   }
 
 }

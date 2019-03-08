@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
-import { HttpClient, HttpEventType } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { FormControl, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-profile-aff-member',
   templateUrl: './profile-aff-member.component.html',
-  styleUrls: ['./profile-aff-member.component.scss']
+  styleUrls: ['./profile-aff-member.component.scss'],
+  providers: [
+    // FormControl
+  ]
 })
 
 export class ProfileAffMemberComponent implements OnInit {
-
   // variable
   public profile = {
     fullname: '',
@@ -24,8 +28,25 @@ export class ProfileAffMemberComponent implements OnInit {
     copyIdCard: ''
   };
 
+  requestAffiliate = <any>'';
+
   profileUpload: File = null;
   idCardUpload: File = null;
+
+  // validation
+  validation = new FormControl('',[Validators.required]);
+  validProfile = {
+    fullname: true,
+    birth: true,
+    tel: true,
+    email: true,
+    nationality: true,
+    address: true,
+    idNumber: true,
+    profilePicture: '',
+    copyIdCard: ''
+  };
+  nextButton = true;
 
   constructor(
     private http: Http,
@@ -36,13 +57,13 @@ export class ProfileAffMemberComponent implements OnInit {
   // 1. active menu
   public activeMenu(){
     // set storage
-    sessionStorage.setItem('menu',JSON.stringify(999));
-    sessionStorage.setItem('sub-menu',JSON.stringify(999));
+    sessionStorage.setItem('menu',JSON.stringify(2));
+    sessionStorage.setItem('sub-menu',JSON.stringify(2));
   }
 
   // 2. window back
   public windowBack(){
-    this.router.navigate(['user/member/request/affiliate/howto']);
+    this.router.navigate(['user/member/request/affiliate']);
   }
 
   // 3. window next
@@ -74,8 +95,8 @@ export class ProfileAffMemberComponent implements OnInit {
       this.router.navigate(['user/logout']);
     }
 
-    let url = 'http://localhost:9000/api/Dashboard/Member/GetAccountProfile';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Member/GetAccountProfile';
+    // let url = 'http://localhost:9000/api/Dashboard/Member/GetAccountProfile';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Member/GetAccountProfile';
 
     let users = {
       token: token
@@ -122,36 +143,147 @@ export class ProfileAffMemberComponent implements OnInit {
     }
   }
 
-  // Save images to directory
-  // input profile image
-  // handleProfileInput(files: FileList){
-  //   this.profileUpload = files.item(0);
-  //   this.profile.profilePicture = this.profileUpload.name;
-  //   console.log(this.profileUpload);
+  // 7. check request affiliate
+  // 7.1 
+  checkMemberRequestAffiliate(){
+    let token = <any>'';
+
+    // get user
+    let getUser = JSON.parse(localStorage.getItem('users'));
+    if(getUser){
+      let token = getUser.data.token;
+    }else{
+      alert('Session expired, please login again.');
+      this.router.navigate(['user/logout']);
+    }
+
+    // set data
+    let setData = {
+      "token": getUser.data.token
+    };
+
+    // post for check request affiliate : API
+    // let url = 'http://localhost:9000/api/Dashboard/Member/CheckRequestJoinAffiliate';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Member/CheckRequestJoinAffiliate';
+
+    let options = new RequestOptions();
+
+    return this.http.post(url, setData, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      data => [
+                        sessionStorage.setItem('request-aff',JSON.stringify(data)),
+                        this.checkRequestAffiliate(data)
+                      ],
+                      err => [
+                        console.log(err)
+                      ]
+                    );
+  }
+
+  // 7.2 
+  checkRequestAffiliate(data){
+    let getRequestAff = data;
+
+    if(getRequestAff.message=='Complete'){
+      alert('คุณได้ส่งคำขอเรียบร้อยแล้ว โปรดรอการอนุมัติ...');
+      this.router.navigate(['user/member/approval']);
+    }else{
+      this.requestAffiliate = false;
+    }
+    
+  }
+
+  // validation
+  validationField(param){
+    switch(param){
+      case 'fullname'     : if(this.validation.hasError('required')){
+                              this.validProfile.fullname = true;
+                              return 'กรอกชื่อ-นามสกุล (5-50 ตัวอักษร)';
+                            }else{
+                              this.validProfile.fullname = false;
+                              return '';
+                            };
+      case 'birth'        : if(this.validation.hasError('required')){
+                              this.validProfile.birth = true;
+                              return 'เลือกวัน/เดือน/ปีเกิด (m/dd/yyyy)';
+                            }else{
+                              this.validProfile.birth = false;
+                              return '';
+                            };
+      case 'tel'          : if(this.validation.hasError('required')){
+                              this.validProfile.tel = true;
+                              return 'กรอกเบอร์โทรศัพท์';
+                            }else{
+                              this.validProfile.tel = false;
+                              return '';
+                            };
+      case 'email'        : if(this.validation.hasError('required')){
+                              this.validProfile.email = true;
+                              return 'กรอกอีเมล';
+                            }else{
+                              this.validProfile.email = false;
+                              return '';
+                            };
+      case 'nationality'  : if(this.validation.hasError('required')){
+                              this.validProfile.nationality = true;
+                              return 'กรอกสัญชาติ';
+                            }else{
+                              this.validProfile.nationality = false;
+                              return '';
+                            };
+      case 'address'      : if(this.validation.hasError('required')){
+                              this.validProfile.address = true;
+                              return 'กรอกข้อมูลที่อยู่';
+                            }else{
+                              this.validProfile.address = false;
+                              return '';
+                            };
+      case 'IdNumber'     : if(this.validation.hasError('required')){
+                              this.validProfile.idNumber = true;
+                              return 'กรอกหมายเลขประจำตัวประชาชน 13 หลัก';
+                            }else{
+                              this.validProfile.idNumber = false;
+                              return '';
+                            };
+    }
+  }
+
+  // initValidation(){
+  //   let field = ['fullname','birth','tel','email','nationality','address','IdNumber'];
+  //   let length = field.length;
+  //   for(let i=0; i<length; i++){
+  //     this.validationField(field[i]);
+  //     this.validation.hasError('required');
+  //   }
   // }
 
-  // // input copy id card image
-  // handleCopyIDInput(files: FileList){
-  //   this.idCardUpload = files.item(0);
-  //   this.profile.copyIdCard = this.idCardUpload.name;
-  //   console.log(this.idCardUpload);
-  // }
+  checkNextButton(){
+    if(this.profile.fullname.length > 4 
+      && this.profile.birth.length > 8 
+      && this.profile.tel.length > 4 
+      && this.profile.email.length > 4 
+      && this.profile.nationality.length > 1 
+      && this.profile.address.length > 9 
+      && this.profile.idNumber.length > 5){
 
-  // // 
-  // onUploadPictureFile(fileToUpload: File){
-  //   const uploadData = new FormData();
-  //   uploadData.append('image', this.profileUpload, this.profileUpload.name);
-  //   this.https.post('http://tour-in-chiangmai.com/images/', uploadData) 
-  //                 .subscribe(
-  //                   event => {
-  //                     console.log(event); // handle event here
-  //                   }
-  //                 );
-  // }
+      this.nextButton=false; // diabled == false
+    }else{
+      this.nextButton=true; // diabled == true
+    }
+
+  }
 
   ngOnInit() {
+    this.checkMemberRequestAffiliate();
     this.activeMenu();
     this.GetAccountProfile();
+
+    // check every time
+    Observable.interval(1000*1).subscribe(x => { // 1sec
+      // this.initValidation();
+      this.checkNextButton();
+    });
   }
 
 }

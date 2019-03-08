@@ -13,46 +13,48 @@
       <h2 class="text-center"><b>Booking&nbsp; Table</b></h2>
     </div>
     <div class="container">
-      <table class="table table-bordered table-hover">
-        <!-- Table Header -->
-        <tr class="font-table-13px">
-          <th class="text-center bg-damask text-light">No.</th>
-          <th class="text-center bg-damask text-light">Inv No.</th>
-          <th class="text-center bg-damask text-light">Tour Name</th>
-          <th class="text-center bg-damask text-light">Privacy</th>
-          <th class="text-center bg-damask text-light">Pax</th>
-          <th class="text-center bg-damask text-light">Guest</th>
-          <th class="text-center bg-damask text-light">Hotel</th>
-          <th class="text-center bg-dark text-light display-print">Booking</th>
-          <th class="text-center bg-dark text-light display-print">Invoice</th>
-          <th class="text-center bg-dark text-light display-print">Edit</th>
-        </tr>
-        <!-- Table Body -->
-        <tr *ngFor="let booked of _getBookingStatistics | slice:pointStart:pointEnd; let i = index;" [class.table-info]="highlightId==booked.transactionId" class="font-table-12px">
-          <td class="text-center">{{i+1+(perPage*(activePage-1))}}</td>
-          <td class="text-center">{{booked.invoiceId}}</td>
-          <td title="{{booked.tourFullname}}">{{booked.tourName}}</td>
-          <td class="text-center">{{booked.tourPrivacy}}</td>
-          <td class="text-center">{{booked.tourPax}}</td>
-          <td>{{booked.guestName}}</td>
-          <td>{{booked.hotel}}</td>
-          <td class="text-center table-valign-mid display-print doc-background">
-            <a href="/#/user/reservations/book-form/{{booked.transactionId}}" target="_blank" class="book-link-doc">
-              <i class="fa fa-file font-table-1-5em" aria-hidden="true"></i>
-            </a>
-          </td>
-          <td class="text-center table-valign-mid display-print doc-background">
-            <a href="/#/user/reservations/invoice/{{booked.transactionId}}" target="_blank" class="book-link-doc">
-              <i class="fa fa-file-text font-table-1-5em"></i>
-            </a>
-          </td>
-          <td class="text-center table-valign-mid display-print doc-background">
-            <a href="/#/user/reservations/book-form-edit/{{booked.transactionId}}" class="book-link-doc">
-              <i class="fa fa-pencil-square-o font-table-1-5em"></i>
-            </a>
-          </td>
-        </tr>
-      </table>
+      <div style="overflow-x:auto;">
+        <table class="table table-bordered table-hover">
+          <!-- Table Header -->
+          <tr class="font-table-13px">
+            <th class="text-center bg-damask text-light">No.</th>
+            <th class="text-center bg-damask text-light">Inv No.</th>
+            <th class="text-center bg-damask text-light">Tour Name</th>
+            <th class="text-center bg-damask text-light">Privacy</th>
+            <th class="text-center bg-damask text-light">Pax</th>
+            <th class="text-center bg-damask text-light">Guest</th>
+            <th class="text-center bg-damask text-light">Hotel</th>
+            <th class="text-center bg-dark text-light display-print">Booking</th>
+            <th class="text-center bg-dark text-light display-print">Invoice</th>
+            <th class="text-center bg-dark text-light display-print">Edit</th>
+          </tr>
+          <!-- Table Body -->
+          <tr *ngFor="let booked of _getBookingStatistics | slice:pointStart:pointEnd; let i = index;" [class.table-info]="highlightId==booked.transactionId" class="font-table-12px">
+            <td class="text-center">{{i+1+(perPage*(activePage-1))}}</td>
+            <td class="text-center">{{booked.invoiceId}}</td>
+            <td title="{{booked.tourFullname}}">{{booked.tourName}}</td>
+            <td class="text-center">{{booked.tourPrivacy}}</td>
+            <td class="text-center">{{booked.tourPax}}</td>
+            <td>{{booked.guestName}}</td>
+            <td>{{booked.hotel}}</td>
+            <td class="text-center table-valign-mid display-print doc-background">
+              <a href="/#/user/reservations/book-form/{{booked.transactionId}}" target="_blank" class="book-link-doc">
+                <i class="fa fa-file font-table-1-5em" aria-hidden="true"></i>
+              </a>
+            </td>
+            <td class="text-center table-valign-mid display-print doc-background">
+              <a href="/#/user/reservations/invoice/{{booked.transactionId}}" target="_blank" class="book-link-doc">
+                <i class="fa fa-file-text font-table-1-5em"></i>
+              </a>
+            </td>
+            <td class="text-center table-valign-mid display-print doc-background">
+              <a href="/#/user/reservations/book-form-edit/{{booked.transactionId}}" class="book-link-doc">
+                <i class="fa fa-pencil-square-o font-table-1-5em"></i>
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
 
       <!-- Page -->
       <div class="text-center">

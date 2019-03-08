@@ -43,7 +43,6 @@ import { ProfileUserComponent } from './users/profiles/profile-user/profile-user
 import { ProfileEditUserComponent } from './users/profiles/profile-edit-user/profile-edit-user.component';
 import { ForceLogoutUserComponent } from './users/login/force-logout-user/force-logout-user.component';
 import { SessionLoginComponent } from './users/login/session-login/session-login.component';
-import { CheckLogoutUserComponent } from './users/logout/check-logout-user/check-logout-user.component';
 
 // Angular charts
 import { ChartsModule } from 'ng2-charts';
@@ -91,9 +90,26 @@ import { BankAffMemberComponent } from './member/request/affiliate/request-aff-m
 import { ProfileAffMemberComponent } from './member/request/affiliate/request-aff-member/profile-aff-member/profile-aff-member.component';
 import { ApprovalAffMemberComponent } from './member/request/affiliate/request-aff-member/approval-aff-member/approval-aff-member.component';
 import { PermissionMemberComponent } from './member/permission/permission-member/permission-member.component';
-import { UserRequestComponent } from './admin/user-request/user-request.component';
 import { RequestMemberComponent } from './member/request/request-member/request-member.component';
 import { AdsChannelAffMemberComponent } from './member/request/affiliate/request-aff-member/ads-channel-aff-member/ads-channel-aff-member.component';
+import { CheckRequestAffiliateMemberComponent } from './member/request/affiliate/check-request-affiliate-member/check-request-affiliate-member.component';
+import { UserRequestAdminComponent } from './admin/user-request/user-request-admin/user-request-admin.component';
+import { MenuManagerComponent } from './manager/commons/header-manager/menu-manager/menu-manager.component';
+import { HomeManagerComponent } from './manager/home/home-manager/home-manager.component';
+import { PermissionManagerComponent } from './manager/permission/permission-manager/permission-manager.component';
+import { BookedTableManagerComponent } from './manager/booked/booked-table-manager/booked-table-manager.component';
+import { BookedSummaryManagerComponent } from './manager/booked/booked-summary-manager/booked-summary-manager.component';
+import { BookedDaysOfMonthManagerComponent } from './manager/booked/booked-days-of-month-manager/booked-days-of-month-manager.component';
+import { BookedMonthlyManagerComponent } from './manager/booked/booked-monthly-manager/booked-monthly-manager.component';
+import { BookedTourManagerComponent } from './manager/booked/booked-tour-manager/booked-tour-manager.component';
+import { BookedAffiliateTableComponent } from './manager/booked-affiliate/booked-affiliate-table/booked-affiliate-table.component';
+import { BookedAffiliateSummaryManagerComponent } from './manager/booked-affiliate/booked-affiliate-summary-manager/booked-affiliate-summary-manager.component';
+import { BookedAffiliateDaysOfMonthManageComponent } from './manager/booked-affiliate/booked-affiliate-days-of-month-manage/booked-affiliate-days-of-month-manage.component';
+import { BookedAffiliateMonthlyManagerComponent } from './manager/booked-affiliate/booked-affiliate-monthly-manager/booked-affiliate-monthly-manager.component';
+import { BookedAffiliateTourManagerComponent } from './manager/booked-affiliate/booked-affiliate-tour-manager/booked-affiliate-tour-manager.component';
+import { GetlinkBookingAffComponent } from './affiliate/booking/getlink-booking-aff/getlink-booking-aff.component';
+import { AffiliateManagementManagerComponent } from './manager/affiliate-management/affiliate-management-manager/affiliate-management-manager.component';
+import { AffiliateDetailManagerComponent } from './manager/affiliate-management/affiliate-detail-manager/affiliate-detail-manager.component';
 
 @NgModule({
   declarations: [
@@ -134,7 +150,6 @@ import { AdsChannelAffMemberComponent } from './member/request/affiliate/request
     HeaderAffComponent,
     MenuBarAffComponent,
     MenuSidebarAffComponent,
-    CheckLogoutUserComponent,
     BookedMonthlyAffComponent,
     BookedDayOfMonthAffComponent,
     TourAffComponent,
@@ -171,9 +186,26 @@ import { AdsChannelAffMemberComponent } from './member/request/affiliate/request
     ProfileAffMemberComponent,
     ApprovalAffMemberComponent,
     PermissionMemberComponent,
-    UserRequestComponent,
     RequestMemberComponent,
     AdsChannelAffMemberComponent,
+    CheckRequestAffiliateMemberComponent,
+    UserRequestAdminComponent,
+    MenuManagerComponent,
+    HomeManagerComponent,
+    PermissionManagerComponent,
+    BookedTableManagerComponent,
+    BookedSummaryManagerComponent,
+    BookedDaysOfMonthManagerComponent,
+    BookedMonthlyManagerComponent,
+    BookedTourManagerComponent,
+    BookedAffiliateTableComponent,
+    BookedAffiliateSummaryManagerComponent,
+    BookedAffiliateDaysOfMonthManageComponent,
+    BookedAffiliateMonthlyManagerComponent,
+    BookedAffiliateTourManagerComponent,
+    GetlinkBookingAffComponent,
+    AffiliateManagementManagerComponent,
+    AffiliateDetailManagerComponent,
   ],
   imports: [
     BrowserModule,

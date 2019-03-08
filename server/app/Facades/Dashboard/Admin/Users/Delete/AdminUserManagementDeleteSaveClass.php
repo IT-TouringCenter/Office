@@ -56,6 +56,7 @@ class AdminUserManagementDeleteSaveClass{
         // delete account
         $dataUpdate = [
             "is_delete"=>1,
+            "is_active"=>0,
             "updated_by"=>array_get($data,'accountName'),
             "updated_at"=>$dateNow
         ];

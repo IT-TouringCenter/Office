@@ -96,30 +96,32 @@ Route::get('/', 'WelcomeController@index');
 /*----------- Bank (End) ---------------------------------------*/
 
 /*----------- Dashboard (Start) --------------------------------*/
-	// Dashboard
+	// Affiliate
+	//- Dashboard
 	Route::post('api/Dashboard/Affiliate', 'Dashboard\Affiliate\Home\DashboardAffiliateController@AffiliateDashboard');
 	Route::post('api/Dashboard/Affiliate/Booked', 'Dashboard\Affiliate\Home\DashboardAffiliateController@AffiliateDashboardBooked');
 	Route::post('api/Dashboard/Affiliate/Commission', 'Dashboard\Affiliate\Home\DashboardAffiliateController@AffiliateDashboardCommission');
-	// Booked
+	//- Booked
 	Route::post('api/Dashboard/Affiliate/Booked/Summary', 'Dashboard\Affiliate\Booked\DashboardAffiliateBookedController@AffiliateDashboardBookedSummary');
 	Route::post('api/Dashboard/Affiliate/Booked/Summary/Month', 'Dashboard\Affiliate\Booked\DashboardAffiliateBookedController@AffiliateDashboardBookedSummaryMonth');
 	Route::post('api/Dashboard/Affiliate/Booked/Summary/Year', 'Dashboard\Affiliate\Booked\DashboardAffiliateBookedController@AffiliateDashboardBookedSummaryYear');
 	Route::post('api/Dashboard/Affiliate/Booked/DaysOfMonth', 'Dashboard\Affiliate\Booked\DashboardAffiliateBookedController@AffiliateDashboardBookedDaysOfMonth');
 	Route::post('api/Dashboard/Affiliate/Booked/Monthly', 'Dashboard\Affiliate\Booked\DashboardAffiliateBookedController@AffiliateDashboardBookedMonthly');
-	// Traveled
+	//- Traveled
 	Route::post('api/Dashboard/Affiliate/Traveled', 'Dashboard\Affiliate\Traveled\DashboardAffiliateTraveledController@AffiliateDashboardTraveled');
 	Route::post('api/Dashboard/Affiliate/Traveled/DaysOfMonth', 'Dashboard\Affiliate\Traveled\DashboardAffiliateTraveledController@AffiliateDashboardTraveledDaysOfMonth');
 	Route::post('api/Dashboard/Affiliate/Traveled/Monthly', 'Dashboard\Affiliate\Traveled\DashboardAffiliateTraveledController@AffiliateDashboardTraveledMonthly');
 	Route::post('api/Dashboard/Affiliate/Traveled/Tour', 'Dashboard\Affiliate\Traveled\DashboardAffiliateTraveledController@AffiliateDashboardTraveledTour');
-	// Tour
+	//- Tour
 	Route::post('api/Dashboard/Affiliate/Tour', 'Dashboard\Affiliate\Tours\DashboardAffiliateTourController@AffiliateDashboardTour');
 	Route::post('api/Dashboard/Affiliate/Tour/DaysOfMonth', 'Dashboard\Affiliate\Tours\DashboardAffiliateTourController@AffiliateDashboardTourDaysOfMonth');
 	Route::post('api/Dashboard/Affiliate/Tour/Monthly', 'Dashboard\Affiliate\Tours\DashboardAffiliateTourController@AffiliateDashboardTourMonthly');
-	// Commission
+	//- Commission
 	Route::post('api/Dashboard/Affiliate/Commission/Summary', 'Dashboard\Affiliate\Commission\DashboardAffiliateCommissionController@DashboardAffiliateCommission');
 	Route::post('api/Dashboard/Affiliate/Commission/DaysOfMonth', 'Dashboard\Affiliate\Commission\DashboardAffiliateCommissionController@DashboardAffiliateCommissionDaysOfMonth');
 	Route::post('api/Dashboard/Affiliate/Commission/Monthly', 'Dashboard\Affiliate\Commission\DashboardAffiliateCommissionController@DashboardAffiliateCommissionMonthly');
 	Route::post('api/Dashboard/Affiliate/Commission/Tour', 'Dashboard\Affiliate\Commission\DashboardAffiliateCommissionController@DashboardAffiliateCommissionTour');
+
 	// Admin
 	Route::post('api/Dashboard/Admin/UserManagement', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagement');
 	Route::post('api/Dashboard/Admin/UserManagement/Add', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagementAdd');
@@ -130,9 +132,26 @@ Route::get('/', 'WelcomeController@index');
 	Route::post('api/Dashboard/Admin/UserManagement/Active', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagementActive');
 	Route::post('api/Dashboard/Admin/UserManagement/Active/Save', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagementActiveSave');
 	Route::post('api/Dashboard/Admin/UserManagement/ResetPassword', 'Dashboard\Admin\Users\AdminUserManagementController@AdminUserManagementResetPassword');
+	Route::post('api/Dashboard/Admin/UserRequest', 'Dashboard\Admin\Request\AdminUserRequestController@UserRequest');
+	Route::post('api/Dashboard/Admin/UserRequest/Update', 'Dashboard\Admin\Request\AdminUserRequestController@UserRequestUpdate');
+	Route::post('api/Dashboard/Admin/GetUserProfile', 'Dashboard\Admin\Users\AdminUserProfileController@UserProfile');
+
 	// Member
 	Route::post('api/Dashboard/Member/GetAccountProfile', 'Dashboard\Member\Account\MemberAccountProfileController@GetAccountProfile');
-	Route::post('api/Dashboard/Member/RequestJoinAffiliate', 'Dashboard\Member\Request\MemberRequestJoinAffiliateController@RequestJoinAffiliate');
+	Route::post('api/Dashboard/Member/RequestJoinAffiliate', 'Dashboard\Member\Request\MemberRequestController@RequestJoinAffiliate');
+	Route::post('api/Dashboard/Member/CheckRequestJoinAffiliate', 'Dashboard\Member\Request\MemberRequestController@CheckRequestJoinAffiliate');
+	Route::post('api/Dashboard/Member/CancelRequest', 'Dashboard\Member\Request\MemberRequestController@CancelRequest');
+	Route::post('api/Dashboard/Member/Approval', 'Dashboard\Member\Approval\MemberApprovalController@MemberApproval');
+
+	// Manager
+	Route::post('api/Dashboard/Manager/AffiliateManagement', 'Dashboard\Manager\Affiliate\ManagerAffiliateManagementController@AffiliateManagement');
+	Route::post('api/Dashboard/Manager/AffiliateManagement/Detail', 'Dashboard\Manager\Affiliate\ManagerAffiliateManagementController@AffiliateManagementDetail');
+	Route::post('api/Dashboard/Manager/AffiliateManagement/CommissionRate', 'Dashboard\Manager\Affiliate\ManagerAffiliateManagementController@AffiliateManagementCommissionRate');
+	Route::post('api/Dashboard/Manager/AffiliateManagement/CommissionRate/Update', 'Dashboard\Manager\Affiliate\ManagerAffiliateManagementController@AffiliateUpdateCommissionRate');
+
+	// Request
+	Route::post('api/Account/AccountRequestStatus', 'Accounts\Request\AccountRequestStatusController@AccountRequestStatus');
+
 	/*----------- Dashboard (End) ----------------------------------*/
 
 // Test Email

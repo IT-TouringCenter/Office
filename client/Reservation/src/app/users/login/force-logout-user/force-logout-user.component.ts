@@ -34,8 +34,8 @@ export class ForceLogoutUserComponent implements OnInit {
 
   // 1. Get account data
   getAccountData(){
-    let url = 'http://localhost:9000/api/Account/GetAccountLoginData';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/GetAccountLoginData';
+    // let url = 'http://localhost:9000/api/Account/GetAccountLoginData';
+    let url = 'http://api.tourinchiangmai.com/api/Account/GetAccountLoginData';
 
       let options = new RequestOptions();
       let dataSave = {
@@ -65,8 +65,8 @@ export class ForceLogoutUserComponent implements OnInit {
   // 3. Submit
   submit(){
     // Call API
-    let url = 'http://localhost:9000/api/Account/AccountForceLogout';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/AccountForceLogout';
+    // let url = 'http://localhost:9000/api/Account/AccountForceLogout';
+    let url = 'http://api.tourinchiangmai.com/api/Account/AccountForceLogout';
 
     let options = new RequestOptions();
     let dataLogout = {

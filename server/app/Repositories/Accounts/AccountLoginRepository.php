@@ -30,6 +30,7 @@ class AccountLoginRepository{
 		$result = \DB::table('accounts')
 						->where('username',$username)
 						->where('password',$password)
+						->where('is_delete',0)
 						// ->where('is_active')
 						->get();
 		return $result;
@@ -40,6 +41,7 @@ class AccountLoginRepository{
 		$result = \DB::table('accounts')
 						->where('username',$username)
 						->where('password',$password)
+						->where('is_delete',0)
 						->where('is_active',1)
 						->get();
 		return $result;
@@ -69,6 +71,7 @@ class AccountLoginRepository{
 	public function GetAccountData($accountId){
 		$result = \DB::table('accounts')
 						->where('id',$accountId)
+						->where('is_delete',0)
 						->where('is_active',1)
 						->get();
 		return $result;
@@ -116,15 +119,17 @@ class AccountLoginRepository{
 	public function GetAccountByToken($token){
 		$result = \DB::table('accounts')
 						->where('token',$token)
+						->where('is_delete',0)
 						->where('is_active',1)
 						->get();
 		return $result;
 	}
 
 	// 11. Get account login by token
-	public function GetAccountLoginByToken($token){
+	public function GetAccountLoginByToken($token,$tokenLogin){
 		$result = \DB::table('login_histories')
 						->where('token',$token)
+						->where('token_login',$tokenLogin)
 						->where('is_active',1)
 						->get();
 		return $result;
@@ -150,6 +155,7 @@ class AccountLoginRepository{
 						->join('account_types as at','at.id','=','a.account_type_id')
 						->where('a.token',$token)
 						->where('a.account_type_id',$accountTypeId)
+						->where('a.is_delete',0)
 						->where('a.is_active',1)
 						->where('at.is_active',1)
 						->get();
@@ -165,4 +171,14 @@ class AccountLoginRepository{
 						->get();
 		return $result;
 	}
+
+	// 15. Get token login by id : login_histories
+	public function GetLoginhistoryById($loginId){
+		$result = \DB::table('login_histories')
+						->where('id',$loginId)
+						->where('is_active',1)
+						->get();
+		return $result;
+	}
+
 }

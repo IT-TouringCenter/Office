@@ -34,13 +34,15 @@
         display: none;
     }
 }
-.join-btn{
+.join-btn-block{
     text-align: right;
-    color: blue;
+}
+.join-btn{
+    color: blue !important;
     cursor: pointer;
 }
 .join-btn:hover{
-    color: #50009b;
+    color: #50009b !important;
     cursor: pointer;
 }
 .affiliate-condition-link, .affiliate-policy-link{

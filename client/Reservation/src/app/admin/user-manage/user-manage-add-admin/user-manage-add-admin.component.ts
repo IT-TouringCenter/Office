@@ -19,7 +19,7 @@ export class UserManageAddAdminComponent implements OnInit {
     email: <any>""
   };
 
-  private accountType;
+  private accountType = <any>"";
 
   constructor(
     private http: Http,
@@ -43,18 +43,15 @@ export class UserManageAddAdminComponent implements OnInit {
     // let url = "http://localhost:9000/api/Account/GetAccountType";
     let url = "http://api.tourinchiangmai.com/api/Account/GetAccountType";
 
-    /*==================  Success  ===================*/
     this.http.get(url)
                     .map(res => res.json())
                     .subscribe(
                       data => [
-                        console.log(data),
-                        this.accountType = data,
-                        this.addUser.accountType = 0
+                        this.addUser.accountType = 0,
+                        this.accountType = data
                       ],
                       err => {console.log(err)}
                     );
-    /*==================  Success  ===================*/
   }
 
   // 4. register
@@ -65,6 +62,8 @@ export class UserManageAddAdminComponent implements OnInit {
     this.addUser.account = getAccount.data.username;
     this.addUser.accountName = getAccount.data.name;
     this.addUser.email = this.addUser.username;
+
+    console.log(JSON.stringify(this.addUser));
     
     // let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement/Add";
     let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Add";

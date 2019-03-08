@@ -30,6 +30,7 @@ class UpdateBookingPaymentClass{
 
 	// Update is_active=1
 	public function UpdateBookingPayment($data){
+		$result = new Transaction;
 		$checkUpdate = array_get($data,'isUpdate');
 		if($checkUpdate==false){
 			return 'Can not update payment.';
@@ -61,16 +62,33 @@ class UpdateBookingPaymentClass{
 			$UpdateTransactionTourDetailHistory = $this->UpdateBookingPaymentRepo->UpdateTransactionTourDetailHistory($value->id);
 		}		
 
-		// 7. Update payment status
-		$UpdatePaymentStatus = $this->UpdateBookingPaymentRepo->UpdatePayment($TransactionId);
+		// 7. Save invoice (run number)
+		$checkPaymentPaid = $this->UpdateBookingPaymentRepo->CheckPaymentPaid($TransactionId);
+		if($checkPaymentPaid){
+			$result->status = false;
+			$result->message = 'Error';
+			$result->data = [];
 
-		// 8. Save invoice (run number)
+			return $result;
+		}
+
 		$SaveInvoice = $this->SaveInvoice($TransactionId,$UpdateTransactionTourGetID[0]->id);
-		$result = $SaveInvoice;
+		if($SaveInvoice){
+			// 7. Update payment status
+			$UpdatePaymentStatus = $this->UpdateBookingPaymentRepo->UpdatePayment($TransactionId);
+
+			$result->status = true;
+			$result->message = 'OK';
+			$result->data = [];
+		}else{
+			$result->status = false;
+			$result->message = 'Error!';
+			$result->data = [];
+		}
 
 		// 9. Commission Tour
-		$affiliateCommission = $this->AffiliateCommission($TransactionId,$UpdateTransactionTourGetID[0]->id);
-		$result = $affiliateCommission;
+		// $affiliateCommission = $this->AffiliateCommission($TransactionId,$UpdateTransactionTourGetID[0]->id);
+		// $result = $affiliateCommission;
 
 		return $result;
 	}
@@ -136,11 +154,19 @@ class UpdateBookingPaymentClass{
 	public function AffiliateCommission($TransactionId,$TransactionTourId){
 		// 1. Get transaction tour
 		$bookingData = \TourCommissionFacade::GetTransactionTour($TransactionTourId);
+		$tourId = $bookingData[0]->tour_id;
 		
 		// 2. Get account id from transactions
 		$transactionData = \TourCommissionFacade::GetTransaction($TransactionId);
-		$accountId = $transactionData[0]->account_id;
 
+		if($transactionData){
+			return 'true';
+		}else{
+			return 'false';
+		}
+
+		// Affiliate logic
+		$accountId = $transactionData[0]->account_id;
 		if($accountId < 1){ // none affiliate
 			return 'none account';
 		}else{
@@ -148,7 +174,7 @@ class UpdateBookingPaymentClass{
 			$affiliateCommission = \TourCommissionFacade::GetAffiliateCommission($accountId);
 
 			// 4. Get tour commission price rate
-			$commissionRate = \TourCommissionFacade::GetTourCommissionPriceRate();
+			$commissionRate = \TourCommissionFacade::GetTourCommissionPriceRate($accountId,$tourId);
 
 			// 5. Calculate tour commission
 			$calculateTourCommission = $this->CalculateTourCommission($accountId,$bookingData,$affiliateCommission,$commissionRate,$transactionData,$TransactionTourId);
@@ -205,22 +231,22 @@ class UpdateBookingPaymentClass{
 			$commissionDetail->comAmount = $comAmount;
 			$saveCommissionDetail = $this->SaveAffiliateCommissionDetail($commissionDetail,$accountId,$transactionTourId);
 
-			if($saveCommissionDetail=='true transactionData'){
-				// 7. save affiliate commission
-				$commission = new Transaction;
-				$commission->pax = $guestPax + $affiliateCommission[0]->pax;
-				$commission->adultPax = $adultPax + $affiliateCommission[0]->adult_pax;
-				$commission->childPax = $childPax + $affiliateCommission[0]->child_pax;
-				$commission->infantPax = $infantPax + $affiliateCommission[0]->infant_pax;
-				$commission->adultPrice = $adultPrice + $affiliateCommission[0]->adult_price;
-				$commission->childPrice = $childPrice + $affiliateCommission[0]->child_price;
-				$commission->comAdult = $comAdult + $affiliateCommission[0]->commission_adult;
-				$commission->comChild = $comChild + $affiliateCommission[0]->commission_child;
-				$commission->comTotal = $comTotal + $affiliateCommission[0]->commission_total;
-				$commission->comBonus = 0 + $affiliateCommission[0]->commission_bonus;
-				$commission->comAmount = $comAmount + $affiliateCommission[0]->commission_amount;
-				$saveCommission = $this->SaveAffiliateCommission($commission,$accountId);
-			}
+			// if($saveCommissionDetail=='true transactionData'){
+			// 	// 7. save affiliate commission
+			// 	$commission = new Transaction;
+			// 	$commission->pax = $guestPax + $affiliateCommission[0]->pax;
+			// 	$commission->adultPax = $adultPax + $affiliateCommission[0]->adult_pax;
+			// 	$commission->childPax = $childPax + $affiliateCommission[0]->child_pax;
+			// 	$commission->infantPax = $infantPax + $affiliateCommission[0]->infant_pax;
+			// 	$commission->adultPrice = $adultPrice + $affiliateCommission[0]->adult_price;
+			// 	$commission->childPrice = $childPrice + $affiliateCommission[0]->child_price;
+			// 	$commission->comAdult = $comAdult + $affiliateCommission[0]->commission_adult;
+			// 	$commission->comChild = $comChild + $affiliateCommission[0]->commission_child;
+			// 	$commission->comTotal = $comTotal + $affiliateCommission[0]->commission_total;
+			// 	$commission->comBonus = 0 + $affiliateCommission[0]->commission_bonus;
+			// 	$commission->comAmount = $comAmount + $affiliateCommission[0]->commission_amount;
+			// 	$saveCommission = $this->SaveAffiliateCommission($commission,$accountId);
+			// }
 
 		return $saveCommissionDetail;
 	}

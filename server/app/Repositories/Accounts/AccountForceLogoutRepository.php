@@ -18,6 +18,8 @@ class AccountForceLogoutRepository{
 	public function GetAccount($username){
 		$result = \DB::table('accounts')
 						->where('username',$username)
+						->where('is_delete',0)
+						->where('is_active',1)
 						->get();
 		return $result;
 	}

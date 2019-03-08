@@ -45,14 +45,25 @@ class AffiliateCommissionClass{
 
     // 
     public function CalculateCommission($data,$transactionTourId){
+        // get commission rate
+        $accountId = $data[0]->account_id;
+        $tourId = $data[0]->tour_id;
+
+        $commissionRate = 0;
+        $getCommissionRate = $this->AffiliateRepo->GetAffiliateCommissionTourRate($accountId,$tourId);
+        if($getCommissionRate){
+            $commissionRate = $getCommissionRate[0]->price_rate / 100;
+        }
+
+        // calculate
         $pax = $data[0]->pax;
         $adultPax = $data[0]->adult_pax;
         $childPax = $data[0]->child_pax;
-        $adultPrice = $data[0]->adult_price;
-        $childPrice = $data[0]->child_price;
+        $adultPrice = $data[0]->total_adult_price;
+        $childPrice = $data[0]->total_child_price;
 
-        $this->commissionAdult = ($adultPax*$adultPrice)*0.10;
-        $this->commissionChild = ($childPax*$childPrice)*0.10;
+        $this->commissionAdult = $adultPrice * $commissionRate;
+        $this->commissionChild = $childPrice * $commissionRate;
 
         $this->commission = [
             "commission_adult"=>$this->commissionAdult,
@@ -86,8 +97,8 @@ class AffiliateCommissionClass{
             'adult_pax'=>$data[0]->adult_pax,
             'child_pax'=>$data[0]->child_pax,
             'infant_pax'=>$data[0]->infant_pax,
-            'adult_price'=>$data[0]->adult_price,
-            'child_price'=>$data[0]->child_price,
+            'adult_price'=>$data[0]->total_adult_price,
+            'child_price'=>$data[0]->total_child_price,
             'commission_adult'=>$data[0]->commission_adult,
             'commission_child'=>$data[0]->commission_child,
             'commission_total'=>$commissionTotal,

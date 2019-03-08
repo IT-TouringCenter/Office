@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder {
 		//- Account
 		$this->call(AccountTypeSeeder::class);
 		$this->call(AccountRequestTypeSeeder::class);
+		$this->call(AccountRequestStatusSeeder::class);
 
 		//- Configuration
 		$this->call(ConfigurationEmailSeeder::class);

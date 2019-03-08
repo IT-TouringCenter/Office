@@ -46,9 +46,12 @@ class TourCommissionRepository{
 	}
 
 	// Get tour commission price rate
-	public function GetTourCommissionPriceRate(){
-		$result = \DB::table('tour_commission_price_rates')
+	public function GetTourCommissionPriceRate($accountId,$tourId){
+		// $result = \DB::table('tour_commission_price_rates')
+		$result = \DB::table('affiliate_commission_tour_rates')
 						->select('min_pax','max_pax','price_rate')
+						->where('account_id',$accountId)
+						->where('tour_id',$tourId)
 						->where('is_active',1)
 						->get();
 		return $result;

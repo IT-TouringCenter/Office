@@ -90,15 +90,10 @@ export class TourAffComponent implements OnInit {
                     .subscribe(
                       data => [
                         sessionStorage.setItem('tour-chart',JSON.stringify(data)),
+                        this.setDataBinding()
                       ],
                       err => console.log("Error :: " + err)
                     );
-    // setTimeout(()=>{
-    //   let _getData = JSON.parse(sessionStorage.getItem('tour-chart'));
-    //   this.barChartData = _getData.booked;
-    //   this.tours = _getData.tours;
-    //   this.amount = _getData.amount;
-    // }, 500);
   }
 
   // 3.1 set data binding
@@ -120,6 +115,7 @@ export class TourAffComponent implements OnInit {
 
     this.activeMenu();
     this.getTourData();
+    // this.setDataBinding();
   }
 
 }

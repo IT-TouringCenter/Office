@@ -34,8 +34,8 @@ class TourCommissionClass{
     }
 
     // Get tour commission price rate
-    public function GetTourCommissionPriceRate(){
-        $result = $this->TourCommissionRepo->GetTourCommissionPriceRate();
+    public function GetTourCommissionPriceRate($accountId,$tourId){
+        $result = $this->TourCommissionRepo->GetTourCommissionPriceRate($accountId,$tourId);
         return $result;
     }
 

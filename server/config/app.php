@@ -228,6 +228,8 @@ return [
 		'AccountLoginReturnTypeFacade' => 'App\Facades\Accounts\AccountLoginReturnTypeFacade',
 		'AccountTypeFacade' => 'App\Facades\Accounts\AccountTypeFacade',
 
+		'AccountRequestStatusFacade' => 'App\Facades\Accounts\Request\AccountRequestStatusFacade',
+
 		// Affiliate
 		'AffiliateFacade' => 'App\Facades\Affiliates\AffiliateFacade',
 		'AffiliateCommissionFacade' => 'App\Facades\Affiliates\Commission\AffiliateCommissionFacade',
@@ -274,9 +276,22 @@ return [
 		'AdminUserManagementDeleteSaveFacade' => 'App\Facades\Dashboard\Admin\Users\Delete\AdminUserManagementDeleteSaveFacade',
 		'AdminUserManagementActiveFacade' => 'App\Facades\Dashboard\Admin\Users\Active\AdminUserManagementActiveFacade',
 		'AdminUserManagementActiveSaveFacade' => 'App\Facades\Dashboard\Admin\Users\Active\AdminUserManagementActiveSaveFacade',
+		'AdminUserRequestFacade' => 'App\Facades\Dashboard\Admin\Request\AdminUserRequestFacade',
+		'AdminUserRequestUpdateFacade' => 'App\Facades\Dashboard\Admin\Request\AdminUserRequestUpdateFacade',
+		'AdminUserProfileFacade' => 'App\Facades\Dashboard\Admin\Users\Profile\AdminUserProfileFacade',
 
 		// Dashboard (Member)
-		'MemberAccountProfile' => 'App\Facades\Dashboard\Member\Account\MemberAccountProfileFacade',
+		'MemberAccountProfileFacade' => 'App\Facades\Dashboard\Member\Account\MemberAccountProfileFacade',
+		'MemberRequestJoinAffiliateFacade' => 'App\Facades\Dashboard\Member\Request\MemberRequestJoinAffiliateFacade',
+		'MemberCheckRequestJoinAffiliateFacade' => 'App\Facades\Dashboard\Member\Request\MemberCheckRequestJoinAffiliateFacade',
+		'MemberCancelRequestFacade' => 'App\Facades\Dashboard\Member\Request\MemberCancelRequestFacade',
+		'MemberApprovalFacade' => 'App\Facades\Dashboard\Member\Approval\MemberApprovalFacade',
+
+		// Dashboard (Manager)
+		'ManagerAffiliateManagementFacade' => 'App\Facades\Dashboard\Manager\Affiliate\ManagerAffiliateManagementFacade',
+		'ManagerAffiliateManagementDetailFacade' => 'App\Facades\Dashboard\Manager\Affiliate\ManagerAffiliateManagementDetailFacade',
+		'ManagerAffiliateManagementCommissionRateFacade' => 'App\Facades\Dashboard\Manager\Affiliate\ManagerAffiliateManagementCommissionRateFacade',
+		'ManagerAffiliateUpdateCommissionRateFacade' => 'App\Facades\Dashboard\Manager\Affiliate\ManagerAffiliateUpdateCommissionRateFacade',
 
 		// Banks
 		'BankFacade' => 'App\Facades\Bank\BankFacade',

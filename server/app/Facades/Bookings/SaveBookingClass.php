@@ -30,18 +30,19 @@ class SaveBookingClass{
 
 	// Save to DB : transaction table
 	public function SaveBooking($bookingData){
+		// return $bookingData;
 		// Set data for save
 		$bookingArr = [];
 		$summary = array_get($bookingData,'summary');
 		$guestData = array_get($bookingData, 'guestInfo');
 		$noteBy = array_get($bookingData, 'noteBy');
-		$invoiceRef = array_get($bookingData, 'invoiceRef');
-		$account = array_get($bookingData, 'account');
+		// $invoiceRef = array_get($bookingData, 'invoiceRef');
+		$account = array_get($bookingData, 'accountInfo');
 		$count = 1;
 
 		$this->transaction = new Transaction;
 		// Account
-		$GetAccountId = \AccountFacade::GetAffiliateAccountIDByToken(array_get($account,'affId'));
+		$GetAccountId = \AccountFacade::GetAffiliateAccountIDByToken(array_get($account,'token'));
 		$this->transaction->account = $GetAccountId;
 		// Transaction
 		$saveTransactionId = $this->SaveBookingRepo->SaveTransactionBooking($bookingData,$GetAccountId);
@@ -49,6 +50,7 @@ class SaveBookingClass{
 		$TransactionTourId = $this->SaveTransactionTourBooking($saveTransactionId,$bookingData);
 		// Transaction tour reference
 		$saveTransactionTourReference = $this->SaveBookingRepo->SaveTransactionTourReference($saveTransactionId, array_get($bookingData,'upackId'));
+		// return $saveTransactionTourReference;
 		// Payment
 		$PaymentId = $this->SaveBookingPayment($saveTransactionId,$summary,$noteBy);
 

@@ -105,9 +105,6 @@ export class TourDayOfMonthAffComponent implements OnInit {
 
     // this.barChartLabels = <any>['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
     this.barChartLabels = daysDataArr;
-    // console.log(daysDataArr);
-    // console.log('-----------------------');
-    // console.log(this.barChartLabels);
     this.barChartType = 'line';
     this.barChartLegend = true;
   }
@@ -179,11 +176,6 @@ export class TourDayOfMonthAffComponent implements OnInit {
                       ],
                       err => {console.log(err)}
                     );
-    // setTimeout(()=>{
-    //   let _getData = JSON.parse(sessionStorage.getItem('tour-day-chart'));
-    //   this.barChartData = _getData.booked;
-    //   this.amount = _getData.amount;
-    // }, 500);
   }
 
   // 3.1 set data binding
@@ -221,17 +213,6 @@ export class TourDayOfMonthAffComponent implements OnInit {
                       ],
                       err => {console.log(err)}
                     );
-    // setTimeout(()=>{
-    //   let _getData = JSON.parse(sessionStorage.getItem('tour-day-chart'));
-
-    //   // set default data
-    //   let daysInMonth = _getData.days.length;
-    //   this.setDefaultChart(daysInMonth);
-      
-    //   this.barChartData = _getData.booked;
-    //   this.barChartLabels = _getData.days;
-    //   this.amount = _getData.amount;
-    // }, 500);
   }
 
   // 4.1 set data search

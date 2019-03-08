@@ -35,13 +35,14 @@ export class LogoutUserComponent implements OnInit {
     let data = JSON.parse(sessionData);
 
     // Call API
-    let url = 'http://localhost:9000/api/Account/AccountLogout';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/AccountLogout';
+    // let url = 'http://localhost:9000/api/Account/AccountLogout';
+    let url = 'http://api.tourinchiangmai.com/api/Account/AccountLogout';
 
       let options = new RequestOptions();
       let dataLogout = {
         username: data.data.username,
-        token: data.data.token
+        token: data.data.token,
+        tokenLogin: data.data.tokenLogin
       };
 
       return this.http.post(url, dataLogout, options)
@@ -64,6 +65,8 @@ export class LogoutUserComponent implements OnInit {
     sessionStorage.clear();
     localStorage.removeItem('users');
     this.router.navigate(['user/login']);
+    // return;
+    sessionStorage.setItem('reload',JSON.stringify(1));
   }
 
   ngOnInit() {

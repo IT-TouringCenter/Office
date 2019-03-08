@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
-import "rxjs/Rx";
+import { Observable } from "rxjs/Rx";
 
 @Component({
   selector: 'app-permission-admin',
@@ -20,7 +20,6 @@ export class PermissionAdminComponent implements OnInit {
 
   // get user storage
   getUserStorage(){
-    // let getUser = JSON.parse(sessionStorage.getItem('users'));
     let getUser = JSON.parse(localStorage.getItem('users'));
 
     if(getUser==null || getUser==undefined || getUser==''){
@@ -35,6 +34,7 @@ export class PermissionAdminComponent implements OnInit {
   // check user login
   checkUserLogin(getUser){
     let token = getUser.data.token;
+    let tokenLogin = getUser.data.tokenLogin;
     let type = getUser.data.userType;
 
     // let url = 'http://localhost:9000/api/Account/AccountSessionLoginReturnType';
@@ -42,6 +42,7 @@ export class PermissionAdminComponent implements OnInit {
 
     let checkLogin = {
       token: token,
+      tokenLogin: tokenLogin,
       type: type
     }
 
@@ -50,7 +51,7 @@ export class PermissionAdminComponent implements OnInit {
                     .map(res => res.json())
                     .subscribe(
                       data => [
-                        sessionStorage.setItem('login',JSON.stringify(data)),
+                        // sessionStorage.setItem('login',JSON.stringify(data)),
                         this.setUserLogin(data)
                       ],
                       err => [
@@ -84,6 +85,10 @@ export class PermissionAdminComponent implements OnInit {
 
   ngOnInit() {
     this.getUserStorage();
+    // run every time
+    Observable.interval(1000*30).subscribe(x => {
+      this.getUserStorage();
+    });
   }
 
 }

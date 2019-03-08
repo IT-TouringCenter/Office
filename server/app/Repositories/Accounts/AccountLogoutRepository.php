@@ -15,11 +15,12 @@ class AccountLogoutRepository{
 	*/
 
 	// 1. Update login_histories (non active)
-	public function Logout($accountId,$token,$dateTimeNow){
+	public function Logout($accountId,$token,$tokenLogin,$dateTimeNow){
 		$update = ['is_active'=>0,'logout_datetime'=>$dateTimeNow];
 		$result = \DB::table('login_histories')
 						->where('account_id',$accountId)
 						->where('token',$token)
+						->where('token_login',$tokenLogin)
 						->where('is_active',1)
 						->update($update);
 		return $result;

@@ -44,7 +44,7 @@ class DashboardAffiliateRepository{
     public function GetTraveled($accountId){
         $result = \DB::table('transaction_tours as tt')
                     ->join('transactions as t','t.id','=','tt.transaction_id')
-                    ->where('t.account_id',1)
+                    ->where('t.account_id',$accountId)
                     ->where('t.is_active',1)
                     ->where('tt.is_travel',1)
                     ->where('tt.is_active',1)
@@ -102,6 +102,21 @@ class DashboardAffiliateRepository{
                     ->where('account_id',$accountId)
                     ->where('is_active',1)
                     ->get();
+        return $result;
+    }
+
+    // check affiliate commission table 
+    public function CheckAffiliateCommission($accountId){
+        $result = \DB::table('affiliate_commissions')
+                    ->where('account_id',$accountId)
+                    ->where('is_active',1)
+                    ->get();
+        return $result;
+    }
+
+    // create affiliate commission record
+    public function CreateAffiliateCommissionRecord($data){
+        $result = \DB::table('affiliate_commissions')->insertGetId($data);
         return $result;
     }
 }

@@ -35,6 +35,7 @@ class AccountLoginClass{
         $forceLogout = false;
 
         $login = new Account;
+        $returnTokenLogin = '';
 
         // 1. Check email in account table
         $checkAccount = $this->CheckAccount($data);
@@ -86,6 +87,10 @@ class AccountLoginClass{
             $saveLogin = $this->SaveLoginHistory($checkAccount);
             if($saveLogin){
                 $saveLoginRes = true;
+                // $returnTokenLogin = $saveLogin[0]->token_login; // token login
+                // Get token login
+                $getTokenLogin = $this->AccountLoginRepo->GetLoginhistoryById($saveLogin);
+                $returnTokenLogin = $getTokenLogin[0]->token_login;
             }else{
                 $saveLoginRes = false;
                 $login->status = false;
@@ -119,6 +124,8 @@ class AccountLoginClass{
             $mail = $this->SendMailLoginHistory($accountId,$saveLogin);
                         
             // 6. Return
+            $resData->tokenLogin = $returnTokenLogin; // set return token login
+
             $login->status = true;
             $login->message = 'Signed in successfully.';
             $login->notify = 'OK';
@@ -165,11 +172,14 @@ class AccountLoginClass{
         $logoutCode = \GenerateCodeFacade::Code5Chars();
         $logoutCodeExpired = \DateFormatFacade::SetDatePlus30Minute($dateTimeNow);
         $logoutExpired = \DateFormatFacade::SetDatePlus1Hour($dateTimeNow);
+        // generate token login
+        $tokenLogin = \GenerateCodeFacade::GenerateToken();
 
         $data = [
             'account_id'=>$accountData[0]->id,
             'login_dateTime'=>$dateTimeNow,
             'token'=>$accountData[0]->token,
+            'token_login'=>$tokenLogin,
             'logout_code'=>$logoutCode,
             'logout_code_expired'=>$logoutCodeExpired,
             'logout_expired'=>$logoutExpired

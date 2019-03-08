@@ -13,39 +13,41 @@
     <div class="container">
       <h3 class="dashboard-header">User management</h3>
       <!-- <hr style="width: 100px; text-align: center; border: #651e1e 1px solid; margin-bottom: 30px;"> -->
-      <div style="margin:auto; margin-top:20px;width:80% !important;">
-        <table class="table table-bordered table-hover">
-          <!-- Table Header -->
-          <tr class="font-table-13px">
-            <th class="text-center bg-damask text-light">No.</th>
-            <th class="text-center bg-damask text-light">Type</th>
-            <th class="text-center bg-damask text-light">Username</th>
-            <th class="text-center bg-damask text-light">Fullname</th>
-            <th class="text-center bg-damask text-light">Email</th>
-            <th class="text-center bg-damask text-light">Status</th>
-            <th class="text-center bg-dark-gray text-light">Edit</th>
-            <th class="text-center bg-dark-gray text-light">Delete</th>
-          </tr>
-          <!-- Table Body -->
-          <tr *ngFor="let user of getUser | slice:pointStart:pointEnd; let i = index;" [class.table-info]="highlightId==user.userId" class="font-table-12px">
-            <td class="text-center">{{i+1+(perPage*(activePage-1))}}</td>
-            <td class="text-center">{{user.type}}</td>
-            <td class="text-center">{{user.username}}</td>
-            <td class="text-center">{{user.fullname}}</td>
-            <td class="text-center">{{user.email}}</td>
-            <td class="text-center">{{user.status}}</td>
-            <td class="text-center">
-              <a href="/#/user/admin/user-manage/edit/{{user.token}}">
-                <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 15px;"></i>
-              </a>
-            </td>
-            <td class="text-center">
-              <a href="/#/user/admin/user-manage/delete/{{user.token}}">
-                <i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i>
-              </a>
-            </td>
-          </tr>
-        </table>
+      <div style="margin:auto; margin-top:20px;width:100% !important;">
+        <div style="overflow-x:auto;">
+          <table class="table table-bordered table-hover">
+            <!-- Table Header -->
+            <tr class="font-table-13px">
+              <th class="text-center bg-damask text-light">No.</th>
+              <th class="text-center bg-damask text-light">Type</th>
+              <th class="text-center bg-damask text-light">Username</th>
+              <th class="text-center bg-damask text-light">Fullname</th>
+              <th class="text-center bg-damask text-light">Email</th>
+              <!-- <th class="text-center bg-damask text-light">Status</th> -->
+              <th class="text-center bg-dark-gray text-light">Edit</th>
+              <th class="text-center bg-dark-gray text-light">Delete</th>
+            </tr>
+            <!-- Table Body -->
+            <tr *ngFor="let user of getUser | slice:pointStart:pointEnd; let i = index;" [class.table-info]="highlightId==user.userId" class="font-table-12px">
+              <td class="text-center">{{i+1+(perPage*(activePage-1))}}</td>
+              <td class="text-center">{{user.type}}</td>
+              <td class="text-center">{{user.username}}</td>
+              <td class="text-center">{{user.fullname}}</td>
+              <td class="text-center">{{user.email}}</td>
+              <!-- <td class="text-center">{{user.status}}</td> -->
+              <td class="text-center">
+                <a href="/#/user/admin/user-manage/edit/{{user.token}}">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 15px;"></i>
+                </a>
+              </td>
+              <td class="text-center">
+                <a href="/#/user/admin/user-manage/delete/{{user.token}}">
+                  <i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i>
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
 
         <!-- Page -->
         <div class="text-center">

@@ -121,7 +121,6 @@ export class TourMonthlyAffComponent implements OnInit {
     }
 
     // get token from session
-    // let getToken = JSON.parse(sessionStorage.getItem('users'));
     let getToken = JSON.parse(localStorage.getItem('users'));
     if(getToken==null || getToken==undefined || getToken==''){
       alert('Session expired!');
@@ -132,7 +131,7 @@ export class TourMonthlyAffComponent implements OnInit {
       this.tourData.token = getToken.data.token;
       this.tourData.type = getToken.data.userType;
     }
-    /*==================  Success  ===================*/
+
     console.log(this.tourData);
     this.http.post(url, this.tourData, options)
                     .map(res => res.json())
@@ -143,11 +142,6 @@ export class TourMonthlyAffComponent implements OnInit {
                       ],
                       err => {console.log(err)}
                     );
-    // setTimeout(()=>{
-    //   let _getData = JSON.parse(sessionStorage.getItem('tour-monthly-chart'));
-    //   this.barChartData = _getData.booked;
-    //   this.amount = _getData.amount;
-    // }, 500);
   }
 
   // 3.1 set data binding
@@ -164,7 +158,6 @@ export class TourMonthlyAffComponent implements OnInit {
     let options = new RequestOptions();
 
     // get token from session
-    // let getToken = JSON.parse(sessionStorage.getItem('users'));
     let getToken = JSON.parse(localStorage.getItem('users'));
     if(getToken==null || getToken==undefined || getToken==''){
       this.tourData.token = 0;
@@ -185,11 +178,6 @@ export class TourMonthlyAffComponent implements OnInit {
                       ],
                       err => {console.log(err)}
                     );
-    // setTimeout(()=>{
-    //   let _getData = JSON.parse(sessionStorage.getItem('tour-monthly-chart'));
-    //   this.barChartData = _getData.booked;
-    //   this.amount = _getData.amount;
-    // }, 500);
   }
 
   // 4.1 set data search

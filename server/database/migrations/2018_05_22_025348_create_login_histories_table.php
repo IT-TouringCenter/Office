@@ -20,6 +20,7 @@ class CreateLoginHistoriesTable extends Migration {
 			$table->dateTime('login_datetime');
 			$table->dateTime('logout_datetime')->nullable();
 			$table->string('token');
+			$table->string('token_login');
 			$table->string('otp')->nullable();
 			// $table->dateTime('otp_expire');
 			$table->string('logout_code',20);

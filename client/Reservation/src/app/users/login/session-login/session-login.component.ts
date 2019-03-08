@@ -40,8 +40,8 @@ export class SessionLoginComponent implements OnInit {
 
   // 2. Check login (API)
   checkLogin(sessionData){
-    let url = 'http://localhost:9000/api/Account/AccountSessionLogin';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/AccountSessionLogin';
+    // let url = 'http://localhost:9000/api/Account/AccountSessionLogin';
+    let url = 'http://api.tourinchiangmai.com/api/Account/AccountSessionLogin';
 
     let options = new RequestOptions();
     let checkLogin = {
@@ -73,8 +73,8 @@ export class SessionLoginComponent implements OnInit {
   // 3. Logout
   logout(data){
     // Call API
-    let url = 'http://localhost:9000/api/Account/AccountLogout';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/AccountLogout';
+    // let url = 'http://localhost:9000/api/Account/AccountLogout';
+    let url = 'http://api.tourinchiangmai.com/api/Account/AccountLogout';
 
     let options = new RequestOptions();
     let dataLogout = {
@@ -107,8 +107,8 @@ export class SessionLoginComponent implements OnInit {
   // 5. Check logout (AI)
   checkLogout(){
     // Call API
-    let url = 'http://localhost:9000/api/Account/CheckAccountLoginExpired';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/CheckAccountLoginExpired';
+    // let url = 'http://localhost:9000/api/Account/CheckAccountLoginExpired';
+    let url = 'http://api.tourinchiangmai.com/api/Account/CheckAccountLoginExpired';
 
     let options = new RequestOptions();
     let dataLogout = {};

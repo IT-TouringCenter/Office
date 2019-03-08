@@ -124,12 +124,7 @@ export class BookedDayOfMonthAffComponent implements OnInit {
     }
 
     // get token from session
-    // let getToken = JSON.parse(sessionStorage.getItem('users'));
     let getToken = JSON.parse(localStorage.getItem('users'));
-    // if(_getUserData==null || _getUserData==undefined || _getUserData==''){
-    //   alert('Session expired!');
-    //   this.router.navigate(['user/logout']);
-    // }
 
     if(getToken==null || getToken==undefined || getToken==''){
       alert('Session expired!');
@@ -141,7 +136,6 @@ export class BookedDayOfMonthAffComponent implements OnInit {
       this.bookedData.type = getToken.data.userType;
     }
 
-    /*==================  Success  ===================*/
     console.log(this.bookedData);
     this.http.post(url, this.bookedData, options)
                     .map(res => res.json())
@@ -153,11 +147,6 @@ export class BookedDayOfMonthAffComponent implements OnInit {
                       ],
                       err => {console.log(err)}
                     );
-    // setTimeout(()=>{
-    //   let _getData = JSON.parse(sessionStorage.getItem('booked-day-chart'));
-    //   this.barChartData = _getData.booked;
-    //   this.amount = _getData.amount;
-    // }, 500);
   }
 
   // 3.1 set data binding
@@ -184,7 +173,6 @@ export class BookedDayOfMonthAffComponent implements OnInit {
       this.bookedData.type = getToken.data.userType;
     }
 
-    /*==================  Success  ===================*/
     console.log(this.bookedData);
     this.http.post(url, this.bookedData, options)
                     .map(res => res.json())
@@ -196,18 +184,6 @@ export class BookedDayOfMonthAffComponent implements OnInit {
                       ],
                       err => {console.log(err)}
                     );
-    
-    // setTimeout(()=>{
-    //   let _getData = JSON.parse(sessionStorage.getItem('booked-day-chart'));
-
-    //   // set default data
-    //   let daysInMonth = _getData.days.length;
-    //   this.setDefaultChart(daysInMonth);
-      
-    //   this.barChartData = _getData.booked;
-    //   this.barChartLabels = _getData.days;
-    //   this.amount = _getData.amount;
-    // }, 500);
   }
 
   // 4.1 set data search

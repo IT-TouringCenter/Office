@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
-import "rxjs/Rx";
+import { Observable } from "rxjs/Rx";
 
 @Component({
   selector: 'app-permission-user-aff',
@@ -37,6 +37,7 @@ export class PermissionUserAffComponent implements OnInit {
   // check user login
   checkUserLogin(getUser){
     let token = getUser.data.token;
+    let tokenLogin = getUser.data.tokenLogin;
     let type = getUser.data.userType;
 
     // let url = 'http://localhost:9000/api/Account/AccountSessionLoginReturnType';
@@ -44,6 +45,7 @@ export class PermissionUserAffComponent implements OnInit {
 
     let checkLogin = {
       token: token,
+      tokenLogin: tokenLogin,
       type: type
     }
 
@@ -79,13 +81,17 @@ export class PermissionUserAffComponent implements OnInit {
 
   // check user type (permission)
   checkPermission(userType){
-    if(userType!=="Affiliate"){
+    if(userType!=="Affiliate" && userType!=="Affiliate intern"){
       this.router.navigate(['user/logout']);
     }
   }
 
   ngOnInit() {
     this.getUserStorage();
+    // run every time
+    Observable.interval(1000*30).subscribe(x => {
+      this.getUserStorage();
+    });
   }
 
 }

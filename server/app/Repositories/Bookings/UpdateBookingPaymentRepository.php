@@ -100,10 +100,20 @@ class UpdateBookingPaymentRepository{
 	// GetAccountID
 	public function GetAccountID($transactionId){
 		$result = \DB::table('transactions')
-						->select('account_id')
-						->where('id',$transactionId)
-						->where('is_active',1)
-						->get();
+									->select('account_id')
+									->where('id',$transactionId)
+									->where('is_active',1)
+									->get();
+		return $result;
+	}
+
+	// Check payment status = paid
+	public function CheckPaymentPaid($transactionId){
+		$result = \DB::table('payments')
+									->where('transaction_id',$transactionId)
+									->where('payment_status_id',2)
+									->where('is_active',1)
+									->get();
 		return $result;
 	}
 }

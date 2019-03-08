@@ -13,32 +13,34 @@
     <div class="container">
       <h3 style="text-align:center;margin-top:0px;margin-bottom:35px;padding:15px;font-weight:600 !important;width:85%;margin:auto;">Booked Table</h3>
       <div style="margin:auto; margin-top:20px;width:80% !important;">
-        <table class="table table-bordered table-hover">
-          <!-- Table Header -->
-          <tr class="font-table-13px">
-            <th class="text-center bg-damask text-light">No.</th>
-            <th class="text-center bg-damask text-light">Inv No.</th>
-            <th class="text-center bg-damask text-light">Tour Name</th>
-            <th class="text-center bg-damask text-light">Privacy</th>
-            <th class="text-center bg-damask text-light">Pax</th>
-            <th class="text-center bg-damask text-light">Guest</th>
-            <th class="text-center bg-damask text-light">Hotel</th>
-            <th class="text-center bg-damask text-light">Booked</th>
-            <th class="text-center bg-damask text-light">Traveled</th>
-          </tr>
-          <!-- Table Body -->
-          <tr *ngFor="let booked of getBooked | slice:pointStart:pointEnd; let i = index;" [class.table-info]="highlightId==booked.transactionId" class="font-table-12px">
-            <td class="text-center">{{i+1+(perPage*(activePage-1))}}</td>
-            <td class="text-center">{{booked.invoiceId}}</td>
-            <td title="{{booked.tourFullname}}">{{booked.tourName}}</td>
-            <td class="text-center">{{booked.tourPrivacy}}</td>
-            <td class="text-center">{{booked.tourPax}}</td>
-            <td>{{booked.guestName}}</td>
-            <td>{{booked.hotel}}</td>
-            <td class="text-center">{{booked.bookDate}}</td>
-            <td class="text-center">{{booked.tourTravel}}</td>
-          </tr>
-        </table>
+        <div style="overflow-x:auto;">
+          <table class="table table-bordered table-hover">
+            <!-- Table Header -->
+            <tr class="font-table-13px">
+              <th class="text-center bg-damask text-light">No.</th>
+              <th class="text-center bg-damask text-light">Inv No.</th>
+              <th class="text-center bg-damask text-light">Tour Name</th>
+              <th class="text-center bg-damask text-light">Privacy</th>
+              <th class="text-center bg-damask text-light">Pax</th>
+              <th class="text-center bg-damask text-light">Guest</th>
+              <th class="text-center bg-damask text-light">Hotel</th>
+              <th class="text-center bg-damask text-light">Booked</th>
+              <th class="text-center bg-damask text-light">Traveled</th>
+            </tr>
+            <!-- Table Body -->
+            <tr *ngFor="let booked of getBooked | slice:pointStart:pointEnd; let i = index;" [class.table-info]="highlightId==booked.transactionId" class="font-table-12px">
+              <td class="text-center">{{i+1+(perPage*(activePage-1))}}</td>
+              <td class="text-center">{{booked.invoiceId}}</td>
+              <td title="{{booked.tourFullname}}">{{booked.tourName}}</td>
+              <td class="text-center">{{booked.tourPrivacy}}</td>
+              <td class="text-center">{{booked.tourPax}}</td>
+              <td>{{booked.guestName}}</td>
+              <td>{{booked.hotel}}</td>
+              <td class="text-center">{{booked.bookDate}}</td>
+              <td class="text-center">{{booked.tourTravel}}</td>
+            </tr>
+          </table>
+        </div>
 
         <!-- Page -->
         <div class="text-center">

@@ -13,7 +13,7 @@
           <i class="fa fa-user" aria-hidden="true"></i><span> {{user}}</span>
         </li> -->
         <li style="float: right;">
-          <a class="logout" (click)="logout()" style="cursor: pointer;">Logout</a>
+          <a class="logout" (click)="logout()" style="cursor: pointer;">ออกจากระบบ</a>
         </li>
       </ul>
     </div>
@@ -28,15 +28,22 @@
       <!-- Dashboard -->
       <li class="sub-menu">
         <a class="sidebar-active" href="/#/user/member" [ngClass]="{'active':id==0}" (click)="addClass(id=0);addSubClass(subId=0)">
-          <span>Dashboard</span>
-          <i class="fa fa-area-chart fa-5x" aria-hidden="true"></i>
+          <span>แผงควบคุม</span>
+          <i class="fa fa-tachometer" aria-hidden="true"></i>
+        </a>
+      </li>
+      <!-- Approval -->
+      <li class="sub-menu">
+        <a class="sidebar-active" href="/#/user/member/approval" [ngClass]="{'active':id==1}" (click)="addClass(id=1);addSubClass(subId=1)">
+          <span>การอนุมัติ</span>
+          <i class="fa fa-check-square-o" aria-hidden="true"></i>
         </a>
       </li>
       <!-- Request -->
       <li class="sub-menu">
-        <a class="sidebar-active" href="/#/user/member/request/affiliate/howto" [ngClass]="{'active':id==999}" (click)="addClass(id=999);addSubClass(subId=999)">
-          <span>Request</span>
-          <i class="fa fa-area-chart fa-5x" aria-hidden="true"></i>
+        <a class="sidebar-active" href="/#/user/member/request/affiliate" [ngClass]="{'active':id==2}" (click)="addClass(id=2);addSubClass(subId=2)">
+          <span>Affiliate program</span>
+          <i class="fa fa-external-link" aria-hidden="true"></i>
         </a>
       </li>
     </ul>

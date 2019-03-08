@@ -91,7 +91,7 @@ export class MenuBarAffComponent implements OnInit {
 
   //
   logout(){
-    let logout = confirm("Are you sure!!");
+    let logout = confirm("คุณต้องการออกจากระบบหรือไม่!!");
     if(logout!=true){
       return;
     }else{

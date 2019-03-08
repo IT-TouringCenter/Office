@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu-bar-member.component.scss']
 })
 export class MenuBarMemberComponent implements OnInit {
+
   user = "";
   id = 0;
   subId = 0;
@@ -14,6 +15,8 @@ export class MenuBarMemberComponent implements OnInit {
 
   iconMenu = 0;
   request = true;
+
+  disabled = true;
 
   constructor(
     private router: Router,
@@ -73,7 +76,7 @@ export class MenuBarMemberComponent implements OnInit {
     let sidebar = document.getElementById("sidebar");
     let sidebarMenu = document.getElementById("nav-accordion");
 
-    if (sidebar.style.display === "none") {
+    if(sidebar.style.display === "none"){
       sidebar.style.display = "block";
       sidebar.style.width = "220px";
       sidebar.style.height = "100%";
@@ -81,7 +84,7 @@ export class MenuBarMemberComponent implements OnInit {
       sidebarMenu.style.display = "block";
 
       this.iconMenu = 1;
-    } else {
+    }else{
       sidebar.style.display = "none";
       sidebarMenu.style.display = "none";
 

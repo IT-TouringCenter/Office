@@ -28,46 +28,46 @@ class DashboardAffiliateController extends Controller {
 
     // Dashboard
     public function AffiliateDashboard(Request $request){
-        $req  = $request->input();
-        try{
-			$results = \DashboardAffiliateFacade::AffiliateDashboard($req);
-			if($results==null){
-				abort(400);
+			$req  = $request->input();
+			try{
+				$results = \DashboardAffiliateFacade::AffiliateDashboard($req);
+				if($results==null){
+					abort(400);
+				}
+				return $results;
+				// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
+			}catch(Exception $e){
+				abort(500);
 			}
-			return $results;
-			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
-		}catch(Exception $e){
-			abort(500);
-		}
     }
 
     // Dashboard booked
     public function AffiliateDashboardBooked(Request $request){
-        $req  = $request->input();
-        try{
-			$results = \DashboardAffiliateBookedFacade::AffiliateDashboardBooked($req);
-			if($results==null){
-				abort(400);
+      $req  = $request->input();
+			try{
+				$results = \DashboardAffiliateBookedFacade::AffiliateDashboardBooked($req);
+				if($results==null){
+					abort(400);
+				}
+				return $results;
+				// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
+			}catch(Exception $e){
+				abort(500);
 			}
-			return $results;
-			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
-		}catch(Exception $e){
-			abort(500);
-		}
     }
 
     // Dashboard commission
     public function AffiliateDashboardCommission(Request $request){
-        $req  = $request->input();
-        try{
-			$results = \DashboardAffiliateCommissionFacade::AffiliateDashboardCommission($req);
-			if($results==null){
-				abort(400);
+      $req  = $request->input();
+      try{
+				$results = \DashboardAffiliateCommissionFacade::AffiliateDashboardCommission($req);
+				if($results==null){
+					abort(400);
+				}
+				return $results;
+				// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
+			}catch(Exception $e){
+				abort(500);
 			}
-			return $results;
-			// return $this->Response(ResponseStatus::OK,ResponseCode::OK,$results);
-		}catch(Exception $e){
-			abort(500);
-		}
     }
 }

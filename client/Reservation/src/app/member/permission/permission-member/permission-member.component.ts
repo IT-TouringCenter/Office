@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
-import "rxjs/Rx";
+import { Observable } from "rxjs/Rx";
 
 @Component({
   selector: 'app-permission-member',
@@ -24,7 +24,7 @@ export class PermissionMemberComponent implements OnInit {
     let getUser = localStorage.getItem('users');
 
     if(getUser==null || getUser==undefined || getUser==''){
-      alert('Session expired!');
+      alert('เซสชั่นหมดอายุ กรุณาเข้าสู่ระบบใหม่อีกครั้ง.');
       this.router.navigate(['user/logout']);
       return;
     }
@@ -37,13 +37,15 @@ export class PermissionMemberComponent implements OnInit {
   // check user login
   checkUserLogin(getUser){
     let token = getUser.data.token;
+    let tokenLogin = getUser.data.tokenLogin;
     let type = getUser.data.userType;
 
-    let url = 'http://localhost:9000/api/Account/AccountSessionLoginReturnType';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/AccountSessionLoginReturnType';
+    // let url = 'http://localhost:9000/api/Account/AccountSessionLoginReturnType';
+    let url = 'http://api.tourinchiangmai.com/api/Account/AccountSessionLoginReturnType';
 
     let checkLogin = {
       token: token,
+      tokenLogin: tokenLogin,
       type: type
     }
 
@@ -86,6 +88,11 @@ export class PermissionMemberComponent implements OnInit {
 
   ngOnInit() {
     this.getUserStorage();
+    // run every time
+    Observable.interval(1000*30).subscribe(x => {
+      this.getUserStorage();
+    });
+    
   }
 
 }

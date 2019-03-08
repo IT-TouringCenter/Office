@@ -18,8 +18,8 @@ export class TraveledTourAffService {
   }
 
   getTour(){
-    let url = 'http://localhost:9000/api/Tours/GetTourData';
-    // let url = 'http://api.tourinchiangmai.com/api/Tours/GetTourData';
+    // let url = 'http://localhost:9000/api/Tours/GetTourData';
+    let url = 'http://api.tourinchiangmai.com/api/Tours/GetTourData';
     return this._http.get(url).map(result => result);
   }
 

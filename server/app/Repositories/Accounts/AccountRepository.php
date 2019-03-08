@@ -29,6 +29,7 @@ class AccountRepository{
     public function GetAccountByID($accountId){
         $result = \DB::table('accounts')
                         ->where('id',$accountId)
+                        ->where('is_delete',0)
                         ->where('is_active',1)
                         ->get();
         return $result;
@@ -37,7 +38,8 @@ class AccountRepository{
     // 3. Get account by token
     public function GetAccountByToken($token){
 		$result = \DB::table('accounts')
-						->where('token',$token)
+                        ->where('token',$token)
+                        ->where('is_delete',0)
 						->where('is_active',1)
 						->get();
 		return $result;
@@ -47,17 +49,19 @@ class AccountRepository{
     public function GetAccountByTokenNonActive($token){
         $result = \DB::table('accounts')
                         ->where('token',$token)
+                        ->where('is_delete',0)
                         ->where('is_active',0)
                         ->get();
         return $result;
     }
 
-    //
+    // 5. Get affiliate account by token
     public function GetAffiliateAccountIDByToken($token){
         $result = \DB::table('accounts')
                         ->select('id')
                         ->where('account_type_id',3)
                         ->where('token',$token)
+                        ->where('is_delete',0)
                         ->where('is_active',1)
                         ->get();
         // $result = $this->Account->where('token',$token)->get();

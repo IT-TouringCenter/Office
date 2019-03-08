@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
-import "rxjs/Rx";
+import { Observable } from "rxjs/Rx";
 
 @Component({
   selector: 'app-permission-user',
@@ -20,7 +20,6 @@ export class PermissionUserComponent implements OnInit {
 
   // get user storage
   getUserStorage(){
-    // let getUser = JSON.parse(sessionStorage.getItem('users'));
     let getUser = JSON.parse(localStorage.getItem('users'));
 
     if(getUser==null || getUser==undefined || getUser==''){
@@ -35,13 +34,15 @@ export class PermissionUserComponent implements OnInit {
   // check user login
   checkUserLogin(getUser){
     let token = getUser.data.token;
+    let tokenLogin = getUser.data.tokenLogin;
     let type = getUser.data.userType;
 
-    let url = 'http://localhost:9000/api/Account/AccountSessionLoginReturnType';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/AccountSessionLoginReturnType';
+    // let url = 'http://localhost:9000/api/Account/AccountSessionLoginReturnType';
+    let url = 'http://api.tourinchiangmai.com/api/Account/AccountSessionLoginReturnType';
 
     let checkLogin = {
       token: token,
+      tokenLogin: tokenLogin,
       type: type
     }
 
@@ -62,8 +63,10 @@ export class PermissionUserComponent implements OnInit {
   // set user login
   setUserLogin(userData){
     if(userData==null || userData==undefined || userData==""){
+      alert('Session expired, please login again.');
       this.router.navigate(['user/logout']);
     }else if(userData.status==false){
+      alert('Session expired, please login again.');
       this.router.navigate(['user/logout']);
     }
 
@@ -80,18 +83,24 @@ export class PermissionUserComponent implements OnInit {
       case "Member" : this.router.navigate(['user/member']); break;
       case "Affiliate" : this.router.navigate(['user/affiliate']); break;
       case "Admin" : this.router.navigate(['user/admin']); break;
-      case "Manager" : this.router.navigate(['user']); break;
+      case "Manager" : this.router.navigate(['user/manager']); break;
       case "Senior reservation" : this.router.navigate(['user/reservations']); break;
       case "Reservation" : this.router.navigate(['user/reservations']); break;
       case "Sale" : this.router.navigate(['user']); break;
       case "Online marketing" : this.router.navigate(['user']); break;
       case "Accounting" : this.router.navigate(['user']); break;
       case "Programmer" : this.router.navigate(['user']); break;
+      case "Intern" : this.router.navigate(['user']); break;
+      case "Affiliate intern" : this.router.navigate(['user/affiliate']); break;
     }
   }
 
   ngOnInit() {
     this.getUserStorage();
+    // run every time
+    // Observable.interval(1000*30).subscribe(x => {
+    //   this.getUserStorage();
+    // });
   }
 
 }

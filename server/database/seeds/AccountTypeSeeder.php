@@ -18,6 +18,7 @@ class AccountTypeSeeder extends Seeder{
 		account_type::create(["type"=>"Accounting"]);
 		account_type::create(["type"=>"Programer"]);
 		account_type::create(["type"=>"Intern"]);
+		account_type::create(["type"=>"Affiliate intern"]);
 	}
 }
 ?>

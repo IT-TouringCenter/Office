@@ -43,6 +43,14 @@
     }
 }
 //////////////
+#header-block{
+    position: fixed;
+    z-index: 100;
+}
+#sidebar-block{
+    position: fixed;
+    z-index: 99;
+}
 .menu-toggle-display{
     display: block;
 }

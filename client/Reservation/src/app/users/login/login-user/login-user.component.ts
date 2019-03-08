@@ -29,8 +29,8 @@ export class LoginUserComponent implements OnInit {
 
   // 1. Login
   login(){
-    let url = 'http://localhost:9000/api/Account/AccountLogin';
-    // let url = 'http://api.tourinchiangmai.com/api/Account/AccountLogin';
+    // let url = 'http://localhost:9000/api/Account/AccountLogin';
+    let url = 'http://api.tourinchiangmai.com/api/Account/AccountLogin';
 
       let options = new RequestOptions();
       let dataSave = {
@@ -38,8 +38,6 @@ export class LoginUserComponent implements OnInit {
           "password": this.data.password
       };
 
-      /*==================  Success  ===================*/
-      // return this.http.post(url, dataSave, options)
       return this.http.post(url, dataSave, options)
                       .map(res => res.json())
                       .subscribe(
@@ -49,7 +47,6 @@ export class LoginUserComponent implements OnInit {
                         ],
                         err => {console.log(err)}
                       );
-      /*==================  Success  ===================*/
   }
 
   // 2. Set login
@@ -57,7 +54,6 @@ export class LoginUserComponent implements OnInit {
     // console.log(data);
     if(data.status==true){
       alert(data.message);
-      // sessionStorage.setItem('users',JSON.stringify(data));
       localStorage.setItem('users',JSON.stringify(data));
       this.router.navigate(['user']);
     }else if(data.status==false && data.notify=='Sign out not found'){
@@ -92,8 +88,18 @@ export class LoginUserComponent implements OnInit {
     });
   }
 
+  // check reload
+  checkReload(){
+    let check = sessionStorage.getItem('reload');
+    if(check){
+      sessionStorage.removeItem('reload');
+      window.location.reload();
+    }
+  }
+
   ngOnInit() {
     this.keyPressEnter();
+    this.checkReload();
   }
 
 }

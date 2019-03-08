@@ -17,13 +17,14 @@ class AffiliateRepository{
 					->select(
 						't.account_id',
 						't.book_date',
+						'tt.tour_id',
 						'tt.travel_date',
 						'tt.pax',
 						'tt.adult_pax',
 						'tt.child_pax',
 						'tt.infant_pax',
-						'tt.total_adult_price as adult_price',
-						'tt.total_child_price as child_price',
+						'tt.total_adult_price as total_adult_price',
+						'tt.total_child_price as total_child_price',
 						'tt.commission_adult',
 						'tt.commission_child'
 					)
@@ -61,8 +62,19 @@ class AffiliateRepository{
 	// Update commission
 	public function UpdateAffiliateCommission($accountId,$data){
 		$result = \DB::table('affiliate_commissions')
-					->where('account_id',$accountId)
-					->update($data);
+									->where('account_id',$accountId)
+									->update($data);
+		return $result;
+	}
+
+	// Get affiliate commission tour rate
+	public function GetAffiliateCommissionTourRate($accountId,$tourId){
+		$result = \DB::table('affiliate_commission_tour_rates')
+									->select('min_pax','max_pax','price_rate')
+									->where('account_id',$accountId)
+									->where('tour_id',$tourId)
+									->where('is_active',1)
+									->get();
 		return $result;
 	}
 }

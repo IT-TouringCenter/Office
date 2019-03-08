@@ -113,11 +113,6 @@ export class BookedMonthlyAffComponent implements OnInit {
                       ],
                       err => {console.log(err)}
                     );
-    // setTimeout(()=>{
-    //   let _getData = JSON.parse(sessionStorage.getItem('booked-monthly-chart'));
-    //   this.barChartData = _getData.booked;
-    //   this.amount = _getData.amount;
-    // }, 500);
   }
 
   // 3.1 set data binding
@@ -156,11 +151,6 @@ export class BookedMonthlyAffComponent implements OnInit {
                       ],
                       err => {console.log(err)}
                     );
-    // setTimeout(()=>{
-    //   let _getData = JSON.parse(sessionStorage.getItem('booked-monthly-chart'));
-    //   this.barChartData = _getData.booked;
-    //   this.amount = _getData.amount;
-    // }, 500);
   }
 
   // 4.1 set data search

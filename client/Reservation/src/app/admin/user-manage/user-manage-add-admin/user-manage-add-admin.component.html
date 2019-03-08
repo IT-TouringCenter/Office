@@ -13,7 +13,9 @@
         <div class="container">
             <h3 class="dashboard-header">Add user <i class="fa fa-plus-circle" aria-hidden="true"></i></h3>
             <div class="block-content">
-                <table style="width:60%; margin:auto;">
+
+                <!-- PC -->
+                <table style="width:90%; margin:auto;" class="hidden-xs">
                     <tr style="height: 50px;">
                         <th>Username <span style="color: red;">*</span></th>
                         <td>
@@ -42,6 +44,38 @@
                         </td>
                     </tr>
                 </table>
+
+                <!-- Mobile -->
+                <div style="width:90%; margin:auto;" class="hidden-lg hidden-md hidden-sm">
+                    <div style="margin-bottom: 10px;">
+                        <label for="username">Username <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" placeholder="Email" [(ngModel)]="addUser.username">
+                    </div>
+
+                    <div style="margin-bottom: 10px;">
+                        <label for="password">Password <span style="color: red;">*</span></label>
+                        <input type="password" class="form-control" placeholder="Password" [(ngModel)]="addUser.password">
+                    </div>
+
+                    <div style="margin-bottom: 10px;">
+                        <label for="fullname">Fullname <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" placeholder="Fullname" [(ngModel)]="addUser.fullname">
+                    </div>
+
+                    <div style="margin-bottom: 10px;">
+                        <label for="type">Type <span style="color: red;">*</span></label>
+                        <select class="form-control" [(ngModel)]="addUser.accountType" >
+                            <option value="0" disabled selected>Please select user type</option>
+                            <option *ngFor="let type of accountType" value="{{type.id}}">{{type.type}}</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 10px;">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" placeholder="Email" [(ngModel)]="addUser.email">
+                    </div>
+                </div>
+
                 <!-- Button -->
                 <div style="text-align: center; margin-top: 30px;">
                     <button type="submit" mat-raised-button class="register-btn" (click)="register()">

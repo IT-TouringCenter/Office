@@ -17,8 +17,10 @@ class CreateAccountRequestsTable extends Migration {
 			$table->increments('id');
 			$table->integer('account_id');
 			$table->integer('account_request_type_id');
-			$table->string('request_code',20);
-			$table->dateTime('request_code_expired');
+			$table->integer('account_request_status_id')->default(1);
+			$table->string('request_code',20)->nullable();
+			$table->dateTime('request_code_expired')->nullable();
+			$table->tinyInteger('is_cancel')->default(0);
 			$table->tinyInteger('is_active')->default(1);
 			$table->string('created_by',50)->default('System');
 			$table->string('updated_by',50)->nullable();

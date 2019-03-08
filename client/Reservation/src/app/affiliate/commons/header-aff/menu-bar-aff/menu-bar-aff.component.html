@@ -23,7 +23,7 @@
             <li class="sub-menu">
                 <a class="sidebar-active" href="/#/user/affiliate" [ngClass]="{'active':id==0}" (click)="addClass(id=0);addSubClass(subId=0)">
                     <span>Dashboard</span>
-                    <i class="fa fa-area-chart fa-5x" aria-hidden="true"></i>
+                    <i class="fa fa-tachometer fa-5x" aria-hidden="true"></i>
                 </a>
             </li>
             <!-- Booked -->
@@ -76,6 +76,13 @@
                     <li><a href="/#/user/affiliate/commission/monthly" [ngClass]="{'sub-active':subId===403}" (click)="addSubClass(subId=403)">Monthly</a></li>
                     <!-- <li><a href="/#/user/affiliate/commission/tour" [ngClass]="{'sub-active':subId===404}" (click)="addSubClass(subId=404)">Tour</a></li> -->
                 </ul>
+            </li>
+            <!-- Get link booking -->
+            <li class="sub-menu">
+                <a class="sidebar-active" href="/#/user/affiliate/getlink-booking" [ngClass]="{'active':id==5}" (click)="addClass(id=5);addSubClass(subId=501)">
+                    <span>Get link</span>
+                    <i class="fa fa-link fa-5x" aria-hidden="true"></i>
+                </a>
             </li>
         </ul>
     </div>

@@ -40,6 +40,7 @@ import { CommissionAffComponent } from './affiliate/commission/commission-aff/co
 import { CommissionDayOfMonthAffComponent } from './affiliate/commission/commission-day-of-month-aff/commission-day-of-month-aff.component';
 import { CommissionMonthlyAffComponent } from './affiliate/commission/commission-monthly-aff/commission-monthly-aff.component';
 import { CommissionTourAffComponent } from './affiliate/commission/commission-tour-aff/commission-tour-aff.component';
+import { GetlinkBookingAffComponent } from './affiliate/booking/getlink-booking-aff/getlink-booking-aff.component';
 // Admin
 import { HomeAdminComponent } from './admin/home/home-admin/home-admin.component';
 import { UserManageAdminComponent } from './admin/user-manage/user-manage-admin/user-manage-admin.component';
@@ -47,17 +48,30 @@ import { UserManageAddAdminComponent } from './admin/user-manage/user-manage-add
 import { UserManageDeleteAdminComponent } from './admin/user-manage/user-manage-delete-admin/user-manage-delete-admin.component';
 import { UserManageEditAdminComponent } from './admin/user-manage/user-manage-edit-admin/user-manage-edit-admin.component';
 import { UserManageActiveAdminComponent } from './admin/user-manage/user-manage-active-admin/user-manage-active-admin.component';
-import { UserRequestComponent } from './admin/user-request/user-request.component';
+import { UserRequestAdminComponent } from './admin/user-request/user-request-admin/user-request-admin.component';
 // Member
 import { HomeMemberComponent } from './member/home/home-member/home-member.component';
 import { RequestMemberComponent } from './member/request/request-member/request-member.component';
-import { RequestAffMemberComponent } from './member/request/affiliate/request-aff-member/request-aff-member.component';
 import { HowtoAffMemberComponent } from './member/request/affiliate/request-aff-member/howto-aff-member/howto-aff-member.component';
 import { ProfileAffMemberComponent } from './member/request/affiliate/request-aff-member/profile-aff-member/profile-aff-member.component'
 import { BankAffMemberComponent } from './member/request/affiliate/request-aff-member/bank-aff-member/bank-aff-member.component';
 import { AdsChannelAffMemberComponent } from './member/request/affiliate/request-aff-member/ads-channel-aff-member/ads-channel-aff-member.component';
 import { ConfirmAffMemberComponent } from './member/request/affiliate/request-aff-member/confirm-aff-member/confirm-aff-member.component';
 import { ApprovalAffMemberComponent } from './member/request/affiliate/request-aff-member/approval-aff-member/approval-aff-member.component';
+// Manager
+import { HomeManagerComponent } from './manager/home/home-manager/home-manager.component';
+import { BookedTableManagerComponent } from './manager/booked/booked-table-manager/booked-table-manager.component';
+import { BookedSummaryManagerComponent } from './manager/booked/booked-summary-manager/booked-summary-manager.component';
+import { BookedDaysOfMonthManagerComponent } from './manager/booked/booked-days-of-month-manager/booked-days-of-month-manager.component';
+import { BookedMonthlyManagerComponent } from './manager/booked/booked-monthly-manager/booked-monthly-manager.component';
+import { BookedTourManagerComponent } from './manager/booked/booked-tour-manager/booked-tour-manager.component';
+import { BookedAffiliateTableComponent } from './manager/booked-affiliate/booked-affiliate-table/booked-affiliate-table.component';
+import { BookedAffiliateSummaryManagerComponent } from './manager/booked-affiliate/booked-affiliate-summary-manager/booked-affiliate-summary-manager.component';
+import { BookedAffiliateDaysOfMonthManageComponent } from './manager/booked-affiliate/booked-affiliate-days-of-month-manage/booked-affiliate-days-of-month-manage.component';
+import { BookedAffiliateMonthlyManagerComponent } from './manager/booked-affiliate/booked-affiliate-monthly-manager/booked-affiliate-monthly-manager.component';
+import { BookedAffiliateTourManagerComponent } from './manager/booked-affiliate/booked-affiliate-tour-manager/booked-affiliate-tour-manager.component';
+import { AffiliateManagementManagerComponent } from './manager/affiliate-management/affiliate-management-manager/affiliate-management-manager.component';
+import { AffiliateDetailManagerComponent } from './manager/affiliate-management/affiliate-detail-manager/affiliate-detail-manager.component';
 
 const routes: Routes = [
   {
@@ -199,6 +213,10 @@ const routes: Routes = [
     path: 'user/affiliate/commission/tour',
     component: CommissionTourAffComponent
   },
+  {
+    path: 'user/affiliate/getlink-booking',
+    component: GetlinkBookingAffComponent
+  },
   // Admin
   {
     path: 'user/admin',
@@ -226,7 +244,7 @@ const routes: Routes = [
   },
   {
     path: 'user/admin/user-request',
-    component: UserRequestComponent
+    component: UserRequestAdminComponent
   },
   // Member
   {
@@ -239,10 +257,6 @@ const routes: Routes = [
   },
   {
     path: 'user/member/request/affiliate',
-    component: RequestAffMemberComponent
-  },
-  {
-    path: 'user/member/request/affiliate/howto',
     component: HowtoAffMemberComponent
   },
   {
@@ -262,8 +276,57 @@ const routes: Routes = [
     component: ConfirmAffMemberComponent
   },
   {
-    path: 'user/member/request/affiliate/approval',
+    path: 'user/member/approval',
     component: ApprovalAffMemberComponent
+  },
+  // Manager
+  {
+    path: 'user/manager',
+    component: HomeManagerComponent
+  },
+  {
+    path: 'user/manager/booked',
+    component: BookedSummaryManagerComponent
+  },
+  {
+    path: 'user/manager/booked/table',
+    component: BookedTableManagerComponent
+  },
+  {
+    path: 'user/manager/booked/days-of-month',
+    component: BookedDaysOfMonthManagerComponent
+  },
+  {
+    path: 'user/manager/booked/monthly',
+    component: BookedMonthlyManagerComponent
+  },
+  {
+    path: 'user/manager/affiliate-booked',
+    component: BookedAffiliateSummaryManagerComponent
+  },
+  {
+    path: 'user/manager/affiliate-booked/table',
+    component: BookedAffiliateTableComponent
+  },
+  {
+    path: 'user/manager/affiliate-booked/days-of-month',
+    component: BookedAffiliateDaysOfMonthManageComponent
+  },
+  {
+    path: 'user/manager/affiliate-booked/monthly',
+    component: BookedAffiliateMonthlyManagerComponent
+  },
+  {
+    path: 'user/manager/affiliate-booked/tour',
+    component: BookedAffiliateTourManagerComponent
+  },
+  {
+    path: 'user/manager/affiliate-management',
+    component: AffiliateManagementManagerComponent
+  },
+  {
+    path: 'user/manager/affiliate-management/detail/:userId',
+    component: AffiliateDetailManagerComponent
   },
 ];
 

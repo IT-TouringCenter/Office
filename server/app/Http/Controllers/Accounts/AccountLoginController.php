@@ -76,9 +76,10 @@ class AccountLoginController extends Controller {
     public function AccountSessionLoginReturnType(Request $request){
         $accountData = $request->input();
         $token = array_get($accountData,'token');
+        $tokenLogin = array_get($accountData,'tokenLogin');
         $accountType = array_get($accountData,'type');
         try{
-            $results = \AccountLoginReturnTypeFacade::GetAccountByTokenReturnType($token,$accountType);
+            $results = \AccountLoginReturnTypeFacade::GetAccountByTokenReturnType($token,$tokenLogin,$accountType);
             if($results==null){
                 abort(400);
             }

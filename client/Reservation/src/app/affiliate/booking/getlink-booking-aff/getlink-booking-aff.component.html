@@ -1,0 +1,55 @@
+<!-- Check permission -->
+<app-permission-user-aff></app-permission-user-aff>
+
+<!-- Menu bar -->
+<app-menu-bar-aff></app-menu-bar-aff>
+<!-- Side bar -->
+<!-- <app-menu-sidebar-aff></app-menu-sidebar-aff> -->
+
+<!-- Content -->
+<section id="main-content" class="panel-block-1">
+  <section class="wrapper">
+    <!-- Graf -->
+    <div class="container">
+      <h3 style="text-align:center;margin-top:0px;margin-bottom:35px;padding:15px;font-weight:600 !important;width:85%;margin:auto;">Get link<br><small>(Booking)</small></h3>
+      <div style="margin:auto; margin-top:20px;width:80% !important;">
+        <!-- All tour -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 40px;">
+          <p style="margin-bottom: 0; margin-left: 15px;">
+            <label style="font-weight: 600;"><u>All programs</u> : </label>
+          </p>
+          <!-- link block -->
+          <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12" style="margin-top: 10px;">
+            <input type="text" class="form-control" [value]="linkAllTour" style="height: 36px; background: #ececec;" #linkAllProgram>
+          </div>
+          <!-- copy button block -->
+          <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12" style="margin-top: 10px; text-align: center; width: 100%;">
+            <button type="submit" mat-stroked-button style="width: 100%;" (click)="copyLink(linkAllProgram)">Copy</button>
+          </div>
+        </div>
+
+        <!-- By tour -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 40px;">
+          <p style="margin-bottom: 0; margin-left: 15px;">
+            <label style="font-weight: 600;"><u>By programs</u> : </label>
+          </p>
+          <!-- select block -->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 10px;">
+            <select name="tour" [(ngModel)]="linkByTour" class="form-control" style="height: 36px;" (change)="setLinkTourProgramByTour()">
+              <option value=""> Please select tour</option>
+              <option value="{{link.link}}" *ngFor="let link of tourLink">{{link.tour}}</option>
+            </select>
+          </div>
+          <!-- link block -->
+          <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12" style="margin-top: 10px;">
+            <input type="text" class="form-control" [value]="linkTour" style="height: 36px; background: #ececec;" #linkByProgram>
+          </div>
+          <!-- copy button block -->
+          <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12" style="margin-top: 10px; text-align: center; width: 100%;">
+            <button type="submit" mat-stroked-button style="width: 100%;" (click)="copyLink(linkByProgram)">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

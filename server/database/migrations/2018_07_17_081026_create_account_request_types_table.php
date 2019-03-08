@@ -15,7 +15,8 @@ class CreateAccountRequestTypesTable extends Migration {
 		Schema::create('account_request_types', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('type');
+			$table->string('type_th');
+			$table->string('type_en');
 			$table->tinyInteger('is_active')->default(1);
 			$table->string('created_by',50)->default('System');
 			$table->string('updated_by',50)->nullable();

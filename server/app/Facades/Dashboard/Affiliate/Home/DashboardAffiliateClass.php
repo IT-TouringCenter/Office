@@ -29,6 +29,17 @@ class DashboardAffiliateClass{
             return "null";
         }
 
+        // Check affiliate commission table
+        $checkAffiliateCommission = $this->DashboardAffiliateRepo->CheckAffiliateCommission($accountId);
+        if(empty($checkAffiliateCommission)){
+            // create affiliate_commission record
+            $createAffiliateCommission = $this->CreateAffiliateCommissionRecord($accountId);
+            if($createAffiliateCommission==false){
+                return "null";
+            }
+
+        }
+
         $this->data = new Transaction;
         $this->GetBooked($accountId);
         $this->GetTraveled($accountId);
@@ -40,10 +51,15 @@ class DashboardAffiliateClass{
     // 2. Get booked
     public function GetBooked($accountId){
         $getBooked = $this->DashboardAffiliateRepo->GetBooked($accountId);
-
         $booked = new Transaction;
-        $booked->id = 0;
-        $booked->amount = count($getBooked);
+
+        if($getBooked){
+            $booked->id = 0;
+            $booked->amount = count($getBooked);
+        }else{
+            $booked->id = 0;
+            $booked->amount = 0;
+        }
 
         $this->data->booked = $booked;
     }
@@ -51,10 +67,15 @@ class DashboardAffiliateClass{
     // 3. Get traveled
     public function GetTraveled($accountId){
         $getTraveled = $this->DashboardAffiliateRepo->GetTraveled($accountId);
-
         $traveled = new Transaction;
-        $traveled->id = 0;
-        $traveled->amount = count($getTraveled);
+
+        if($getTraveled){
+            $traveled->id = 0;
+            $traveled->amount = count($getTraveled);
+        }else{
+            $traveled->id = 0;
+            $traveled->amount = 0;
+        }
 
         $this->data->traveled = $traveled;
     }
@@ -62,11 +83,31 @@ class DashboardAffiliateClass{
     // 4. Get commission
     public function GetCommission($accountId){
         $getCommission = $this->DashboardAffiliateRepo->GetCommission($accountId);
-
         $commission = new Transaction;
-        $commission->id = 0;
-        $commission->amount = $getCommission[0]->commission_amount;
+
+        if($getCommission){
+            $commission->id = 0;
+            $commission->amount = $getCommission[0]->commission_amount;    
+        }else{
+            $commission->id = 0;
+            $commission->amount = 0;
+        }
 
         $this->data->commission = $commission;
     }
+
+    // 5. Create affiliate commission record
+    public function CreateAffiliateCommissionRecord($accountId){
+        $defaultData = [
+            'account_id'=>$accountId
+        ];
+
+        $createRecord = $this->DashboardAffiliateRepo->CreateAffiliateCommissionRecord($defaultData);
+        if($createRecord){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

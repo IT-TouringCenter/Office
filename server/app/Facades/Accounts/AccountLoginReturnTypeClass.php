@@ -21,12 +21,12 @@ class AccountLoginReturnTypeClass{
     */
 
     // 1. 
-    public function GetAccountByTokenReturnType($token,$accountType){
+    public function GetAccountByTokenReturnType($token,$tokenLogin,$accountType){
         $this->account = new Account;
         $loginStatus = false;
 
         // check login
-        $getLogin = $this->AccountLoginRepo->GetAccountLoginByToken($token);
+        $getLogin = $this->AccountLoginRepo->GetAccountLoginByToken($token,$tokenLogin);
         if($getLogin){
             // check login expired
             $checkLoginExpired = $this->CheckLoginExpired($token);

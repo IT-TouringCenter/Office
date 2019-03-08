@@ -16,38 +16,38 @@
 
 <aside id="sidebar-block">
   <div id="sidebar"  class="nav-collapse" style="overflow-y: auto; direction: rtl;">
-      <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><img src="./assets/images/logo/logo-daytrip-join.jpg" class="img-circle" width="100"></p>
-          <h5 class="centered" style="margin-top: 20px; margin-bottom: 25px;">Admin</h5>
-          <!-- Dashboard -->
-          <li class="sub-menu">
-              <a class="sidebar-active" href="/#/user/admin" [ngClass]="{'active':id==0}" (click)="addClass(id=0);addSubClass(subId=0)">
-                  <span>Dashboard</span>
-                  <i class="fa fa-area-chart fa-5x" aria-hidden="true"></i>
-              </a>
-          </li>
-          <!-- User management -->
-          <li class="sub-menu">
-              <a class="sidebar-active" href="/#/user/admin/user-manage" [ngClass]="{'active':id==1}" (click)="addClass(id=1);addSubClass(subId=1)">
-                  <span>User management</span>
-                  <i class="fa fa-user fa-5x" aria-hidden="true"></i>
-              </a>
-              <ul class="sub" [ngStyle]="{'display':id==1?'block':'none'}">
-                  <li><a href="/#/user/admin/user-manage" [ngClass]="{'sub-active':subId===101}" (click)="addClass(id=1);addSubClass(subId=101)">Manage</a></li>
-                  <li><a href="/#/user/admin/user-manage/add" [ngClass]="{'sub-active':subId===102}" (click)="addClass(id=1);addSubClass(subId=102)">Add</a></li>
-                  <li><a href="/#/user/admin/user-manage/active" [ngClass]="{'sub-active':subId===103}" (click)="addClass(id=1);addSubClass(subId=103)">Active</a></li>
-              </ul>
-          </li>
-          <!-- User request -->
-          <li class="sub-menu">
-                <a class="sidebar-active" href="/#/user/admin/user-request" [ngClass]="{'active':id==2}" (click)="addClass(id=2);addSubClass(subId=2)">
-                    <span>User request</span>
-                    <i class="fa fa-envelope fa-5x" aria-hidden="true"></i>
-                </a>
-                <ul class="sub" [ngStyle]="{'display':id==2?'block':'none'}">
-                    <li><a href="/#/user/admin/user-request" [ngClass]="{'sub-active':subId===201}" (click)="addClass(id=2);addSubClass(subId=201)">Request</a></li>
-                </ul>
-            </li>
-      </ul>
+    <ul class="sidebar-menu" id="nav-accordion">
+      <p class="centered"><img src="./assets/images/logo/logo-daytrip-join.jpg" class="img-circle" width="100"></p>
+      <h5 class="centered" style="margin-top: 20px; margin-bottom: 25px;">Admin</h5>
+      <!-- Dashboard -->
+      <li class="sub-menu">
+        <a class="sidebar-active" href="/#/user/admin" [ngClass]="{'active':id==0}" (click)="addClass(id=0);addSubClass(subId=0)">
+          <span>Dashboard</span>
+          <i class="fa fa-tachometer fa-5x" aria-hidden="true"></i>
+        </a>
+      </li>
+      <!-- User management -->
+      <li class="sub-menu">
+        <a class="sidebar-active" href="/#/user/admin/user-manage" [ngClass]="{'active':id==1}" (click)="addClass(id=1);addSubClass(subId=1)">
+          <span>User management</span>
+          <i class="fa fa-user fa-5x" aria-hidden="true"></i>
+        </a>
+        <ul class="sub" [ngStyle]="{'display':id==1?'block':'none'}">
+          <li><a href="/#/user/admin/user-manage" [ngClass]="{'sub-active':subId===101}" (click)="addClass(id=1);addSubClass(subId=101)">Manage</a></li>
+          <li><a href="/#/user/admin/user-manage/add" [ngClass]="{'sub-active':subId===102}" (click)="addClass(id=1);addSubClass(subId=102)">Add</a></li>
+          <li><a href="/#/user/admin/user-manage/active" [ngClass]="{'sub-active':subId===103}" (click)="addClass(id=1);addSubClass(subId=103)">Active</a></li>
+        </ul>
+      </li>
+      <!-- User request -->
+      <li class="sub-menu">
+        <a class="sidebar-active" href="/#/user/admin/user-request" [ngClass]="{'active':id==2}" (click)="addClass(id=2);addSubClass(subId=2)">
+          <span>User request</span>
+          <i class="fa fa-envelope fa-5x" aria-hidden="true"></i>
+        </a>
+        <ul class="sub" [ngStyle]="{'display':id==2?'block':'none'}">
+          <li><a href="/#/user/admin/user-request" [ngClass]="{'sub-active':subId===201}" (click)="addClass(id=2);addSubClass(subId=201)">Request</a></li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </aside>

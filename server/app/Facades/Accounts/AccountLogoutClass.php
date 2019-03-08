@@ -24,6 +24,7 @@ class AccountLogoutClass{
     public function AccountLogout($data){
         $username = array_get($data,'username');
         $token = array_get($data,'token');
+        $tokenLogin = array_get($data,'tokenLogin');
         $dateTimeNow = Carbon::now('Asia/Bangkok');
         $signout = new Account;
 
@@ -32,7 +33,7 @@ class AccountLogoutClass{
         $accountId = $account[0]->id;
 
         // Logout
-        $result = $this->AccountLogoutRepo->Logout($accountId, $token, $dateTimeNow);
+        $result = $this->AccountLogoutRepo->Logout($accountId, $token, $tokenLogin, $dateTimeNow);
         if($result){
             $signout->status = true;
             $signout->message = 'Sign out successfully.';

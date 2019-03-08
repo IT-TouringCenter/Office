@@ -13,7 +13,8 @@
         <div class="container">
             <h3 class="dashboard-header">Edit user <i class="fa fa-pencil-square" aria-hidden="true"></i></h3>
             <div class="block-content">
-                <table style="width:60%; margin:auto;">
+                <!-- PC -->
+                <table style="width:90%; margin:auto;" class="hidden-xs">
                     <tr style="height: 50px;">
                         <th>Username</th>
                         <td>
@@ -42,6 +43,32 @@
                         </td>
                     </tr>
                 </table>
+
+                <!-- Mobile -->
+                <div style="width:90%; margin:auto;" class="hidden-lg hidden-md hidden-sm">
+                    <div style="margin-bottom: 10px;">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" placeholder="Email" [(ngModel)]="editUser.username" disabled>
+                    </div>
+                    
+                    <div style="margin-bottom: 10px;">
+                        <label for="fullname">Fullname</label>
+                        <input type="text" class="form-control" placeholder="Fullname" [(ngModel)]="editUser.fullname">
+                    </div>
+
+                    <div style="margin-bottom: 10px;">
+                        <label for="type">Type</label>
+                        <select class="form-control" [(ngModel)]="editUser.userType" >
+                            <option *ngFor="let type of userType" value="{{type.id}}">{{type.type}}</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 10px;">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" placeholder="Email" [(ngModel)]="editUser.email">
+                    </div>
+                </div>
+
                 <!-- Button login -->
                 <div style="text-align: center; margin-top: 30px;">
                     <button type="submit" mat-raised-button class="register-btn" (click)="editRegister()">
