@@ -9,12 +9,91 @@
   <section class="wrapper">
     <!-- Graf -->
     <div class="container">
-      <h3 class="dashboard-header">Affiliate &nbsp;detail<br><small></small></h3>
+      <h3 class="dashboard-header" style="text-align: center;"><b>Affiliate detail</b><br><small></small></h3>
       <!-- <hr style="width: 100px; text-align: center; border: #651e1e 1px solid; margin-bottom: 30px;"> -->
       <div style="margin:auto; margin-top:20px;width:100% !important;">
+        <div class="content-main-block">
 
+          <!-- Personal -->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content-block">
+            <h4><u>ข้อมูลส่วนตัว</u></h4>
+            <table class="table-block">
+              <tr>
+                <th>ชื่อ-นามสกุล</th>
+                <td>: {{affiliateData.profile.fullname}}</td>
+              </tr>
+              <tr>
+                <th>วัน/เดือน/ปีเกิด</th>
+                <td>: {{affiliateData.profile.birth}}</td>
+              </tr>
+              <tr>
+                <th>เบอร์โทรศัพท์</th>
+                <td>: {{affiliateData.profile.tel}}</td>
+              </tr>
+              <tr>
+                <th>อีเมล</th>
+                <td>: {{affiliateData.profile.email}}</td>
+              </tr>
+              <tr>
+                <th>สัญชาติ</th>
+                <td>: {{affiliateData.profile.nationality}}</td>
+              </tr>
+              <tr>
+                <th>ที่อยู่</th>
+                <td>: {{affiliateData.profile.address}}</td>
+              </tr>
+              <tr>
+                <th>เลขประจำตัวประชาชน</th>
+                <td>: {{affiliateData.profile.idNumber}}</td>
+              </tr>
+              <!-- <tr>
+                <th>รูปถ่าย</th>
+                <td>: {{affiliateData.profile.profilePicture}}</td>
+              </tr>
+              <tr>
+                <th>สำเนาบัตรประชาชน</th>
+                <td>: {{affiliateData.profile.copyIdCard}}</td>
+              </tr> -->
+            </table>
+          </div>
+  
+          <!-- Bank -->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content-block">
+            <h4><u>ข้อมูลบัญชีธนาคาร</u></h4>
+            <table class="table-block">
+              <tr>
+                <th>ธนาคาร</th>
+                <td>: {{affiliateData.bank.bank.bankTH}}</td>
+              </tr>
+              <tr>
+                <th>ชื่อบัญชี</th>
+                <td>: {{affiliateData.bank.accountName}}</td>
+              </tr>
+              <tr>
+                <th>หมายเลขบัญชี</th>
+                <td>: {{affiliateData.bank.accountNo}}</td>
+              </tr>
+              <!-- <tr>
+                <th>สำเนาสมุดบัญชี</th>
+                <td>: {{affiliateData.bank.copyBook}}</td>
+              </tr> -->
+            </table>
+          </div>
+  
+          <!-- URL -->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content-block">
+            <h4><u>ช่องทางการโฆษณา</u></h4>
+            <table class="table-block">
+              <tr>
+                <th>ช่องทางโฆษณา</th>
+                <td>: {{affiliateData.profile.url}}</td>
+              </tr>
+            </table>
+          </div>
 
+        </div>
       </div>
+
     </div>
   </section>
 </section>

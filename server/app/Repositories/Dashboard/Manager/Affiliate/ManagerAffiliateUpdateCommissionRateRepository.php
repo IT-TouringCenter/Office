@@ -20,5 +20,21 @@ class ManagerAffiliateUpdateCommissionRateRepository{
 	}
 	
 	// get affiliate data
+	public function GetAffiliateByToken($token){
+		$result = \DB::table('accounts')
+									->where('token',$token)
+									->where('is_active',1)
+									->get();
+		return $result;
+	}
 
+	// update commission rate
+	public function UpdateCommissionRate($accountId, $tourId, $data){
+		$result = \DB::table('affiliate_commission_tour_rates')
+									->where('account_id',$accountId)
+									->where('tour_id',$tourId)
+									->where('is_active',1)
+									->update($data);
+		return $result;
+	}
 }
