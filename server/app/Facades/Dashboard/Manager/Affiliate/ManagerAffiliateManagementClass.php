@@ -15,7 +15,7 @@ class ManagerAffiliateManagementClass{
     $this->ManagerAffiliateManagementRepo = $ManagerAffiliateManagementRepo;
     $this->accountType = 5; // Manager
     $this->affiliate = "Affiliate";
-    $this->affiliateIntern = "Affiiliate intern";
+    $this->affiliateIntern = "Affiliate intern";
 	}
 
   // Affiliate management

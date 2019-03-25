@@ -57,6 +57,7 @@ class AdminUserProfileClass{
             return $returnData;
         }else{
             $profileData->fullname = $getProfileData[0]->fullname;
+            // $profileData->birth = $getProfileData[0]->birth;
             $profileData->birth = \DateFormatFacade::SetFullDate($getProfileData[0]->birth);
             $profileData->tel = $getProfileData[0]->tel;
             $profileData->email = $getProfileData[0]->email;

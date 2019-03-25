@@ -95,6 +95,7 @@ class SaveBookingRepository{
 		$noteBy = array_get($bookingData,'noteBy');
 		$summary = array_get($bookingData,'summary');
 		$hotel = array_get($bookingData,'hotelInfo');
+		$travelDate = date('Y-m-d',strtotime(array_get($bookingInfo,'travelDate')));
 
 		$tour = [
 			'transaction_id'=>$transactionId,
@@ -104,6 +105,7 @@ class SaveBookingRepository{
 			'tour_privacy'=>array_get($bookingInfo,'tourPrivacy'),
 			'tour_travel_time'=>array_get($bookingInfo,'travelTime'),
 			'tour_travel_date'=>array_get($bookingInfo,'travelDate'),
+			'travel_date'=>$travelDate,
 			'rate_two_pax'=>array_get($bookingInfo,'rateTwoPax'),
 			'pax'=>array_get($bookingInfo,'pax'),
 			'adult_pax'=>array_get($bookingInfo,'adultPax'),
@@ -143,6 +145,7 @@ class SaveBookingRepository{
 			'tour_privacy'=>array_get($tour,'tour_privacy'),
 			'tour_travel_time'=>array_get($tour,'tour_travel_time'),
 			'tour_travel_date'=>array_get($tour,'tour_travel_date'),
+			'travel_date'=>$travelDate,
 			'rate_two_pax'=>array_get($tour,'rate_two_pax'),
 			'pax'=>array_get($tour,'pax'),
 			'adult_pax'=>array_get($tour,'adult_pax'),

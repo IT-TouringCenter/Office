@@ -50,4 +50,34 @@ class AdminUserManagementEditRepository{
         return $result;
     }
 
+    // Get account type
+    public function GetAccountType($accountTypeId){
+        $result = \DB::table('account_types')
+                    ->select('type')
+                    ->where('id',$accountTypeId)
+                    ->where('is_active',1)
+                    ->get();
+        return $result;
+    }
+
+    // Non active affiliate_commissions
+    public function NonActiveAffiliateCommission($accountId){
+        $update = ["is_active"=>0];
+        $result = \DB::table('affiliate_commissions')
+                    ->where('account_id',$accountId)
+                    // ->where('is_active',1)
+                    ->update($update);
+        return $result;
+    }
+
+    // Non active affiliate_commission_tour_rates
+    public function NonActiveAffiliateCommissionTourRate($accountId){
+        $update = ["is_active"=>0];
+        $result = \DB::table('affiliate_commission_tour_rates')
+                    ->where('account_id',$accountId)
+                    // ->where('is_active',1)
+                    ->update($update);
+        return $result;
+    }
+
 }

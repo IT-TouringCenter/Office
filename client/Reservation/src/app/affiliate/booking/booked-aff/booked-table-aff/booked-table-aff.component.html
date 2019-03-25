@@ -25,7 +25,7 @@
               <th class="text-center bg-damask text-light">Guest</th>
               <th class="text-center bg-damask text-light">Hotel</th>
               <th class="text-center bg-damask text-light">Booked</th>
-              <th class="text-center bg-damask text-light">Traveled</th>
+              <th class="text-center bg-damask text-light">Traveling</th>
             </tr>
             <!-- Table Body -->
             <tr *ngFor="let booked of getBooked | slice:pointStart:pointEnd; let i = index;" [class.table-info]="highlightId==booked.transactionId" class="font-table-12px">

@@ -58,6 +58,7 @@ class AdminUserRequestClass{
             $req->requestStatusTH = $value->status_th;
             $req->requestStatusEN = $value->status_en;
             $req->requestDate = \DateFormatFacade::SetShortDate($value->created_at);
+            // $req->requestDate = $value->created_at;
 
             array_push($requestArr, $req);
         }

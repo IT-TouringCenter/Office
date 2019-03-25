@@ -30,6 +30,7 @@ class BookingStatisticsClass{
 
     // 1. Transaction
     public function GetBookingStatistics(){
+        // set
         $transaction = $this->TransactionRepo->GetTransactionAll();
         if($transaction==null){
             return null;
@@ -117,24 +118,29 @@ class BookingStatisticsClass{
     }
 
     //=====================================================================
+    // Affiliate booked
     // 5. Transaction by account id
     public function GetBookedByAccountId($accountData){
+        // get data
         $token = array_get($accountData,'token');
         $typeId = array_get($accountData,'type');
-        $getAccount = $this->AccountRepo->GetAccountByTokenAndType($token,$typeId);
-
-        if($getAccount){
-            $accountId = $getAccount[0]->id;
-        }else{
-            return 'null';
-        }
-
-        $transaction = $this->TransactionRepo->GetTransactionByAccountId($accountId);
-        if($transaction==null){
-            return 'null';
-        }
         $transactionArr = [];
 
+        // check accounts
+        $getAccount = $this->AccountRepo->GetAccountByTokenAndType($token,$typeId);
+        if(empty($getAccount)){
+            return 'null';
+        }
+
+        $accountId = $getAccount[0]->id;
+
+        // get transactions
+        $transaction = $this->TransactionRepo->GetTransactionByAccountId($accountId);
+        if(empty($transaction)){
+            return 'null';
+        }
+
+        // get transaction_tours
         foreach($transaction as $value){
             $this->transaction = new Transaction;
             $TransactionTour = $this->GetTransactionTourById($value->id);

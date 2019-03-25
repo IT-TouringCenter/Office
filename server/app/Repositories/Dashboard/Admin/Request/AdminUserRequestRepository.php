@@ -24,6 +24,7 @@ class AdminUserRequestRepository{
                     ->join('accounts as a','a.id','=','ar.account_id')
                     ->join('account_request_types as art','art.id','=','ar.account_request_type_id')
                     ->join('account_request_statuses as ars','ars.id','=','ar.account_request_status_id')
+                    ->where('a.is_delete',0)
                     ->where('ar.is_active',1)
                     ->get();
         return $result;

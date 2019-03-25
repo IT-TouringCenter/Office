@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
+
 @Component({
-  selector: 'app-affiliate-detail-manager',
-  templateUrl: './affiliate-detail-manager.component.html',
-  styleUrls: ['./affiliate-detail-manager.component.scss']
+  selector: 'app-affiliate-profile-manager',
+  templateUrl: './affiliate-profile-manager.component.html',
+  styleUrls: ['./affiliate-profile-manager.component.scss']
 })
-export class AffiliateDetailManagerComponent implements OnInit {
+export class AffiliateProfileManagerComponent implements OnInit {
 
   // variable
   userToken = <any>"";
@@ -34,6 +35,7 @@ export class AffiliateDetailManagerComponent implements OnInit {
     sessionStorage.setItem('sub-menu',JSON.stringify(301));
   }
 
+  // 3. get data from api
   public getAffiliateDetail(){
     // get token
     let getUser = JSON.parse(localStorage.getItem('users'));
@@ -47,8 +49,8 @@ export class AffiliateDetailManagerComponent implements OnInit {
     console.log(setData);
 
     // post to API
-    let url = 'http://localhost:9000/api/Dashboard/Manager/AffiliateManagement/Detail';
-    // let url = 'http://api.tourinchiangmai.com/api/Dashboard/Manager/AffiliateManagement/Detail';
+    // let url = 'http://localhost:9000/api/Dashboard/Manager/AffiliateManagement/Detail';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Manager/AffiliateManagement/Detail';
 
     let options = new RequestOptions();
 
@@ -57,13 +59,19 @@ export class AffiliateDetailManagerComponent implements OnInit {
                     .subscribe(
                       data => [
                         this.affiliateData = data.data,
-                        console.log(this.affiliateData)
+                        // console.log(this.affiliateData)
                       ],
                       err => [
                         console.log(err)
                       ]
                     );
   }
+
+  // 4. button commission rate
+  public btnCommissionRate(){
+    let url = 'user/manager/affiliate-management/commission-rate/'+this.userToken;
+    this.router.navigate([url]);
+  } 
 
   ngOnInit() {
     this.activeMenu();

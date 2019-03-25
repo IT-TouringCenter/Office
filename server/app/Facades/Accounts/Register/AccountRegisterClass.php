@@ -152,7 +152,8 @@ class AccountRegisterClass{
 
     // 6. Send email for confirm register
     public function SendMailRegister($data){
-        $activeExpired = \DateFormatFacade::SetFullDate(array_get($data,'activeExpired'));
+        $tomorrow = \DateFormatFacade::SetTomorrow(array_get($data,'activeExpired'));
+        $activeExpired = \DateFormatFacade::SetFullDate($tomorrow);
         $userId = \GenerateCodeFacade::Encode(array_get($data,'id')+231327);
 
         // Template
@@ -203,7 +204,7 @@ class AccountRegisterClass{
 
         // Set email data
         $to = array_get($data,'email');
-        $subject = "Register mail";
+        $subject = "Register : Touring Center";
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Reply-To: noreply@example.com". "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";

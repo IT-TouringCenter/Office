@@ -57,6 +57,7 @@ class ManagerAffiliateManagementCommissionRateClass{
 
     $affiliateData = new Account;
     $affiliateData->token = $checkAffiliate[0]->token;
+    $affiliateData->fullname = $checkAffiliate[0]->fullname;
     $affiliateData->commissionRate = $commissionRate;
 
     $returnData->status = true;

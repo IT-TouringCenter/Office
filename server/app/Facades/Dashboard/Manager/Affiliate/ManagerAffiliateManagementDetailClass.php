@@ -63,6 +63,20 @@ class ManagerAffiliateManagementDetailClass{
       $affiliateData->profilePicture = $getAffiliateData[0]->picture;
       $affiliateData->copyIdCard = $getAffiliateData[0]->copy_id_card;
       $affiliateData->url = $getAffiliateData[0]->url;
+    }else{
+      $affiliateData->id = '';
+      $affiliateData->token = '';
+      $affiliateData->fullname = '';
+      $affiliateData->email = '';
+      $affiliateData->tel = '';
+      $affiliateData->birth = '';
+      $affiliateData->type = '';
+      $affiliateData->idNumber = '';
+      $affiliateData->address = '';
+      $affiliateData->nationality = '';
+      $affiliateData->profilePicture = '';
+      $affiliateData->copyIdCard = '';
+      $affiliateData->url = '';
     }
     $affiliate->profile = $affiliateData;
 
@@ -74,6 +88,12 @@ class ManagerAffiliateManagementDetailClass{
       $affiliateBank->bank = $getBankData[0]->bank;
       $affiliateBank->branch = $getBankData[0]->branch;
       $affiliateBank->copyBook = $getBankData[0]->copy_book;
+    }else{
+      $affiliateBank->accountName = '';
+      $affiliateBank->accountNo = '';
+      $affiliateBank->bank = '';
+      $affiliateBank->branch = '';
+      $affiliateBank->copyBook = '';
     }
     $affiliate->bank = $affiliateBank;
 

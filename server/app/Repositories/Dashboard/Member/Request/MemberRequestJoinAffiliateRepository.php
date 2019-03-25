@@ -134,4 +134,15 @@ class MemberRequestJoinAffiliateRepository{
         return $result;
     }
 
+    // 11. Check record profile
+    public function CheckRecordProfile($accountId){
+        $result = \DB::table('account_profiles')->where('account_id',$accountId)->get();
+        return $result;
+    }
+
+    // 12. Insert profile record
+    public function InsertProfileRecord($data){
+        $result = \DB::table('account_profiles')->insertGetId($data);
+        return $result;
+    }
 }

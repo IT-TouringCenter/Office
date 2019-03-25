@@ -45,15 +45,11 @@ export class AffiliateManagementManagerComponent implements OnInit {
     sessionStorage.setItem('menu',JSON.stringify(3));
     sessionStorage.setItem('sub-menu',JSON.stringify(301));
   }
-
   
   // JSON booked stat from API
   getAffiliateData(): void{
-    let url = "http://localhost:9000/api/Dashboard/Manager/AffiliateManagement";
-    // let url = "http://api.tourinchiangmai.com/api/Dashboard/Manager/AffiliateManagement";
-
-    // let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement";
-    // let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement";
+    // let url = "http://localhost:9000/api/Dashboard/Manager/AffiliateManagement";
+    let url = "http://api.tourinchiangmai.com/api/Dashboard/Manager/AffiliateManagement";
 
     // set data to save
     let _getUserData = JSON.parse(localStorage.getItem('users'));
@@ -94,6 +90,9 @@ export class AffiliateManagementManagerComponent implements OnInit {
 
   //------------------ Start Page ------------------------
   PagePagination(){
+    // reset
+    this.iPage = [];
+    
     this.activePage = 1;
     this.nextPage = 2;
     this.pointEnd = this.perPage*this.activePage;

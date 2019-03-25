@@ -23,6 +23,7 @@ import { BookformAddRsvnComponent } from './reservations/bookings/bookform-add-r
 import { BookformEditRsvnComponent } from './reservations/bookings/bookform-edit-rsvn/bookform-edit-rsvn.component';
 import { InvoiceRsvnComponent } from './reservations/invoices/invoice-rsvn/invoice-rsvn.component';
 import { TemplateTcWebsiteComponent } from './websites/templates/template-tc-website/template-tc-website.component';
+import { RsvnTourTravelingComponent } from './reservations/traveling/rsvn-tour-traveling/rsvn-tour-traveling.component';
 // Affiliate
 import { HomeAffComponent } from './affiliate/home/home-aff/home-aff.component';
 import { BookedAffComponent } from './affiliate/booking/booked-aff/booked-aff.component';
@@ -71,7 +72,8 @@ import { BookedAffiliateDaysOfMonthManageComponent } from './manager/booked-affi
 import { BookedAffiliateMonthlyManagerComponent } from './manager/booked-affiliate/booked-affiliate-monthly-manager/booked-affiliate-monthly-manager.component';
 import { BookedAffiliateTourManagerComponent } from './manager/booked-affiliate/booked-affiliate-tour-manager/booked-affiliate-tour-manager.component';
 import { AffiliateManagementManagerComponent } from './manager/affiliate-management/affiliate-management-manager/affiliate-management-manager.component';
-import { AffiliateDetailManagerComponent } from './manager/affiliate-management/affiliate-detail-manager/affiliate-detail-manager.component';
+import { AffiliateProfileManagerComponent } from './manager/affiliate-management/affiliate-profile-manager/affiliate-profile-manager.component';
+import { AffiliateCommissionRateManagerComponent } from './manager/affiliate-management/affiliate-commission-rate-manager/affiliate-commission-rate-manager.component';
 
 const routes: Routes = [
   {
@@ -147,6 +149,10 @@ const routes: Routes = [
   {
     path: 'user/reservations/invoice/:transactionId',
     component: InvoiceRsvnComponent
+  },
+  {
+    path: 'user/reservations/tour-traveling',
+    component: RsvnTourTravelingComponent
   },
   // Affiliate
   {
@@ -325,9 +331,13 @@ const routes: Routes = [
     component: AffiliateManagementManagerComponent
   },
   {
-    path: 'user/manager/affiliate-management/detail/:userId',
-    component: AffiliateDetailManagerComponent
+    path: 'user/manager/affiliate-management/profile/:userId',
+    component: AffiliateProfileManagerComponent
   },
+  {
+    path: 'user/manager/affiliate-management/commission-rate/:userId',
+    component: AffiliateCommissionRateManagerComponent
+  }
 ];
 
 @NgModule({

@@ -21,7 +21,7 @@ class AccountRegisterConfirmRepository{
 						->select('id')
 						->where('username',array_get($data,'email'))
 						->where('active_code',array_get($data,'registerCode'))
-						->where('active_expired','>',$dateNow)
+						->where('active_expired','>=',$dateNow)
 						->where('is_active',0)
 						->get();
 		if($result){
@@ -36,7 +36,7 @@ class AccountRegisterConfirmRepository{
 		$update = ['account_type_id'=>2,'is_active'=>1];
 		$result = \DB::table('accounts')
 						->where('id',$accoutId)
-						->where('active_expired','>',$dateNow)
+						->where('active_expired','>=',$dateNow)
 						->where('is_active',0)
 						->update($update);
 		if($result){

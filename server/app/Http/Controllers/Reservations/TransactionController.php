@@ -53,9 +53,9 @@ class TransactionController extends MyBaseController {
 		}
 	}
 
-	// Update booking traveled
+	// Update booking traveled : all
 	public function AutoUpdateTourTraveled(Request $request){
-		$data = $request->input();
+		$data = $request->input(); 
 		try{
 			$results = \ReservationAutoUpdateTourTraveledFacade::AutoUpdateTourTraveled($data);
 			if($results==null){
@@ -66,4 +66,33 @@ class TransactionController extends MyBaseController {
 			abort(500);
 		}
 	}
+
+	// Get traveled for update
+	public function GetUpdateTraveled(Request $request){
+		$data = $request->input();
+		try{
+			$results = \ReservationGetUpdateTraveledFacade::GetUpdateTraveled($data);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+		}catch(Exception $e){
+			abort(500);
+		}
+	}
+
+	// Update traveled
+	public function UpdateTraveled(Request $request){
+		$data = $request->input();
+		try{
+			$results = \ReservationUpdateTraveledFacade::UpdateTraveled($data);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+		}catch(Exception $e){
+			abort(500);
+		}
+	}
+
 }

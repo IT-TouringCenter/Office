@@ -65,11 +65,11 @@ class AdminUserRequestUpdateClass{
         // update account type : accounts table
         $accountTypeId = $checkAccount[0]->account_type_id;
         
-        $checkAccountType = $this->CheckAccountType($requestTypeId, $accountTypeId);
-        $accountTypeId = $checkAccountType; // new set
+        $checkAccountType = $this->CheckAccountTypeByRequest($requestTypeId, $accountTypeId);
+        $accountTypeId = $checkAccountType; // new set type
 
         $updateAccountType = $this->AdminUserRequestUpdateRepo->UpdateAccountType($accountId, $accountTypeId);
-        if(empty($updateStatus)){
+        if(empty($updateAccountType)){
             $request->status = false;
             $request->message = 'Error#!';
             $request->data = [];
@@ -83,17 +83,28 @@ class AdminUserRequestUpdateClass{
             $request->status = false;
             $request->message = 'Error~#!!';
             $request->data = [];
+            
+            return $request;
         }
 
-        $request->status = true;
-        $request->message = 'OK';
-        $request->data = [];
+        // Affiliate logic
+        // $getAccountType = 
+        $addCommissionRate = \AdminUserManagementAddFacade::CreateRecordAffiliate($accountId, $accountTypeId);
+        if($addCommissionRate=='Affiliate'){
+            $request->status = true;
+            $request->message = 'OK';
+            $request->data = [];
+        }else{
+            $request->status = false;
+            $request->message = 'Create commission rate error!';
+            $request->data = [];
+        }
 
         return $request;
     }
 
     // check account type
-    public function CheckAccountType($accountRequestType, $accountTypeId){
+    public function CheckAccountTypeByRequest($accountRequestType, $accountTypeId){
         $accountType = '';
         switch($accountRequestType){
             case '1' : $accountType = 2; break;

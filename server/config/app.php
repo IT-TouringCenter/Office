@@ -210,6 +210,8 @@ return [
 		'BookingFormEditFacade' => 'App\Facades\Reservations\BookingFormEdit\BookingFormEditFacade',
 		'ReservationUpdateTourTraveledFacade' => 'App\Facades\Reservations\Traveleds\UpdateTourTraveledFacade',
 		'ReservationAutoUpdateTourTraveledFacade' => 'App\Facades\Reservations\Traveleds\AutoUpdateTourTraveledFacade',
+		'ReservationGetUpdateTraveledFacade' => 'App\Facades\Reservations\Traveleds\GetUpdateTraveledFacade', // get tour traveled
+		'ReservationUpdateTraveledFacade' => 'App\Facades\Reservations\Traveleds\UpdateTraveledFacade', // update tour traveled
 
 		// Online booking
 		//-- Save booking

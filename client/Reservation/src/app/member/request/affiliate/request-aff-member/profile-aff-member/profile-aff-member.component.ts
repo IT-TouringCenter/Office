@@ -17,15 +17,15 @@ import { Observable } from 'rxjs/Rx';
 export class ProfileAffMemberComponent implements OnInit {
   // variable
   public profile = {
-    fullname: '',
-    birth: '',
-    tel: '',
-    email: '',
-    nationality: '',
-    address: '',
-    idNumber: '',
-    profilePicture: '',
-    copyIdCard: ''
+    fullname: <any>'',
+    birth: <any>'',
+    tel: <any>'',
+    email: <any>'',
+    nationality: <any>'',
+    address: <any>'',
+    idNumber: <any>'',
+    profilePicture: <any>'',
+    copyIdCard: <any>''
   };
 
   requestAffiliate = <any>'';
@@ -259,19 +259,41 @@ export class ProfileAffMemberComponent implements OnInit {
   // }
 
   checkNextButton(){
-    if(this.profile.fullname.length > 4 
-      && this.profile.birth.length > 8 
-      && this.profile.tel.length > 4 
-      && this.profile.email.length > 4 
-      && this.profile.nationality.length > 1 
-      && this.profile.address.length > 9 
-      && this.profile.idNumber.length > 5){
-
+    // console.log('Fullname : '+this.profile.fullname+' ('+this.profile.fullname.length+')');
+    // console.log('Birth : '+this.profile.birth+' ('+this.profile.birth.length+')');
+    // console.log('Tel : '+this.profile.tel+' ('+this.profile.tel.length+')');
+    // console.log('Email : '+this.profile.email+' ('+this.profile.email.length+')');
+    // console.log('Nationality : '+this.profile.nationality+' ('+this.profile.nationality.length+')');
+    // console.log('Address : '+this.profile.address+' ('+this.profile.address.length+')');
+    // console.log('Id number : '+this.profile.idNumber+' ('+this.profile.idNumber.length+')');
+    // console.log('---------------------------------------------');
+    if(this.profile.fullname!==null 
+      && this.profile.birth!==null 
+      && this.profile.tel!==null 
+      && this.profile.email!==null 
+      && this.profile.nationality!==null 
+      && this.profile.address!==null 
+      && this.profile.idNumber!==null
+      ){
       this.nextButton=false; // diabled == false
+      // console.log('++++++');
     }else{
       this.nextButton=true; // diabled == true
+      // console.log('******');
     }
+    // if(this.profile.fullname.length > 4 
+    //   && this.profile.birth.length > 7 
+    //   && this.profile.tel.length > 4 
+    //   && this.profile.email.length > 4 
+    //   && this.profile.nationality.length > 1 
+    //   && this.profile.address.length > 9 
+    //   && this.profile.idNumber.length > 5){
 
+    //   this.nextButton=false; // diabled == false
+    // }else{
+    //   this.nextButton=true; // diabled == true
+    // }
+    // console.log(this.nextButton);
   }
 
   ngOnInit() {
@@ -280,7 +302,7 @@ export class ProfileAffMemberComponent implements OnInit {
     this.GetAccountProfile();
 
     // check every time
-    Observable.interval(1000*1).subscribe(x => { // 1sec
+    Observable.interval(1000*1).subscribe(x => { // 1 sec
       // this.initValidation();
       this.checkNextButton();
     });

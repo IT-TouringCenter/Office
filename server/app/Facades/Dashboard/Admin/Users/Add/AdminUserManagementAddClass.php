@@ -84,18 +84,26 @@ class AdminUserManagementAddClass{
             return $return;
         }
 
-        // Check account type
-        $checkAccountType = $this->CreateRecordAffiliate($accountId, array_get($dataSave,'account_type_id'));
-        // return $checkAccountType;
-        if($checkAccountType=="Affiliate"){
-            $return->status = true;
-            $return->message = "Affiliate OK";
-        }else if($checkAccountType=="Affiliate commission error"){
-            $return->status = false;
-            $return->message = "Add affiliate commission error";
-        }else if($checkAccountType=="Affiliate error"){
-            $return->status = false;
-            $return->message = "Add affiliate error";
+        //---------------------------------- Affiliate logic -------------------------------
+        $accountTypeId = array_get($data,'accountType');
+        $checkAccountType = $this->AdminUserManagementAddRepo->CheckAccountType($accountTypeId);
+        if($checkAccountType[0]->type=="Affiliate" || $checkAccountType[0]->type=="Affiliate intern"){
+            // Check account type
+            $checkAccountType = $this->CreateRecordAffiliate($accountId, array_get($dataSave,'account_type_id'));
+
+            if($checkAccountType=="Affiliate"){
+                $return->status = true;
+                $return->message = "Affiliate OK";
+            }else if($checkAccountType=="Affiliate commission error"){
+                $return->status = false;
+                $return->message = "Add affiliate commission error";
+            }else if($checkAccountType=="Affiliate error"){
+                $return->status = false;
+                $return->message = "Add affiliate error";
+            }else{
+                $return->status = true;
+                $return->message = "OK";
+            }
         }else{
             $return->status = true;
             $return->message = "OK";
@@ -120,11 +128,12 @@ class AdminUserManagementAddClass{
     // Create record into affiliates table
     public function CreateRecordAffiliate($accountId, $accountTypeId){
         $comRate = 0;
-        $checkAccountType = $this->AdminUserManagementAddRepo->CheckAccountType($accountId, $accountTypeId);
+        $checkAccountType = $this->AdminUserManagementAddRepo->CheckAccountTypeByAccountId($accountId, $accountTypeId);
 
         if(empty($checkAccountType)){
-            return false;    
+            return false;
         }
+
         $accountType = $checkAccountType[0]->type;
         if($accountType=="Affiliate"){
             $comRate = 10;
@@ -134,15 +143,29 @@ class AdminUserManagementAddClass{
             return false;
         }
 
-        // create affiliate_commissions
-        $affiliateCommission = [
-            "account_id"=>$accountId,
-            "created_at"=>$this->dateNow
-        ];
-        $insertAffiliateCommission = $this->AdminUserManagementAddRepo->InsertAffiliateCommission($affiliateCommission);
-        if(empty($insertAffiliateCommission)){
-            return "Affiliate commission error";
+        // check empty affiliate_commissions
+        $checkAffiliateCommission = $this->AdminUserManagementAddRepo->CheckAffiliateCommission($accountId);
+        if($checkAffiliateCommission){
+            $affComActive = $checkAffiliateCommission[0]->is_active;
+            if($affComActive==0){
+                $activeAffCom = $this->AdminUserManagementAddRepo->ActiveAffiliateCommission($accountId);
+            }else{
+                // $nonActiveAffCom = $this->AdminUserManagementAddRepo->NonActiveAffiliateCommission($accountId);
+            }
+        }else{
+            // create affiliate_commissions
+            $affiliateCommission = [
+                "account_id"=>$accountId,
+                "created_at"=>$this->dateNow
+            ];
+            $insertAffiliateCommission = $this->AdminUserManagementAddRepo->InsertAffiliateCommission($affiliateCommission);
+            if(empty($insertAffiliateCommission)){
+                return "Affiliate commission error";
+            }
         }
+
+        // non active commission rate
+        $nonActiveCommissionRate = $this->AdminUserManagementAddRepo->NonActiveAffiliateCommissionRate($accountId);
 
         // create affiliate_commission_tour_rates
         // get tour id

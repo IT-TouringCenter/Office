@@ -1,27 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-// Services
-import { BookedTableAffService } from './booked-table-aff.service';
-// Interfaces
-import { BookedTableAffInterface } from './booked-table-aff-interface';
+import { Http, RequestOptions } from '@angular/http';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/observable';
 
 @Component({
-  selector: 'app-booked-table-aff',
-  templateUrl: './booked-table-aff.component.html',
-  styleUrls: ['./booked-table-aff.component.scss'],
-  providers: [BookedTableAffService]
+  selector: 'app-rsvn-tour-traveling',
+  templateUrl: './rsvn-tour-traveling.component.html',
+  styleUrls: ['./rsvn-tour-traveling.component.scss']
 })
-export class BookedTableAffComponent implements OnInit {
-
-  // interface
-  _getBooked: BookedTableAffInterface;
+export class RsvnTourTravelingComponent implements OnInit {
 
   public highlightId :number;
-  public getBooked = <any>[];
+  public getTraveling = <any>[];
+  public travelingData = <any>"";
 
   // page
-  public routeLink = "['/user/affiliate/booked/table']";
+  public routeLink = "['/user/reservation/tour-traveling']";
 
   public iPage: number[] = [];
   public iPageStart: number = 1;
@@ -37,7 +31,6 @@ export class BookedTableAffComponent implements OnInit {
   public pointEnd: number;
 
   constructor(
-    private BookedTableAffService: BookedTableAffService,
     private http: Http,
     private router: Router,
     private route: ActivatedRoute
@@ -51,26 +44,20 @@ export class BookedTableAffComponent implements OnInit {
   // 2. active menu
   public activeMenu(){
     // set storage
-    sessionStorage.setItem('menu',JSON.stringify(1));
-    sessionStorage.setItem('sub-menu',JSON.stringify(101));
+    sessionStorage.setItem('menu',JSON.stringify(3));
+    sessionStorage.setItem('sub-menu',JSON.stringify(301));
   }
 
   // JSON booked stat from API
-  getInvoiceFromData(): void{
-    // let url = "http://localhost:9000/api/reservations/GetBookedByAccountId";
-    let url = "http://api.tourinchiangmai.com/api/reservations/GetBookedByAccountId";
+  getUserData(): void{
+    // let url = "http://localhost:9000/api/Reservations/GetUpdateTraveled";
+    let url = "http://api.tourinchiangmai.com/api/Reservations/GetUpdateTraveled";
 
     // set data to save
     // let _getUserData = JSON.parse(sessionStorage.getItem('users'));
     let _getUserData = JSON.parse(localStorage.getItem('users'));
-    if(_getUserData==null || _getUserData==undefined || _getUserData==''){
-      alert('Session expired!');
-      this.router.navigate(['user/logout']);
-    }
-
     let dataSave = {
-      token : _getUserData.data.token,
-      type : _getUserData.data.userType
+      token : _getUserData.data.token
     };
 
     let options = new RequestOptions();
@@ -79,42 +66,92 @@ export class BookedTableAffComponent implements OnInit {
                     .map(res => res.json())
                     .subscribe(
                       data => [
-                        this.getBooked = data,
-                        sessionStorage.setItem('booked-table',JSON.stringify(data)),
-                        this.setInvoiceFromData()
+                        this.lengthDataFromGet(data.data),
+                        this.PagePagination()
                       ],
                       err => {console.log(err)}
                     );
     /*==================  Success  ===================*/
-    // setTimeout(()=>{
-    //   this.getBooked = JSON.parse(sessionStorage.getItem('booked-table'));
-    //   this.lengthDataFromGet(this.getBooked);
-    //   this.PagePagination();
-    // }, 500);
-  }
-
-  // 
-  public setInvoiceFromData(){
-    this.getBooked = JSON.parse(sessionStorage.getItem('booked-table'));
-    this.lengthDataFromGet(this.getBooked);
-    this.PagePagination();
+    setTimeout(()=>{
+      // this.lengthDataFromGet(this.getUser);
+      // this.PagePagination();
+    }, 500);
   }
 
   // Length data
-  lengthDataFromGet(getBooked){
+  lengthDataFromGet(getUser){
+    this.getTraveling = getUser;
+
     let count = 0;
-    for(var tour in getBooked){
+    for(var tour in getUser){
       count++;
     }
     this.totalItem = count;
 
   }
 
+  openDialog(data){
+    this.travelingData = data;
+  }
+
+  // update to api
+  updateTraveling(){
+    // let url = "http://localhost:9000/api/Reservations/UpdateTraveled";
+    let url = "http://api.tourinchiangmai.com/api/Reservations/UpdateTraveled";
+
+    // set data to save
+    let _getUserData = JSON.parse(localStorage.getItem('users'));
+    let dataSave = {
+      token : _getUserData.data.token,
+      tour : this.travelingData
+    };
+
+    let options = new RequestOptions();
+    this.http.post(url, dataSave, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      data => [
+                        alert('Update success'),
+                        this.getUserData()
+                      ],
+                      err => {console.log(err)}
+                    );
+  }
+
+  // All update traveling
+  allUpdateTravel(){
+    if(confirm('Update all tour trips')){
+      // let url = "http://localhost:9000/api/Reservations/AutoUpdateTraveled";
+      let url = "http://api.tourinchiangmai.com/api/Reservations/AutoUpdateTraveled";
+
+      // set data to save
+      let _getUserData = JSON.parse(localStorage.getItem('users'));
+      let dataSave = {
+        isTraveled : 1,
+        token : _getUserData.data.token,
+        updateBy : _getUserData.data.name
+      };
+
+      // return console.log(dataSave);
+
+      let options = new RequestOptions();
+      return this.http.post(url, dataSave, options)
+                      .map(res => res.json())
+                      .subscribe(
+                        data => [
+                          alert('Update success'),
+                          this.getUserData()
+                        ],
+                        err => {console.log(err)}
+                      );
+    }   
+  }
+
   //------------------ Start Page ------------------------
   PagePagination(){
     // reset
     this.iPage = [];
-    
+
     this.activePage = 1;
     this.nextPage = 2;
     this.pointEnd = this.perPage*this.activePage;
@@ -143,15 +180,15 @@ export class BookedTableAffComponent implements OnInit {
           }
         });
 
-    let params = this.route.snapshot.paramMap;
-    if(params.has('transactionId')){
-      this.highlightId = +params.get('transactionId');
-    }
+    // let params = this.route.snapshot.paramMap;
+    // if(params.has('userId')){
+    //   this.highlightId = +params.get('userId');
+    // }
   }
 
   changePage(page:number){
     this.activePage = page;
-    let link = '/user/affiliate/booked/table';
+    let link = '/user/reservations/tour-traveling';
     this.router.navigate([link], {queryParams:{page:page}});
     // this.router.navigate([link], {queryParams:{page:page}});
   }
@@ -179,13 +216,11 @@ export class BookedTableAffComponent implements OnInit {
       }
     }
   }
-
   //------------------ End Page ------------------------
-
 
   ngOnInit() {
     this.activeMenu();
-    this.getInvoiceFromData();
+    this.getUserData();
   }
 
 }

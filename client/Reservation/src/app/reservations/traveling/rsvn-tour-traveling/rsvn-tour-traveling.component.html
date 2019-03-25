@@ -1,0 +1,120 @@
+<!-- Check permission -->
+<app-permission-user-rsvn></app-permission-user-rsvn>
+
+<!-- Menu bar -->
+<app-menu-bar-rsvn></app-menu-bar-rsvn>
+
+<section id="main-content">
+  <section class="wrapper">
+    <!-- Booked -->
+    <div class="container booked-header-block">
+      <h2 class="text-center"><b>Tour&nbsp; Traveling</b></h2>
+    </div>
+    
+    <!-- Update all -->
+    <div class="container" style="text-align: right; margin-bottom: 10px;">
+      <button type="button" class="btn btn-warning" data-dismiss="modal" style="min-width: 90px !important;" (click)="allUpdateTravel()">Update all</button>
+    </div>
+
+    <!-- Tour traveling -->
+    <div class="container">
+      <div style="overflow-x:auto;">
+        <table class="table table-bordered table-hover">
+          <!-- Table Header -->
+          <tr class="font-table-13px">
+            <th class="text-center bg-damask text-light">No.</th>
+            <th class="text-center bg-damask text-light">Code</th>
+            <th class="text-center bg-damask text-light">Title</th>
+            <th class="text-center bg-damask text-light">Privacy</th>
+            <th class="text-center bg-damask text-light">Pax</th>
+            <th class="text-center bg-damask text-light">Date</th>
+            <th class="text-center bg-dark text-light display-print">Update</th>
+          </tr>
+          <!-- Table Body -->
+          <tr *ngFor="let traveling of getTraveling | slice:pointStart:pointEnd; let i = index;" class="font-table-12px">
+            <td class="text-center">{{i+1+(perPage*(activePage-1))}}</td>
+            <td class="text-center">{{traveling.code}}</td>
+            <td title="{{traveling.tourFullname}}">{{traveling.title}}</td>
+            <td class="text-center">{{traveling.privacy}}</td>
+            <td class="text-center">{{traveling.pax}}</td>
+            <td class="text-center">{{traveling.travelDate}}</td>
+            <td class="text-center table-valign-mid display-print doc-background">
+              <p data-toggle="modal" data-target="#dialogActive" (click)="openDialog(traveling)" class="dialog-popup"><i class="fa fa-pencil-square-o font-table-1-5em"></i></p>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Page -->
+      <div class="text-center">
+        <nav aria-label="Page navigation">
+          <p style="margin:0 !important; color:#3e3e3e;"><small>Page : {{activePage}} of {{totalPage}}</small></p>
+          <ul class="pagination text-center">
+            <li class="page-item">
+              <a class="page-link" [routerLink]="['/user/reservations/tour-traveling']" [queryParams]="{page: 1}"> First</a>
+            </li>
+            <li class="page-item disabled" [class.disabled]="activePage==1">
+              <a class="page-link" [routerLink]="['/user/reservations/tour-traveling']" [queryParams]="{page: prevPage}"> Previous</a>
+            </li>
+            <li class="page-item" *ngFor="let i of iPage" [class.active]="activePage==i">
+              <a class="page-link" [routerLink]="['/user/reservations/tour-traveling']" [queryParams]="{page: i}">{{i}}</a>
+            </li>
+            <li class="page-item" [class.disabled]="activePage==totalPage">
+              <a class="page-link" [routerLink]="['/user/reservations/tour-traveling']" [queryParams]="{page: nextPage}"> Next</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" [routerLink]="['/user/reservations/tour-traveling']" [queryParams]="{page: totalPage}"> Last</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="dialogActive" class="modal fade" role="dialog">
+      <div class="modal-dialog" style="width: 80% !important; max-width: 600px !important;">
+        <!-- Modal content-->
+        <div class="modal-content" style="min-height: 300px !important;">
+          <h4 style="text-align: center; margin: 35px 0; font-size: 20px;"><b>Tour</b> &nbsp;: {{travelingData.title}}&nbsp; </h4>
+          <div class="modal-body" style="min-height: 250px;">
+            <div style="text-align: center; margin: auto; height: 70px; padding-top: 0;">
+              <table>
+                <tr>
+                  <th style="padding: 3px 0; width: 120px;">Code</th>
+                  <td style="padding: 3px 0; text-align: left;">: {{travelingData.code}}</td>
+                </tr>
+                <tr>
+                  <th style="padding: 3px 0; width: 120px;">Title</th>
+                  <td style="padding: 3px 0; text-align: left;">: {{travelingData.title}}</td>
+                </tr>
+                <tr>
+                  <th style="padding: 3px 0; width: 120px;">Privacy</th>
+                  <td style="padding: 3px 0; text-align: left;">: {{travelingData.privacy}}</td>
+                </tr>
+                <tr>
+                  <th style="padding: 3px 0; width: 120px;">Type</th>
+                  <td style="padding: 3px 0; text-align: left;">: {{travelingData.travelTime}}</td>
+                </tr>
+                <tr>
+                  <th style="padding: 3px 0; width: 120px;">Date</th>
+                  <td style="padding: 3px 0; text-align: left;">: {{travelingData.travelDate}}</td>
+                </tr>
+                <tr>
+                  <th style="padding: 3px 0; width: 120px;">Pax</th>
+                  <td style="padding: 3px 0; text-align: left;">: {{travelingData.pax}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" style="min-width: 90px !important;" (click)="updateTraveling()">OK</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" style="min-width: 90px !important;">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</section>

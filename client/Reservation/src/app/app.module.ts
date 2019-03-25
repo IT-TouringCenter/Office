@@ -109,7 +109,9 @@ import { BookedAffiliateMonthlyManagerComponent } from './manager/booked-affilia
 import { BookedAffiliateTourManagerComponent } from './manager/booked-affiliate/booked-affiliate-tour-manager/booked-affiliate-tour-manager.component';
 import { GetlinkBookingAffComponent } from './affiliate/booking/getlink-booking-aff/getlink-booking-aff.component';
 import { AffiliateManagementManagerComponent } from './manager/affiliate-management/affiliate-management-manager/affiliate-management-manager.component';
-import { AffiliateDetailManagerComponent } from './manager/affiliate-management/affiliate-detail-manager/affiliate-detail-manager.component';
+import { AffiliateCommissionRateManagerComponent } from './manager/affiliate-management/affiliate-commission-rate-manager/affiliate-commission-rate-manager.component';
+import { AffiliateProfileManagerComponent } from './manager/affiliate-management/affiliate-profile-manager/affiliate-profile-manager.component';
+import { RsvnTourTravelingComponent } from './reservations/traveling/rsvn-tour-traveling/rsvn-tour-traveling.component';
 
 @NgModule({
   declarations: [
@@ -205,7 +207,9 @@ import { AffiliateDetailManagerComponent } from './manager/affiliate-management/
     BookedAffiliateTourManagerComponent,
     GetlinkBookingAffComponent,
     AffiliateManagementManagerComponent,
-    AffiliateDetailManagerComponent,
+    AffiliateCommissionRateManagerComponent,
+    AffiliateProfileManagerComponent,
+    RsvnTourTravelingComponent,
   ],
   imports: [
     BrowserModule,

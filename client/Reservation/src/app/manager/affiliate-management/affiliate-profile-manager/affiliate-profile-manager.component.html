@@ -63,7 +63,7 @@
             <table class="table-block">
               <tr>
                 <th>ธนาคาร</th>
-                <td>: {{affiliateData.bank.bank.bankTH}}</td>
+                <td>: {{affiliateData.bank.bank}}</td>
               </tr>
               <tr>
                 <th>ชื่อบัญชี</th>
@@ -89,6 +89,10 @@
                 <td>: {{affiliateData.profile.url}}</td>
               </tr>
             </table>
+          </div>
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content-block" style="margin: 30px 0; text-align: center;">
+            <button mat-raised-button color="warn" (click)="btnCommissionRate()">Commission rate</button>
           </div>
 
         </div>

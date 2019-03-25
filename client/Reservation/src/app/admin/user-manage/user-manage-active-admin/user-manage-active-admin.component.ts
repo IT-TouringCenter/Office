@@ -212,6 +212,9 @@ export class UserManageActiveAdminComponent implements OnInit {
   }
 
   PagePagination(){
+    // reset
+    this.iPage = [];
+    
     this.activePage = 1;
     this.nextPage = 2;
     this.pointEnd = this.perPage*this.activePage;

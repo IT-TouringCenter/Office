@@ -297,7 +297,7 @@ class TransactionRepository{
 	// Get transaction by account id
 	public function GetTransactionByAccountId($accountId){
 		$result = \DB::table('transactions')
-					->where('account_id',1)
+					->where('account_id',$accountId)
 					->where('is_active',1)
 					->orderBy('id','desc')
 					->get();

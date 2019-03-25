@@ -24,10 +24,13 @@ class AdminUserManagementEditSaveClass{
     public function AdminUserManagementEditSave($data){
         $token = array_get($data,'userToken');
         $dateNow = Carbon::now('Asia/Bangkok');
-        $result = new Account;
+        $this->result = new Account;
 
         // get account id
         $getAccount = $this->AdminUserManagementEditRepo->GetAccountByToken($token);
+        if(empty($getAccount)){
+            return false;
+        }
         $accountId = $getAccount[0]->id;
 
         // update account table
@@ -49,23 +52,60 @@ class AdminUserManagementEditSaveClass{
             ];
             $updateAccountProfile = $this->AdminUserManagementEditRepo->UpdateAccountProfileByAccountId($accountId,$setAccountProfileData);
 
+            // affiliate logic
             if($updateAccountProfile){
-                $result->status = true;
-                $result->message = "OK";
+                $accountTypeId = array_get($data,'userType');
+                $this->CreateAffiliateRecord($accountId, $accountTypeId);
         
-                return $result;
+                return $this->result;
             }else{
-                $result->status = false;
-                $result->message = "Failed!!";
+                $this->result->status = false;
+                $this->result->message = "Failed!!";
         
-                return $result;
+                return $this->result;
             }
         }else{
-            $result->status = false;
-            $result->message = "Failed!";
+            $this->result->status = false;
+            $this->result->message = "Failed!";
     
-            return $result;
+            return $this->result;
         }
-        
+
+    }
+
+    //-------------------------- Affiliate logic -----------------------------
+    public function CreateAffiliateRecord($accountId, $accountTypeId){
+        $getAccountType = $this->AdminUserManagementEditRepo->GetAccountType($accountTypeId);
+        if(empty($getAccountType)){
+            $this->result->status = false;
+            $this->result->message = "Failed!!*&";
+        }
+
+        $accountType = $getAccountType[0]->type;
+        $this->result->status = true;
+        $this->result->message = $accountType;
+
+        if($accountType=='Affiliate' || $accountType=='Affiliate intern'){
+            $addCommissionRate = \AdminUserManagementAddFacade::CreateRecordAffiliate($accountId, $accountTypeId);
+
+            if($addCommissionRate=='Affiliate'){
+                $this->result->status = true;
+                $this->result->message = "Affiliate OK";
+            }else{
+                $this->result->status = true;
+                $this->result->message = "Affiliate error";
+            }
+        }else{
+            // non active affiliate_commissions
+            $this->AdminUserManagementEditRepo->NonActiveAffiliateCommission($accountId);
+
+            // non active affiliate_commission_tour_rate
+            $this->AdminUserManagementEditRepo->NonActiveAffiliateCommissionTourRate($accountId);
+
+            $this->result->status = true;
+            $this->result->message = 'OK';
+        }
+
+        return $this->result;
     }
 }

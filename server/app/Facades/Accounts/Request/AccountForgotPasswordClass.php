@@ -177,7 +177,7 @@ class AccountForgotPasswordClass{
 
         // Set email data
         $to = array_get($accountData,'email');
-        $subject = "Register mail";
+        $subject = "Forgot password : Touring Center";
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Reply-To: noreply@example.com". "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";

@@ -19,7 +19,7 @@ class DateFormatClass{
 
     // 01 January 2018
     public function SetFullDate($date){
-        $result = date('d F Y');
+        $result = date('d F Y',strtotime($date));
         return $result;
     }
 
@@ -84,5 +84,11 @@ class DateFormatClass{
         $result = date('g:i a d F Y',strtotime($dateTime));
         return $result;
     }
+
+    // Format 01 January 2018
+    // public function SetFullDateFormat($date){
+    //     $result = date('d F Y',strtotime($date));
+    //     return $result;
+    // }
 
 }

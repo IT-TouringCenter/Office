@@ -174,7 +174,7 @@ class MemberRequestJoinAffiliateClass{
         // update account
         $account = $this->MemberRequestJoinAffiliateRepo->UpdateAccount($accountId, $accountData);
 
-        // update account_profile
+        // update account profile
         $accountProfile = $this->MemberRequestJoinAffiliateRepo->UpdateAccountProfile($accountId, $profileData);
         if(empty($account) || empty($accountProfile)){
             return null;
@@ -203,10 +203,11 @@ class MemberRequestJoinAffiliateClass{
                 'created_at' => $this->dateNow
             ];            
             // insert
-            $accountBank = $this->MemberRequestJoinAffiliateRepo->InsertAccountBank($insertBankData);
+            $insertBank = $this->MemberRequestJoinAffiliateRepo->InsertAccountBank($insertBankData);
         }else{
             // set data update
             $bankData = [
+                'account_id' => $accountId,
                 'bank_id' => array_get($bank,'id'),
                 'account_name' => array_get($bankInfo,'accountName'),
                 'account_no' => array_get($bankInfo,'accountNo'),
