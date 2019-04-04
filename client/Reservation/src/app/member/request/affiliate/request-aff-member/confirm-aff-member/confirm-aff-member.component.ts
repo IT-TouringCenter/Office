@@ -76,7 +76,6 @@ export class ConfirmAffMemberComponent implements OnInit {
     let url = 'http://api.tourinchiangmai.com/api/Dashboard/Member/RequestJoinAffiliate';
 
     let options = new RequestOptions();
-
     return this.http.post(url, setData, options)
                     .map(res => res.json())
                     .subscribe(

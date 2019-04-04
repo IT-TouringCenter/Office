@@ -112,8 +112,21 @@
                   <p style="font-size: 16px;"><u>Advertisement</u></p>
                   <table class="modal-table">
                     <tr>
-                      <td class="text-top">
-                        <a href="{{profileData.url}}" target="_blank">{{profileData.url}}</a>
+                      <td class="text-top" style="width: 120px;">Url</td>
+                      <td class="text-top">: 
+                        <a href="{{profileData.url1}}" target="_blank">Link ads 1</a>
+                      </td>
+                    </tr>
+                    <tr *ngIf="profileData.url2!==''">
+                      <td class="text-top" style="width: 120px;"></td>
+                      <td class="text-top">: 
+                        <a href="{{profileData.url2}}" target="_blank">Link ads 2</a>
+                      </td>
+                    </tr>
+                    <tr *ngIf="profileData.url3!==''">
+                      <td class="text-top" style="width: 120px;"></td>
+                      <td class="text-top">: 
+                        <a href="{{profileData.url3}}" target="_blank">Link ads 3</a>
                       </td>
                     </tr>
                   </table>

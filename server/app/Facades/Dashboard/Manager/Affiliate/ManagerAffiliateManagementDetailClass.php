@@ -62,7 +62,9 @@ class ManagerAffiliateManagementDetailClass{
       $affiliateData->nationality = $getAffiliateData[0]->nationality;
       $affiliateData->profilePicture = $getAffiliateData[0]->picture;
       $affiliateData->copyIdCard = $getAffiliateData[0]->copy_id_card;
-      $affiliateData->url = $getAffiliateData[0]->url;
+      $affiliateData->url1 = $getAffiliateData[0]->url1;
+      $affiliateData->url2 = $getAffiliateData[0]->url2;
+      $affiliateData->url3 = $getAffiliateData[0]->url3;
     }else{
       $affiliateData->id = '';
       $affiliateData->token = '';
@@ -76,7 +78,9 @@ class ManagerAffiliateManagementDetailClass{
       $affiliateData->nationality = '';
       $affiliateData->profilePicture = '';
       $affiliateData->copyIdCard = '';
-      $affiliateData->url = '';
+      $affiliateData->url1 = '';
+      $affiliateData->url2 = '';
+      $affiliateData->url3 = '';
     }
     $affiliate->profile = $affiliateData;
 

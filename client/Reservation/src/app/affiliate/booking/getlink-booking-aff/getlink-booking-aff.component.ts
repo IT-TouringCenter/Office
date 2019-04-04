@@ -128,7 +128,7 @@ export class GetlinkBookingAffComponent implements OnInit {
   // 4. set link all tour
   setLinkTourProgram(){
     let website = "http://tour-in-chiangmai.com/tours.php";
-    this.linkAllTour = website+'?aff='+this.token;
+    this.linkAllTour = website+'?user='+this.token;
     // console.log(this.linkAllTour);
   }
 
@@ -146,7 +146,7 @@ export class GetlinkBookingAffComponent implements OnInit {
           tourId = this.tourLink[i].id * 23 + 1327;
         }
       }
-      this.linkTour = website+'?aff='+this.token+'&tour='+tourId;
+      this.linkTour = website+'?user='+this.token+'&tour='+tourId;
     }
   }
 

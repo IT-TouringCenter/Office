@@ -73,4 +73,22 @@ class AccountRepository{
         
     }
 
+    // 6. Get affiliate intern account by token
+    public function GetAffiliateInternAccountIDByToken($token){
+        $result = \DB::table('accounts')
+                        ->select('id')
+                        ->where('account_type_id',13)
+                        ->where('token',$token)
+                        ->where('is_delete',0)
+                        ->where('is_active',1)
+                        ->get();
+        // $result = $this->Account->where('token',$token)->get();
+        if($result){
+            return $result[0]->id;
+        }else{
+            return 0;
+        }
+        
+    }
+
 }

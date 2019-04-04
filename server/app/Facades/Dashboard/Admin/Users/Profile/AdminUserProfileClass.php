@@ -66,7 +66,9 @@ class AdminUserProfileClass{
             $profileData->idNumber = $getProfileData[0]->id_number;
             $profileData->profilePicture = $getProfileData[0]->picture;
             $profileData->copyIdCard = $getProfileData[0]->copy_id_card;
-            $profileData->url = $getProfileData[0]->url; // advertise
+            $profileData->url1 = $getProfileData[0]->url1; // advertise
+            $profileData->url2 = $getProfileData[0]->url2;
+            $profileData->url3 = $getProfileData[0]->url3;
         }
 
         // get bank data
@@ -110,7 +112,9 @@ class AdminUserProfileClass{
         $setData->users = $data;
         $setData->profile = $profileData;
         $setData->bank = $bankData;
-        $setData->url = $getProfileData[0]->url;
+        $setData->url1 = $getProfileData[0]->url1;
+        $setData->url2 = $getProfileData[0]->url2;
+        $setData->url3 = $getProfileData[0]->url3;
 
         // return
         $returnData->status = true;

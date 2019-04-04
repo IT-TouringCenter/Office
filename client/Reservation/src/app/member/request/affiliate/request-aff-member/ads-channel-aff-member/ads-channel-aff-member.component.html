@@ -13,10 +13,25 @@
       <h3 class="block-header">ขั้นตอนที่ 3 : <span class="sub-header">ช่องทางการโฆษณา</span></h3>
       <div class="content-main-block">
         <!-- advertising channel -->
+        <!-- url 1 -->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content-block">
           <mat-form-field>
-            <input matInput placeholder="URL" [(ngModel)]="channelData.url" id="url" required>
+            <input matInput placeholder="URL 1" [(ngModel)]="channelData.url1" id="url1" required>
             <mat-error *ngIf="validation.invalid">{{validationField('url')}}</mat-error>
+          </mat-form-field>
+        </div>
+         <!-- url 2 -->
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content-block">
+          <mat-form-field>
+            <input matInput placeholder="URL 2" [(ngModel)]="channelData.url2" id="url2">
+            <!-- <mat-error *ngIf="validation.invalid">{{validationField('url')}}</mat-error> -->
+          </mat-form-field>
+        </div>
+        <!-- url 3 -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content-block">
+          <mat-form-field>
+            <input matInput placeholder="URL 3" [(ngModel)]="channelData.url3" id="url3">
+            <!-- <mat-error *ngIf="validation.invalid">{{validationField('url')}}</mat-error> -->
           </mat-form-field>
         </div>
       </div>

@@ -49,9 +49,16 @@ class DashboardAffiliateBookedDaysOfMonthClass{
             array_push($arrDays,$i);
         }
 
+        // check type
+        $getAccountType = $getAccount[0]->account_type_id;
+        
         // get data
         $this->res = new Transaction;
-        $this->GetBookedDataByDays($accountId,$arrDays,$date);
+        if($getAccountType==5){ // manager
+            $this->GetAllBookedDataByDays($arrDays,$date);    
+        }else{
+            $this->GetBookedDataByDays($accountId,$arrDays,$date);
+        }
         array_push($bookedData, $this->res);
 
         // cal amount
@@ -84,6 +91,31 @@ class DashboardAffiliateBookedDaysOfMonthClass{
         foreach($arrDay as $value){
             $date = $year.'-'.$month.'-'.str_pad(($value),2,'0',STR_PAD_LEFT);
             $getBookData = $this->DashboardAffiliateBookedRepo->GetBookedByBookDate($accountId,$date);
+            $countBooked = count($getBookData);
+
+            array_push($result,$countBooked);
+            $sum += $countBooked;
+        }
+
+        $this->res->data = $result;
+        $this->res->label = $monthEn.' '.$year;
+        $this->res->total = $sum;
+        // return $result;
+    }
+
+    // 2. get all booked data by day no. (manager)
+    public function GetAllBookedDataByDays($arrDay,$date){
+        $result = [];
+        $count = 10;
+        $sum = 0;
+        $monthEn = array_get($date,'month');
+        $month = array_get($date,'getMonth');
+        $year = array_get($date,'getYear');
+
+        // get data from DB
+        foreach($arrDay as $value){
+            $date = $year.'-'.$month.'-'.str_pad(($value),2,'0',STR_PAD_LEFT);
+            $getBookData = $this->DashboardAffiliateBookedRepo->GetAllBookedByBookDate($date);
             $countBooked = count($getBookData);
 
             array_push($result,$countBooked);

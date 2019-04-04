@@ -55,7 +55,14 @@ class DashboardAffiliateTraveledDaysOfMonthClass{
         // get data
         $bookedData = [];
         $this->res = new Transaction;
-        $this->GetTraveledByDays($accountId,$arrDays,$date);
+
+        // check type
+        $getAccountType = $getAccount[0]->account_type_id;
+        if($getAccountType==5){
+            $this->GetAllTraveledByDays($arrDays,$date);
+        }else{
+            $this->GetTraveledByDays($accountId,$arrDays,$date);
+        }
         array_push($bookedData, $this->res);
 
         // cal amount
@@ -88,6 +95,31 @@ class DashboardAffiliateTraveledDaysOfMonthClass{
         foreach($arrDay as $value){
             $date = str_pad($value, 2, "0", STR_PAD_LEFT).' '.$monthEn.' '.$year;
             $getBookData = $this->DashboardAffiliateTraveledRepo->GetTraveledByDays($accountId,$date);
+            $countBooked = count($getBookData);
+
+            array_push($result,$countBooked);
+            $sum += $countBooked;
+        }
+
+        $this->res->data = $result;
+        $this->res->label = $monthEn.' '.$year;
+        $this->res->total = $sum;
+        // return $result;
+    }
+
+    // 3. get all traveled data by day no. (manager)
+    public function GetAllTraveledByDays($arrDay,$date){
+        $result = [];
+        $count = 0;
+        $sum = 0;
+        $monthEn = array_get($date,'month');
+        $month = array_get($date,'getMonth');
+        $year = array_get($date,'getYear');
+
+        // get data from DB
+        foreach($arrDay as $value){
+            $date = str_pad($value, 2, "0", STR_PAD_LEFT).' '.$monthEn.' '.$year;
+            $getBookData = $this->DashboardAffiliateTraveledRepo->GetAllTraveledByDays($date);
             $countBooked = count($getBookData);
 
             array_push($result,$countBooked);

@@ -54,4 +54,16 @@ class AdminUserRequestUpdateRepository{
         return $result;
     }
 
+    // 5. Get request first record
+    public function GetRequestFirstRecord($accountId){
+        $result = \DB::table('account_requests as ar')
+                    ->select('ar.id','ars.status_th','ars.status_en','art.type_th','art.type_en')
+                    ->join('account_request_types as art','art.id','=','ar.account_request_type_id')
+                    ->join('account_request_statuses as ars','ars.id','=','ar.account_request_status_id')
+                    ->where('account_id',$accountId)
+                    ->orderBy('id','desc')
+                    ->get();
+        return $result;
+    }
+
 }

@@ -31,7 +31,7 @@ class ManagerAffiliateManagementDetailRepository{
 	// get affiliate data
 	public function GetAffiliateData($accountId){
 		$result = \DB::table('accounts as a')
-									->select('a.id','a.token','a.fullname','a.email','a.tel','at.type','ap.birth','ap.id_number','ap.address','ap.nationality','ap.picture','ap.copy_id_card','ap.url')
+									->select('a.id','a.token','a.fullname','a.email','a.tel','at.type','ap.birth','ap.id_number','ap.address','ap.nationality','ap.picture','ap.copy_id_card','ap.url1','ap.url2','ap.url3')
 									->join('account_types as at','at.id','=','a.account_type_id')
 									->join('account_profiles as ap','ap.account_id','=','a.id')
 									->where('a.id',$accountId)

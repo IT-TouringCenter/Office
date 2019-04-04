@@ -97,10 +97,15 @@ class AccountClass{
         return $account;
     }
 
-    // 
+    // Get affiliate account
     public function GetAffiliateAccountIDByToken($token){
         $GetAccountId = $this->AccountRepo->GetAffiliateAccountIDByToken($token);
         return $GetAccountId;
     }
 
+    // Get affiliate intern account
+    public function GetAffiliateInternAccountIDByToken($token){
+        $GetAccountId = $this->AccountRepo->GetAffiliateInternAccountIDByToken($token);
+        return $GetAccountId;
+    }
 }

@@ -229,10 +229,14 @@ class MemberRequestJoinAffiliateClass{
     // 5. update account advertise
     public function UpdateUserAdvertise($accountId, $adsInfo){
         // set data
-        $advertise = array_get($adsInfo,'url');
+        $advertise1 = array_get($adsInfo,'url1');
+        $advertise2 = array_get($adsInfo,'url2');
+        $advertise3 = array_get($adsInfo,'url3');
 
         $adsData = [
-            'url' => $advertise,
+            'url1' => $advertise1,
+            'url2' => $advertise2,
+            'url3' => $advertise3,
             'updated_by' => 'System'
         ];
 

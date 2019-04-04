@@ -13,7 +13,9 @@ export class AdsChannelAffMemberComponent implements OnInit {
 
   // variable
   public channelData = {
-    url: <any>''
+    url1: <any>'',
+    url2: <any>'',
+    url3: <any>''
   };
 
   requestAffiliate = <any>'';
@@ -57,7 +59,7 @@ export class AdsChannelAffMemberComponent implements OnInit {
     // get storage
     let getSession = JSON.parse(sessionStorage.getItem('set-channel'));
     if(getSession){
-      this.channelData.url = getSession.url;
+      this.channelData.url1 = getSession.url1;
     }
   }
 
@@ -147,7 +149,7 @@ export class AdsChannelAffMemberComponent implements OnInit {
   // }
 
   checkNextButton(){
-    if(this.channelData.url.length > 5){
+    if(this.channelData.url1.length > 5){
       this.nextButton = false; // disabled == false
     }else{
       this.nextButton = true; // disabled == true;

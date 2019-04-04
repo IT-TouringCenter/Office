@@ -290,6 +290,7 @@ return [
 		'MemberApprovalFacade' => 'App\Facades\Dashboard\Member\Approval\MemberApprovalFacade',
 
 		// Dashboard (Manager)
+		'ManagerAffiliateFacade' => 'App\Facades\Dashboard\Manager\Affiliate\ManagerAffiliateFacade',
 		'ManagerAffiliateManagementFacade' => 'App\Facades\Dashboard\Manager\Affiliate\ManagerAffiliateManagementFacade',
 		'ManagerAffiliateManagementDetailFacade' => 'App\Facades\Dashboard\Manager\Affiliate\ManagerAffiliateManagementDetailFacade',
 		'ManagerAffiliateManagementCommissionRateFacade' => 'App\Facades\Dashboard\Manager\Affiliate\ManagerAffiliateManagementCommissionRateFacade',

@@ -38,14 +38,30 @@ class SaveBookingClass{
 		$noteBy = array_get($bookingData, 'noteBy');
 		// $invoiceRef = array_get($bookingData, 'invoiceRef');
 		$account = array_get($bookingData, 'accountInfo');
+		$token = array_get($account,'token');
 		$count = 1;
 
 		$this->transaction = new Transaction;
 		// Account
-		$GetAccountId = \AccountFacade::GetAffiliateAccountIDByToken(array_get($account,'token'));
-		$this->transaction->account = $GetAccountId;
+		$GetAccountId = \AccountFacade::GetAffiliateAccountIDByToken($token);
+		
+		if(empty($GetAccountId)){
+			$GetAffInternId = \AccountFacade::GetAffiliateInternAccountIDByToken($token);
+			if($GetAffInternId){
+				$AccountId = $GetAffInternId;
+				$this->transaction->account = $AccountId;
+			}else{
+				$AccountId = 0;
+				$this->transaction->account = $AccountId;
+			}
+			
+		}else{
+			$AccountId = $GetAccountId;
+			$this->transaction->account = $AccountId;
+		}
+
 		// Transaction
-		$saveTransactionId = $this->SaveBookingRepo->SaveTransactionBooking($bookingData,$GetAccountId);
+		$saveTransactionId = $this->SaveBookingRepo->SaveTransactionBooking($bookingData,$AccountId);
 		// Transaction tour
 		$TransactionTourId = $this->SaveTransactionTourBooking($saveTransactionId,$bookingData);
 		// Transaction tour reference

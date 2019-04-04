@@ -304,6 +304,15 @@ class TransactionRepository{
 		return $result;
 	}
 
+	// Get all transaction
+	public function GetAllTransaction(){
+		$result = \DB::table('transactions')
+					->where('is_active',1)
+					->orderBy('id','desc')
+					->get();
+		return $result;
+	}
+
 	// Get tour travel time by tour id
 	public function GetTourTravelTimeByTourId($tourId, $tourTravelTime){
 		$result = \DB::table('tour_travel_times')

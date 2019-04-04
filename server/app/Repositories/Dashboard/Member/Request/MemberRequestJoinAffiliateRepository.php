@@ -128,7 +128,9 @@ class MemberRequestJoinAffiliateRepository{
     public function CheckAccountUrl($accountId, $adsData){
         $result = \DB::table('account_profiles')
                         ->where('account_id',$accountId)
-                        ->where('url',array_get($adsData,'url'))
+                        ->where('url1',array_get($adsData,'url1'))
+                        ->where('url2',array_get($adsData,'url2'))
+                        ->where('url3',array_get($adsData,'url2'))
                         ->where('is_active',1)
                         ->get();
         return $result;

@@ -46,6 +46,19 @@ class DashboardAffiliateTraveledRepository{
         return $result;
     }
 
+    // all : manager
+    public function GetAllTourTraveled($tourId){
+        $result = \DB::table('transaction_tours as tt')
+                    ->join('transactions as t','t.id','=','tt.transaction_id')
+                    ->where('t.is_active',1)
+                    ->where('tt.tour_id',$tourId)
+                    ->where('tt.is_travel',1)
+                    ->where('tt.is_cancel',0)
+                    ->where('tt.is_active',1)
+                    ->get();
+        return $result;
+    }
+
     // traveled [days of month]
     public function GetTraveledByDays($accountId,$travelDate){
         $result = \DB::table('transaction_tours as tt')
@@ -60,11 +73,37 @@ class DashboardAffiliateTraveledRepository{
         return $result;
     }
 
+    // all traveled [days of month] : manager
+    public function GetAllTraveledByDays($travelDate){
+        $result = \DB::table('transaction_tours as tt')
+                    ->join('transactions as t','t.id','=','tt.transaction_id')
+                    ->where('t.is_active',1)
+                    ->where('tt.tour_travel_date',$travelDate)
+                    ->where('tt.is_travel',1)
+                    ->where('tt.is_cancel',0)
+                    ->where('tt.is_active',1)
+                    ->get();
+        return $result;
+    }
+
     // traveled [monthly]
     public function GetTraveledByMonth($accountId,$travelDate){
         $result = \DB::table('transaction_tours as tt')
                     ->join('transactions as t','t.id','=','tt.transaction_id')
                     ->where('t.account_id',$accountId)
+                    ->where('t.is_active',1)
+                    ->where('tt.tour_travel_date','like','% '.$travelDate)
+                    ->where('tt.is_travel',1)
+                    ->where('tt.is_cancel',0)
+                    ->where('tt.is_active',1)
+                    ->get();
+        return $result;
+    }
+
+    // all traveled [monthly] : manager
+    public function GetAllTraveledByMonth($travelDate){
+        $result = \DB::table('transaction_tours as tt')
+                    ->join('transactions as t','t.id','=','tt.transaction_id')
                     ->where('t.is_active',1)
                     ->where('tt.tour_travel_date','like','% '.$travelDate)
                     ->where('tt.is_travel',1)

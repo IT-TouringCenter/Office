@@ -9,10 +9,64 @@
   <section class="wrapper">
     <!-- Graf -->
     <div class="container">
-      <h3 class="dashboard-header">Days of month<br><small>Booked</small></h3>
-      <!-- <hr style="width: 100px; text-align: center; border: #651e1e 1px solid; margin-bottom: 30px;"> -->
-      <div style="margin:auto; margin-top:30px;width:100% !important;">
-      
+      <h3 style="text-align:center;margin-top:0px;margin-bottom:35px;padding:15px;font-weight:600 !important;width:85%;margin:auto;">Days of Month<br><small>(Booked)</small></h3>
+      <div style="margin:auto; margin-top:20px;width:80% !important;">
+        <!--  -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-print" style="text-align: center;margin-bottom:30px;">
+          <mat-form-field>
+            <mat-select placeholder="Month" [(ngModel)]="bookedData.month">
+              <mat-option *ngFor="let month of arrMonth; let i=index;" value="{{month}}">
+                {{month}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Year" [(ngModel)]="bookedData.year">
+              <mat-option *ngFor="let year of arrYear; let i=index;" value="{{year}}">
+                {{year}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button type="submit" (click)="searchData()" mat-stroked-button>OK</button>
+        </div>
+        <!--  -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <canvas baseChart 
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [colors]="barChartColors"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)">
+          </canvas>
+        </div>
+      </div>
+    </div>
+    <!-- Stat -->
+    <div class="container" style="margin-top: 20px;">
+      <div style="margin:auto; width:80% !important;">
+        <table style="width:80%; border: solid 1px #cacaca;margin:auto !important;">
+          <tr style="background:#0f4675 !important;">
+            <th style="text-align:center;color:white !important;border-right:#cacaca solid 1px;">Day</th>
+            <th style="text-align:center;color:white !important;">Booked</th>
+          </tr>
+          <tr *ngFor="let label of barChartLabels; let i=index">
+            <td style="text-align:center; width:50%;border-right:#cacaca solid 1px;"><small>{{label}} {{shortMonthNow}} {{year}}</small></td>
+            <td *ngFor="let data of barChartData" style="text-align:center;"><small>{{data.data[i] | number}}</small></td>
+          </tr>
+          <tr style="background: #e4e4e4; border: #cacaca solid 1px;">
+            <th style="text-align:center; width:50%;border-right:#cacaca solid 1px;">Total</th>
+            <th style="text-align:center;">{{amount | number}}</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <!-- Print -->
+    <div class="container no-print" style="margin-top:30px;margin-bottom:15px;">
+      <div style="margin:auto; width:60% !important;text-align:center;">
+        <button type="submit" mat-stroked-button color="warn" (click)="print()">Print</button>
       </div>
     </div>
   </section>

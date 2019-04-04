@@ -9,7 +9,7 @@
   <section class="wrapper">
     <!-- Graf -->
     <div class="container">
-      <h3 class="dashboard-header" style="text-align: center;"><b>Affiliate detail</b><br><small></small></h3>
+      <h3 class="dashboard-header" style="text-align: center;"><b>Affiliate profile</b><br><small></small></h3>
       <!-- <hr style="width: 100px; text-align: center; border: #651e1e 1px solid; margin-bottom: 30px;"> -->
       <div style="margin:auto; margin-top:20px;width:100% !important;">
         <div class="content-main-block">
@@ -85,8 +85,16 @@
             <h4><u>ช่องทางการโฆษณา</u></h4>
             <table class="table-block">
               <tr>
-                <th>ช่องทางโฆษณา</th>
-                <td>: {{affiliateData.profile.url}}</td>
+                <th style="vertical-align: top;">ช่องทางโฆษณา</th>
+                <td>: <a href="{{affiliateData.profile.url1}}" target="_blank">ลิงค์โฆษณา 1</a></td>
+              </tr>
+              <tr *ngIf="affiliateData.profile.url2==''">
+                <th></th>
+                <td>: <a href="{{affiliateData.profile.url3}}" target="_blank">ลิงค์โฆษณา 3</a></td>
+              </tr>
+              <tr *ngIf="affiliateData.profile.url3==''">
+                <th></th>
+                <td>: <a href="{{affiliateData.profile.url3}}" target="_blank">ลิงค์โฆษณา 3</a></td>
               </tr>
             </table>
           </div>

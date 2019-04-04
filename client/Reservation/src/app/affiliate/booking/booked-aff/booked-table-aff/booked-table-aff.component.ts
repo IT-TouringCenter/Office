@@ -56,7 +56,7 @@ export class BookedTableAffComponent implements OnInit {
   }
 
   // JSON booked stat from API
-  getInvoiceFromData(): void{
+  getBookedFormData(): void{
     // let url = "http://localhost:9000/api/reservations/GetBookedByAccountId";
     let url = "http://api.tourinchiangmai.com/api/reservations/GetBookedByAccountId";
 
@@ -185,7 +185,7 @@ export class BookedTableAffComponent implements OnInit {
 
   ngOnInit() {
     this.activeMenu();
-    this.getInvoiceFromData();
+    this.getBookedFormData();
   }
 
 }

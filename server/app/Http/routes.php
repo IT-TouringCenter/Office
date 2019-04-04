@@ -135,10 +135,24 @@ Route::get('/', 'WelcomeController@index');
 	Route::post('api/Dashboard/Member/Approval', 'Dashboard\Member\Approval\MemberApprovalController@MemberApproval');
 
 	// Manager
+	Route::post('api/Dashboard/Manager/GetAffiliateAccount', 'Dashboard\Manager\Affiliate\ManagerAffiliateController@GetAffiliateAccount');
+
 	Route::post('api/Dashboard/Manager/AffiliateManagement', 'Dashboard\Manager\Affiliate\ManagerAffiliateManagementController@AffiliateManagement');
 	Route::post('api/Dashboard/Manager/AffiliateManagement/Detail', 'Dashboard\Manager\Affiliate\ManagerAffiliateManagementController@AffiliateManagementDetail');
 	Route::post('api/Dashboard/Manager/AffiliateManagement/CommissionRate', 'Dashboard\Manager\Affiliate\ManagerAffiliateManagementController@AffiliateManagementCommissionRate');
 	Route::post('api/Dashboard/Manager/AffiliateManagement/CommissionRate/Update', 'Dashboard\Manager\Affiliate\ManagerAffiliateManagementController@AffiliateUpdateCommissionRate');
+
+	Route::post('api/Dashboard/Manager/Booked', 'Dashboard\Manager\Booked\ManagerBookedController@BookedSummary');
+	Route::post('api/Dashboard/Manager/Booked/Table', 'Dashboard\Manager\Booked\ManagerBookedController@BookedTable');
+	Route::post('api/Dashboard/Manager/Booked/DaysOfMonth', 'Dashboard\Manager\Booked\ManagerBookedController@BookedDaysOfMonth');
+	Route::post('api/Dashboard/Manager/Booked/Monthly', 'Dashboard\Manager\Booked\ManagerBookedController@BookedMonthly');
+	Route::post('api/Dashboard/Manager/Booked/Tour', 'Dashboard\Manager\Booked\ManagerBookedController@BookedTour');
+
+	Route::post('api/Dashboard/Manager/AffiliateBooked', 'Dashboard\Manager\Booked\ManagerAffiliateBookedController@AffiliateBookedSummary');
+	Route::post('api/Dashboard/Manager/AffiliateBooked/Table', 'Dashboard\Manager\Booked\ManagerAffiliateBookedController@AffiliateBookedTable');
+	Route::post('api/Dashboard/Manager/AffiliateBooked/DaysOfMonth', 'Dashboard\Manager\Booked\ManagerAffiliateBookedController@AffiliateBookedDaysOfMonth');
+	Route::post('api/Dashboard/Manager/AffiliateBooked/Monthly', 'Dashboard\Manager\Booked\ManagerAffiliateBookedController@AffiliateBookedMonthly');
+	Route::post('api/Dashboard/Manager/AffiliateBooked/Tour', 'Dashboard\Manager\Booked\ManagerAffiliateBookedController@AffiliateBookedTour');
 
 	// Request
 	Route::post('api/Account/AccountRequestStatus', 'Accounts\Request\AccountRequestStatusController@AccountRequestStatus');

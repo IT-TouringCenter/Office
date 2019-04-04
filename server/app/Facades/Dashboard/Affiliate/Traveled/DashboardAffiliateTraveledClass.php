@@ -42,7 +42,14 @@ class DashboardAffiliateTraveledClass{
 
         // get tour traveled
         $bookedArr = [];
-        $getTourTraveled = $this->TourTraveled($accountId,$tourArr);
+
+        // check type
+        $getAccountType = $getAccount[0]->account_type_id;
+        if($getAccountType==5){ // manager
+            $getTourTraveled = $this->AllTourTraveled($tourArr);
+        }else{
+            $getTourTraveled = $this->TourTraveled($accountId,$tourArr);
+        }
         array_push($bookedArr,$getTourTraveled);
 
         // amount
@@ -66,6 +73,28 @@ class DashboardAffiliateTraveledClass{
 
         foreach($tourArr as $value){
             $getTraveled = $this->DashboardAffiliateTraveledRepo->GetTourTraveled($accountId,$value->id);
+            $countTravel = count($getTraveled);
+
+            array_push($traveledArr,$countTravel);
+            $total += $countTravel;
+        }
+
+        $traveled = new Transaction;
+        $traveled->data = $traveledArr;
+        $traveled->label = "summary";
+        $traveled->total = $total;
+
+        return $traveled;
+        
+    }
+
+    // 3. get all tour traveled (manager)
+    public function AllTourTraveled($tourArr){
+        $traveledArr = [];
+        $total = 0;
+
+        foreach($tourArr as $value){
+            $getTraveled = $this->DashboardAffiliateTraveledRepo->GetAllTourTraveled($value->id);
             $countTravel = count($getTraveled);
 
             array_push($traveledArr,$countTravel);

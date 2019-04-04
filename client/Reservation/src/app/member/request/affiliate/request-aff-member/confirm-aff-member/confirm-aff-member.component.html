@@ -84,8 +84,16 @@
           <h4><u>ช่องทางการโฆษณา</u></h4>
           <table class="table-block">
             <tr>
-              <th>ช่องทางโฆษณา</th>
-              <td>: {{memberData.adsInfo.url}}</td>
+              <th style="vertical-align: top;">ช่องทางโฆษณา</th>
+              <td>: {{memberData.adsInfo.url1}}</td>
+            </tr>
+            <tr *ngIf="memberData.adsInfo.url2!=''">
+              <th></th>
+              <td>: {{memberData.adsInfo.url2}}</td>
+            </tr>
+            <tr *ngIf="memberData.adsInfo.url3!=''">
+              <th></th>
+              <td>: {{memberData.adsInfo.url3}}</td>
             </tr>
           </table>
         </div>

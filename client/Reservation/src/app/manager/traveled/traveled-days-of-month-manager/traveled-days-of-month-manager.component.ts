@@ -1,0 +1,192 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from "@angular/router";
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
+import "rxjs/Rx";
+
+@Component({
+  selector: 'app-traveled-days-of-month-manager',
+  templateUrl: './traveled-days-of-month-manager.component.html',
+  styleUrls: ['./traveled-days-of-month-manager.component.scss']
+})
+export class TraveledDaysOfMonthManagerComponent implements OnInit {
+
+  constructor(
+    private http: Http,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
+
+  public arrMonth = <any>['January','February','March','April','May','June','July','August','September','October','November','December'];
+  public arrYear = <any>[];
+  public amount;
+
+  // default valiable
+  public travelData = {
+    token: <any>"",
+    type: <any>"",
+    month: <any>"",
+    year: <any>""
+  };
+
+  // Bar chart
+  public barChartOptions:any = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+
+  public barChartData:any[];
+  public barChartLabels:string[];
+  public barChartType:string;
+  public barChartLegend:boolean;
+  public barChartColors:Array<any> = [
+    { backgroundColor: '#6d0808'}
+  ];
+
+  // 
+  public setDefaultYear(){
+    // set year
+    let getYear = new Date();
+    let yearStart = 2018;
+    let yearNow = getYear.getFullYear();
+    let yearDif = yearNow - yearStart;
+    for(let i=0;i<=yearDif;i++){
+      let newYear = yearStart+i;
+      this.arrYear.push(newYear.toString());
+    }
+    console.log(this.arrYear);
+
+    // set days in month
+    let monthNow = getYear.getMonth();
+    let daysInMonth = new Date(yearNow, monthNow+1, 0).getDate();
+
+    this.setDefaultChart(daysInMonth);
+  }
+
+  // 
+  public setDefaultChart(daysInMonth){
+    // set days in month
+    let daysArr = <any>[];
+    for(let i=0;i<daysInMonth;i++){
+      daysArr.push(0);
+    }
+
+    // set default binding bar data
+    this.barChartData = [
+      {data: daysArr, label: '', total: 0}
+    ];
+
+    let daysDataArr = <any>[];
+    for(let j=0;j<daysInMonth;j++){
+      let number = j+1;
+      daysDataArr.push(number.toString());
+    }
+
+    // this.barChartLabels = <any>['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
+    this.barChartLabels = daysDataArr;
+    this.barChartType = 'bar';
+    this.barChartLegend = true;
+  }
+
+  // 1. print
+  public print():void {
+    window.print();
+  }
+
+  // 2. active menu
+  public activeMenu(){
+    // set storage
+    sessionStorage.setItem('menu',JSON.stringify(1));
+    sessionStorage.setItem('sub-menu',JSON.stringify(106));
+  }
+
+  // 3. get data binding
+  public getTraveledDayOfMonthData(){
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled/DaysOfMonth';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled/DaysOfMonth';
+
+    // set time
+    let getDate = new Date();
+    this.travelData.month = this.arrMonth[getDate.getMonth()];
+    let getYear = getDate.getFullYear();
+
+    for(let i=0;i<this.arrYear.length;i++){
+      if(getYear == this.arrYear[i]){
+        this.travelData.year = this.arrYear[i];
+      }
+    }
+
+    // get token from session
+    let getToken = JSON.parse(localStorage.getItem('users'));
+    if(getToken==null || getToken==undefined || getToken==''){
+      alert('Session expired!');
+      this.router.navigate(['user/logout']);
+      this.travelData.token = 0;
+      this.travelData.type = 0;
+    }else{
+      this.travelData.token = getToken.data.token;
+      this.travelData.type = getToken.data.userType;
+    }
+
+    let options = new RequestOptions();
+    this.http.post(url, this.travelData, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      data => [
+                        console.log(data),
+                        sessionStorage.setItem('traveled-day-chart',JSON.stringify(data)),
+                        this.setDataBinding()
+                      ],
+                      err => {console.log(err)}
+                    );
+  }
+
+  // 3.1 set data binding
+  public setDataBinding(){
+    let _getData = JSON.parse(sessionStorage.getItem('traveled-day-chart'));
+    this.barChartData = _getData.booked;
+    this.amount = _getData.amount;
+  }
+
+  // 4. search data
+  public searchData(){
+    // let url = 'http://localhost:9000/api/Dashboard/Affiliate/Traveled/DaysOfMonth';
+    let url = 'http://api.tourinchiangmai.com/api/Dashboard/Affiliate/Traveled/DaysOfMonth';
+
+    // get token from session
+    let getToken = JSON.parse(localStorage.getItem('users'));
+    if(getToken==null || getToken==undefined || getToken==''){
+      this.travelData.token = 0;
+      this.travelData.type = 0;
+    }else{
+      this.travelData.token = getToken.data.token;
+      this.travelData.type = getToken.data.userType;
+    }
+
+    let options = new RequestOptions();
+    this.http.post(url, this.travelData, options)
+                    .map(res => res.json())
+                    .subscribe(
+                      data => [
+                        sessionStorage.setItem('traveled-day-chart',JSON.stringify(data)),
+                        this.setDataSearch()
+                      ],
+                      err => {console.log(err)}
+                    );
+  }
+
+  // 4.1 set data search
+  public setDataSearch(){
+    let _getData = JSON.parse(sessionStorage.getItem('traveled-day-chart'));
+    this.barChartData = _getData.booked;
+    this.amount = _getData.amount;
+  }
+
+  ngOnInit() {
+    this.setDefaultYear();
+    // get data
+    this.activeMenu();
+    this.getTraveledDayOfMonthData();
+  }
+
+}

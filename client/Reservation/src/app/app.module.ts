@@ -101,17 +101,25 @@ import { BookedTableManagerComponent } from './manager/booked/booked-table-manag
 import { BookedSummaryManagerComponent } from './manager/booked/booked-summary-manager/booked-summary-manager.component';
 import { BookedDaysOfMonthManagerComponent } from './manager/booked/booked-days-of-month-manager/booked-days-of-month-manager.component';
 import { BookedMonthlyManagerComponent } from './manager/booked/booked-monthly-manager/booked-monthly-manager.component';
-import { BookedTourManagerComponent } from './manager/booked/booked-tour-manager/booked-tour-manager.component';
 import { BookedAffiliateTableComponent } from './manager/booked-affiliate/booked-affiliate-table/booked-affiliate-table.component';
 import { BookedAffiliateSummaryManagerComponent } from './manager/booked-affiliate/booked-affiliate-summary-manager/booked-affiliate-summary-manager.component';
 import { BookedAffiliateDaysOfMonthManageComponent } from './manager/booked-affiliate/booked-affiliate-days-of-month-manage/booked-affiliate-days-of-month-manage.component';
 import { BookedAffiliateMonthlyManagerComponent } from './manager/booked-affiliate/booked-affiliate-monthly-manager/booked-affiliate-monthly-manager.component';
-import { BookedAffiliateTourManagerComponent } from './manager/booked-affiliate/booked-affiliate-tour-manager/booked-affiliate-tour-manager.component';
 import { GetlinkBookingAffComponent } from './affiliate/booking/getlink-booking-aff/getlink-booking-aff.component';
 import { AffiliateManagementManagerComponent } from './manager/affiliate-management/affiliate-management-manager/affiliate-management-manager.component';
 import { AffiliateCommissionRateManagerComponent } from './manager/affiliate-management/affiliate-commission-rate-manager/affiliate-commission-rate-manager.component';
 import { AffiliateProfileManagerComponent } from './manager/affiliate-management/affiliate-profile-manager/affiliate-profile-manager.component';
 import { RsvnTourTravelingComponent } from './reservations/traveling/rsvn-tour-traveling/rsvn-tour-traveling.component';
+import { BookedAffiliateTourDaysOfMonthManagerComponent } from './manager/booked-affiliate/booked-affiliate-tour-days-of-month-manager/booked-affiliate-tour-days-of-month-manager.component';
+import { BookedAffiliateTourMonthlyManagerComponent } from './manager/booked-affiliate/booked-affiliate-tour-monthly-manager/booked-affiliate-tour-monthly-manager.component';
+import { BookedAffiliateCommissionDaysOfMonthManagerComponent } from './manager/booked-affiliate/booked-affiliate-commission-days-of-month-manager/booked-affiliate-commission-days-of-month-manager.component';
+import { BookedAffiliateCommissionMonthlyManagerComponent } from './manager/booked-affiliate/booked-affiliate-commission-monthly-manager/booked-affiliate-commission-monthly-manager.component';
+import { BookedAffiliateTourSummaryManagerComponent } from './manager/booked-affiliate/booked-affiliate-tour-summary-manager/booked-affiliate-tour-summary-manager.component';
+import { BookedAffiliateCommissionSummaryManagerComponent } from './manager/booked-affiliate/booked-affiliate-commission-summary-manager/booked-affiliate-commission-summary-manager.component';
+import { TraveledSummaryManagerComponent } from './manager/traveled/traveled-summary-manager/traveled-summary-manager.component';
+import { TraveledDaysOfMonthManagerComponent } from './manager/traveled/traveled-days-of-month-manager/traveled-days-of-month-manager.component';
+import { TraveledMonthlyManagerComponent } from './manager/traveled/traveled-monthly-manager/traveled-monthly-manager.component';
+import { UserRequestManagerComponent } from './manager/user-request-manager/user-request-manager.component';
 
 @NgModule({
   declarations: [
@@ -199,17 +207,25 @@ import { RsvnTourTravelingComponent } from './reservations/traveling/rsvn-tour-t
     BookedSummaryManagerComponent,
     BookedDaysOfMonthManagerComponent,
     BookedMonthlyManagerComponent,
-    BookedTourManagerComponent,
     BookedAffiliateTableComponent,
     BookedAffiliateSummaryManagerComponent,
     BookedAffiliateDaysOfMonthManageComponent,
     BookedAffiliateMonthlyManagerComponent,
-    BookedAffiliateTourManagerComponent,
     GetlinkBookingAffComponent,
     AffiliateManagementManagerComponent,
     AffiliateCommissionRateManagerComponent,
     AffiliateProfileManagerComponent,
     RsvnTourTravelingComponent,
+    BookedAffiliateTourDaysOfMonthManagerComponent,
+    BookedAffiliateTourMonthlyManagerComponent,
+    BookedAffiliateCommissionDaysOfMonthManagerComponent,
+    BookedAffiliateCommissionMonthlyManagerComponent,
+    BookedAffiliateTourSummaryManagerComponent,
+    BookedAffiliateCommissionSummaryManagerComponent,
+    TraveledSummaryManagerComponent,
+    TraveledDaysOfMonthManagerComponent,
+    TraveledMonthlyManagerComponent,
+    UserRequestManagerComponent,
   ],
   imports: [
     BrowserModule,

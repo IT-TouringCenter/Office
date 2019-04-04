@@ -129,15 +129,22 @@ class BookingStatisticsClass{
         // check accounts
         $getAccount = $this->AccountRepo->GetAccountByTokenAndType($token,$typeId);
         if(empty($getAccount)){
-            return 'null';
+            return 'null 1';
         }
 
         $accountId = $getAccount[0]->id;
 
+        // check type
+        $accountType = $getAccount[0]->account_type_id;
+        if($accountType=='5'){ // manager
+            $transaction = $this->TransactionRepo->GetAllTransaction(); // manager
+        }else{
+            $transaction = $this->TransactionRepo->GetTransactionByAccountId($accountId);    
+        }
+
         // get transactions
-        $transaction = $this->TransactionRepo->GetTransactionByAccountId($accountId);
         if(empty($transaction)){
-            return 'null';
+            return 'null 2';
         }
 
         // get transaction_tours
