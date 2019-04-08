@@ -15,7 +15,7 @@ export class BookedTableManagerComponent implements OnInit {
   public getBooked = <any>[];
 
   // page
-  public routeLink = "['/user/affiliate/booked/table']";
+  public routeLink = "['/user/manager/booked/table']";
 
   public iPage: number[] = [];
   public iPageStart: number = 1;

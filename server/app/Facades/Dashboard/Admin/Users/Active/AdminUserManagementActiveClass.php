@@ -63,6 +63,7 @@ class AdminUserManagementActiveClass{
             $user->token = $value->token;
             $user->username = $value->username;
             $user->fullname = $value->fullname;
+            $user->noted = $value->noted;
             $user->active = $value->is_active;
 
             if($value->is_active==1){

@@ -42,6 +42,7 @@ class AdminUserManagementClass{
             $user->username = $value->username;
             $user->fullname = $value->fullname;
             $user->email = $value->email;
+            $user->registerDate = \DateFormatFacade::SetFullDate($value->regisDate);
             $user->active = $value->isActive;
 
             if($value->isActive==1){

@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 // Template
 import { AppComponent } from './app.component';
@@ -120,6 +121,8 @@ import { TraveledSummaryManagerComponent } from './manager/traveled/traveled-sum
 import { TraveledDaysOfMonthManagerComponent } from './manager/traveled/traveled-days-of-month-manager/traveled-days-of-month-manager.component';
 import { TraveledMonthlyManagerComponent } from './manager/traveled/traveled-monthly-manager/traveled-monthly-manager.component';
 import { UserRequestManagerComponent } from './manager/user-request-manager/user-request-manager.component';
+import { TravelingTableManagerComponent } from './manager/traveled/traveling-table-manager/traveling-table-manager.component';
+import { AffiliateAllCommissionRateManagerComponent } from './manager/affiliate-management/affiliate-all-commission-rate-manager/affiliate-all-commission-rate-manager.component';
 
 @NgModule({
   declarations: [
@@ -226,6 +229,8 @@ import { UserRequestManagerComponent } from './manager/user-request-manager/user
     TraveledDaysOfMonthManagerComponent,
     TraveledMonthlyManagerComponent,
     UserRequestManagerComponent,
+    TravelingTableManagerComponent,
+    AffiliateAllCommissionRateManagerComponent,
   ],
   imports: [
     BrowserModule,
@@ -237,7 +242,8 @@ import { UserRequestManagerComponent } from './manager/user-request-manager/user
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    ChartsModule
+    ChartsModule,
+    Ng2SearchPipeModule
   ],
   providers: [
 

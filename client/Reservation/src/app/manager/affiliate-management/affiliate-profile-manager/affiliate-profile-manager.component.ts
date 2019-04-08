@@ -71,7 +71,7 @@ export class AffiliateProfileManagerComponent implements OnInit {
   public btnCommissionRate(){
     let url = 'user/manager/affiliate-management/commission-rate/'+this.userToken;
     this.router.navigate([url]);
-  } 
+  }
 
   ngOnInit() {
     this.activeMenu();

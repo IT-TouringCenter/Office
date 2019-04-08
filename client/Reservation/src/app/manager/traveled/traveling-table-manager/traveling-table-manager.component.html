@@ -1,8 +1,8 @@
 <!-- Check permission -->
-<app-permission-user-rsvn></app-permission-user-rsvn>
+<app-permission-manager></app-permission-manager>
 
 <!-- Menu bar -->
-<app-menu-bar-rsvn></app-menu-bar-rsvn>
+<app-menu-manager></app-menu-manager>
 
 <section id="main-content">
   <section class="wrapper">
@@ -19,11 +19,6 @@
       <i class="fa fa-search" aria-hidden="true" style="margin-right: 20px; color: #787878;"></i>
     </div>
 
-    <!-- Update all -->
-    <div class="container" style="text-align: right; margin-bottom: 10px;">
-      <button type="button" class="btn btn-warning" data-dismiss="modal" style="min-width: 90px !important;" (click)="allUpdateTravel()">Update all</button>
-    </div>
-
     <!-- Tour traveling -->
     <div class="container">
       <div style="overflow-x:auto;">
@@ -36,7 +31,6 @@
             <th class="text-center bg-damask text-light">Privacy</th>
             <th class="text-center bg-damask text-light">Pax</th>
             <th class="text-center bg-damask text-light">Date</th>
-            <th class="text-center bg-dark text-light display-print">Update</th>
           </tr>
           <!-- Table Body -->
           <tr *ngFor="let traveling of getTraveling | slice:pointStart:pointEnd | filter: traveling; let i = index;" class="font-table-12px">
@@ -46,9 +40,6 @@
             <td class="text-center">{{traveling.privacy}}</td>
             <td class="text-center">{{traveling.pax}}</td>
             <td class="text-center">{{traveling.travelDate}}</td>
-            <td class="text-center table-valign-mid display-print doc-background">
-              <p data-toggle="modal" data-target="#dialogActive" (click)="openDialog(traveling)" class="dialog-popup"><i class="fa fa-pencil-square-o font-table-1-5em"></i></p>
-            </td>
           </tr>
         </table>
       </div>
@@ -59,19 +50,19 @@
           <p style="margin:0 !important; color:#3e3e3e;"><small>Page : {{activePage}} of {{totalPage}}</small></p>
           <ul class="pagination text-center">
             <li class="page-item">
-              <a class="page-link" [routerLink]="['/user/reservations/tour-traveling']" [queryParams]="{page: 1}"> First</a>
+              <a class="page-link" [routerLink]="['/user/manager/traveling']" [queryParams]="{page: 1}"> First</a>
             </li>
             <li class="page-item disabled" [class.disabled]="activePage==1">
-              <a class="page-link" [routerLink]="['/user/reservations/tour-traveling']" [queryParams]="{page: prevPage}"> Previous</a>
+              <a class="page-link" [routerLink]="['/user/manager/traveling']" [queryParams]="{page: prevPage}"> Previous</a>
             </li>
             <li class="page-item" *ngFor="let i of iPage" [class.active]="activePage==i">
-              <a class="page-link" [routerLink]="['/user/reservations/tour-traveling']" [queryParams]="{page: i}">{{i}}</a>
+              <a class="page-link" [routerLink]="['/user/manager/traveling']" [queryParams]="{page: i}">{{i}}</a>
             </li>
             <li class="page-item" [class.disabled]="activePage==totalPage">
-              <a class="page-link" [routerLink]="['/user/reservations/tour-traveling']" [queryParams]="{page: nextPage}"> Next</a>
+              <a class="page-link" [routerLink]="['/user/manager/traveling']" [queryParams]="{page: nextPage}"> Next</a>
             </li>
             <li class="page-item">
-              <a class="page-link" [routerLink]="['/user/reservations/tour-traveling']" [queryParams]="{page: totalPage}"> Last</a>
+              <a class="page-link" [routerLink]="['/user/manager/traveling']" [queryParams]="{page: totalPage}"> Last</a>
             </li>
           </ul>
         </nav>

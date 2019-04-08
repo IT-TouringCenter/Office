@@ -11,6 +11,15 @@
     <div class="container">
       <h3 class="block-header">การอนุมัติ</h3>
       <div style="margin:auto; margin-top:30px;width:80% !important;">
+        <!-- Search -->
+        <div style="text-align: center;">
+          <mat-form-field>
+            <input type="text" matInput placeholder="Search" [(ngModel)]="approv">
+          </mat-form-field>
+          <i class="fa fa-search" aria-hidden="true" style="margin-right: 20px; color: #787878;"></i>
+        </div>
+
+        <!-- Table -->
         <div style="overflow-x:auto;">
           <table class="table table-bordered table-hover" style="width: 100%">
             <tr class="font-table-13px">
@@ -20,7 +29,7 @@
               <th class="text-center bg-damask text-light">สถานะ</th>
               <th class="text-center bg-dark-gray text-light">ยกเลิกคำขอ</th>
             </tr>
-            <tr *ngFor="let approv of approval.data | slice:pointStart:pointEnd; let i = index;" [class.table-info]="highlightId==approval.id" class="font-table-12px">
+            <tr *ngFor="let approv of approval.data | slice:pointStart:pointEnd | filter: approv; let i = index;" [class.table-info]="highlightId==approval.id" class="font-table-12px">
               <td class="text-center td-data">{{i+1+(perPage*(activePage-1))}}</td>
               <td class="text-center td-data">{{approv.requestTypeTH}}</td>
               <td class="text-center td-data">{{approv.requestDate}}</td>

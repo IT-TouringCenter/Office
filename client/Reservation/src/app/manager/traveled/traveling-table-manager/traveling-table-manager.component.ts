@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/observable';
 
 @Component({
-  selector: 'app-affiliate-management-manager',
-  templateUrl: './affiliate-management-manager.component.html',
-  styleUrls: ['./affiliate-management-manager.component.scss']
+  selector: 'app-traveling-table-manager',
+  templateUrl: './traveling-table-manager.component.html',
+  styleUrls: ['./traveling-table-manager.component.scss']
 })
-export class AffiliateManagementManagerComponent implements OnInit {
+export class TravelingTableManagerComponent implements OnInit {
 
   public highlightId :number;
-  public getAffiliate = <any>[];
-  
+  public getTraveling = <any>[];
+  public travelingData = <any>"";
+
   // page
-  public routeLink = "['/user/manager/affiliate-management']";
+  public routeLink = "['/user/manager/traveling']";
 
   public iPage: number[] = [];
   public iPageStart: number = 1;
@@ -42,17 +44,17 @@ export class AffiliateManagementManagerComponent implements OnInit {
   // 2. active menu
   public activeMenu(){
     // set storage
-    sessionStorage.setItem('menu',JSON.stringify(3));
-    sessionStorage.setItem('sub-menu',JSON.stringify(301));
+    sessionStorage.setItem('menu',JSON.stringify(1));
+    sessionStorage.setItem('sub-menu',JSON.stringify(105));
   }
-  
-  // 3. get affiliate data
+
   // JSON booked stat from API
-  getAffiliateData(): void{
-    // let url = "http://localhost:9000/api/Dashboard/Manager/AffiliateManagement";
-    let url = "http://api.tourinchiangmai.com/api/Dashboard/Manager/AffiliateManagement";
+  getUserData(): void{
+    // let url = "http://localhost:9000/api/Reservations/GetTourTraveling";
+    let url = "http://api.tourinchiangmai.com/api/Reservations/GetTourTraveling";
 
     // set data to save
+    // let _getUserData = JSON.parse(sessionStorage.getItem('users'));
     let _getUserData = JSON.parse(localStorage.getItem('users'));
     let dataSave = {
       token : _getUserData.data.token,
@@ -60,44 +62,46 @@ export class AffiliateManagementManagerComponent implements OnInit {
     };
 
     let options = new RequestOptions();
+    /*==================  Success  ===================*/
     this.http.post(url, dataSave, options)
                     .map(res => res.json())
                     .subscribe(
                       data => [
-                        this.lengthDataFromGet(data),
+                        console.log(data.data),
+                        this.lengthDataFromGet(data.data),
                         this.PagePagination()
                       ],
                       err => {console.log(err)}
                     );
+    /*==================  Success  ===================*/
     setTimeout(()=>{
       // this.lengthDataFromGet(this.getUser);
       // this.PagePagination();
     }, 500);
   }
 
-  // 4. Length data
+  // Length data
   lengthDataFromGet(getUser){
-    this.getAffiliate = getUser.data;
+    this.getTraveling = getUser;
+    console.log(this.getTraveling);
 
     let count = 0;
-    for(var tour in getUser.data){
+    for(var tour in getUser){
       count++;
     }
     this.totalItem = count;
 
   }
 
-  // 5. button link update commission rate
-  public btnUpdateCommission(){
-    let url = 'user/manager/affiliate-management/all-update-commission-rate';
-    this.router.navigate([url]);
-  } 
+  openDialog(data){
+    this.travelingData = data;
+  }
 
   //------------------ Start Page ------------------------
   PagePagination(){
     // reset
     this.iPage = [];
-    
+
     this.activePage = 1;
     this.nextPage = 2;
     this.pointEnd = this.perPage*this.activePage;
@@ -126,15 +130,15 @@ export class AffiliateManagementManagerComponent implements OnInit {
           }
         });
 
-    let params = this.route.snapshot.paramMap;
-    if(params.has('userId')){
-      this.highlightId = +params.get('userId');
-    }
+    // let params = this.route.snapshot.paramMap;
+    // if(params.has('userId')){
+    //   this.highlightId = +params.get('userId');
+    // }
   }
 
   changePage(page:number){
     this.activePage = page;
-    let link = '/user/manager/affiliate-user';
+    let link = '/user/manager/traveling';
     this.router.navigate([link], {queryParams:{page:page}});
     // this.router.navigate([link], {queryParams:{page:page}});
   }
@@ -166,7 +170,7 @@ export class AffiliateManagementManagerComponent implements OnInit {
 
   ngOnInit() {
     this.activeMenu();
-    this.getAffiliateData();
+    this.getUserData();
   }
 
 }

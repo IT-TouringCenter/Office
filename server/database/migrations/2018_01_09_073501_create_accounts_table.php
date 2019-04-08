@@ -24,6 +24,7 @@ class CreateAccountsTable extends Migration {
 			$table->string('tel')->nullable();
 			$table->string('active_code');
 			$table->date('active_expired');
+			$table->text('noted')->nullable();
 			$table->tinyInteger('is_block_affiliate')->default(0);
 			$table->tinyInteger('is_subscribe')->default(1);
 			$table->tinyInteger('is_delete')->default(0);

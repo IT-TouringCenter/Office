@@ -11,6 +11,14 @@
     <div class="container">
       <h3 class="dashboard-header">User request</h3>
       <div style="margin:auto; margin-top:30px;width:100% !important;">
+        <!-- Search -->
+        <div style="text-align: center;">
+          <mat-form-field>
+            <input type="text" matInput placeholder="Search" [(ngModel)]="request">
+          </mat-form-field>
+          <i class="fa fa-search" aria-hidden="true" style="margin-right: 20px; color: #787878;"></i>
+        </div>
+
         <div style="overflow-x:auto;">
           <table class="table table-bordered table-hover">
 
@@ -30,7 +38,7 @@
             </tr>
 
             <!-- Table Body -->
-            <tr *ngFor="let request of getRequest.data | slice:pointStart:pointEnd; let i = index;" [class.table-info]="highlightId==request.id" class="font-table-12px">
+            <tr *ngFor="let request of getRequest.data | slice:pointStart:pointEnd | filter: request; let i = index;" [class.table-info]="highlightId==request.id" class="font-table-12px">
               <td class="text-center text-middle">{{i+1+(perPage*(activePage-1))}}</td>
               <td class="text-center text-middle">{{request.username}}</td>
               <td class="text-center text-middle">{{request.fullname}}</td>

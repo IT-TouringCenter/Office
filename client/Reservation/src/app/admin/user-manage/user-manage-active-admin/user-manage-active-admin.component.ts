@@ -30,7 +30,8 @@ export class UserManageActiveAdminComponent implements OnInit {
     accountToken: <any>"",
     accountName: <any>"",
     userToken: <any>"",
-    active: <any>""
+    active: <any>"",
+    noted: <any>""
   };
   public userActiveNow;
   public routeLink = "['/user/admin/user-manage']";
@@ -85,7 +86,8 @@ export class UserManageActiveAdminComponent implements OnInit {
     // let _getUserData = JSON.parse(sessionStorage.getItem('users'));
     let _getUserData = JSON.parse(localStorage.getItem('users'));
     let dataSave = {
-      token : _getUserData.data.token
+      token : _getUserData.data.token,
+      type : _getUserData.data.userType
     };
 
     let options = new RequestOptions();
@@ -109,6 +111,7 @@ export class UserManageActiveAdminComponent implements OnInit {
 
   // Set default data
   pushActiveData(data){
+    // console.log(data);
     this.getUser = data;
     let length = this.getUser.data.length;
 
@@ -116,6 +119,7 @@ export class UserManageActiveAdminComponent implements OnInit {
       // this.getUser.data[i].push(this.activeData);
       this.getUser.data[i].activeData = this.activeData;
     }
+    // this.userActive.noted = data.noted;
     // console.log(this.getUser);
   }
 
@@ -126,7 +130,9 @@ export class UserManageActiveAdminComponent implements OnInit {
     let getAccount = JSON.parse(localStorage.getItem('users'));
     this.userActive.accountToken = getAccount.data.token;
     this.userActive.accountName = getAccount.data.name;
+    // this.userActive.noted = getAccount.data.noted;
 
+    console.log(this.userActive);
     // let url = "http://localhost:9000/api/Dashboard/Admin/UserManagement/Active/Save";
     let url = "http://api.tourinchiangmai.com/api/Dashboard/Admin/UserManagement/Active/Save";
 
@@ -162,11 +168,11 @@ export class UserManageActiveAdminComponent implements OnInit {
       // let _getUserData = JSON.parse(sessionStorage.getItem('users'));
       let _getUserData = JSON.parse(localStorage.getItem('users'));
       let dataSave = {
-        token : _getUserData.data.token
+        token : _getUserData.data.token,
+        type : _getUserData.data.userType
       };
 
       let options = new RequestOptions();
-      /*==================  Success  ===================*/
       this.http.post(url, dataSave, options)
                       .map(res => res.json())
                       .subscribe(
@@ -177,7 +183,6 @@ export class UserManageActiveAdminComponent implements OnInit {
                         ],
                         err => {console.log(err)}
                       );
-/*==================  Success  ===================*/
     }else{
       alert("Please change the value.");
     }
@@ -192,6 +197,7 @@ export class UserManageActiveAdminComponent implements OnInit {
         this.userActive.userToken = token;
         this.dialogData = this.getUser.data[i];
         this.dialogActive = this.getUser.data[i].status;
+        this.userActive.noted = this.getUser.data[i].noted;
       }
     }
     // console.log('-----------------');

@@ -13,6 +13,13 @@
 
       <!-- Select affiliate -->
       <div style="text-align: center; margin-top: 15px;">
+        <!-- Search -->
+        <mat-form-field>
+          <input type="text" matInput placeholder="Search" [(ngModel)]="booked">
+        </mat-form-field>
+        <i class="fa fa-search" aria-hidden="true" style="margin-right: 20px; color: #787878;"></i>
+        
+        <!-- Search form API -->
         <mat-form-field>
           <mat-select placeholder="Select affiliate" [(ngModel)]="selectedAffiliate">
             <mat-option *ngFor="let affiliate of affiliateAccount; let i=index;" value="{{affiliate.token}}">
@@ -39,7 +46,7 @@
               <th class="text-center bg-damask text-light">Traveling</th>
             </tr>
             <!-- Table Body -->
-            <tr *ngFor="let booked of getBooked | slice:pointStart:pointEnd; let i = index;" [class.table-info]="highlightId==booked.transactionId" class="font-table-12px">
+            <tr *ngFor="let booked of getBooked | slice:pointStart:pointEnd | filter: booked; let i = index;" [class.table-info]="highlightId==booked.transactionId" class="font-table-12px">
               <td class="text-center">{{i+1+(perPage*(activePage-1))}}</td>
               <td class="text-center">{{booked.invoiceId}}</td>
               <td title="{{booked.tourFullname}}">{{booked.tourName}}</td>

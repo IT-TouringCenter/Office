@@ -22,7 +22,7 @@ class AdminUserManagementRepository{
     // Get account data
     public function GetAccountData(){
         $result = \DB::table('accounts as a')
-                    ->select('a.id','a.token','a.username','a.fullname','a.email','a.tel','at.type','a.is_active as isActive')
+                    ->select('a.id','a.token','a.username','a.fullname','a.email','a.created_at as regisDate','a.tel','at.type','a.is_active as isActive')
                     ->join('account_types as at','at.id','=','a.account_type_id')
                     ->where('a.is_delete',0)
                     ->where('a.is_active',1)

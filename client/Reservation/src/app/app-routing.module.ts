@@ -72,6 +72,7 @@ import { BookedAffiliateMonthlyManagerComponent } from './manager/booked-affilia
 import { AffiliateManagementManagerComponent } from './manager/affiliate-management/affiliate-management-manager/affiliate-management-manager.component';
 import { AffiliateProfileManagerComponent } from './manager/affiliate-management/affiliate-profile-manager/affiliate-profile-manager.component';
 import { AffiliateCommissionRateManagerComponent } from './manager/affiliate-management/affiliate-commission-rate-manager/affiliate-commission-rate-manager.component';
+import { AffiliateAllCommissionRateManagerComponent } from './manager/affiliate-management/affiliate-all-commission-rate-manager/affiliate-all-commission-rate-manager.component'
 import { BookedAffiliateTourDaysOfMonthManagerComponent } from './manager/booked-affiliate/booked-affiliate-tour-days-of-month-manager/booked-affiliate-tour-days-of-month-manager.component';
 import { BookedAffiliateTourMonthlyManagerComponent } from './manager/booked-affiliate/booked-affiliate-tour-monthly-manager/booked-affiliate-tour-monthly-manager.component';
 import { BookedAffiliateCommissionDaysOfMonthManagerComponent } from './manager/booked-affiliate/booked-affiliate-commission-days-of-month-manager/booked-affiliate-commission-days-of-month-manager.component';
@@ -82,6 +83,7 @@ import { TraveledSummaryManagerComponent } from './manager/traveled/traveled-sum
 import { TraveledDaysOfMonthManagerComponent } from './manager/traveled/traveled-days-of-month-manager/traveled-days-of-month-manager.component';
 import { TraveledMonthlyManagerComponent } from './manager/traveled/traveled-monthly-manager/traveled-monthly-manager.component';
 import { UserRequestManagerComponent } from './manager/user-request-manager/user-request-manager.component';
+import { TravelingTableManagerComponent } from './manager/traveled/traveling-table-manager/traveling-table-manager.component';
 
 const routes: Routes = [
   {
@@ -315,6 +317,10 @@ const routes: Routes = [
     component: BookedMonthlyManagerComponent
   },
   {
+    path: 'user/manager/traveling',
+    component: TravelingTableManagerComponent
+  },
+  {
     path: 'user/manager/traveled',
     component: TraveledSummaryManagerComponent
   },
@@ -377,6 +383,10 @@ const routes: Routes = [
   {
     path: 'user/manager/affiliate-management/commission-rate/:userId',
     component: AffiliateCommissionRateManagerComponent
+  },
+  {
+    path: 'user/manager/affiliate-management/all-update-commission-rate',
+    component: AffiliateAllCommissionRateManagerComponent
   },
   {
     path: 'user/manager/user-request',

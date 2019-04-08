@@ -167,7 +167,7 @@ export class UserRequestManagerComponent implements OnInit {
                     .map(res => res.json())
                     .subscribe(
                       data => [
-                        console.log(data),
+                        // console.log(data),
                         this.getRequestData()
                       ],
                       err => {console.log(err)}

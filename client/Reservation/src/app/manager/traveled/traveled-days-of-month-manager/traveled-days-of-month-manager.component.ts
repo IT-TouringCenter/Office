@@ -97,7 +97,7 @@ export class TraveledDaysOfMonthManagerComponent implements OnInit {
   public activeMenu(){
     // set storage
     sessionStorage.setItem('menu',JSON.stringify(1));
-    sessionStorage.setItem('sub-menu',JSON.stringify(106));
+    sessionStorage.setItem('sub-menu',JSON.stringify(107));
   }
 
   // 3. get data binding

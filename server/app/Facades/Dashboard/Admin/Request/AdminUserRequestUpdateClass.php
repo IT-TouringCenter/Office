@@ -54,10 +54,13 @@ class AdminUserRequestUpdateClass{
             $request->data = [];
 
             return $request;
-        }else if($statusId==3){ // not approve
+        }else if($statusId==3){ // not approv
             $request->status = false;
-            $request->message = 'not approve';
+            $request->message = 'not approv';
             $request->data = [];
+
+            $notApprov = $this->EmailApprovalRequest($checkAccount, $requestId);
+            $request->data = $notApprov;
 
             return $request;
         }
@@ -100,7 +103,7 @@ class AdminUserRequestUpdateClass{
         }
 
         // email approval request
-        $emailApprov = $this->EmailApprovalRequest($checkAccount);
+        $emailApprov = $this->EmailApprovalRequest($checkAccount, $requestId);
         $request->data = $emailApprov;
 
         return $request;
@@ -120,7 +123,7 @@ class AdminUserRequestUpdateClass{
     }
 
     // email approval request
-    public function EmailApprovalRequest($accountData){
+    public function EmailApprovalRequest($accountData, $requestId){
         // set data
         $accountId = $accountData[0]->id;
         $fullname = $accountData[0]->fullname;
@@ -128,21 +131,25 @@ class AdminUserRequestUpdateClass{
         $email = $accountData[0]->email;
         
         // get request data
-        $getRequestData = $this->AdminUserRequestUpdateRepo->GetRequestFirstRecord($accountId);
+        $getRequestData = $this->AdminUserRequestUpdateRepo->GetRequestRecord($accountId, $requestId);
 
         // set email text
+        $requestType = $getRequestData[0]->type_en;
         // check approv
         if($getRequestData[0]->status_en=='Approved'){
-        // if(array_get($getRequestData,'status_en')=='Approved'){
-            $approvStatus = 'ได้รับการอนุมัติ';
+            $approvText = "คุณได้รับการอนุมัติการส่งคำขอสมัคร ".$requestType." เรียบร้อยแล้ว";
+            $loginBlock = "
+                <p class='row-space text-center' style='text-align: center; padding: 10px 0 20px 0;'>
+                    <a href='http://dev.tourinchiangmai.com/#/user/login' class='btn' style='min-width: 100px; cursor: pointer; color: white; text-decoration: none;'>
+                        <span style='padding: 8px 20px; font-size: 15px; background: #2762bb; border: solid 1px #3c66ff; border-radius: 2px;'>Login</span>
+                    </a>
+                </p>";
+        }else if($getRequestData[0]->status_en=='Not approved'){
+            $approvText = "คุณได้รับการอนุมัติการส่งคำขอสมัคร ".$requestType." โปรดตรวจสอบข้อมูลและคุณสมบัติให้ครบถ้วนอีกครั้ง";
+            $loginBlock = "";
         }else{
-            $approvStatus = 'ไม่ได้รับการอนุมัติ';
+            return false;
         }
-        
-        $requestType = $getRequestData[0]->type_en;
-        // $requestType = array_get($getRequestData,'type_en');
-
-        $approvText = "คุณ".$approvStatus."การส่งคำขอสมัคร ".$requestType." เรียบร้อยแล้ว";
 
         // Template
         $body = "
@@ -171,13 +178,9 @@ class AdminUserRequestUpdateClass{
                         </p>
                         <p class='text-center text-head-2 row-space' style='text-align: center; padding: 10px 0 10px 0; font-size: 18px;'><b>Account</b> : ".$username."</p>
                         <hr>
-                        <p class='row-space' style='padding: 10px 0 20px 0;'>".$approvText."</p>
+                        <p class='row-space' style='padding: 10px 0 20px 0; text-align: center;'>".$approvText."</p>
 
-                        <p class='row-space text-center' style='text-align: center; padding: 10px 0 10px 0;'>
-                            <a href='http://dev.tourinchiangmai.com/#/user/login' class='btn' style='min-width: 100px; cursor: pointer; color: white; text-decoration: none;'>
-                                <span style='padding: 8px 20px; font-size: 15px; background: #2762bb; border: solid 1px #3c66ff; border-radius: 2px;'>Login</span>
-                            </a>
-                        </p>
+                        ".$loginBlock."
                     </div>
                 </div>
 
@@ -191,7 +194,7 @@ class AdminUserRequestUpdateClass{
         </html>";
 
         // Set email data
-        $to = 'yuranannong@gmail.com';
+        $to = $email;
         $subject = "Request : Touring Center";
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Reply-To: noreply@example.com". "\r\n";
@@ -201,7 +204,7 @@ class AdminUserRequestUpdateClass{
 
         $mail = mail($to,$subject,$body,$headers);
         if($mail){
-            return $getRequestData[0]->id;
+            return true;
         }else{
             return false;
         }

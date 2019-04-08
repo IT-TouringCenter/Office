@@ -71,4 +71,18 @@ class ManagerAffiliateManagementController extends Controller {
 		}
 	}
 
+	// Update all affiliate commission rate
+	public function AffiliateUpdateAllCommissionRate(Request $request){
+		$data = $request->input();
+		try{
+			$results = \ManagerAffiliateUpdateAllCommissionRateFacade::AffiliateUpdateAllCommissionRate($data);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+		}catch(Exception $e){
+			abort(500);
+		}
+	}
+
 }

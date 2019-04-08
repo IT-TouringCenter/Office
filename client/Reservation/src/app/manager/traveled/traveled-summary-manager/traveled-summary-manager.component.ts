@@ -45,7 +45,7 @@ export class TraveledSummaryManagerComponent implements OnInit {
   public activeMenu(){
     // set storage
     sessionStorage.setItem('menu',JSON.stringify(1));
-    sessionStorage.setItem('sub-menu',JSON.stringify(105));
+    sessionStorage.setItem('sub-menu',JSON.stringify(106));
   }
 
   // 3. get data binding

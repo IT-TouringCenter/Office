@@ -31,6 +31,7 @@ Route::get('/', 'WelcomeController@index');
 	Route::post('api/Reservations/EditReservation', 'Reservations\TransactionController@EditReservation');
 	Route::post('api/Reservations/UpdateTourTraveled', 'Reservations\TransactionController@UpdateTourTraveled');
 	Route::post('api/Reservations/AutoUpdateTraveled', 'Reservations\TransactionController@AutoUpdateTourTraveled');
+	Route::post('api/Reservations/GetTourTraveling', 'Reservations\TransactionController@GetTourTraveling');
 	Route::post('api/Reservations/GetUpdateTraveled', 'Reservations\TransactionController@GetUpdateTraveled');
 	Route::post('api/Reservations/UpdateTraveled', 'Reservations\TransactionController@UpdateTraveled');
 /*----------- Reservation System (End) -------------------------*/
@@ -141,6 +142,7 @@ Route::get('/', 'WelcomeController@index');
 	Route::post('api/Dashboard/Manager/AffiliateManagement/Detail', 'Dashboard\Manager\Affiliate\ManagerAffiliateManagementController@AffiliateManagementDetail');
 	Route::post('api/Dashboard/Manager/AffiliateManagement/CommissionRate', 'Dashboard\Manager\Affiliate\ManagerAffiliateManagementController@AffiliateManagementCommissionRate');
 	Route::post('api/Dashboard/Manager/AffiliateManagement/CommissionRate/Update', 'Dashboard\Manager\Affiliate\ManagerAffiliateManagementController@AffiliateUpdateCommissionRate');
+	Route::post('api/Dashboard/Manager/AffiliateManagement/CommissionRate/UpdateAll', 'Dashboard\Manager\Affiliate\ManagerAffiliateManagementController@AffiliateUpdateAllCommissionRate');
 
 	Route::post('api/Dashboard/Manager/Booked', 'Dashboard\Manager\Booked\ManagerBookedController@BookedSummary');
 	Route::post('api/Dashboard/Manager/Booked/Table', 'Dashboard\Manager\Booked\ManagerBookedController@BookedTable');

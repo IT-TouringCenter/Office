@@ -15,6 +15,7 @@ class AccountRegisterClass{
 	public function __construct(AccountRegisterRepo $AccountRegisterRepo, GenerateTokenRepo $GenerateTokenRepo){
         $this->AccountRegisterRepo = $AccountRegisterRepo;
         $this->GenerateTokenRepo = $GenerateTokenRepo;
+        $this->dateNow = Carbon::now('Asia/Bangkok');
 	}
 
     /*  Register logic
@@ -93,7 +94,8 @@ class AccountRegisterClass{
             "tel"=>'',
             "active_code"=>$activeCode,
             "active_expired"=>$tomorrow,
-            "is_active"=>0
+            "is_active"=>0,
+            "created_at"=>$this->dateNow
         ];
 
         $result = $this->AccountRegisterRepo->InsertAccount($setData);
@@ -106,7 +108,8 @@ class AccountRegisterClass{
             "account_id"=>$accountId,
             "fullname"=>array_get($data,'fullname'),
             "birth"=>array_get($data,'birth'),
-            "is_active"=>0
+            "is_active"=>0,
+            "created_at"=>$this->dateNow
         ];
 
         $result = $this->AccountRegisterRepo->InsertAccountProfile($setData);

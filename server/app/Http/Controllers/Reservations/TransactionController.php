@@ -95,4 +95,18 @@ class TransactionController extends MyBaseController {
 		}
 	}
 
+	// Get tour traveling
+	public function GetTourTraveling(Request $request){
+		$data = $request->input();
+		try{
+			$results = \ReservationGetTourTravelingFacade::GetTourTraveling($data);
+			if($results==null){
+				abort(400);
+			}
+			return $results;
+		}catch(Exception $e){
+			abort(500);
+		}
+	}
+
 }

@@ -38,8 +38,9 @@ class AdminUserManagementActiveSaveClass{
             return $result;
         }
 
-        // delete account
+        // update account
         $dataUpdate = [
+            "noted"=>array_get($data,'noted'),
             "is_active"=>$active,
             "updated_by"=>array_get($data,'accountName'),
             "updated_at"=>$dateNow

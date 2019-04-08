@@ -14,6 +14,15 @@
       <h3 class="dashboard-header">User active</h3>
       <!-- <hr style="width: 100px; text-align: center; border: #651e1e 1px solid; margin-bottom: 30px;"> -->
       <div style="margin:auto; margin-top:30px;width:100% !important;">
+        <!-- Search -->
+        <div style="text-align: center;">
+          <mat-form-field>
+            <input type="text" matInput placeholder="Search" [(ngModel)]="user">
+          </mat-form-field>
+          <i class="fa fa-search" aria-hidden="true" style="margin-right: 20px; color: #787878;"></i>
+        </div>
+
+        <!-- Table -->
         <div style="overflow-x:auto;">
           <table class="table table-bordered table-hover">
             <!-- Table Header -->
@@ -24,7 +33,7 @@
             <th class="text-center bg-damask text-light td-data">Status</th>
             </tr>
             <!-- Table Body -->
-            <tr *ngFor="let user of getUser.data | slice:pointStart:pointEnd; let i = index;" [class.table-info]="highlightId==user.userId" class="font-table-12px">
+            <tr *ngFor="let user of getUser.data | slice:pointStart:pointEnd | filter: user; let i = index;" [class.table-info]="highlightId==user.userId" class="font-table-12px">
             <td class="text-center td-data">{{i+1+(perPage*(activePage-1))}}</td>
             <td class="text-center td-data">{{user.username}}</td>
             <td class="text-center td-data">{{user.fullname}}</td>
@@ -73,12 +82,17 @@
           <div class="modal-content">
             <h4 style="text-align: center; margin: 35px 0;"><b>User</b> &nbsp;:&nbsp; {{dialogData.fullname}}</h4>
             <div class="modal-body">
-              <div style="text-align: center; margin: auto; height: 70px; padding-top: 0;">
-                <select [(ngModel)]="userActive.active" class="form-control" style="height: 35px;">
-                  <option *ngFor="let dialog of dialogData.activeData;" value="{{dialog.active}}" [selected]="dialog.active==dialogData.active">{{dialog.status}}</option>
-                </select>
-                <!-- <input type="checkbox" [checked]="dialogActive=='Active'" data-toggle="toggle" data-onstyle="danger"> -->
+              <div style="text-align: center; margin: auto; min-height: 70px; padding-top: 0;">
+                <div style="margin: 10px 0;">
+                  <select [(ngModel)]="userActive.active" class="form-control" style="height: 35px;">
+                    <option *ngFor="let dialog of dialogData.activeData;" value="{{dialog.active}}" [selected]="dialog.active==dialogData.active">{{dialog.status}}</option>
+                  </select>
+                </div>
+                <div style="margin: 10px 0;">
+                  <textarea [(ngModel)]="userActive.noted" name="noted" rows="5" style="width: 100%;" placeholder="note..."></textarea>
+                </div>
               </div>
+
             </div>
             <div class="modal-footer">
               <div>

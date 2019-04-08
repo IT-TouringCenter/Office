@@ -212,6 +212,7 @@ return [
 		'ReservationAutoUpdateTourTraveledFacade' => 'App\Facades\Reservations\Traveleds\AutoUpdateTourTraveledFacade',
 		'ReservationGetUpdateTraveledFacade' => 'App\Facades\Reservations\Traveleds\GetUpdateTraveledFacade', // get tour traveled
 		'ReservationUpdateTraveledFacade' => 'App\Facades\Reservations\Traveleds\UpdateTraveledFacade', // update tour traveled
+		'ReservationGetTourTravelingFacade' => 'App\Facades\Reservations\Traveleds\GetTourTravelingFacade', // get tour traveled
 
 		// Online booking
 		//-- Save booking
@@ -295,6 +296,7 @@ return [
 		'ManagerAffiliateManagementDetailFacade' => 'App\Facades\Dashboard\Manager\Affiliate\ManagerAffiliateManagementDetailFacade',
 		'ManagerAffiliateManagementCommissionRateFacade' => 'App\Facades\Dashboard\Manager\Affiliate\ManagerAffiliateManagementCommissionRateFacade',
 		'ManagerAffiliateUpdateCommissionRateFacade' => 'App\Facades\Dashboard\Manager\Affiliate\ManagerAffiliateUpdateCommissionRateFacade',
+		'ManagerAffiliateUpdateAllCommissionRateFacade' => 'App\Facades\Dashboard\Manager\Affiliate\ManagerAffiliateUpdateAllCommissionRateFacade',
 
 		// Banks
 		'BankFacade' => 'App\Facades\Bank\BankFacade',

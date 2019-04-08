@@ -11,6 +11,15 @@
     <div class="container">
       <h3 style="text-align:center;margin-top:0px;margin-bottom:35px;padding:15px;font-weight:600 !important;width:85%;margin:auto;">Booked Table</h3>
       <div style="margin:auto; margin-top:20px;width:80% !important;">
+        <!-- Search -->
+        <div style="text-align: center;">
+          <mat-form-field>
+            <input type="text" matInput placeholder="Search" [(ngModel)]="booked">
+          </mat-form-field>
+          <i class="fa fa-search" aria-hidden="true" style="margin-right: 20px; color: #787878;"></i>
+        </div>
+
+        <!-- Table -->
         <div style="overflow-x:auto;">
           <table class="table table-bordered table-hover">
             <!-- Table Header -->
@@ -26,7 +35,7 @@
               <th class="text-center bg-damask text-light">Traveling</th>
             </tr>
             <!-- Table Body -->
-            <tr *ngFor="let booked of getBooked | slice:pointStart:pointEnd; let i = index;" [class.table-info]="highlightId==booked.transactionId" class="font-table-12px">
+            <tr *ngFor="let booked of getBooked | slice:pointStart:pointEnd | filter: booked; let i = index;" [class.table-info]="highlightId==booked.transactionId" class="font-table-12px">
               <td class="text-center">{{i+1+(perPage*(activePage-1))}}</td>
               <td class="text-center">{{booked.invoiceId}}</td>
               <td title="{{booked.tourFullname}}">{{booked.tourName}}</td>
@@ -46,19 +55,19 @@
             <p style="margin:0 !important; color:#3e3e3e;"><small>Page : {{activePage}} of {{totalPage}}</small></p>
             <ul class="pagination text-center">
               <li class="page-item">
-                <a class="page-link" [routerLink]="['/user/affiliate/booked/table']" [queryParams]="{page: 1}"> First</a>
+                <a class="page-link" [routerLink]="['/user/manager/booked/table']" [queryParams]="{page: 1}"> First</a>
               </li>
               <li class="page-item disabled" [class.disabled]="activePage==1">
-                <a class="page-link" [routerLink]="['/user/affiliate/booked/table']" [queryParams]="{page: prevPage}"> Previous</a>
+                <a class="page-link" [routerLink]="['/user/manager/booked/table']" [queryParams]="{page: prevPage}"> Previous</a>
               </li>
               <li class="page-item" *ngFor="let i of iPage" [class.active]="activePage==i">
-                <a class="page-link" [routerLink]="['/user/affiliate/booked/table']" [queryParams]="{page: i}">{{i}}</a>
+                <a class="page-link" [routerLink]="['/user/manager/booked/table']" [queryParams]="{page: i}">{{i}}</a>
               </li>
               <li class="page-item" [class.disabled]="activePage==totalPage">
-                <a class="page-link" [routerLink]="['/user/affiliate/booked/table']" [queryParams]="{page: nextPage}"> Next</a>
+                <a class="page-link" [routerLink]="['/user/manager/booked/table']" [queryParams]="{page: nextPage}"> Next</a>
               </li>
               <li class="page-item">
-                <a class="page-link" [routerLink]="['/user/affiliate/booked/table']" [queryParams]="{page: totalPage}"> Last</a>
+                <a class="page-link" [routerLink]="['/user/manager/booked/table']" [queryParams]="{page: totalPage}"> Last</a>
               </li>
               <!-- <li class="page-item">
                 <span class="block-search-page">

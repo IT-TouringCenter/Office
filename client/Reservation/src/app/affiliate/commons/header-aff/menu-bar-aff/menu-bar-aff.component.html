@@ -18,7 +18,12 @@
     <div id="sidebar"  class="nav-collapse" style="overflow-y: auto; direction: rtl;">
         <ul class="sidebar-menu" id="nav-accordion">
             <p class="centered"><img src="./assets/images/logo/logo-daytrip-join.jpg" class="img-circle" width="100"></p>
-            <h5 class="centered" style="margin-top: 20px; margin-bottom: 25px;">Affiliate</h5>
+            <h5 class="centered" style="margin-top: 20px; margin-bottom: 25px; line-height: 1.5;">
+                {{user}}
+                <br>
+                <small>(Affiliate)</small>
+            </h5>
+
             <!-- Dashboard -->
             <li class="sub-menu">
                 <a class="sidebar-active" href="/#/user/affiliate" [ngClass]="{'active':id==0}" (click)="addClass(id=0);addSubClass(subId=0)">

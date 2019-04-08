@@ -66,7 +66,8 @@ class AdminUserManagementAddClass{
             "active_code"=>$activeCode,
             "active_expired"=>$tomorrow,
             "is_active"=>1,
-            "created_by"=>$registerBy
+            "created_by"=>$registerBy,
+            "created_at"=>$this->dateNow
         ];
         $saveAccount = $this->AdminUserManagementAddRepo->InsertAccount($dataSave);
 
@@ -118,7 +119,8 @@ class AdminUserManagementAddClass{
             "account_id"=>$accountId,
             "fullname"=>array_get($data,'fullname'),
             // "birth"=>array_get($data,'birth'),
-            "is_active"=>1
+            "is_active"=>1,
+            "created_at"=>$this->dateNow
         ];
 
         $result = $this->AdminUserManagementAddRepo->InsertAccountProfile($setData);
