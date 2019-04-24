@@ -112,6 +112,19 @@
 //     }
 // }
 
+// modal
+.modal-dialog{
+    max-width: 80% !important;
+}
+@media (min-width: 768px){
+    .modal-dialog {
+        max-width: 80% !important;
+    }
+}
+#policy-modal p{
+    text-align: justify;
+}
+
 // bootstrap
 .form-control{
     height: 35px;

@@ -76,3 +76,16 @@
 .btn-default{
     padding: 5px 10px !important;
 }
+
+// modal
+.modal-dialog{
+    max-width: 80% !important;
+}
+@media (min-width: 768px){
+    .modal-dialog {
+        max-width: 80% !important;
+    }
+}
+#affiliate-condition-modal p{
+    text-align: justify;
+}

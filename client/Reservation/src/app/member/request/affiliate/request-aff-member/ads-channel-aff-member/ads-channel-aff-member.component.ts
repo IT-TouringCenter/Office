@@ -17,6 +17,7 @@ export class AdsChannelAffMemberComponent implements OnInit {
     url2: <any>'',
     url3: <any>''
   };
+  public addUrl = 0;
 
   requestAffiliate = <any>'';
 
@@ -155,6 +156,14 @@ export class AdsChannelAffMemberComponent implements OnInit {
       this.nextButton = true; // disabled == true;
     }
 
+  }
+
+  // Click add url
+  clickAddUrl(){
+    if(this.addUrl<2){
+      this.addUrl++;
+    }
+    console.log(this.addUrl);
   }
 
   ngOnInit() {

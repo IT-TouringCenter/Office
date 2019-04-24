@@ -15,7 +15,7 @@ class CreateTourPriceHistoriesTable extends Migration {
 		Schema::create('tour_price_histories', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('configuration_tour_id');
+			$table->integer('configuration_tour_price_id');
 			$table->double('net_price_adult',10,2);
 			$table->double('net_price_child',10,2);
 			$table->double('sell_price_adult',10,2);
