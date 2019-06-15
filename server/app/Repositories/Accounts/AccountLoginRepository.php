@@ -176,7 +176,7 @@ class AccountLoginRepository{
 	public function GetLoginhistoryById($loginId){
 		$result = \DB::table('login_histories')
 						->where('id',$loginId)
-						->where('is_active',1)
+						->where('is_active','=',1)
 						->get();
 		return $result;
 	}

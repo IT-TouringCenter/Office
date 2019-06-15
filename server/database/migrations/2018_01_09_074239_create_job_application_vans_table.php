@@ -46,7 +46,7 @@ class CreateJobApplicationVansTable extends Migration {
 			$table->string('license_image',100);
 			$table->string('military_status',50);
 			$table->string('driver_license_no',50);
-			$table->string('driver_license_no_expire',50);
+			$table->string('driver_liccense_no_expire',50);
 			$table->string('speak_english',50)->nullable();
 			$table->string('wing41',50)->nullable();
 			$table->tinyInteger('is_camera')->default(0);

@@ -236,4 +236,14 @@ export class BankAffMemberComponent implements OnInit {
     });
   }
 
+  //Check Number Only
+  CheckNum($event: KeyboardEvent) {
+    console.log($event)
+    let value = (<HTMLInputElement>event.target).value;
+  
+      (<HTMLInputElement>event.target).value = value.replace(/\D/g, '');
+    
+  }
+
+
 }

@@ -24,10 +24,21 @@ class DashboardAffiliateClass{
         $accountType = array_get($request,'type');
         $getAccount = $this->DashboardAffiliateRepo->GetAccountByToken($token,$accountType);
         if($getAccount){
-            $accountId = $getAccount[0]->id;
+            $accountId = $getAccount[0]->id; // [{}]
+            // $accountId = array_get($getAccount,'id'); {}
         }else{
             return "null";
         }
+
+        //--------------------- EX. Loop -----------------------
+        // [{},{},{}]
+        // $id = 0;
+        // $idArr = [];
+        // foreach($getAccount as $value){
+        //     $id = $value->id;
+        //     array_push($idArr,$id);
+        // }
+        // return $idArr;
 
         // Check affiliate commission table
         $checkAffiliateCommission = $this->DashboardAffiliateRepo->CheckAffiliateCommission($accountId);

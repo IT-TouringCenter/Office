@@ -102,7 +102,7 @@ export class ForceLogoutUserComponent implements OnInit {
   clearSession(){
     // sessionStorage.removeItem('users');
     localStorage.removeItem('users');
-    this.router.navigate(['user/login']);
+    this.router.navigate(['user/login']); //to page login
   }
 
   ngOnInit() {

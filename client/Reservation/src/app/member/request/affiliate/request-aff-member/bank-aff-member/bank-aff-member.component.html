@@ -46,7 +46,7 @@
         <!-- account no -->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content-block">
           <mat-form-field>
-            <input matInput placeholder="หมายเลขบัญชี" [(ngModel)]="bankData.accountNo" id="accountNo" required minlength="10" maxlength="10">
+            <input matInput placeholder="หมายเลขบัญชี" [(ngModel)]="bankData.accountNo" id="accountNo" required minlength="10" maxlength="10" (keyup)="CheckNum($event)">
             <mat-error *ngIf="validation.invalid">{{validationField('accountNo')}}</mat-error>
           </mat-form-field>
         </div>

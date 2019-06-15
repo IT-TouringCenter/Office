@@ -88,7 +88,7 @@ export class LoginUserComponent implements OnInit {
     });
   }
 
-  // check reload
+  //check reload
   checkReload(){
     let check = sessionStorage.getItem('reload');
     if(check){

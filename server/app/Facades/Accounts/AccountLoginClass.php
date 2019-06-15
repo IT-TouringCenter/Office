@@ -122,7 +122,7 @@ class AccountLoginClass{
         // 5. Send email notify login history
         if($saveLoginRes==true){
             $mail = $this->SendMailLoginHistory($accountId,$saveLogin);
-                        
+ 
             // 6. Return
             $resData->tokenLogin = $returnTokenLogin; // set return token login
 
@@ -277,7 +277,7 @@ class AccountLoginClass{
         $headers .= "From: touringcenter@noreply.com" . "\r\n";
         // $headers .= "BCC: it@touringcnx.com";
 
-        $mail = mail($to,$subject,$body,$headers);
+        $mail = mail($to,$subject,$body,$headers); // sent mail
         
         if($mail){
             return true;

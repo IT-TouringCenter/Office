@@ -97,6 +97,9 @@ export class ResetPasswordUserComponent implements OnInit {
       return;
     }
 
+    //password is not old password
+
+
     // Call API
     if(this.data.isMismatch==false){
       // let url = 'http://localhost:9000/api/Account/Setting/AccountResetPassword';

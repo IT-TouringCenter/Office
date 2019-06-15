@@ -252,6 +252,11 @@ export class HomeAffComponent implements OnInit {
     this.getDataBooked();
     this.getDataCommission();
 
+    // delay
+    // setTimeout(()=>{
+    //   this.getDataDashboard();
+    // }, 2000);
+
     // set data
     // this.setDataBooked();
     // this.SetDataCommission();

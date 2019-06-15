@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from "@angular/router";
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
 import "rxjs/Rx";
+import { windowWhen } from 'rxjs/operators';
 
 @Component({
   selector: 'app-logout-user',
@@ -64,10 +65,14 @@ export class LogoutUserComponent implements OnInit {
     // sessionStorage.removeItem('login');
     sessionStorage.clear();
     localStorage.removeItem('users');
-    this.router.navigate(['user/login']);
+    //sessionStorage.setItem('reload',JSON.stringify(1));
+    //this.router.navigate(['user/login']);
     // return;
-    sessionStorage.setItem('reload',JSON.stringify(1));
+
+    window.location.href='http://localhost:4200/';       //Edit page Login refresh 2 time
   }
+
+  
 
   ngOnInit() {
     this.logout();

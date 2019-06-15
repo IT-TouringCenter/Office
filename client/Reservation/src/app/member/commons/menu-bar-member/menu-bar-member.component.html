@@ -25,7 +25,8 @@
     <ul class="sidebar-menu" id="nav-accordion">
       <p class="centered"><img src="./assets/images/logo/logo-daytrip-join.jpg" class="img-circle" width="100"></p>
       <h5 class="centered" style="margin-top: 20px; margin-bottom: 25px; line-height: 1.5;">
-        {{user}}
+        <!-- Cut username > 10 and add "..." to after username -->
+        {{(user.length > 10)? '...'+(user|slice:0:10):(user)}}
         <br>
         <small>(Member)</small>
       </h5>

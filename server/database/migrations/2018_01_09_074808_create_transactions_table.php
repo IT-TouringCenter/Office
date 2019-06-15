@@ -34,7 +34,7 @@ class CreateTransactionsTable extends Migration {
 			$table->string('currency')->nullable();
 			$table->double('currency_rate')->default(1);
 			$table->text('insurance_note')->nullable();
-			$table->string('issued_by',100)->default('Offline'); // online | offline
+			$table->string('issued_by',100)->default('Offline'); // online | ofline
 			$table->tinyInteger('is_insurance')->default(0);
 			$table->tinyInteger('is_service_charge')->default(0);
 			$table->tinyInteger('is_advance')->default(0);
